@@ -37,7 +37,7 @@ const Dropdown = styled(motion.div)`
   position: absolute;
   background: white;
   top: 100%;
-  right: 10px;
+  right: -83px;
   margin-top: 20px;
   border-radius: 8px;
   box-shadow: -4px 18px 70px 0 rgba(108, 143, 167, 0.32);

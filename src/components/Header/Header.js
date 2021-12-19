@@ -39,12 +39,6 @@ const StyledBannerInner = styled('div')`
 `
 
 const Header = styled('header')`
-  ${p =>
-    p.isMenuOpen
-      ? `
-    background: white;
-  `
-      : ''}
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -54,7 +48,6 @@ const Header = styled('header')`
   width: 100%;
   z-index: 2;
   height: 50px;
-  border-bottom: 1px solid #fff;
   ${mq.medium`
     height: auto;
   `}
@@ -104,10 +97,14 @@ function HeaderContainer() {
   const toggleMenu = () => setMenuOpen(!isMenuOpen)
   const { t } = useTranslation()
 
+  console.log('mediumBP:', mediumBP)
+  console.log('mediumBPMax:', mediumBPMax)
+  console.log('mq:', mq)
+
   return (
     <>
       <Header isMenuOpen={isMenuOpen}>
-        <Logo isMenuOpen={isMenuOpen} />
+        <Logo />
         {mediumBP ? (
           <>
             <SearchHeader />
@@ -115,7 +112,10 @@ function HeaderContainer() {
             <LanguageSwitcher />
           </>
         ) : (
-          <Hamburger isMenuOpen={isMenuOpen} openMenu={toggleMenu} />
+          <>
+            <LanguageSwitcher />
+            <Hamburger isMenuOpen={isMenuOpen} openMenu={toggleMenu} />
+          </>
         )}
       </Header>
       {hasNonAscii() && (
@@ -138,8 +138,8 @@ function HeaderContainer() {
       )}
       {mediumBPMax && (
         <>
-          <SideNav isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           <SearchHeader />
+          <SideNav isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
         </>
       )}
     </>

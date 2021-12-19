@@ -17,14 +17,13 @@ import Info from 'components/Icons/Info'
 
 const SideNavContainer = styled('nav')`
   display: ${p => (p.isMenuOpen ? 'block' : 'none')};
-  z-index: 1;
+  z-index: 999;
   ${mq.medium`
-    z-index: 1;
+    z-index: 999;
   `}
-
   left: 0;
   height: auto;
-  background: #121d46;
+  background: white;
   width: 100%;
   margin-top: -10px;
   ${mq.medium`
@@ -59,8 +58,9 @@ const SideNavContainer = styled('nav')`
 
 const NavLink = styled(Link)`
   display: flex;
+  text-align: center;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-weight: 200;
   font-size: 22px;
   color: ${p => (p.active ? '#ea6060' : '#C7D3E3')};
@@ -102,7 +102,6 @@ const ThirdPartyLink = styled('a')`
   font-weight: 200;
   font-size: 22px;
   color: ${p => (p.active ? '#ea6060' : '#C7D3E3')};
-  padding: 10px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
   ${mq.medium`
@@ -185,10 +184,12 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
           </NavLink>
         </li>
         <li>
-          <ThirdPartyLink href={aboutPageURL()}>
-            <Info />
-            <span>{t('c.about')}</span>
-          </ThirdPartyLink>
+          <NavLink>
+            <ThirdPartyLink href={aboutPageURL()}>
+              <Info />
+              <span>{t('c.about')}</span>
+            </ThirdPartyLink>
+          </NavLink>
         </li>
       </ul>
     </SideNavContainer>
