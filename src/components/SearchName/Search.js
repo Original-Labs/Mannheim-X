@@ -8,7 +8,8 @@ import { parseSearchTerm } from '../../utils/utils'
 import '../../api/subDomainRegistrar'
 import { withRouter } from 'react-router'
 import searchIcon from '../../assets/search.svg'
-import mq from 'mediaQuery'
+import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
+import LanguageSwitcher from 'components/LanguageSwitcher'
 
 const SearchForm = styled('form')`
   display: flex;
@@ -30,7 +31,8 @@ const SearchForm = styled('form')`
     padding: 20px 0 20px 55px;
     width: 100%;
     border: none;
-    border-radius: 14px 0 0 14px;
+    border-radius:14px 0 0 14px;
+    ${p => (p.mediumBP ? `border-radius:14px 0 0 14px;` : `border-radius:0;`)}
     font-size: 18px;
     font-family: Overpass;
     font-weight: 100;
@@ -79,6 +81,8 @@ const SEARCH_QUERY = gql`
 `
 
 function Search({ history, className, style }) {
+  const mediumBP = useMediaMin('medium')
+  const mediumBPMax = useMediaMax('medium')
   const { t } = useTranslation()
   const [inputValue, setInputValue] = useState(null)
   const {
@@ -101,6 +105,8 @@ function Search({ history, className, style }) {
       style={style}
       action="#"
       hasSearch={hasSearch}
+      mediumBP={mediumBP}
+      mediumBPMax={mediumBPMax}
       onSubmit={async e => {
         e.preventDefault()
         if (!hasSearch) return
