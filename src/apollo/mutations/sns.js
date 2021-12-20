@@ -1,6 +1,9 @@
 // import { setupENS } from '@ensdomains/ui'
-import { setupSNS } from 'lib/ui/src/index'
+import { setupSNS, setupSNSResolver } from 'lib/ui/src/index'
 import { isENSReadyReactive } from '../reactiveVars'
+import { getProvider } from '../../setup'
+import { getNetwork } from '@ensdomains/ui'
+import { debug } from 'prettier/doc'
 
 const INFURA_ID =
   window.location.host === 'sns.chat'
@@ -25,6 +28,7 @@ export async function setup({
     customProvider,
     snsAddress
   }
+  option.infura = INFURA_ID
   if (enforceReadOnly) {
     option.infura = INFURA_ID
   }
@@ -39,7 +43,17 @@ export async function setup({
   return { sns, snsResolver, providerObject }
 }
 
-export function getSnsResolver() {
+export async function getSnsResolver() {
+  // if (JSON.stringify(snsResolver) === '{}') {
+  //   snsResolver = await setupSNSResolver({
+  //     reloadOnAccountsChange: false,
+  //     enforceReadOnly: true,
+  //     enforceReload: false,
+  //     infura: INFURA_ID,
+  //     name: name,
+  //     sns: sns
+  //   })
+  // }
   return snsResolver
 }
 

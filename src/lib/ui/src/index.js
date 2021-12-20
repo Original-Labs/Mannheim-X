@@ -1,9 +1,15 @@
-import { getProvider, setupWeb3, getNetworkId, getNetwork } from './web3'
+import {
+  getProvider,
+  setupWeb3,
+  getNetworkId,
+  getNetwork,
+  getAccount
+} from './web3'
 import { ENS } from './ens.js'
 import { setupRegistrar } from './registrar'
 export { utils, ethers } from 'ethers'
 import { SNS } from './sns.js'
-import { setupSNSResolver } from './sns.resolver'
+import { SNSResolver } from './sns.resolver'
 
 export async function setupENS({
   customProvider,
@@ -50,13 +56,15 @@ export async function setupSNS({
   })
   const networkId = await getNetworkId()
   console.log('networkId>>>', networkId)
+  debugger
   // get sns and resolver instance
   const sns = new SNS({ provider, networkId, registryAddress: ensAddress })
   // Get the address of the parser
-  const snsResolver = await setupSNSResolver({ provider, networkId, sns })
+  // const name = await sns.getSNSName(getAccount())
+  const snsResolver = new SNSResolver({ networkId, provider })
+
   const network = await getNetwork()
 
-  executeTestCode(sns)
   return {
     sns,
     snsResolver,
@@ -66,8 +74,32 @@ export async function setupSNS({
   }
 }
 
-async function executeTestCode(sns) {
-  console.log('sns.isOverDeadline()>>>', await sns.isOverDeadline())
+export async function setupSNSResolver({
+  customProvider,
+  ensAddress,
+  reloadOnAccountsChange,
+  enforceReadOnly,
+  enforceReload,
+  infura,
+  name,
+  sns
+} = {}) {
+  const { provider } = await setupWeb3({
+    customProvider,
+    reloadOnAccountsChange,
+    enforceReadOnly,
+    enforceReload,
+    infura
+  })
+  const networkId = await getNetworkId()
+  let newVar = await sns.isOverDeadline()
+  // Get the address of the parser
+  if (name) {
+    const resolverAddress = await sns.getResolverAddress(name)
+    debugger
+    return new SNSResolver({ networkId, resolverAddress, provider })
+  }
+  return {}
 }
 
 export * from './ens'

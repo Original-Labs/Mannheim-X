@@ -49,15 +49,15 @@ const contracts = {
 export class SNSResolver {
   constructor({ networkId, resolverAddress, provider }) {
     this.contracts = contracts
-    // const hasRegistry = has(this.contracts[networkId], 'registry')
+    const hasRegistry = has(this.contracts[networkId], 'registry')
 
-    // if (!hasRegistry && !registryAddress) {
-    //   throw new Error(`Unsupported network ${networkId}`)
-    // } else if (this.contracts[networkId] && !registryAddress) {
-    //   registryAddress = contracts[networkId].registry
-    // }
+    if (!hasRegistry && !resolverAddress) {
+      throw new Error(`Unsupported network ${networkId}`)
+    } else if (this.contracts[networkId] && !resolverAddress) {
+      resolverAddress = contracts[networkId].registry
+    }
 
-    // this.resolverAddress = resolverAddress
+    this.resolverAddress = resolverAddress
 
     const SNSResolverContract = getSNSResolverContract({
       address: resolverAddress,
@@ -206,11 +206,11 @@ export class SNSResolver {
   }
 }
 
-export async function setupSNSResolver({ provider, networkId, sns }) {
-  const snsName = await sns.getSNSName(getAccount())
-  if (snsName) {
-    const resolverAddress = await sns.getResolverAddress(snsName)
-    return new SNSResolver({ networkId, resolverAddress, provider })
-  }
-  return {}
-}
+// export async function setupSNSResolver({ provider, networkId, sns, name }) {
+//   // const snsName = await sns.getSNSName(getAccount())
+//   if (name) {
+//     const resolverAddress = await sns.getResolverAddress(name)
+//     return new SNSResolver({ networkId, resolverAddress, provider })
+//   }
+//   return {}
+// }
