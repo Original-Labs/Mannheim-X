@@ -219,18 +219,18 @@ function DetailsContainer({
   return (
     <Details data-testid="name-details">
       {isOwner && <SetupName initialState={showExplainer} />}
-      {parseInt(domain.owner, 16) !== 0 &&
-        !loadingIsMigrated &&
-        !isMigratedToNewRegistry && (
-          <RegistryMigration
-            account={account}
-            domain={domain}
-            dnssecmode={dnssecmode}
-            refetchIsMigrated={refetchIsMigrated}
-            isParentMigratedToNewRegistry={isParentMigratedToNewRegistry}
-            loadingIsParentMigrated={loadingIsParentMigrated}
-          />
-        )}
+      {/*{parseInt(domain.owner, 16) !== 0 &&*/}
+      {/*  !loadingIsMigrated &&*/}
+      {/*  !isMigratedToNewRegistry && (*/}
+      {/*    <RegistryMigration*/}
+      {/*      account={account}*/}
+      {/*      domain={domain}*/}
+      {/*      dnssecmode={dnssecmode}*/}
+      {/*      refetchIsMigrated={refetchIsMigrated}*/}
+      {/*      isParentMigratedToNewRegistry={isParentMigratedToNewRegistry}*/}
+      {/*      loadingIsParentMigrated={loadingIsParentMigrated}*/}
+      {/*    />*/}
+      {/*  )}*/}
       {domainParent ? (
         <DetailsItem uneditable>
           <DetailsKey>{t('c.parent')}</DetailsKey>
@@ -241,22 +241,22 @@ function DetailsContainer({
       ) : (
         ''
       )}
-      {showUnclaimableWarning && (
-        <GracePeriodWarningContainer>
-          <DetailsItem>
-            {t('c.cannotclaimDns', { name: domainParent })}
-            <LinkToLearnMore
-              href="https://docs.ens.domains/dns-registrar-guide"
-              target="_blank"
-            >
-              {t('c.learnmore')}{' '}
-              <EtherScanLinkContainer>
-                <ExternalLinkIcon />
-              </EtherScanLinkContainer>
-            </LinkToLearnMore>
-          </DetailsItem>
-        </GracePeriodWarningContainer>
-      )}
+      {/*{showUnclaimableWarning && (*/}
+      {/*  <GracePeriodWarningContainer>*/}
+      {/*    <DetailsItem>*/}
+      {/*      {t('c.cannotclaimDns', { name: domainParent })}*/}
+      {/*      <LinkToLearnMore*/}
+      {/*        href="https://docs.ens.domains/dns-registrar-guide"*/}
+      {/*        target="_blank"*/}
+      {/*      >*/}
+      {/*        {t('c.learnmore')}{' '}*/}
+      {/*        <EtherScanLinkContainer>*/}
+      {/*          <ExternalLinkIcon />*/}
+      {/*        </EtherScanLinkContainer>*/}
+      {/*      </LinkToLearnMore>*/}
+      {/*    </DetailsItem>*/}
+      {/*  </GracePeriodWarningContainer>*/}
+      {/*)}*/}
       <OwnerFields outOfSync={outOfSync}>
         <>
           <DetailsItemEditable

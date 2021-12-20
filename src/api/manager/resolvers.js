@@ -468,13 +468,12 @@ const resolvers = {
         if (resolverOwner !== emptyAddress) {
           node.state = 'Open'
           node.available = false
+          node.registrant = resolverOwner
         } else {
           node.state = 'Owned'
           node.available = true
         }
-        node.registrant = await ens.getResolverAddress(name)
-
-        debugger
+        // node.registrant = await ens.getResolverAddress(name)
 
         const dataSources = [
           // getRegistrarEntry(name),

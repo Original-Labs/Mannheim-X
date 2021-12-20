@@ -55,8 +55,6 @@ export async function setupSNS({
     infura
   })
   const networkId = await getNetworkId()
-  console.log('networkId>>>', networkId)
-  debugger
   // get sns and resolver instance
   const sns = new SNS({ provider, networkId, registryAddress: ensAddress })
   // Get the address of the parser
@@ -96,7 +94,6 @@ export async function setupSNSResolver({
   // Get the address of the parser
   if (name) {
     const resolverAddress = await sns.getResolverAddress(name)
-    debugger
     return new SNSResolver({ networkId, resolverAddress, provider })
   }
   return {}
