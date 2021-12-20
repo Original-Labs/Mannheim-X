@@ -49,15 +49,15 @@ const contracts = {
 export class SNSResolver {
   constructor({ networkId, resolverAddress, provider }) {
     this.contracts = contracts
-    // const hasRegistry = has(this.contracts[networkId], 'registry')
+    const hasRegistry = has(this.contracts[networkId], 'registry')
 
-    // if (!hasRegistry && !registryAddress) {
-    //   throw new Error(`Unsupported network ${networkId}`)
-    // } else if (this.contracts[networkId] && !registryAddress) {
-    //   registryAddress = contracts[networkId].registry
-    // }
+    if (!hasRegistry && !resolverAddress) {
+      throw new Error(`Unsupported network ${networkId}`)
+    } else if (this.contracts[networkId] && !resolverAddress) {
+      resolverAddress = contracts[networkId].registry
+    }
 
-    // this.resolverAddress = resolverAddress
+    this.resolverAddress = resolverAddress
 
     const SNSResolverContract = getSNSResolverContract({
       address: resolverAddress,
@@ -165,10 +165,7 @@ export class SNSResolver {
   }
 
   async getAllProperties(name) {
-    const SNSWithoutSigner = this.SNSResolver
-    const signer = await getSigner()
-    const SNS = SNSWithoutSigner.connect(signer)
-    return await SNS.getAllProperties(name)
+    return await this.SNSResolver.getAllProperties(name)
   }
 
   //exp: 0-1-2-3-4-5-6-7-8-9-10-11-12-13-14

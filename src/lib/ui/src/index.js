@@ -56,18 +56,13 @@ export async function setupSNS({
   })
   const networkId = await getNetworkId()
   console.log('networkId>>>', networkId)
+  debugger
   // get sns and resolver instance
   const sns = new SNS({ provider, networkId, registryAddress: ensAddress })
   // Get the address of the parser
-  const name = await sns.getSNSName(getAccount())
-  let snsResolver = {}
-  debugger
-  if (name) {
-    const resolverAddress = await sns.getResolverAddress(
-      await sns.getSNSName(getAccount())
-    )
-    snsResolver = new SNSResolver({ networkId, resolverAddress, provider })
-  }
+  // const name = await sns.getSNSName(getAccount())
+  const snsResolver = new SNSResolver({ networkId, provider })
+
   const network = await getNetwork()
 
   return {
@@ -105,10 +100,6 @@ export async function setupSNSResolver({
     return new SNSResolver({ networkId, resolverAddress, provider })
   }
   return {}
-}
-
-async function executeTestCode(sns) {
-  console.log('sns.isOverDeadline()>>>', await sns.isOverDeadline())
 }
 
 export * from './ens'
