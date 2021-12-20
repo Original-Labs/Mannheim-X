@@ -426,7 +426,9 @@ const resolvers = {
         const handleName = name.split('.key')[0]
         // TODO Check whether there is a SNS address, if there is no execute, if there is execute get all attributes
         if ((await ens.getResolverAddress(name)) !== emptyAddress) {
-          snsResolver = getSnsResolver()
+          snsResolver = await getSnsResolver(name)
+          debugger
+          let all = await snsResolver.getAllProperties(name)
           snsResolverIsNull = false
         }
 
@@ -471,6 +473,8 @@ const resolvers = {
           node.available = true
         }
         node.registrant = await ens.getResolverAddress(name)
+
+        debugger
 
         const dataSources = [
           // getRegistrarEntry(name),

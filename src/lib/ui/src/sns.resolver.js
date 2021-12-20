@@ -165,7 +165,10 @@ export class SNSResolver {
   }
 
   async getAllProperties(name) {
-    return await this.SNSResolver.getAllProperties(name)
+    const SNSWithoutSigner = this.SNSResolver
+    const signer = await getSigner()
+    const SNS = SNSWithoutSigner.connect(signer)
+    return await SNS.getAllProperties(name)
   }
 
   //exp: 0-1-2-3-4-5-6-7-8-9-10-11-12-13-14
@@ -206,11 +209,11 @@ export class SNSResolver {
   }
 }
 
-export async function setupSNSResolver({ provider, networkId, sns }) {
-  const snsName = await sns.getSNSName(getAccount())
-  if (snsName) {
-    const resolverAddress = await sns.getResolverAddress(snsName)
-    return new SNSResolver({ networkId, resolverAddress, provider })
-  }
-  return {}
-}
+// export async function setupSNSResolver({ provider, networkId, sns, name }) {
+//   // const snsName = await sns.getSNSName(getAccount())
+//   if (name) {
+//     const resolverAddress = await sns.getResolverAddress(name)
+//     return new SNSResolver({ networkId, resolverAddress, provider })
+//   }
+//   return {}
+// }
