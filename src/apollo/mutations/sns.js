@@ -39,11 +39,12 @@ export async function setup({
   } = await setupSNS(option)
   sns = snsInstance
   snsResolver = snsResolverInstance
+  debugger
   isENSReadyReactive(true)
   return { sns, snsResolver, providerObject }
 }
 
-export async function getSnsResolver() {
+export function getSnsResolver() {
   // if (JSON.stringify(snsResolver) === '{}') {
   //   snsResolver = await setupSNSResolver({
   //     reloadOnAccountsChange: false,
