@@ -3,12 +3,6 @@ import styled from '@emotion/styled/macro'
 
 const HamburgerContainer = styled('div')`
   background: white;
-  ${p =>
-    p.isMenuOpen
-      ? `
-    background: #121D46;
-  `
-      : ''}
 
   button {
     &:focus {
@@ -119,7 +113,7 @@ const HamburgerContainer = styled('div')`
   .hamburger--collapse-r.is-active .hamburger-inner,
   .hamburger--collapse-r.is-active .hamburger-inner::after,
   .hamburger--collapse-r.is-active .hamburger-inner::before {
-    background: #fff;
+    background: #000;
   }
 `
 
