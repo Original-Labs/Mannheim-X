@@ -432,102 +432,102 @@ function DetailsContainer({
         {/*  />*/}
         {/*)}*/}
         {/* To be replaced with a logic a function to detect dnsregistrar */}
-        {domain.isDNSRegistrar ? (
-          <>
-            <DetailsItem uneditable>
-              <DetailsKey>{t('dns.dnsowner')}</DetailsKey>
-              <DetailsValue>
-                {dnssecmode.displayError ? (
-                  <DNSOwnerError>{dnssecmode.title}</DNSOwnerError>
-                ) : (
-                  <AddressLink address={domain.dnsOwner}>
-                    <SingleNameBlockies
-                      address={domain.dnsOwner}
-                      imageSize={24}
-                    />
-                    {domain.dnsOwner}
-                  </AddressLink>
-                )}
-              </DetailsValue>
-              <ButtonContainer outOfSync={outOfSync}>
-                {loading ? (
-                  <Button>
-                    <Loader />
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => {
-                      setLoading(true)
-                      refetch()
-                        .then(dd => {
-                          setLoading(false)
-                        })
-                        .catch(err => {
-                          console.log('failed to refetch', err)
-                        })
-                    }}
-                  >
-                    {t('c.refresh')}{' '}
-                  </Button>
-                )}
-              </ButtonContainer>
-            </DetailsItem>
-            {dnssecmode.displayError ? (
-              <ErrorExplainer>
-                <OrangeExclamation />
-                {domain.stateError
-                  ? domain.stateError
-                  : t('singleName.dns.messages.error')}
-                <LinkToLearnMore
-                  href="https://docs.ens.domains/dns-registrar-guide"
-                  target="_blank"
-                >
-                  {t('c.learnmore')}{' '}
-                  <EtherScanLinkContainer>
-                    <ExternalLinkIcon />
-                  </EtherScanLinkContainer>
-                </LinkToLearnMore>
-              </ErrorExplainer>
-            ) : outOfSync ? (
-              <OutOfSyncExplainerContainer>
-                <HR />
-                <OutOfSyncExplainer>
-                  <OrangeExclamation />
-                  <Trans i18nKey={'singleName.dns.messages.outOfSync'}>
-                    {dnssecmode.explainer}
-                  </Trans>
-                  <LinkToLearnMore
-                    href="https://docs.ens.domains/dns-registrar-guide"
-                    target="_blank"
-                    outOfSync={outOfSync}
-                  >
-                    {t('c.learnmore')}{' '}
-                    <EtherScanLinkContainer>
-                      <ExternalLinkIcon />
-                    </EtherScanLinkContainer>
-                  </LinkToLearnMore>
-                </OutOfSyncExplainer>
-              </OutOfSyncExplainerContainer>
-            ) : (
-              <Explainer>
-                <Trans i18nKey={'singleName.dns.messages.readyToRegister'}>
-                  {dnssecmode.explainer}
-                </Trans>
-                <LinkToLearnMore
-                  href="https://docs.ens.domains/dns-registrar-guide"
-                  target="_blank"
-                >
-                  {t('c.learnmore')}{' '}
-                  <EtherScanLinkContainer>
-                    <ExternalLinkIcon />
-                  </EtherScanLinkContainer>
-                </LinkToLearnMore>
-              </Explainer>
-            )}
-          </>
-        ) : (
-          ''
-        )}
+        {/*{domain.isDNSRegistrar ? (*/}
+        {/*  <>*/}
+        {/*    <DetailsItem uneditable>*/}
+        {/*      <DetailsKey>{t('dns.dnsowner')}</DetailsKey>*/}
+        {/*      <DetailsValue>*/}
+        {/*        {dnssecmode.displayError ? (*/}
+        {/*          <DNSOwnerError>{dnssecmode.title}</DNSOwnerError>*/}
+        {/*        ) : (*/}
+        {/*          <AddressLink address={domain.dnsOwner}>*/}
+        {/*            <SingleNameBlockies*/}
+        {/*              address={domain.dnsOwner}*/}
+        {/*              imageSize={24}*/}
+        {/*            />*/}
+        {/*            {domain.dnsOwner}*/}
+        {/*          </AddressLink>*/}
+        {/*        )}*/}
+        {/*      </DetailsValue>*/}
+        {/*      <ButtonContainer outOfSync={outOfSync}>*/}
+        {/*        {loading ? (*/}
+        {/*          <Button>*/}
+        {/*            <Loader />*/}
+        {/*          </Button>*/}
+        {/*        ) : (*/}
+        {/*          <Button*/}
+        {/*            onClick={() => {*/}
+        {/*              setLoading(true)*/}
+        {/*              refetch()*/}
+        {/*                .then(dd => {*/}
+        {/*                  setLoading(false)*/}
+        {/*                })*/}
+        {/*                .catch(err => {*/}
+        {/*                  console.log('failed to refetch', err)*/}
+        {/*                })*/}
+        {/*            }}*/}
+        {/*          >*/}
+        {/*            {t('c.refresh')}{' '}*/}
+        {/*          </Button>*/}
+        {/*        )}*/}
+        {/*      </ButtonContainer>*/}
+        {/*    </DetailsItem>*/}
+        {/*    {dnssecmode.displayError ? (*/}
+        {/*      <ErrorExplainer>*/}
+        {/*        <OrangeExclamation />*/}
+        {/*        {domain.stateError*/}
+        {/*          ? domain.stateError*/}
+        {/*          : t('singleName.dns.messages.error')}*/}
+        {/*        <LinkToLearnMore*/}
+        {/*          href="https://docs.ens.domains/dns-registrar-guide"*/}
+        {/*          target="_blank"*/}
+        {/*        >*/}
+        {/*          {t('c.learnmore')}{' '}*/}
+        {/*          <EtherScanLinkContainer>*/}
+        {/*            <ExternalLinkIcon />*/}
+        {/*          </EtherScanLinkContainer>*/}
+        {/*        </LinkToLearnMore>*/}
+        {/*      </ErrorExplainer>*/}
+        {/*    ) : outOfSync ? (*/}
+        {/*      <OutOfSyncExplainerContainer>*/}
+        {/*        <HR />*/}
+        {/*        <OutOfSyncExplainer>*/}
+        {/*          <OrangeExclamation />*/}
+        {/*          <Trans i18nKey={'singleName.dns.messages.outOfSync'}>*/}
+        {/*            {dnssecmode.explainer}*/}
+        {/*          </Trans>*/}
+        {/*          <LinkToLearnMore*/}
+        {/*            href="https://docs.ens.domains/dns-registrar-guide"*/}
+        {/*            target="_blank"*/}
+        {/*            outOfSync={outOfSync}*/}
+        {/*          >*/}
+        {/*            {t('c.learnmore')}{' '}*/}
+        {/*            <EtherScanLinkContainer>*/}
+        {/*              <ExternalLinkIcon />*/}
+        {/*            </EtherScanLinkContainer>*/}
+        {/*          </LinkToLearnMore>*/}
+        {/*        </OutOfSyncExplainer>*/}
+        {/*      </OutOfSyncExplainerContainer>*/}
+        {/*    ) : (*/}
+        {/*      <Explainer>*/}
+        {/*        <Trans i18nKey={'singleName.dns.messages.readyToRegister'}>*/}
+        {/*          {dnssecmode.explainer}*/}
+        {/*        </Trans>*/}
+        {/*        <LinkToLearnMore*/}
+        {/*          href="https://docs.ens.domains/dns-registrar-guide"*/}
+        {/*          target="_blank"*/}
+        {/*        >*/}
+        {/*          {t('c.learnmore')}{' '}*/}
+        {/*          <EtherScanLinkContainer>*/}
+        {/*            <ExternalLinkIcon />*/}
+        {/*          </EtherScanLinkContainer>*/}
+        {/*        </LinkToLearnMore>*/}
+        {/*      </Explainer>*/}
+        {/*    )}*/}
+        {/*  </>*/}
+        {/*) : (*/}
+        {/*  ''*/}
+        {/*)}*/}
 
         {domain.registrationDate ? (
           <DetailsItem uneditable>

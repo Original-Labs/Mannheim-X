@@ -22,7 +22,7 @@ import { addressUtils, emptyAddress } from 'utils/utils'
 import { refetchTilUpdatedSingle } from 'utils/graphql'
 import Bin from '../Forms/Bin'
 import { useAccount } from '../QueryAccount'
-import { getEnsAddress } from '../../apollo/mutations/ens'
+import { getSNSAddress } from '../../apollo/mutations/sns'
 
 import AddToCalendar from '../Calendar/RenewalCalendar'
 import Tooltip from '../Tooltip/Tooltip'
@@ -268,26 +268,26 @@ function getInputType(
       />
     )
   }
-  const ensAddress = getEnsAddress()
-  const provider =
-    process.env.REACT_APP_STAGE === 'local'
-      ? 'http://localhost:8545'
-      : window.ethereum || window.web3
-  if (type === 'address' && keyName !== 'Resolver') {
-    let option = {
-      presetValue: presetValue || '',
-      provider,
-      onResolve: ({ address }) => {
-        if (address) {
-          updateValue(address)
-        } else {
-          updateValue('')
-        }
-      },
-      ensAddress
-    }
-    return <AddressInput {...option} />
-  }
+  // const ensAddress = getSNSAddress()
+  // const provider =
+  //   process.env.REACT_APP_STAGE === 'local'
+  //     ? 'http://localhost:8545'
+  //     : window.ethereum || window.web3
+  // if (type === 'address' && keyName !== 'Resolver') {
+  //   let option = {
+  //     presetValue: presetValue || '',
+  //     provider,
+  //     onResolve: ({ address }) => {
+  //       if (address) {
+  //         updateValue(address)
+  //       } else {
+  //         updateValue('')
+  //       }
+  //     },
+  //     ensAddress
+  //   }
+  //   return <AddressInput {...option} />
+  // }
 
   return (
     <Input

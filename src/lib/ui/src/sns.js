@@ -150,7 +150,7 @@ export class SNS {
   async transfer(name, address) {
     const signer = await getSigner()
     const SNS = this.SNS.connect(signer)
-    return SNS.transfer(nameRemoveSuffix(name), address)
+    return await SNS.transfer(nameRemoveSuffix(name), address)
   }
 
   //Get the registered SNSName by address

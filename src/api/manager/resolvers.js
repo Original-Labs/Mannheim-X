@@ -567,6 +567,10 @@ const resolvers = {
         5: {
           OLD: ['0xfF77b96d6bafCec0D684bB528b22e0Ab09C70663'],
           DEPRECATED: []
+        },
+        137: {
+          OLD: [],
+          DEPRECATED: []
         }
       }
 

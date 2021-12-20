@@ -64,7 +64,6 @@ export class SNSResolver {
       provider
     })
     this.SNSResolver = SNSResolverContract
-    debugger
   }
 
   /* Get the raw Ethers contract object */

@@ -125,7 +125,9 @@ const resolvers = {
     async setRegistrant(_, { name, address }) {
       // NFT transfer
       const sns = getSNS()
+      console.log('sns------', sns)
       const tx = await sns.transfer(name, address)
+      console.log('txinfo------', tx)
       return sendHelper(tx)
     },
     async submitProof(_, { name, parentOwner }) {
