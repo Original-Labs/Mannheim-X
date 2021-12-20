@@ -33,7 +33,6 @@ async function addTransaction({ txHash, txState }) {
 
 export async function sendHelper(txObj) {
   return new Promise(async resolve => {
-    debugger
     resolve(txObj.hash)
     let txState = 'Pending'
     addTransaction({ txHash: txObj.hash, txState })

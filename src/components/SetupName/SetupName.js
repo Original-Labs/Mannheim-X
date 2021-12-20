@@ -78,10 +78,10 @@ function SetupName({ initialState = false }) {
         <RotatingSmallCaret rotated={open ? 1 : 0} />
       </Header>
       <Content open={open}>
-        <Block>
-          <h3>{t('singleName.learnmore.step1.title')}</h3>
-          <p>{t('singleName.learnmore.step1.text')}</p>
-        </Block>
+        {/*<Block>*/}
+        {/*  <h3>{t('singleName.learnmore.step1.title')}</h3>*/}
+        {/*  <p>{t('singleName.learnmore.step1.text')}</p>*/}
+        {/*</Block>*/}
         <Block>
           <h3>{t('singleName.learnmore.step2.title')}</h3>
           <p>{t('singleName.learnmore.step2.text')}</p>

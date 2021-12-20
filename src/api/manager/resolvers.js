@@ -421,16 +421,16 @@ const resolvers = {
             auctionEnds: null
           }
         const ens = getSNS()
-        let snsResolver = {}
-        let snsResolverIsNull = true
+        let snsResolver = getSnsResolver()
+        // let snsResolverIsNull = true
         const handleName = name.split('.key')[0]
         // TODO Check whether there is a SNS address, if there is no execute, if there is execute get all attributes
-        if ((await ens.getResolverAddress(name)) !== emptyAddress) {
-          snsResolver = await getSnsResolver(name)
-          debugger
-          let all = await snsResolver.getAllProperties(name)
-          snsResolverIsNull = false
-        }
+        // if ((await ens.getResolverAddress(name)) !== emptyAddress) {
+        //   snsResolver = await
+        //   debugger
+        //   let all = await snsResolver.getAllProperties(name)
+        //   snsResolverIsNull = false
+        // }
 
         const decrypted = isDecrypted(name)
 
@@ -468,13 +468,12 @@ const resolvers = {
         if (resolverOwner !== emptyAddress) {
           node.state = 'Open'
           node.available = false
+          node.registrant = resolverOwner
         } else {
           node.state = 'Owned'
           node.available = true
         }
-        node.registrant = await ens.getResolverAddress(name)
-
-        debugger
+        // node.registrant = await ens.getResolverAddress(name)
 
         const dataSources = [
           // getRegistrarEntry(name),
@@ -483,7 +482,7 @@ const resolvers = {
           // getDNSEntryDetails(name),
           // getTestEntry(name),
           // getRegistrant(name),
-          snsResolverIsNull ? {} : await snsResolver.getAllProperties(name),
+          await snsResolver.getAllProperties(name),
           await ens.isOverDeadline(),
           await ens.getResolverAddress(name)
         ]
@@ -567,6 +566,10 @@ const resolvers = {
         },
         5: {
           OLD: ['0xfF77b96d6bafCec0D684bB528b22e0Ab09C70663'],
+          DEPRECATED: []
+        },
+        137: {
+          OLD: [],
           DEPRECATED: []
         }
       }

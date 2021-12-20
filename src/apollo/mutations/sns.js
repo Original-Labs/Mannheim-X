@@ -3,6 +3,7 @@ import { setupSNS, setupSNSResolver } from 'lib/ui/src/index'
 import { isENSReadyReactive } from '../reactiveVars'
 import { getProvider } from '../../setup'
 import { getNetwork } from '@ensdomains/ui'
+import { debug } from 'prettier/doc'
 
 const INFURA_ID =
   window.location.host === 'sns.chat'
@@ -10,8 +11,8 @@ const INFURA_ID =
     : '5a380f9dfbb44b2abf9f681d39ddc382' // Free version
 
 let sns = {},
-  snsResolver = {}
-// snsResolverAddress = undefined
+  snsResolver = {},
+  snsAddress = undefined
 
 export async function setup({
   reloadOnAccountsChange,
@@ -27,6 +28,7 @@ export async function setup({
     customProvider,
     snsAddress
   }
+  option.infura = INFURA_ID
   if (enforceReadOnly) {
     option.infura = INFURA_ID
   }
@@ -41,20 +43,24 @@ export async function setup({
   return { sns, snsResolver, providerObject }
 }
 
-export async function getSnsResolver(name) {
-  if (JSON.stringify(snsResolver) === '{}') {
-    snsResolver = await setupSNSResolver({
-      reloadOnAccountsChange: false,
-      enforceReadOnly: true,
-      enforceReload: false,
-      infura: INFURA_ID,
-      name: name,
-      sns: sns
-    })
-  }
+export function getSnsResolver() {
+  // if (JSON.stringify(snsResolver) === '{}') {
+  //   snsResolver = await setupSNSResolver({
+  //     reloadOnAccountsChange: false,
+  //     enforceReadOnly: true,
+  //     enforceReload: false,
+  //     infura: INFURA_ID,
+  //     name: name,
+  //     sns: sns
+  //   })
+  // }
   return snsResolver
 }
 
 export default function getSNS() {
   return sns
+}
+
+export function getSNSAddress() {
+  return sns.registryAddress
 }

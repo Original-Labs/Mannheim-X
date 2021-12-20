@@ -122,7 +122,7 @@ function Progress({ step, waitPercentComplete }) {
       />
       <Steps>
         <Tooltip
-          text="<p>The transaction is being mined on the Polygon blockchain. This should take 3-10 seconds.</p>"
+          text="<p>The transaction is being mined on the Polygon blockchain. This should take 10-30 seconds.</p>"
           position="top"
           border={true}
           offset={{ left: -30, top: 10 }}
