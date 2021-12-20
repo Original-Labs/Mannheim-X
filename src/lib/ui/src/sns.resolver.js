@@ -42,7 +42,7 @@ const contracts = {
     registry: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
   },
   137: {
-    registry: '0x233c8743D8C5f1BAE38AA88aE00c4727d3F85e62'
+    registry: '0x256A0332173034F9E074fCd92B18fCF5E7925d3e'
   }
 }
 
@@ -64,6 +64,7 @@ export class SNSResolver {
       provider
     })
     this.SNSResolver = SNSResolverContract
+    debugger
   }
 
   /* Get the raw Ethers contract object */
