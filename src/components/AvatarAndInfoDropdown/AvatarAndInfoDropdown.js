@@ -1,6 +1,7 @@
 import React, { createRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
+import { css } from 'emotion'
 import styled from '@emotion/styled/macro'
 import mq from 'mediaQuery'
 import { useQuery, gql } from '@apollo/client'
@@ -11,6 +12,7 @@ import UnstyledBlockies from '../Blockies'
 import { useOnClickOutside } from 'components/hooks'
 import { imageUrl } from '../../utils/utils'
 import SideNav from 'components/SideNav/SideNav'
+import Loading from 'components/Loading/Loading'
 
 const ActiveAvatar = styled('div')`
   color: #fff;
@@ -83,11 +85,10 @@ const DefaultAvatar = styled('img')`
   cursor: pointer;
 `
 
-export default function AvatarAndInfoDropdown({ match }) {
+export default function AvatarAndInfoDropdown() {
   const dropdownRef = createRef()
   const togglerRef = createRef()
   const [showDropdown, setShowDropdown] = useState(false)
-  const { i18n } = useTranslation()
 
   useOnClickOutside([dropdownRef, togglerRef], () => setShowDropdown(false))
 
@@ -139,7 +140,9 @@ export default function AvatarAndInfoDropdown({ match }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
           >
-            <SideNav />
+            <Loading loading={true}>
+              <SideNav />
+            </Loading>
           </Dropdown>
         </AnimatePresence>
       )}

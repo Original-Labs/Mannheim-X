@@ -49,7 +49,7 @@ const BannerContent = styled(`div`)`
 
 export const MainPageBannerContainer = styled(`div`)`
   position: absolute;
-  top: 100px;
+  top: 135px;
   margin-left: auto;
   margin-right: auto;
   left: 0;
