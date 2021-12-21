@@ -55,6 +55,7 @@ function PricerInner({
   displayGas = false
 }) {
   const { t } = useTranslation()
+
   return (
     <>
       <Prompt>

@@ -45,7 +45,7 @@ import getSNS, { getSNSAddress, getSnsResolver } from 'apollo/mutations/sns'
 import { isENSReadyReactive, namesReactive } from '../../apollo/reactiveVars'
 import getReverseRecord from './getReverseRecord'
 import { isEmptyAddress } from '../../utils/records'
-import { getAccount } from '@ensdomains/ui'
+import { getAccount } from 'lib/ui/src/web3'
 
 const defaults = {
   names: []
@@ -388,6 +388,10 @@ const resolvers = {
       return ens.getOwner(name)
     },
 
+    getSnsName: async (_, { address }) => {
+      const ens = getSNS()
+      return await ens.getSNSName(address)
+    },
     singleName: async (_, { name }) => {
       try {
         if (!isENSReadyReactive() || !name)
