@@ -24,19 +24,31 @@ import {
 import LanguageSwitcher from '../components/LanguageSwitcher'
 
 const HeroTop = styled('div')`
-  display: grid;
+  display: flex;
   padding: 20px;
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  grid-template-columns: 1fr;
+  justify-content: space-around;
+  flex-wrap: wrap;
   ${mq.small`
-     grid-template-columns: 1fr 1fr;
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  `}
+  ${mq.medium`
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
+    justify-content: space-between;
   `}
 `
 
-const NoAccounts = styled(NoAccountsDefault)``
+const NoAccounts = styled(NoAccountsDefault)`
+  div {
+    margin: 0 auto;
+  }
+`
 
 const Network = styled('div')`
   margin-bottom: 5px;
@@ -52,7 +64,6 @@ const NetworkStatus = styled('div')`
   color: white;
   font-weight: 200;
   text-transform: capitalize;
-  display: none;
   ${mq.small`
     display: block;
   `}
@@ -318,6 +329,19 @@ export default ({ match }) => {
   return (
     <Hero>
       <HeroTop>
+        <Nav>
+          {accounts?.length > 0 && !isReadOnly && (
+            <NavLink
+              active={url === '/address/' + accounts[0]}
+              to={'/address/' + accounts[0]}
+            >
+              {t('c.mynames')}
+            </NavLink>
+          )}
+          <NavLink to="/favourites">{t('c.favourites')}</NavLink>
+          <ExternalLink href={aboutPageURL()}>{t('c.whitelist')}</ExternalLink>
+          <LanguageSwitcher />
+        </Nav>
         <NetworkStatus>
           <Network>
             {`${network} ${t('c.network')}`}
@@ -337,23 +361,10 @@ export default ({ match }) => {
             />
           )} */}
         </NetworkStatus>
-        <Nav>
-          {accounts?.length > 0 && !isReadOnly && (
-            <NavLink
-              active={url === '/address/' + accounts[0]}
-              to={'/address/' + accounts[0]}
-            >
-              {t('c.mynames')}
-            </NavLink>
-          )}
-          <NavLink to="/favourites">{t('c.favourites')}</NavLink>
-          <ExternalLink href={aboutPageURL()}>{t('c.whitelist')}</ExternalLink>
-          <LanguageSwitcher />
-        </Nav>
-        <MainPageBannerContainer>
-          <DAOBannerContent />
-        </MainPageBannerContainer>
       </HeroTop>
+      <MainPageBannerContainer>
+        <DAOBannerContent />
+      </MainPageBannerContainer>
       <SearchContainer>
         <>
           <LogoLarge
