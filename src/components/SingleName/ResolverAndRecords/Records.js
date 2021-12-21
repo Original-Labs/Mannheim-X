@@ -425,7 +425,7 @@ export default function Records({
 
   return (
     <RecordsWrapper
-      shouldShowRecords={shouldShowRecords}
+      shouldShowRecords={`shouldShowRecords`}
       needsToBeMigrated={needsToBeMigrated}
     >
       {!canEditRecords && isOwner ? (
