@@ -56,7 +56,7 @@ const contracts = {
     registry: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
   },
   137: {
-    registry: '0xA1412F610ac8B2366AA0D3CD02855Fbcc4e0BD62'
+    registry: '0x9589802a4506b40141BeAC7754C28c4299d07666'
   }
 }
 
@@ -150,7 +150,6 @@ export class SNS {
   async transfer(address, name) {
     const signer = await getSigner()
     const SNS = this.SNS.connect(signer)
-    debugger
     return await SNS.transfer(address, name)
   }
 
