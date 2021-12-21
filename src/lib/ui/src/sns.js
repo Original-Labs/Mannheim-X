@@ -56,7 +56,7 @@ const contracts = {
     registry: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
   },
   137: {
-    registry: '0x9589802a4506b40141BeAC7754C28c4299d07666'
+    registry: '0xb388156EB6d8e8BE4B56D62b9E9e00A98F081836'
   }
 }
 
@@ -209,11 +209,15 @@ export class SNS {
     }
   }
 
+  async getFreeMintQuantity() {
+    return await this.SNS.getFreeMintQuantity()
+  }
   //
   async getRegisteredPrice() {
-    const count = await this.SNS.getTokenMintedExpManager()
+    const count = await this.getTokenMintedExpManager()
+    const freeMintQuantity = await this.getFreeMintQuantity()
     let price
-    if (count.toNumber() <= 10000) {
+    if (count.toNumber() < freeMintQuantity.toNumber()) {
       price = Web3.utils.toWei('1', 'ether')
     } else {
       price = Web3.utils.toWei('10', 'ether')

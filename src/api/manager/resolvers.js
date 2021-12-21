@@ -810,9 +810,10 @@ const resolvers = {
       const signer = await getSigner()
       const resolverInstance = resolverInstanceWithoutSigner.connect(signer)
 
-      const allProperties = await resolverInstanceWithoutSigner.getAllProperties(
+      let allProperties = await resolverInstanceWithoutSigner.getAllProperties(
         name
       )
+      allProperties = allProperties === '' ? '-------------' : allProperties
 
       let properties = allProperties.split('-')
 
@@ -869,9 +870,17 @@ const resolvers = {
             break
         }
       })
-      const newProperties = properties.join('-')
-
-      return await resolverInstance.setAllProperties(name, newProperties)
+      let newProperties = properties[0]
+      debugger
+      for (let i = 1; i < properties.length; i++) {
+        newProperties = newProperties.concat('-', properties[i])
+      }
+      console.log('newProperties>>>', newProperties)
+      const RecordTx = await resolverInstance.setAllProperties(
+        name,
+        newProperties
+      )
+      return sendHelper(RecordTx)
       // if (records.length === 1) {
       //   return await handleSingleTransaction(name, records[0], resolverInstance)
       // }
