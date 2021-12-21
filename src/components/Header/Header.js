@@ -97,10 +97,6 @@ function HeaderContainer() {
   const toggleMenu = () => setMenuOpen(!isMenuOpen)
   const { t } = useTranslation()
 
-  console.log('mediumBP:', mediumBP)
-  console.log('mediumBPMax:', mediumBPMax)
-  console.log('mq:', mq)
-
   return (
     <>
       <Header isMenuOpen={isMenuOpen}>
