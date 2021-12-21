@@ -41,7 +41,7 @@ import COIN_LIST_KEYS from 'constants/coinList'
 import { GET_REGISTRANT_FROM_SUBGRAPH } from '../../graphql/queries'
 import getClient from '../../apollo/apolloClient'
 // import getENS, { getRegistrar } from 'apollo/mutations/ens'
-import getSNS, { getSnsResolver } from 'apollo/mutations/sns'
+import getSNS, { getSNSAddress, getSnsResolver } from 'apollo/mutations/sns'
 import { isENSReadyReactive, namesReactive } from '../../apollo/reactiveVars'
 import getReverseRecord from './getReverseRecord'
 import { isEmptyAddress } from '../../utils/records'
@@ -137,7 +137,6 @@ export const handleMultipleTransactions = async (
     const namehash = getNamehash(name)
 
     const transactionArray = records.map(record => {
-      debugger
       if (record.contractFn === 'setContenthash') {
         let value
         if (isEmptyAddress(record.value)) {
@@ -374,11 +373,10 @@ const resolvers = {
     publicResolver: async () => {
       try {
         // const ens = getENS()
-        const ens = getSNS()
-        const snsResolver = getSnsResolver()
-        const resolver = await snsResolver.getResolverAddress('resolver')
+        const sns = getSNS()
+        const snsResolver = sns.getSNSAddress()
         return {
-          address: resolver,
+          address: snsResolver,
           __typename: 'Resolver'
         }
       } catch (e) {
@@ -612,7 +610,8 @@ const resolvers = {
       }
 
       async function calculateIsPublicResolverReady() {
-        const publicResolver = await ens.getAddress('resolver.eth')
+        const snsResolver = getSnsResolver()
+        const publicResolver = snsResolver.resolverAddress
         return !OLD_RESOLVERS.map(a => a.toLowerCase()).includes(publicResolver)
       }
 
@@ -807,10 +806,72 @@ const resolvers = {
       const signer = await getSigner()
       const resolverInstance = resolverInstanceWithoutSigner.connect(signer)
 
-      if (records.length === 1) {
-        return await handleSingleTransaction(name, records[0], resolverInstance)
-      }
-      return await handleMultipleTransactions(name, records, resolverInstance)
+      const allProperties = await resolverInstanceWithoutSigner.getAllProperties(
+        name
+      )
+
+      let properties = allProperties.split('-')
+
+      records.map(record => {
+        console.log('record>>>>', record)
+        switch (record.key) {
+          case 'ETH':
+            properties[0] = record.value
+            break
+          case 'BTC':
+            properties[1] = record.value
+            break
+          case 'LTC':
+            properties[2] = record.value
+            break
+          case 'DOGE':
+            properties[3] = record.value
+            break
+          case 'CONTENT':
+            properties[4] = record.value
+            break
+          case 'email':
+            properties[5] = record.value
+            break
+          case 'url':
+            properties[6] = record.value
+            break
+          case 'avatar':
+            properties[7] = record.value
+            break
+          case 'description':
+            properties[8] = record.value
+            break
+          case 'notice':
+            properties[9] = record.value
+            break
+          case 'keywords':
+            properties[10] = record.value
+            break
+          case 'com.github':
+            properties[11] = record.value
+            break
+          case 'com.reddit':
+            properties[12] = record.value
+            break
+          case 'com.twitter':
+            properties[13] = record.value
+            break
+          case 'org.telegram':
+            properties[14] = record.value
+            break
+
+          default:
+            break
+        }
+      })
+      const newProperties = properties.join('-')
+
+      return await resolverInstance.setAllProperties(name, newProperties)
+      // if (records.length === 1) {
+      //   return await handleSingleTransaction(name, records[0], resolverInstance)
+      // }
+      // return await handleMultipleTransactions(name, records, resolverInstance)
     },
     migrateResolver: async (_, { name }) => {
       const ens = getENS()
