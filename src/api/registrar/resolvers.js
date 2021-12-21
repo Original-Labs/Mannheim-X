@@ -126,7 +126,7 @@ const resolvers = {
       // NFT transfer
       const sns = getSNS()
       console.log('sns------', sns)
-      const tx = await sns.transfer(name, address)
+      const tx = await sns.transfer(address, name)
       console.log('txinfo------', tx)
       return sendHelper(tx)
     },

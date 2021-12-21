@@ -289,7 +289,6 @@ export default function Address({
   const hasNamesExpiringSoon = !!domains.find(domain =>
     calculateIsExpiredSoon(domain.expiryDate)
   )
-  debugger
   return (
     <>
       <NonMainPageBannerContainerWithMarginBottom>

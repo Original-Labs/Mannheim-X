@@ -388,7 +388,6 @@ export default function Records({
     stopEditing,
     resetPending
   } = actions
-
   const { dataAddresses, dataTextRecords, recordsLoading } = useGetRecords(
     domain
   )
@@ -423,9 +422,71 @@ export default function Records({
   const canEditRecords =
     !isOldPublicResolver && !isDeprecatedResolver && isOwner && !isReadOnly
 
+  if (initialRecords.length != 0) {
+    if (domain.allProperties != '') {
+      let properties = domain.allProperties.split('-')
+      initialRecords.map(records => {
+        switch (records.key) {
+          case 'ETH':
+            records.value = records.value === '' ? properties[0] : records.value
+            break
+          case 'BTC':
+            records.value = records.value === '' ? properties[1] : records.value
+            break
+          case 'LTC':
+            records.value = records.value === '' ? properties[2] : records.value
+            break
+          case 'DOGE':
+            records.value = records.value === '' ? properties[3] : records.value
+            break
+          case 'CONTENT':
+            records.value = records.value === '' ? properties[4] : records.value
+            break
+          case 'email':
+            records.value = records.value === '' ? properties[5] : records.value
+            break
+          case 'url':
+            records.value = records.value === '' ? properties[6] : records.value
+            break
+          case 'avatar':
+            records.value = records.value === '' ? properties[7] : records.value
+            break
+          case 'description':
+            records.value = records.value === '' ? properties[8] : records.value
+            break
+          case 'notice':
+            records.value = records.value === '' ? properties[9] : records.value
+            break
+          case 'keywords':
+            records.value =
+              records.value === '' ? properties[10] : records.value
+            break
+          case 'com.github':
+            records.value =
+              records.value === '' ? properties[11] : records.value
+            break
+          case 'com.reddit':
+            records.value =
+              records.value === '' ? properties[12] : records.value
+            break
+          case 'com.twitter':
+            records.value =
+              records.value === '' ? properties[13] : records.value
+            break
+          case 'org.telegram':
+            records.value =
+              records.value === '' ? properties[14] : records.value
+            break
+
+          default:
+            break
+        }
+      })
+    }
+  }
   return (
     <RecordsWrapper
-      shouldShowRecords={shouldShowRecords}
+      shouldShowRecords={`shouldShowRecords`}
       needsToBeMigrated={needsToBeMigrated}
     >
       {!canEditRecords && isOwner ? (
