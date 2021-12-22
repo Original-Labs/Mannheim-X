@@ -34,10 +34,12 @@ const HeroTop = styled('div')`
   width: 100%;
   justify-content: space-around;
   flex-wrap: wrap;
+  font-size: 16px;
   ${mq.small`
     flex-wrap: nowrap;
     flex-direction: row-reverse;
     justify-content: space-between;
+    font-size: 14px;
   `}
   ${mq.medium`
     flex-wrap: nowrap;

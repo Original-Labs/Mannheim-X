@@ -145,7 +145,7 @@ function Search({ history, className, style }) {
         type="submit"
         data-testid={'home-search-button'}
       >
-        <Loading loading={true}>{t('search.button')}</Loading>
+        <Loading loading={false}>{t('search.button')}</Loading>
       </button>
     </SearchForm>
   )
