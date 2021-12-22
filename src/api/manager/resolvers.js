@@ -71,119 +71,119 @@ function setState(node) {
   }
 }
 
-export const handleSingleTransaction = async (
-  name,
-  record,
-  resolverInstance
-) => {
-  const namehash = getNamehash(name)
-
-  if (record.contractFn === 'setContenthash') {
-    let value
-    if (isEmptyAddress(record.value)) {
-      value = emptyAddress
-    } else {
-      value = encodeContenthash(record.value)?.encoded
-    }
-
-    const contentTx = await resolverInstance[record.contractFn](namehash, value)
-    return sendHelper(contentTx)
-  }
-
-  if (record.contractFn === 'setText') {
-    const textRecordTx = await resolverInstance[record.contractFn](
-      namehash,
-      record.key,
-      record.value
-    )
-    return sendHelper(textRecordTx)
-  }
-
-  if (record.contractFn === 'setAddr(bytes32,uint256,bytes)') {
-    const coinRecord = record
-    const { decoder, coinType } = formatsByName[coinRecord.key]
-    let addressAsBytes
-
-    // use 0x00... for ETH because an empty string throws
-    if (coinRecord.key === 'ETH' && coinRecord.value === '') {
-      coinRecord.value = emptyAddress
-    }
-
-    if (!coinRecord.value || coinRecord.value === '') {
-      addressAsBytes = Buffer.from('')
-    } else {
-      addressAsBytes = decoder(coinRecord.value)
-    }
-
-    const coinRecordTx = await resolverInstance[record.contractFn](
-      namehash,
-      coinType,
-      addressAsBytes
-    )
-
-    return sendHelper(coinRecordTx)
-  }
-
-  console.error('Single transaction error')
-}
-
-export const handleMultipleTransactions = async (
-  name,
-  records,
-  resolverInstance
-) => {
-  try {
-    const resolver = resolverInstance.interface
-    const namehash = getNamehash(name)
-
-    const transactionArray = records.map(record => {
-      if (record.contractFn === 'setContenthash') {
-        let value
-        if (isEmptyAddress(record.value)) {
-          value = emptyAddress
-        } else {
-          value = encodeContenthash(record.value)?.encoded
-        }
-        return resolver.encodeFunctionData(record.contractFn, [namehash, value])
-      }
-
-      if (record.contractFn === 'setText') {
-        return resolver.encodeFunctionData(record.contractFn, [
-          namehash,
-          record.key,
-          record.value
-        ])
-      }
-
-      if (record.contractFn === 'setAddr(bytes32,uint256,bytes)') {
-        const { decoder, coinType } = formatsByName[record.key]
-        let addressAsBytes
-        // use 0x00... for ETH because an empty string throws
-        if (record.key === 'ETH' && record.value === '') {
-          record.value = emptyAddress
-        }
-        if (!record.value || record.value === '') {
-          addressAsBytes = Buffer.from('')
-        } else {
-          addressAsBytes = decoder(record.value)
-        }
-        return resolver.encodeFunctionData(record.contractFn, [
-          namehash,
-          coinType,
-          addressAsBytes
-        ])
-      }
-    })
-
-    // flatten textrecords and addresses and remove undefined
-    //transactionArray.flat().filter(bytes => bytes)
-    //add them all together into one transaction
-    const tx1 = await resolverInstance.setAllProperties(transactionArray)
-    return sendHelper(tx1)
-  } catch (e) {
-    console.log('error creating transaction array', e)
-  }
-}
+// export const handleSingleTransaction = async (
+//   name,
+//   record,
+//   resolverInstance
+// ) => {
+//   const namehash = getNamehash(name)
+//
+//   if (record.contractFn === 'setContenthash') {
+//     let value
+//     if (isEmptyAddress(record.value)) {
+//       value = emptyAddress
+//     } else {
+//       value = encodeContenthash(record.value)?.encoded
+//     }
+//
+//     const contentTx = await resolverInstance[record.contractFn](namehash, value)
+//     return sendHelper(contentTx)
+//   }
+//
+//   if (record.contractFn === 'setText') {
+//     const textRecordTx = await resolverInstance[record.contractFn](
+//       namehash,
+//       record.key,
+//       record.value
+//     )
+//     return sendHelper(textRecordTx)
+//   }
+//
+//   if (record.contractFn === 'setAddr(bytes32,uint256,bytes)') {
+//     const coinRecord = record
+//     const { decoder, coinType } = formatsByName[coinRecord.key]
+//     let addressAsBytes
+//
+//     // use 0x00... for ETH because an empty string throws
+//     if (coinRecord.key === 'ETH' && coinRecord.value === '') {
+//       coinRecord.value = emptyAddress
+//     }
+//
+//     if (!coinRecord.value || coinRecord.value === '') {
+//       addressAsBytes = Buffer.from('')
+//     } else {
+//       addressAsBytes = decoder(coinRecord.value)
+//     }
+//
+//     const coinRecordTx = await resolverInstance[record.contractFn](
+//       namehash,
+//       coinType,
+//       addressAsBytes
+//     )
+//
+//     return sendHelper(coinRecordTx)
+//   }
+//
+//   console.error('Single transaction error')
+// }
+//
+// export const handleMultipleTransactions = async (
+//   name,
+//   records,
+//   resolverInstance
+// ) => {
+//   try {
+//     const resolver = resolverInstance.interface
+//     const namehash = getNamehash(name)
+//
+//     const transactionArray = records.map(record => {
+//       if (record.contractFn === 'setContenthash') {
+//         let value
+//         if (isEmptyAddress(record.value)) {
+//           value = emptyAddress
+//         } else {
+//           value = encodeContenthash(record.value)?.encoded
+//         }
+//         return resolver.encodeFunctionData(record.contractFn, [namehash, value])
+//       }
+//
+//       if (record.contractFn === 'setText') {
+//         return resolver.encodeFunctionData(record.contractFn, [
+//           namehash,
+//           record.key,
+//           record.value
+//         ])
+//       }
+//
+//       if (record.contractFn === 'setAddr(bytes32,uint256,bytes)') {
+//         const { decoder, coinType } = formatsByName[record.key]
+//         let addressAsBytes
+//         // use 0x00... for ETH because an empty string throws
+//         if (record.key === 'ETH' && record.value === '') {
+//           record.value = emptyAddress
+//         }
+//         if (!record.value || record.value === '') {
+//           addressAsBytes = Buffer.from('')
+//         } else {
+//           addressAsBytes = decoder(record.value)
+//         }
+//         return resolver.encodeFunctionData(record.contractFn, [
+//           namehash,
+//           coinType,
+//           addressAsBytes
+//         ])
+//       }
+//     })
+//
+//     // flatten textrecords and addresses and remove undefined
+//     //transactionArray.flat().filter(bytes => bytes)
+//     //add them all together into one transaction
+//     const tx1 = await resolverInstance.setAllProperties(transactionArray)
+//     return sendHelper(tx1)
+//   } catch (e) {
+//     console.log('error creating transaction array', e)
+//   }
+// }
 
 async function getRegistrarEntry(name) {
   const registrar = getRegistrar()
@@ -819,12 +819,11 @@ const resolvers = {
       let allProperties = await resolverInstanceWithoutSigner.getAllProperties(
         name
       )
-      allProperties = allProperties === '' ? '-------------' : allProperties
+      allProperties = allProperties === '' ? '--------------' : allProperties
 
       let properties = allProperties.split('-')
-
       records.map(record => {
-        console.log('record>>>>', record)
+        //TODO if record.value contrains "-", warnings
         switch (record.key) {
           case 'ETH':
             properties[0] = record.value
@@ -877,11 +876,10 @@ const resolvers = {
         }
       })
       let newProperties = properties[0]
-      debugger
       for (let i = 1; i < properties.length; i++) {
         newProperties = newProperties.concat('-', properties[i])
       }
-      console.log('newProperties>>>', newProperties)
+
       const RecordTx = await resolverInstance.setAllProperties(
         name,
         newProperties
