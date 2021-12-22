@@ -8,6 +8,11 @@ export const GET_PUBLIC_RESOLVER = gql`
     }
   }
 `
+export const GET_SNS_NAME = gql`
+  query getSnsName($address: String) {
+    getSnsName(address: $address)
+  }
+`
 
 export const GET_REVERSE_RECORD = gql`
   query getReverseRecord($address: String) {

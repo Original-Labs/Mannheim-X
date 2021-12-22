@@ -387,10 +387,16 @@ const resolvers = {
       const ens = getSNS()
       return ens.getOwner(name)
     },
-
     getSnsName: async (_, { address }) => {
-      const ens = getSNS()
-      return await ens.getSNSName(address)
+      try {
+        debugger
+        const ens = getSNS()
+        const newVar = await ens.getSNSName(address)
+        return { newVar }
+      } catch (e) {
+        console.log('Error in getSnsName', e)
+        throw e
+      }
     },
     singleName: async (_, { name }) => {
       try {

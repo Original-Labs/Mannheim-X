@@ -9,7 +9,9 @@ import { useAccount } from '../QueryAccount'
 import {
   GET_FAVOURITES,
   GET_DOMAINS_SUBGRAPH,
-  GET_REGISTRATIONS_SUBGRAPH
+  GET_REGISTRATIONS_SUBGRAPH,
+  GET_SNS_NAME,
+  GET_SINGLE_NAME
 } from '../../graphql/queries'
 import { decryptName, checkIsDecrypted } from '../../api/labels'
 
@@ -40,6 +42,8 @@ import {
   NonMainPageBannerContainerWithMarginBottom,
   DAOBannerContent
 } from '../Banner/DAOBanner'
+import getSNS from '../../apollo/mutations/sns'
+import { getAccount } from '../../lib/ui'
 
 const DEFAULT_RESULTS_PER_PAGE = 25
 
@@ -136,28 +140,28 @@ function useDomains({
   expiryDate
 }) {
   const skip = (page - 1) * resultsPerPage
-  const registrationsQuery = useQuery(GET_REGISTRATIONS_SUBGRAPH, {
-    variables: {
-      id: address,
-      first: resultsPerPage,
-      skip,
-      orderBy: sort.type,
-      orderDirection: sort.direction,
-      expiryDate
-    },
-    skip: domainType !== 'registrant',
-    fetchPolicy: 'no-cache'
-  })
-
-  const controllersQuery = useQuery(GET_DOMAINS_SUBGRAPH, {
-    variables: {
-      id: address,
-      first: resultsPerPage,
-      skip
-    },
-    skip: domainType !== 'controller',
-    fetchPolicy: 'no-cache'
-  })
+  // const registrationsQuery = useQuery(GET_REGISTRATIONS_SUBGRAPH, {
+  //   variables: {
+  //     id: address,
+  //     first: resultsPerPage,
+  //     skip,
+  //     orderBy: sort.type,
+  //     orderDirection: sort.direction,
+  //     expiryDate
+  //   },
+  //   skip: domainType !== 'registrant',
+  //   fetchPolicy: 'no-cache'
+  // })
+  //
+  // const controllersQuery = useQuery(GET_DOMAINS_SUBGRAPH, {
+  //   variables: {
+  //     id: address,
+  //     first: resultsPerPage,
+  //     skip
+  //   },
+  //   skip: domainType !== 'controller',
+  //   fetchPolicy: 'no-cache'
+  // })
 
   if (domainType === 'registrant') {
     return registrationsQuery
@@ -166,6 +170,27 @@ function useDomains({
   } else {
     throw new Error('Unrecognised domainType')
   }
+}
+
+function getSNSNameInfo(address) {
+  const sns = getSNS()
+  const { data2 } = useQuery(GET_SNS_NAME, {
+    variables: {
+      address: address
+    }
+  })
+
+  const { data, loading, error } = useQuery(GET_SINGLE_NAME, {
+    variables: {
+      name: 'wanbowen.key'
+      // name: data2.snsName
+    }
+  })
+
+  if (!loading && !error) {
+    return data
+  }
+  return null
 }
 
 const RESET_STATE_QUERY = gql`
@@ -227,14 +252,16 @@ export default function Address({
     expiryDate = currentDate.subtract(90, 'days').unix()
   }
 
-  const { loading, data, error, refetch } = useDomains({
-    resultsPerPage,
-    domainType,
-    address: normalisedAddress,
-    sort: activeSort,
-    page,
-    expiryDate
-  })
+  const snsNameInfo = getSNSNameInfo(address)
+
+  // const { loading, data, error, refetch } = useDomains({
+  //   resultsPerPage,
+  //   domainType,
+  //   address: normalisedAddress,
+  //   sort: activeSort,
+  //   page,
+  //   expiryDate
+  // })
 
   const { data: { favourites } = [] } = useQuery(GET_FAVOURITES)
   useEffect(() => {
@@ -243,24 +270,24 @@ export default function Address({
     }
   }, [isENSReady])
 
-  if (error) {
-    console.log(error)
-    return <>Error getting domains. {JSON.stringify(error)}</>
-  }
-
-  if (loading) {
-    return <Loader withWrap large />
-  }
+  // if (error) {
+  //   console.log(error)
+  //   return <>Error getting domains. {JSON.stringify(error)}</>
+  // }
+  //
+  // if (loading) {
+  //   return <Loader withWrap large />
+  // }
 
   let normalisedDomains = []
 
-  if (domainType === 'registrant' && data.account) {
-    normalisedDomains = [...data.account.registrations]
-  } else if (domainType === 'controller' && data.account) {
-    normalisedDomains = [
-      ...filterOutReverse(data.account.domains).map(domain => ({ domain }))
-    ]
-  }
+  // if (domainType === 'registrant' && data.account) {
+  //   normalisedDomains = [...data.account.registrations]
+  // } else if (domainType === 'controller' && data.account) {
+  //   normalisedDomains = [
+  //     ...filterOutReverse(data.account.domains).map(domain => ({ domain }))
+  //   ]
+  // }
 
   let decryptedDomains = filterNormalised(
     decryptNames(normalisedDomains),
@@ -289,32 +316,33 @@ export default function Address({
   const hasNamesExpiringSoon = !!domains.find(domain =>
     calculateIsExpiredSoon(domain.expiryDate)
   )
+
   return (
     <>
       <NonMainPageBannerContainerWithMarginBottom>
         <DAOBannerContent />
       </NonMainPageBannerContainerWithMarginBottom>
 
-      {showOriginBanner && showOriginBannerFlag && (
-        <Banner>
-          <Close onClick={() => setShowOriginBannerFlag(false)} src={close} />
-          {t('address.transactionBanner')}
-        </Banner>
-      )}
-      {hasNamesExpiringSoon && (
-        <Banner>
-          <h3>
-            <img alt="exclamation mark" src={warning} />
-            &nbsp; {t('address.namesExpiringSoonBanner.title')}
-            <p>
-              <Trans i18nKey="address.namesExpiringSoonBanner.text">
-                One or more names are expiring soon, renew them all in one
-                transaction by selecting multiple names and click "Renew"
-              </Trans>
-            </p>
-          </h3>
-        </Banner>
-      )}
+      {/*{showOriginBanner && showOriginBannerFlag && (*/}
+      {/*  <Banner>*/}
+      {/*    <Close onClick={() => setShowOriginBannerFlag(false)} src={close} />*/}
+      {/*    {t('address.transactionBanner')}*/}
+      {/*  </Banner>*/}
+      {/*)}*/}
+      {/*{hasNamesExpiringSoon && (*/}
+      {/*  <Banner>*/}
+      {/*    <h3>*/}
+      {/*      <img alt="exclamation mark" src={warning} />*/}
+      {/*      &nbsp; {t('address.namesExpiringSoonBanner.title')}*/}
+      {/*      <p>*/}
+      {/*        <Trans i18nKey="address.namesExpiringSoonBanner.text">*/}
+      {/*          One or more names are expiring soon, renew them all in one*/}
+      {/*          transaction by selecting multiple names and click "Renew"*/}
+      {/*        </Trans>*/}
+      {/*      </p>*/}
+      {/*    </h3>*/}
+      {/*  </Banner>*/}
+      {/*)}*/}
 
       <AddressContainer>
         <TopBar>
@@ -327,56 +355,57 @@ export default function Address({
           )}
         </TopBar>
         {/*<AddReverseRecord account={account} currentAddress={address} />*/}
-        <Controls>
-          <Filtering
-            activeFilter={domainType}
-            setActiveSort={setActiveSort}
-            url={url}
-          />
+        {/*<Controls>*/}
+        {/*  <Filtering*/}
+        {/*    activeFilter={domainType}*/}
+        {/*    setActiveSort={setActiveSort}*/}
+        {/*    url={url}*/}
+        {/*  />*/}
 
-          {domainType === 'registrant' && (
-            <RenewAll
-              years={years}
-              setYears={setYears}
-              activeFilter={domainType}
-              selectedNames={selectedNames}
-              setCheckedBoxes={setCheckedBoxes}
-              setSelectAll={setSelectAll}
-              allNames={allNames}
-              address={address}
-              data={data}
-              refetch={refetch}
-              getterString="account.registrations"
-            />
-          )}
-          <Sorting
-            activeSort={activeSort}
-            setActiveSort={setActiveSort}
-            activeFilter={domainType}
-          />
+        {/*  {domainType === 'registrant' && (*/}
+        {/*    <RenewAll*/}
+        {/*      years={years}*/}
+        {/*      setYears={setYears}*/}
+        {/*      activeFilter={domainType}*/}
+        {/*      selectedNames={selectedNames}*/}
+        {/*      setCheckedBoxes={setCheckedBoxes}*/}
+        {/*      setSelectAll={setSelectAll}*/}
+        {/*      allNames={allNames}*/}
+        {/*      address={address}*/}
+        {/*      data={data}*/}
+        {/*      refetch={refetch}*/}
+        {/*      getterString="account.registrations"*/}
+        {/*    />*/}
+        {/*  )}*/}
+        {/*  <Sorting*/}
+        {/*    activeSort={activeSort}*/}
+        {/*    setActiveSort={setActiveSort}*/}
+        {/*    activeFilter={domainType}*/}
+        {/*  />*/}
 
-          {domainType === 'registrant' && (
-            <>
-              <SelectAll>
-                <Checkbox
-                  testid="checkbox-renewall"
-                  type="double"
-                  checked={selectAll}
-                  onClick={() => {
-                    if (!selectAll) {
-                      selectAllNames()
-                    } else {
-                      setCheckedBoxes({})
-                    }
-                    setSelectAll(selectAll => !selectAll)
-                  }}
-                />
-              </SelectAll>
-            </>
-          )}
-        </Controls>
+        {/*  {domainType === 'registrant' && (*/}
+        {/*    <>*/}
+        {/*      <SelectAll>*/}
+        {/*        <Checkbox*/}
+        {/*          testid="checkbox-renewall"*/}
+        {/*          type="double"*/}
+        {/*          checked={selectAll}*/}
+        {/*          onClick={() => {*/}
+        {/*            if (!selectAll) {*/}
+        {/*              selectAllNames()*/}
+        {/*            } else {*/}
+        {/*              setCheckedBoxes({})*/}
+        {/*            }*/}
+        {/*            setSelectAll(selectAll => !selectAll)*/}
+        {/*          }}*/}
+        {/*        />*/}
+        {/*      </SelectAll>*/}
+        {/*    </>*/}
+        {/*  )}*/}
+        {/*</Controls>*/}
 
         <DomainList
+          snsName={snsNameInfo}
           setSelectAll={setSelectAll}
           address={address}
           domains={domains}
@@ -387,18 +416,18 @@ export default function Address({
           setCheckedBoxes={setCheckedBoxes}
           showBlockies={false}
         />
-        <Pager
-          variables={{ id: address, expiryDate }}
-          currentPage={page}
-          resultsPerPage={resultsPerPage}
-          setResultsPerPage={setResultsPerPage}
-          pageLink={`/address/${address}/${domainType}`}
-          query={
-            domainType === 'registrant'
-              ? GET_REGISTRATIONS_SUBGRAPH
-              : GET_DOMAINS_SUBGRAPH
-          }
-        />
+        {/*<Pager*/}
+        {/*  variables={{ id: address, expiryDate }}*/}
+        {/*  currentPage={page}*/}
+        {/*  resultsPerPage={resultsPerPage}*/}
+        {/*  setResultsPerPage={setResultsPerPage}*/}
+        {/*  pageLink={`/address/${address}/${domainType}`}*/}
+        {/*  query={*/}
+        {/*    domainType === 'registrant'*/}
+        {/*      ? GET_REGISTRATIONS_SUBGRAPH*/}
+        {/*      : GET_DOMAINS_SUBGRAPH*/}
+        {/*  }*/}
+        {/*/>*/}
       </AddressContainer>
     </>
   )

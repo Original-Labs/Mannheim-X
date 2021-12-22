@@ -43,6 +43,7 @@ const DomainsContainer = styled('div')`
 `
 
 export default function DomainList({
+  snsNameInfo,
   favourites = [],
   address,
   activeSort,
@@ -53,14 +54,14 @@ export default function DomainList({
   domains,
   showBlockies
 }) {
-  if (!domains || domains.length === 0) {
+  if ((!domains || domains.length === 0) && !snsNameInfo) {
     return (
       <NoDomainsContainer>
         <h2>This address does not own any domains</h2>
       </NoDomainsContainer>
     )
   }
-
+  debugger
   return (
     <DomainsContainer>
       {domains.map(d => {
@@ -85,6 +86,25 @@ export default function DomainList({
           />
         )
       })}
+      {snsNameInfo ? (
+        <DomainItem
+          key={snsNameInfo.name}
+          name={snsNameInfo.name}
+          owner={address}
+          domain={snsNameInfo}
+          expiryDate={d?.expiryDate}
+          labelName={snsNameInfo.labelName}
+          labelhash={snsNameInfo.labelhash}
+          parent={snsNameInfo.parent.name}
+          checkedBoxes={activeFilter === 'registrant' ? checkedBoxes : null}
+          setCheckedBoxes={
+            activeFilter === 'registrant' ? setCheckedBoxes : null
+          }
+          setSelectAll={setSelectAll}
+          showBlockies={showBlockies}
+          isFavourite={isFavourite}
+        />
+      ) : null}
     </DomainsContainer>
   )
 }

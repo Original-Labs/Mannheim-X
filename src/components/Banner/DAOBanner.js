@@ -86,6 +86,8 @@ export const NonMainPageBannerContainer = styled(`div`)`
   `}
 `
 
+const BannerSwitch = false
+
 export const NonMainPageBannerContainerWithMarginBottom = styled(
   NonMainPageBannerContainer
 )`
