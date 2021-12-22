@@ -1,5 +1,5 @@
 // import { getAccounts, getNetwork, getNetworkId } from '@ensdomains/ui'
-import { getAccounts, getNetwork, getNetworkId } from 'lib/ui/src/index'
+import { getAccounts, getNetwork, getNetworkId } from 'sns-app-contract-api'
 
 import { isReadOnly } from '@ensdomains/ui/src/web3'
 

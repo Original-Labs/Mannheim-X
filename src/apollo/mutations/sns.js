@@ -1,5 +1,5 @@
 // import { setupENS } from '@ensdomains/ui'
-import { setupSNS, setupSNSResolver } from 'lib/ui/src/index'
+import { setupSNS, setupSNSResolver } from 'sns-app-contract-api'
 import { isENSReadyReactive } from '../reactiveVars'
 import { getProvider } from '../../setup'
 import { getNetwork } from '@ensdomains/ui'
