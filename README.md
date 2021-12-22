@@ -1,6 +1,6 @@
 # SNS Application
 
-SNS Application
+> fork from [ens-app](git@github.com:ensdomains/ens-app.git)
 
 ## Installation
 
@@ -9,8 +9,8 @@ SNS Application
 Expects Node.js version >=14.17.0
 
 ```shell
-$> git clone https://github.com/ensdomains/ens-app.git
-$> cd ens-app
+$> https://github.com/Link-Key/sns-app.git
+$> cd sns-app
 $> yarn install
 $> cd src/lib/ui
 $> yarn install # install lib dependencies package
@@ -28,8 +28,6 @@ yarn start:ipfs
 
 The main difference of the ipfs-build is that it uses HashRouter instead of BrowserRouter and makes sure all links are relative.
 
-The ENS app can be used with the Gnosis Safe web interface. The required steps are outline [here](./docs/gnosis_safe_app_support.md).
-
 ## Unit Testing
 
 All tests are run with Jest for both the front-end application and testing blockchain functionality. For blockchain based tests it uses `ganache-cli` by default. If you want to see the transactions in the Ganache GUI, you can change the environment in the test file from `GANACHE_CLI` to `GANACHE`. Then you can open Ganache on your computer and test manually after the test runner deploys the contracts.
@@ -41,35 +39,6 @@ npm test
 ```
 
 To speed up the tests, the contracts are compiled before the tests. If you need to update the solidity code, you can run `npm run compile` to recompile the code. Alternatively you can uncomment the code that compiles the contracts in the tests, which will slow down the tests considerably.
-
-### Troubleshooting tests
-
-If you get this error:
-
-```bash
-$ npm test
-
-> ens-app@0.1.0 test /Users/youruser/drive/projects/ens-app
-> react-scripts test --env=jsdom
-
-2018-05-23 09:17 node[85833] (FSEvents.framework) FSEventStreamStart: register_with_server: ERROR: f2d_register_rpc() => (null) (-22)
-2018-05-23 09:17 node[85833] (FSEvents.framework) FSEventStreamStart: register_with_server: ERROR: f2d_register_rpc() => (null) (-22)
-events.js:136
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: Error watching file for changes: EMFILE
-    at _errnoException (util.js:999:13)
-    at FSEvent.FSWatcher._handle.onchange (fs.js:1374:9)
-npm ERR! Test failed.  See above for more details.
-```
-
-Try installing watchman on OSX by doing:
-
-```bash
-brew uninstall watchman
-brew install watchman
-```
 
 ## Coding Style and Contribution Guide
 
@@ -179,161 +148,6 @@ To add a new language, copy the `public/locals/en.json` file, and name it [langu
 The other thing that needs to be changed is `LanguageSwitcher.js`, which has a list of currently supported languages, and the `i18n.js` init file. This will add the language to our dropdown menu.
 
 Once this has been done, please create a pull request for us to review and check it has been done correctly.
-
-## End to end Testing
-
-### Getting started with E2E testing
-
-In case you haven't already:
-
-- `git clone https://github.com/ensdomains/ens-app.git`
-- `git clone https://github.com/ensdomains/ens-subgraph`
-- `git clone https://github.com/graphprotocol/graph-node`
-
-You need to make sure these are all cloned into the same parent folder.
-
-Next in the ens-app folder run the following (will need multiple terminals open):
-
-```
-npx ganache-cli -b 1
-```
-
-Install Docker: https://www.docker.com/get-started
-
-Next in the /graph-node/docker folder:
-
-```
-rm -rf data
-docker-compose up
-```
-
-in the `ens-app` folder:
-
-```
-yarn preTest
-yarn subgraph
-```
-
-in the `ens-subgraph` folder:
-
-`yarn setup`
-
-in the `ens-app` folder:
-
-```
-yarn start:test
-yarn run cypress:open
-```
-
-This should open up cypress. To run the tests click on 'Run n integration tests'
-
----
-
-The main package for the E2E tests is `ensdomains/mock`, which exposes a script that will prepopulate ganache with ENS so you have everything setup to run Cypress on.
-
-The ENS app has end to end tests with Cypress. To run them you need to start ganache, run the seed script, run the app and then run cypress. This should start chrome and the Cypress GUI. Each time the test run, the script needs to be re-run and the app restarted for it to work.
-
-```bash
-ganache-cli
-```
-
-```bash
-yarn run preTest
-```
-
-This runs the app in local ganache mode:
-
-```bash
-yarn start:test
-```
-
-```bash
-yarn run cypress:open
-```
-
-To test the ipfs-build use the respective ":ipfs"-variants of the scripts:
-
-```bash
-yarn start:test:ipfs
-```
-
-```bash
-yarn run cypress:open:ipfs
-```
-
-## Setting up subgraph
-
-Subgraph is used to list subdomains and all the names you have registered.
-
-### Prerequisite
-
-Get ens subgraph
-
-```
-git clone https://github.com/ensdomains/ens-subgraph
-cd ens-subgraph
-yarn
-```
-
-Get graph-node
-
-```
-git clone https://github.com/graphprotocol/graph-node
-```
-
-From now on, we assume that `graph-node`, `ens-app`, and `ens-subgraph` all exist under the same directory
-
-### Start ganache
-
-```
-ganache-cli
-```
-
-### Download and start docker
-
-Download and start [docker](https://www.docker.com/) first
-
-### Start thegraph node
-
-This starts up docker with ipfs, postgresdb, and the-graph node.
-
-```
-cd graph-node/docker
-docker-compose up
-```
-
-### Deploy ENS contracts and update subgraph.yml
-
-```
-cd ens-app
-yarn preTest
-yarn subgraph
-```
-
-`subgraph` job updates ENS contract addresses and updates environment from `mainnet` to `dev`
-
-### Deploy ENS subgraph
-
-### Generate deployment code
-
-```
-cd ../ens-subgraph
-yarn
-yarn codegen
-```
-
-### Deploy
-
-```
-yarn create-local
-yarn deploy-local
-```
-
-NOTE: If it raises error, try to delete `graph-node/docker/data` and startup the docker again.
-
-#### Confirm that you can query from browser
-
-<img width="1000" alt="Screenshot 2019-07-17 at 11 34 59" src="https://user-images.githubusercontent.com/2630/61370435-4fd7b280-a88a-11e9-80e6-ba6d5e13d0ee.png">
 
 ## Bundle size
 
