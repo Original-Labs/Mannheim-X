@@ -56,7 +56,7 @@ const contracts = {
     registry: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
   },
   137: {
-    registry: '0xb388156EB6d8e8BE4B56D62b9E9e00A98F081836'
+    registry: '0xBa1f1e3677c9EBF476e1F4a71C172F06a8081CE3'
   }
 }
 
@@ -154,8 +154,8 @@ export class SNS {
   }
 
   //Get the registered SNSName by address
-  async getSNSName(address) {
-    return await this.SNS.getSNSName(address)
+  async getNameOfOwner(address) {
+    return await this.SNS.getNameOfOwner(address)
   }
 
   //Get the resolver address through SNSName

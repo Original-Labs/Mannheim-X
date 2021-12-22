@@ -64,7 +64,8 @@ const AddFavourite = ({ domain, isFavourite, isSubDomain }) => {
     {
       variables: {
         domain: {
-          name: domain.name
+          name: domain.name,
+          owner: domain.owner
         }
       }
     }

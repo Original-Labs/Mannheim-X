@@ -440,7 +440,10 @@ export default function Records({
             records.value = records.value === '' ? properties[3] : records.value
             break
           case 'CONTENT':
-            records.value = records.value === '' ? properties[4] : records.value
+            records.value =
+              records.value === '' || records.value === null
+                ? properties[4]
+                : records.value
             break
           case 'email':
             records.value = records.value === '' ? properties[5] : records.value

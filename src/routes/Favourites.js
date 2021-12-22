@@ -137,6 +137,7 @@ function Favourites() {
     GET_SUBDOMAIN_FAVOURITES
   )
   const favourites = filterNormalised(favouritesWithUnnormalised, 'name')
+
   const ids = favourites && favourites.map(f => getNamehash(f.name))
   const { data: { registrations } = [], refetch } = useQuery(
     GET_REGISTRATIONS_BY_IDS_SUBGRAPH,
@@ -155,26 +156,13 @@ function Favourites() {
   }
   let favouritesList = []
   if (favourites.length > 0) {
-    if (registrations && registrations.length > 0) {
-      favouritesList = favourites.map(f => {
-        let r = registrations.filter(
-          a => a.domain.id === getNamehash(f.name)
-        )[0]
-        return {
-          name: f.name,
-          owner: r && r.registrant.id,
-          available: getAvailable(r && r.expiryDate),
-          expiryDate: r && r.expiryDate
-        }
-      })
-    } else {
-      // Fallback when subgraph is not returning result
-      favouritesList = favourites.map(f => {
-        return {
-          name: f.name
-        }
-      })
-    }
+    favouritesList = favourites.map(f => {
+      return {
+        name: f.name,
+        state: f.state,
+        owner: f.owner
+      }
+    })
   }
 
   const hasFavourites =
@@ -209,6 +197,7 @@ function Favourites() {
   }
   let data = []
   const account = useAccount()
+  console.log('favouritesList', favouritesList)
   const checkedOtherOwner =
     favouritesList.filter(
       f =>

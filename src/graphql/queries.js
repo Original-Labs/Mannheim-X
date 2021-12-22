@@ -179,6 +179,8 @@ export const GET_FAVOURITES = gql`
   query getFavourites {
     favourites @client {
       name
+      state
+      owner
     }
   }
 `
