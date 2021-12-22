@@ -19,7 +19,8 @@ import { connectProvider, disconnectProvider } from '../utils/providerUtils'
 import { gql } from '@apollo/client'
 import {
   MainPageBannerContainer,
-  DAOBannerContent
+  DAOBannerContent,
+  MainPageMetaTimeBannerContainer
 } from '../components/Banner/DAOBanner'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 import MetaTime from '../components/HomePage/MetaTime'
@@ -363,12 +364,14 @@ export default ({ match }) => {
           )} */}
         </NetworkStatus>
       </HeroTop>
-      <MainPageBannerContainer>
-        <DAOBannerContent />
-      </MainPageBannerContainer>
-      <MainPageBannerContainer>
+      {/*<MainPageBannerContainer>*/}
+      {/*  <DAOBannerContent />*/}
+      {/*</MainPageBannerContainer>*/}
+
+      <MainPageMetaTimeBannerContainer>
         <MetaTime />
-      </MainPageBannerContainer>
+      </MainPageMetaTimeBannerContainer>
+
       <SearchContainer>
         <>
           <LogoLarge

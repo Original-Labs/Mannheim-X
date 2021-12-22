@@ -10,6 +10,7 @@ import { withRouter } from 'react-router'
 import searchIcon from '../../assets/search.svg'
 import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
 import LanguageSwitcher from 'components/LanguageSwitcher'
+import Loading from '../Loading/Loading'
 
 const SearchForm = styled('form')`
   display: flex;
@@ -144,7 +145,7 @@ function Search({ history, className, style }) {
         type="submit"
         data-testid={'home-search-button'}
       >
-        {t('search.button')}
+        <Loading loading={true}>{t('search.button')}</Loading>
       </button>
     </SearchForm>
   )

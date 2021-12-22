@@ -20,11 +20,15 @@ class MetaTime extends Component {
   }
   tick() {
     this.setState({
-      time: new Date().toLocaleString()
+      time:
+        new Date().toUTCString().substring(0, 12) +
+        'Ω' +
+        (new Date().getFullYear() - 2021 + 1) +
+        new Date().toUTCString().substring(16)
     })
   }
   render() {
-    return <p className="App-clock">The time is {this.state.time}.</p>
+    return <p className="App-clock">The Metaverse Time | {this.state.time}</p>
   }
 }
 

@@ -68,6 +68,31 @@ export const MainPageBannerContainer = styled(`div`)`
   `}
 `
 
+export const MainPageMetaTimeBannerContainer = styled(`div`)`
+  position: absolute;
+  top: 200px;
+  //margin-left: auto;
+  //margin-right: auto;
+  left: 0;
+  right: 0;
+  //background: #ffffff 0%;
+  text-align: center;
+  border-radius: 14px;
+  max-width: 90%;
+  padding: 15px 0px;
+  font-size: 18px;
+  color: #fff;
+  margin: 0px auto;
+  a {
+    display: grid;
+    grid-template-columns: 73px 1fr 50px;
+  }
+  ${mq.medium`
+    width: 700px;
+    height: 78px;
+  `}
+`
+
 export const NonMainPageBannerContainer = styled(`div`)`
   margin-left: auto;
   margin-right: auto;

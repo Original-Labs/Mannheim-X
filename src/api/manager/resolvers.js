@@ -391,7 +391,7 @@ const resolvers = {
       try {
         debugger
         const ens = getSNS()
-        const newVar = await ens.getSNSName(address)
+        const newVar = await ens.getNameOfOwner(address)
         return { newVar }
       } catch (e) {
         console.log('Error in getSnsName', e)
