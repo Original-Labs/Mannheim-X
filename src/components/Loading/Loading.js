@@ -16,7 +16,7 @@ import 'antd/es/spin/style/css'
  * @returns
  */
 export default function Loading(props) {
-  return (
+  return props.loading ? (
     <Spin
       {...props}
       indicator={
@@ -28,5 +28,7 @@ export default function Loading(props) {
     >
       {props.children}
     </Spin>
+  ) : (
+    props.children
   )
 }
