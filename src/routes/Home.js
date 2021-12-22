@@ -22,6 +22,7 @@ import {
   DAOBannerContent
 } from '../components/Banner/DAOBanner'
 import LanguageSwitcher from '../components/LanguageSwitcher'
+import MetaTime from '../components/HomePage/MetaTime'
 
 const HeroTop = styled('div')`
   display: flex;
@@ -364,6 +365,9 @@ export default ({ match }) => {
       </HeroTop>
       <MainPageBannerContainer>
         <DAOBannerContent />
+      </MainPageBannerContainer>
+      <MainPageBannerContainer>
+        <MetaTime />
       </MainPageBannerContainer>
       <SearchContainer>
         <>
