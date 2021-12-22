@@ -33,8 +33,8 @@ export default function messageMention(props) {
         return message.open({ ...props })
     }
   }
-  if (props && props instanceof String) {
-    return message.open(props)
+  if (typeof props === 'string') {
+    return message.open({ content: props })
   }
   return message.error()
 }
