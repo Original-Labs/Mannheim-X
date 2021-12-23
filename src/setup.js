@@ -178,9 +178,6 @@ export default async reconnect => {
      * @type {*|{}}
      */
     const sns = getSNS()
-
-    console.log('sns >>>', sns)
-    console.log('sns.isOverDeadline() >>>', sns.isOverDeadline())
   } catch (e) {
     console.error('setup error: ', e)
   }
