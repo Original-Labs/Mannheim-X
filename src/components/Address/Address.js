@@ -43,7 +43,6 @@ import {
   DAOBannerContent
 } from '../Banner/DAOBanner'
 import getSNS from '../../apollo/mutations/sns'
-import { getAccount } from '../../lib/ui'
 
 const DEFAULT_RESULTS_PER_PAGE = 25
 
