@@ -188,13 +188,13 @@ const Domain = ({
       </DomainName>
       {/*<ExpiryDate expiryDate={expiryDate} name={domain.name} />*/}
       <Label domain={domain} isOwner={isOwner} />
-      <RightContainer>
-        <AddFavourite
-          domain={domain}
-          isSubDomain={isSubDomain}
-          isFavourite={isFavourite}
-        />
-      </RightContainer>
+      {/*<RightContainer>*/}
+      {/*  <AddFavourite*/}
+      {/*    domain={domain}*/}
+      {/*    isSubDomain={isSubDomain}*/}
+      {/*    isFavourite={isFavourite}*/}
+      {/*  />*/}
+      {/*</RightContainer>*/}
       {/*<RightContainer>*/}
       {/*  <CheckBoxContainer>*/}
       {/*    <Checkbox*/}

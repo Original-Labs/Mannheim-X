@@ -131,11 +131,11 @@ export default function ChildDomainItem({
           ) : (
             <>
               <ExpiryDate name={name} expiryDate={expiryDate} />
-              <AddFavourite
-                domain={{ name }}
-                isSubDomain={false}
-                isFavourite={isFavourite}
-              />
+              {/*<AddFavourite*/}
+              {/*  domain={{ name }}*/}
+              {/*  isSubDomain={false}*/}
+              {/*  isFavourite={isFavourite}*/}
+              {/*/>*/}
             </>
           )}
 

@@ -823,8 +823,13 @@ const resolvers = {
 
       let properties = allProperties.split('+')
       records.map(record => {
-        //TODO if record.value contrains "+", warnings
-        if (record.value) {
+        let valueStr = record.value.split('+')
+        if (valueStr.length > 1) {
+          let newValueStr = ''
+          for (let i = 0; i < valueStr.length; i++) {
+            newValueStr += valueStr[i]
+          }
+          record.value = newValueStr
         }
         switch (record.key) {
           case 'ETH':
