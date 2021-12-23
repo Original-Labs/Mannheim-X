@@ -1,9 +1,6 @@
 // import { setupENS } from '@ensdomains/ui'
 import { setupSNS, setupSNSResolver } from 'sns-app-contract-api'
 import { isENSReadyReactive } from '../reactiveVars'
-import { getProvider } from '../../setup'
-import { getNetwork } from '@ensdomains/ui'
-import { debug } from 'prettier/doc'
 
 const INFURA_ID =
   window.location.host === 'sns.chat'

@@ -4,7 +4,7 @@ import mq from 'mediaQuery'
 export const H2 = styled('h2')`
   font-size: 18px;
   font-weight: 200;
-  color: #adbbcd;
+  color: #fff;
 
   ${mq.medium`
     font-size: 22px;
