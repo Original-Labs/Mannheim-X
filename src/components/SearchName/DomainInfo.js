@@ -3,6 +3,13 @@ import { Query } from '@apollo/client/react/components'
 import { useQuery } from '@apollo/client'
 import DomainItem from '../DomainItem/DomainItem'
 import { GET_FAVOURITES, GET_SINGLE_NAME } from '../../graphql/queries'
+import Loading from 'components/Loading/Loading'
+import styled from '@emotion/styled/macro'
+
+const BlankLoadingContainer = styled('div')`
+  width: 100%;
+  margin-top: 50px;
+`
 
 export const DomainInfo = ({ domainState, isFavourite, loading }) => {
   return (
@@ -44,12 +51,18 @@ const DomainInfoContainer = ({ searchTerm }) => {
     }
   })
 
-  if (loading || !data) return null
+  if (loading || !data)
+    return (
+      <Loading loading={true} defaultColor="white" size="large">
+        <BlankLoadingContainer />
+      </Loading>
+    )
   if (error) {
     console.error(error)
     return null
   }
   const { singleName } = data
+  console.log('data:', data)
 
   return <DomainItemContainer {...{ singleName, searchTerm }} />
 }
