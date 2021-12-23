@@ -1,4 +1,4 @@
-import { getNetworkId } from 'lib/ui/src/web3'
+import { getNetworkId } from 'sns-app-contract-api'
 import {
   emptyAddress as _emptyAddress,
   validateName as _validateName,

@@ -26,7 +26,7 @@ import {
   isDecrypted,
   labelhash,
   utils
-} from 'lib/ui/src/index'
+} from 'sns-app-contract-api'
 import { formatsByName } from '@ensdomains/address-encoder'
 import isEqual from 'lodash/isEqual'
 import modeNames from '../modes'
@@ -44,8 +44,6 @@ import getClient from '../../apollo/apolloClient'
 import getSNS, { getSNSAddress, getSnsResolver } from 'apollo/mutations/sns'
 import { isENSReadyReactive, namesReactive } from '../../apollo/reactiveVars'
 import getReverseRecord from './getReverseRecord'
-import { isEmptyAddress } from '../../utils/records'
-import { getAccount } from 'lib/ui/src/web3'
 
 const defaults = {
   names: []
@@ -390,7 +388,7 @@ const resolvers = {
     getSnsName: async (_, { address }) => {
       try {
         debugger
-        const ens = getSNS()
+        const ens = getSNS().then()
         const newVar = await ens.getNameOfOwner(address)
         return { newVar }
       } catch (e) {

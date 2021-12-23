@@ -8,7 +8,7 @@ import {
   web3ProviderReactive
 } from '../apollo/reactiveVars'
 // import { getNetwork, getNetworkId, isReadOnly } from '@ensdomains/ui'
-import { getNetwork, getNetworkId, isReadOnly } from 'lib/ui/src/index'
+import { getNetwork, getNetworkId, isReadOnly } from 'sns-app-contract-api'
 
 const INFURA_ID =
   window.location.host === 'sns.chat'

@@ -1,5 +1,9 @@
 // import { ethers, getNetworkId, getNetworkProviderUrl } from '@ensdomains/ui'
-import { ethers, getNetworkId, getNetworkProviderUrl } from 'lib/ui/src/index'
+import {
+  ethers,
+  getNetworkId,
+  getNetworkProviderUrl
+} from 'sns-app-contract-api'
 import getENS, { getRegistrar } from 'apollo/mutations/ens'
 import getSNS from '../apollo/mutations/sns'
 
