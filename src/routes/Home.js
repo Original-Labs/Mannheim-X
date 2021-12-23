@@ -45,6 +45,7 @@ const HeroTop = styled('div')`
     flex-wrap: nowrap;
     flex-direction: row-reverse;
     justify-content: space-between;
+    font-size: 16px;
   `}
 `
 
