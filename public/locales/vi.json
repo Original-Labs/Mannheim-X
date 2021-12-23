@@ -369,5 +369,9 @@
       "link": "Wikipedia article",
       "title": "ATTENTION"
     }
+  },
+  "z": {
+    "transferSending": "Gửi giao dịch......",
+    "transferSuccess": "Giao dịch đã được gửi thành công！！！"
   }
 }

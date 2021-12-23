@@ -368,5 +368,9 @@
       "link": "维基百科的相关文章",
       "title": "注意"
     }
+  },
+  "z": {
+    "transferSending": "交易发送中......",
+    "transferSuccess": "交易发送成功！！！"
   }
 }

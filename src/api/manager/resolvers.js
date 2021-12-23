@@ -819,11 +819,13 @@ const resolvers = {
       let allProperties = await resolverInstanceWithoutSigner.getAllProperties(
         name
       )
-      allProperties = allProperties === '' ? '--------------' : allProperties
+      allProperties = allProperties === '' ? '++++++++++++++' : allProperties
 
-      let properties = allProperties.split('-')
+      let properties = allProperties.split('+')
       records.map(record => {
-        //TODO if record.value contrains "-", warnings
+        //TODO if record.value contrains "+", warnings
+        if (record.value) {
+        }
         switch (record.key) {
           case 'ETH':
             properties[0] = record.value
@@ -877,7 +879,7 @@ const resolvers = {
       })
       let newProperties = properties[0]
       for (let i = 1; i < properties.length; i++) {
-        newProperties = newProperties.concat('-', properties[i])
+        newProperties = newProperties.concat('+', properties[i])
       }
 
       const RecordTx = await resolverInstance.setAllProperties(

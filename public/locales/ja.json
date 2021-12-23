@@ -370,5 +370,9 @@
       "link": "Wikipedia article",
       "title": "ATTENTION"
     }
+  },
+  "z": {
+    "transferSending": "トランザクション送信......",
+    "transferSuccess": "トランザクションは正常に送信されました！！！"
   }
 }

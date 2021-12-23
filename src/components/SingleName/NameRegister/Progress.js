@@ -6,6 +6,9 @@ import { hasReachedState } from './registerReducer'
 import Tooltip from '../../Tooltip/Tooltip'
 import { ReactComponent as DefaultQuestionMark } from 'components/Icons/QuestionMarkSmall.svg'
 import { ReactComponent as DefaultCheckCircle } from 'components/Icons/CheckCircle.svg'
+import { useTranslation } from 'react-i18next'
+
+import messageMention from '../../../utils/messageMention'
 
 const ProgressContainer = styled('div')`
   margin-bottom: 40px;
@@ -182,6 +185,24 @@ function Progress({ step, waitPercentComplete }) {
         >
           {({ tooltipElement, showTooltip, hideTooltip }) => {
             const completed = hasReachedState('REVEAL_CONFIRMED', step)
+            //TODO css
+            const { t } = useTranslation()
+            if (!completed) {
+              messageMention({
+                type: 'loading',
+                content: t('z.transferSending'),
+                duration: 5,
+                style: { marginTop: '20vh' }
+              })
+            } else {
+              messageMention({
+                type: 'success',
+                content: t('z.transferSuccess'),
+                duration: 2,
+                style: { marginTop: '20vh' }
+              })
+            }
+
             return (
               <Step
                 completed={completed}

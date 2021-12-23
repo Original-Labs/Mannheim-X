@@ -424,7 +424,7 @@ export default function Records({
 
   if (initialRecords.length != 0) {
     if (domain.allProperties != '') {
-      let properties = domain.allProperties.split('-')
+      let properties = domain.allProperties.split('+')
       initialRecords.map(records => {
         switch (records.key) {
           case 'ETH':
@@ -487,6 +487,7 @@ export default function Records({
       })
     }
   }
+
   return (
     <RecordsWrapper
       shouldShowRecords={`shouldShowRecords`}

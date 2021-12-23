@@ -369,5 +369,9 @@
       "link": "Wikipedia article",
       "title": "ATTENTION"
     }
+  },
+  "z": {
+    "transferSending": "트랜잭션 전송......",
+    "transferSuccess": "거래가 성공적으로 전송되었습니다！！！"
   }
 }

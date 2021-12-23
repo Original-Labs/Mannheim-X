@@ -6,6 +6,8 @@ import { useQuery } from '@apollo/client'
 import { GET_TRANSACTION_HISTORY } from '../graphql/queries'
 
 import Loader from './Loader'
+import messageMention from '../utils/messageMention'
+import { useTranslation } from 'react-i18next'
 
 const PendingContainer = styled('div')`
   display: flex;
@@ -56,6 +58,24 @@ function PendingTx(props) {
     GET_TRANSACTION_HISTORY
   )
   const lastTransaction = last(transactionHistory)
+
+  const { t } = useTranslation()
+
+  if (lastTransaction.txState === 'Pending') {
+    messageMention({
+      type: 'loading',
+      content: t('z.transferSending'),
+      duration: 5,
+      style: { marginTop: '20vh' }
+    })
+  } else if (lastTransaction.txState === 'Confirmed') {
+    messageMention({
+      type: 'success',
+      content: t('z.transferSuccess'),
+      duration: 2,
+      style: { marginTop: '20vh' }
+    })
+  }
   useEffect(() => {
     if (
       onConfirmed &&
