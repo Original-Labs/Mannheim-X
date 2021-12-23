@@ -33,8 +33,8 @@ const option = {
       package: () => import('walletlink'),
       packageFactory: true,
       options: {
-        appName: 'Ethereum name service',
-        jsonRpcUrl: `https://mainnet.infura.io/v3/${INFURA_ID}`
+        appName: 'sns-app',
+        jsonRpcUrl: `https://polygon-mainnet.infura.io/v3/${INFURA_ID}`
       }
     },
     mewconnect: {
@@ -89,7 +89,7 @@ export const disconnect = async function() {
   if (provider && provider.disconnect) {
     provider.disconnect()
   }
-  await setupENS({
+  await setupSNS({
     reloadOnAccountsChange: false,
     enforceReadOnly: true,
     enforceReload: false
