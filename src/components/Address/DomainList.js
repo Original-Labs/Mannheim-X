@@ -54,10 +54,11 @@ export default function DomainList({
   domains,
   showBlockies
 }) {
-  console.log('domains-----', domains)
-  if (snsNameInfo) {
-    console.log('snsNameInfo', snsNameInfo.singleName.name)
-  }
+  // console.log('domains-----', domains)
+  // if (snsNameInfo) {
+  //   console.log('snsNameInfo', snsNameInfo)
+  //   console.log('snsNameInfo', snsNameInfo.singleName.name)
+  // }
   if ((!domains || domains.length === 0) && !snsNameInfo) {
     return (
       <NoDomainsContainer>
@@ -89,7 +90,7 @@ export default function DomainList({
           />
         )
       })}
-      {snsNameInfo ? (
+      {snsNameInfo && snsNameInfo.singleName.name ? (
         <DomainItem
           key={snsNameInfo.singleName.name}
           name={snsNameInfo.singleName.name}
