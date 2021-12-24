@@ -90,7 +90,7 @@ export default function DomainList({
           />
         )
       })}
-      {snsNameInfo && snsNameInfo.singleName.name ? (
+      {snsNameInfo && snsNameInfo.singleName && snsNameInfo.singleName.name ? (
         <DomainItem
           key={snsNameInfo.singleName.name}
           name={snsNameInfo.singleName.name}
