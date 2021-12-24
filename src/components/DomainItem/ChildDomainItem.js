@@ -130,12 +130,12 @@ export default function ChildDomainItem({
             />
           ) : (
             <>
-              <ExpiryDate name={name} expiryDate={expiryDate} />
-              <AddFavourite
-                domain={{ name }}
-                isSubDomain={false}
-                isFavourite={isFavourite}
-              />
+              {/*<ExpiryDate name={name} expiryDate={expiryDate} />*/}
+              {/*<AddFavourite*/}
+              {/*  domain={{ name }}*/}
+              {/*  isSubDomain={false}*/}
+              {/*  isFavourite={isFavourite}*/}
+              {/*/>*/}
             </>
           )}
 
@@ -164,21 +164,21 @@ export default function ChildDomainItem({
               }}
             </Tooltip>
           )}
-          {checkedBoxes && isDecrypted && (
-            <Checkbox
-              testid={`checkbox-${name}`}
-              checked={checkedBoxes[name]}
-              onClick={e => {
-                e.preventDefault()
-                setCheckedBoxes(prevState => {
-                  return { ...prevState, [name]: !prevState[name] }
-                })
-                if (checkedBoxes[name]) {
-                  setSelectAll(false)
-                }
-              }}
-            />
-          )}
+          {/*{checkedBoxes && isDecrypted && (*/}
+          {/*  <Checkbox*/}
+          {/*    testid={`checkbox-${name}`}*/}
+          {/*    checked={checkedBoxes[name]}*/}
+          {/*    onClick={e => {*/}
+          {/*      e.preventDefault()*/}
+          {/*      setCheckedBoxes(prevState => {*/}
+          {/*        return { ...prevState, [name]: !prevState[name] }*/}
+          {/*      })*/}
+          {/*      if (checkedBoxes[name]) {*/}
+          {/*        setSelectAll(false)*/}
+          {/*      }*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*)}*/}
         </DomainLink>
       )}
     </ChildDomainItemContainer>

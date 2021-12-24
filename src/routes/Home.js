@@ -343,7 +343,7 @@ export default ({ match }) => {
               {t('c.mynames')}
             </NavLink>
           )}
-          <NavLink to="/favourites">{t('c.favourites')}</NavLink>
+          {/*<NavLink to="/favourites">{t('c.favourites')}</NavLink>*/}
           <ExternalLink href={aboutPageURL()}>{t('c.whitelist')}</ExternalLink>
           <LanguageSwitcher />
         </Nav>

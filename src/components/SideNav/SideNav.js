@@ -163,16 +163,16 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
             </NavLink>
           </li>
         ) : null}
-        <li>
-          <NavLink
-            onClick={toggleMenu}
-            active={url === '/favourites' ? 1 : 0}
-            to="/favourites"
-          >
-            <Heart active={url === '/favourites'} />
-            <span>{t('c.favourites')}</span>
-          </NavLink>
-        </li>
+        {/*<li>*/}
+        {/*  <NavLink*/}
+        {/*    onClick={toggleMenu}*/}
+        {/*    active={url === '/favourites' ? 1 : 0}*/}
+        {/*    to="/favourites"*/}
+        {/*  >*/}
+        {/*    <Heart active={url === '/favourites'} />*/}
+        {/*    <span>{t('c.favourites')}</span>*/}
+        {/*  </NavLink>*/}
+        {/*</li>*/}
         <li>
           <NavLink
             onClick={toggleMenu}
@@ -183,14 +183,14 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
             <span>{t('c.faq')}</span>
           </NavLink>
         </li>
-        <li>
-          <NavLink>
-            <ThirdPartyLink href={aboutPageURL()}>
-              <Info />
-              <span>{t('c.about')}</span>
-            </ThirdPartyLink>
-          </NavLink>
-        </li>
+        {/*<li>*/}
+        {/*  <NavLink>*/}
+        {/*    <ThirdPartyLink href={aboutPageURL()}>*/}
+        {/*      <Info />*/}
+        {/*      <span>{t('c.about')}</span>*/}
+        {/*    </ThirdPartyLink>*/}
+        {/*  </NavLink>*/}
+        {/*</li>*/}
       </ul>
     </SideNavContainer>
   )

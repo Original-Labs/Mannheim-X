@@ -387,10 +387,10 @@ const resolvers = {
     },
     getSnsName: async (_, { address }) => {
       try {
-        debugger
-        const ens = getSNS().then()
-        const newVar = await ens.getNameOfOwner(address)
-        return { newVar }
+        const sns = getSNS()
+        const newVar = await sns.getSNSName(address)
+        console.log('newVar...', newVar)
+        return newVar
       } catch (e) {
         console.log('Error in getSnsName', e)
         throw e
@@ -817,11 +817,18 @@ const resolvers = {
       let allProperties = await resolverInstanceWithoutSigner.getAllProperties(
         name
       )
-      allProperties = allProperties === '' ? '--------------' : allProperties
+      allProperties = allProperties === '' ? '++++++++++++++' : allProperties
 
-      let properties = allProperties.split('-')
+      let properties = allProperties.split('+')
       records.map(record => {
-        //TODO if record.value contrains "-", warnings
+        let valueStr = record.value.split('+')
+        if (valueStr.length > 1) {
+          let newValueStr = ''
+          for (let i = 0; i < valueStr.length; i++) {
+            newValueStr += valueStr[i]
+          }
+          record.value = newValueStr
+        }
         switch (record.key) {
           case 'ETH':
             properties[0] = record.value
@@ -875,7 +882,7 @@ const resolvers = {
       })
       let newProperties = properties[0]
       for (let i = 1; i < properties.length; i++) {
-        newProperties = newProperties.concat('-', properties[i])
+        newProperties = newProperties.concat('+', properties[i])
       }
 
       const RecordTx = await resolverInstance.setAllProperties(

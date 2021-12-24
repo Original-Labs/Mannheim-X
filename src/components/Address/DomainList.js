@@ -54,6 +54,10 @@ export default function DomainList({
   domains,
   showBlockies
 }) {
+  console.log('domains-----', domains)
+  if (snsNameInfo) {
+    console.log('snsNameInfo', snsNameInfo.singleName.name)
+  }
   if ((!domains || domains.length === 0) && !snsNameInfo) {
     return (
       <NoDomainsContainer>
@@ -61,7 +65,6 @@ export default function DomainList({
       </NoDomainsContainer>
     )
   }
-  debugger
   return (
     <DomainsContainer>
       {domains.map(d => {
@@ -72,7 +75,7 @@ export default function DomainList({
             name={d.domain.name}
             owner={address}
             domain={d.domain}
-            expiryDate={d?.expiryDate}
+            // expiryDate={d?.expiryDate}
             labelName={d.domain.labelName}
             labelhash={d.domain.labelhash}
             parent={d.domain.parent.name}
@@ -88,21 +91,21 @@ export default function DomainList({
       })}
       {snsNameInfo ? (
         <DomainItem
-          key={snsNameInfo.name}
-          name={snsNameInfo.name}
+          key={snsNameInfo.singleName.name}
+          name={snsNameInfo.singleName.name}
           owner={address}
           domain={snsNameInfo}
-          expiryDate={d?.expiryDate}
-          labelName={snsNameInfo.labelName}
+          // expiryDate={d?.expiryDate}
+          labelName={snsNameInfo.label}
           labelhash={snsNameInfo.labelhash}
-          parent={snsNameInfo.parent.name}
+          // parent={snsNameInfo.parent.name}
           checkedBoxes={activeFilter === 'registrant' ? checkedBoxes : null}
           setCheckedBoxes={
             activeFilter === 'registrant' ? setCheckedBoxes : null
           }
           setSelectAll={setSelectAll}
           showBlockies={showBlockies}
-          isFavourite={isFavourite}
+          // isFavourite={isFavourite}
         />
       ) : null}
     </DomainsContainer>

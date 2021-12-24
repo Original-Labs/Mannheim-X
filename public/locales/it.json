@@ -371,5 +371,9 @@
       "link": "Wikipedia article",
       "title": "ATTENTION"
     }
+  },
+  "z": {
+    "transferSending": "Invio transazione......",
+    "transferSuccess": "Transazione inviata con successo！！！"
   }
 }

@@ -373,5 +373,9 @@
       "link": "Wikipedia article",
       "title": "ATTENTION"
     }
+  },
+  "z": {
+    "transferSending": "Отправка транзакции......",
+    "transferSuccess": "Транзакция успешно отправлена！！！"
   }
 }
