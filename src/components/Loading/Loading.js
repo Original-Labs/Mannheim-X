@@ -2,6 +2,13 @@ import React from 'react'
 import { Spin } from 'antd'
 import { SyncOutlined } from '@ant-design/icons'
 import 'antd/es/spin/style/css'
+import styled from '@emotion/styled/macro'
+
+const SpinContainer = styled('div')`
+  .ant-spin-container::after {
+    background: transparent !important;
+  }
+`
 
 /**
  *
@@ -17,17 +24,21 @@ import 'antd/es/spin/style/css'
  */
 export default function Loading(props) {
   return props.loading ? (
-    <Spin
-      {...props}
-      indicator={
-        <SyncOutlined
-          spin
-          style={{ color: props.defaultColor ? props.defaultColor : '#ea6060' }}
-        />
-      }
-    >
-      {props.children}
-    </Spin>
+    <SpinContainer>
+      <Spin
+        {...props}
+        indicator={
+          <SyncOutlined
+            spin
+            style={{
+              color: props.defaultColor ? props.defaultColor : '#ea6060'
+            }}
+          />
+        }
+      >
+        {props.children}
+      </Spin>
+    </SpinContainer>
   ) : (
     props.children
   )
