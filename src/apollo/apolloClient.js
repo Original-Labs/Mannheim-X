@@ -54,7 +54,7 @@ function fromPromise(promise, operation) {
         observer.complete()
       })
       .catch(e => {
-        if (e.data.code) {
+        if (e.data && e.data.code) {
           let errorMessages = e.data.message.split('---')
           messageMention({
             type: 'error',
