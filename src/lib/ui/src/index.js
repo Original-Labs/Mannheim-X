@@ -58,7 +58,8 @@ export async function setupSNS({
   // get sns and resolver instance
   const sns = new SNS({ provider, networkId, registryAddress: ensAddress })
   // Get the address of the parser
-  // const name = await sns.getSNSName(getAccount())
+  const name = await sns.getNameOfOwner(getAccount())
+  console.log('name-----', name)
   const snsResolver = new SNSResolver({ networkId, provider })
 
   const network = await getNetwork()

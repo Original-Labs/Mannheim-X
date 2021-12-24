@@ -22,6 +22,7 @@ import { setupAnalytics } from './utils/analytics'
 import { getReverseRecord } from './apollo/sideEffects'
 import { safeInfo, setupSafeApp } from './utils/safeApps'
 import getSNS from './apollo/mutations/sns'
+import { getAccount } from './lib/ui'
 
 export const setFavourites = () => {
   favouritesReactive(
@@ -180,7 +181,9 @@ export default async reconnect => {
     const sns = getSNS()
 
     console.log('sns >>>', sns)
-    console.log('sns.isOverDeadline() >>>', sns.isOverDeadline())
+    // const name = await sns.getNameOfOwner(getAccount())
+    // console.log("name-----",name);
+    console.log('sns.isOverDeadline() >>>', await sns.isOverDeadline())
   } catch (e) {
     console.error('setup error: ', e)
   }

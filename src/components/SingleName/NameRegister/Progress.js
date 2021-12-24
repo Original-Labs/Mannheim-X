@@ -187,21 +187,21 @@ function Progress({ step, waitPercentComplete }) {
             const completed = hasReachedState('REVEAL_CONFIRMED', step)
             //TODO css
             const { t } = useTranslation()
-            if (!completed) {
-              messageMention({
-                type: 'loading',
-                content: t('z.transferSending'),
-                duration: 5,
-                style: { marginTop: '20vh' }
-              })
-            } else {
-              messageMention({
-                type: 'success',
-                content: t('z.transferSuccess'),
-                duration: 2,
-                style: { marginTop: '20vh' }
-              })
-            }
+            // if (!completed) {
+            //   messageMention({
+            //     type: 'loading',
+            //     content: t('z.transferSending'),
+            //     duration: 5,
+            //     style: { marginTop: '20vh' }
+            //   })
+            // } else {
+            //   messageMention({
+            //     type: 'success',
+            //     content: t('z.transferSuccess'),
+            //     duration: 2,
+            //     style: { marginTop: '20vh' }
+            //   })
+            // }
 
             return (
               <Step

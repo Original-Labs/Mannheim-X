@@ -172,20 +172,26 @@ function useDomains({
 }
 
 function getSNSNameInfo(address) {
-  const sns = getSNS()
-  const { data2 } = useQuery(GET_SNS_NAME, {
+  const data2 = useQuery(GET_SNS_NAME, {
     variables: {
       address: address
     }
   })
 
+  console.log('data2.data--------', data2.data)
+  let SNSName
+  if (data2.data) {
+    SNSName = data2.data.getSnsName
+  }
+  console.log('SNSName--------', SNSName)
+
   const { data, loading, error } = useQuery(GET_SINGLE_NAME, {
     variables: {
-      name: 'wanbowen.key'
-      // name: data2.snsName
+      name: SNSName
     }
   })
-
+  console.log('!loading && !error', !loading && !error)
+  console.log('data-------', data)
   if (!loading && !error) {
     return data
   }
@@ -251,7 +257,9 @@ export default function Address({
     expiryDate = currentDate.subtract(90, 'days').unix()
   }
 
-  const snsNameInfo = getSNSNameInfo(address)
+  let snsNameInfo = getSNSNameInfo(address)
+
+  console.log('snsNameInfo-----', snsNameInfo)
 
   // const { loading, data, error, refetch } = useDomains({
   //   resultsPerPage,
@@ -404,6 +412,7 @@ export default function Address({
         {/*</Controls>*/}
 
         <DomainList
+          snsNameInfo={snsNameInfo}
           snsName={snsNameInfo}
           setSelectAll={setSelectAll}
           address={address}
