@@ -13,9 +13,7 @@ const NoDomainsContainer = styled('div')`
   box-shadow: 3px 4px 6px 0 rgba(229, 236, 241, 0.3);
   border-radius: 6px;
   margin-bottom: 40px;
-
   h2 {
-    color: #fff;
     font-weight: 100;
     margin-bottom: 0;
     padding: 0;
@@ -42,6 +40,13 @@ const DomainsContainer = styled('div')`
   padding-right: 40px;
 `
 
+function hasName(nameInstance) {
+  if (nameInstance && nameInstance.singleName && nameInstance.singleName.name) {
+    return true
+  }
+  return false
+}
+
 export default function DomainList({
   snsNameInfo,
   favourites = [],
@@ -59,10 +64,11 @@ export default function DomainList({
   //   console.log('snsNameInfo', snsNameInfo)
   //   console.log('snsNameInfo', snsNameInfo.singleName.name)
   // }
-  if ((!domains || domains.length === 0) && !snsNameInfo) {
+  debugger
+  if ((!domains || domains.length === 0) && !hasName(snsNameInfo)) {
     return (
       <NoDomainsContainer>
-        <h2>This address does not own any domains</h2>
+        <h2>This address does not own any names</h2>
       </NoDomainsContainer>
     )
   }
@@ -90,7 +96,7 @@ export default function DomainList({
           />
         )
       })}
-      {snsNameInfo && snsNameInfo.singleName && snsNameInfo.singleName.name ? (
+      {hasName(snsNameInfo) ? (
         <DomainItem
           key={snsNameInfo.singleName.name}
           name={snsNameInfo.singleName.name}
