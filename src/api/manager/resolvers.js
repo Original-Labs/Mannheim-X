@@ -389,7 +389,7 @@ const resolvers = {
       try {
         const sns = getSNS()
         const newVar = await sns.getSNSName(address)
-        console.log('newVar...', newVar)
+        // console.log('newVar...', newVar)
         return newVar
       } catch (e) {
         console.log('Error in getSnsName', e)

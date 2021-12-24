@@ -178,20 +178,20 @@ function getSNSNameInfo(address) {
     }
   })
 
-  console.log('data2.data--------', data2.data)
+  // console.log('data2.data--------', data2.data)
   let SNSName
   if (data2.data) {
     SNSName = data2.data.getSnsName
   }
-  console.log('SNSName--------', SNSName)
+  // console.log('SNSName--------', SNSName)
 
   const { data, loading, error } = useQuery(GET_SINGLE_NAME, {
     variables: {
       name: SNSName
     }
   })
-  console.log('!loading && !error', !loading && !error)
-  console.log('data-------', data)
+  // console.log('!loading && !error', !loading && !error)
+  // console.log('data-------', data)
   if (!loading && !error) {
     return data
   }
@@ -259,7 +259,7 @@ export default function Address({
 
   let snsNameInfo = getSNSNameInfo(address)
 
-  console.log('snsNameInfo-----', snsNameInfo)
+  // console.log('snsNameInfo-----', snsNameInfo)
 
   // const { loading, data, error, refetch } = useDomains({
   //   resultsPerPage,
