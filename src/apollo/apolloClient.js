@@ -11,6 +11,10 @@ import resolvers from '../api/rootResolver'
 import typePolicies from './typePolicies'
 import { networkIdReactive } from './reactiveVars'
 
+import { useTranslation } from 'react-i18next'
+
+import messageMention from '../utils/messageMention'
+
 let client
 
 const cache = new InMemoryCache({
@@ -50,6 +54,15 @@ function fromPromise(promise, operation) {
         observer.complete()
       })
       .catch(e => {
+        if (e.data.code) {
+          let errorMessages = e.data.message.split('---')
+          messageMention({
+            type: 'error',
+            content: errorMessages[3],
+            duration: 3,
+            style: { marginTop: '20vh' }
+          })
+        }
         console.error('fromPromise error: ', e)
         observer.error.bind(observer)
       })
