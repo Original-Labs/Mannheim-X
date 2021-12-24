@@ -64,7 +64,6 @@ export default function DomainList({
   //   console.log('snsNameInfo', snsNameInfo)
   //   console.log('snsNameInfo', snsNameInfo.singleName.name)
   // }
-  debugger
   if ((!domains || domains.length === 0) && !hasName(snsNameInfo)) {
     return (
       <NoDomainsContainer>
