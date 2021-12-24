@@ -9,8 +9,6 @@ import '../../api/subDomainRegistrar'
 import { withRouter } from 'react-router'
 import searchIcon from '../../assets/search.svg'
 import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
-import LanguageSwitcher from 'components/LanguageSwitcher'
-import Loading from '../Loading/Loading'
 
 const SearchForm = styled('form')`
   display: flex;
@@ -25,14 +23,13 @@ const SearchForm = styled('form')`
     display: block;
     width: 27px;
     height: 27px;
-    background: url(${searchIcon}) no-repeat;
   }
 
   input {
     padding: 20px 0 20px 55px;
     width: 100%;
     border: none;
-    border-radius:14px 0 0 14px;
+    border-radius: 14px 0 0 14px;
     ${p => (p.mediumBP ? `border-radius:14px 0 0 14px;` : `border-radius:0;`)}
     font-size: 18px;
     font-family: Overpass;
@@ -53,9 +50,6 @@ const SearchForm = styled('form')`
   }
 
   button {
-    // ${p =>
-      p && p.hasSearch ? 'background: #ea6060;' : 'background: #c7d3e3;'}
-    ${p => (p && p.hasSearch ? 'background: #c7d3e3;' : 'background: #eee;')}
     color: white;
     font-size: 22px;
     font-family: Overpass;
@@ -68,10 +62,6 @@ const SearchForm = styled('form')`
     ${mq.medium`
       display: block;
     `}
-
-    &:hover {
-      ${p => (p && p.hasSearch ? 'cursor: pointer;' : 'cursor: default;')}
-    }
   }
 `
 
@@ -145,7 +135,7 @@ function Search({ history, className, style }) {
         type="submit"
         data-testid={'home-search-button'}
       >
-        <Loading loading={false}>{t('search.button')}</Loading>
+        {t('search.button')}
       </button>
     </SearchForm>
   )
