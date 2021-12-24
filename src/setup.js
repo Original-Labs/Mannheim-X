@@ -1,7 +1,7 @@
 // import { getAccounts, getNetwork, getNetworkId } from '@ensdomains/ui'
 import { getAccounts, getNetwork, getNetworkId } from 'sns-app-contract-api'
 
-import { isReadOnly } from '@ensdomains/ui/src/web3'
+import { isReadOnly } from 'sns-app-contract-api/src/web3'
 
 // import { setup } from './apollo/mutations/ens'
 import { setup } from './apollo/mutations/sns'
@@ -22,7 +22,6 @@ import { setupAnalytics } from './utils/analytics'
 import { getReverseRecord } from './apollo/sideEffects'
 import { safeInfo, setupSafeApp } from './utils/safeApps'
 import getSNS from './apollo/mutations/sns'
-import { getAccount } from './lib/ui'
 
 export const setFavourites = () => {
   favouritesReactive(
@@ -179,11 +178,6 @@ export default async reconnect => {
      * @type {*|{}}
      */
     const sns = getSNS()
-
-    console.log('sns >>>', sns)
-    // const name = await sns.getNameOfOwner(getAccount())
-    // console.log("name-----",name);
-    console.log('sns.isOverDeadline() >>>', await sns.isOverDeadline())
   } catch (e) {
     console.error('setup error: ', e)
   }

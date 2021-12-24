@@ -1,12 +1,12 @@
 import { emptyAddress } from '../../utils/utils'
 
-jest.mock('@ensdomains/ui', () => ({
+jest.mock('sns-app-contract-api', () => ({
   __esModule: true,
-  ...jest.requireActual('@ensdomains/ui'),
+  ...jest.requireActual('sns-app-contract-api'),
   getNamehash: jest.fn(),
   encodeContenthash: jest.fn()
 }))
-import { getNamehash, encodeContenthash } from '@ensdomains/ui'
+import { getNamehash, encodeContenthash } from 'sns-app-contract-api'
 
 jest.mock('../resolverUtils', () => ({
   __esModule: true,
