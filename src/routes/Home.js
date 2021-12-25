@@ -345,7 +345,7 @@ export default ({ match }) => {
           )}
           {/*<NavLink to="/favourites">{t('c.favourites')}</NavLink>*/}
           <ExternalLink href={aboutPageURL()}>{t('c.whitelist')}</ExternalLink>
-          <LanguageSwitcher />
+          {/* <LanguageSwitcher /> */}
         </Nav>
         <NetworkStatus>
           <Network>

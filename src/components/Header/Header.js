@@ -105,11 +105,11 @@ function HeaderContainer() {
           <>
             <SearchHeader />
             <AvatarAndInfoDropdown />
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
           </>
         ) : (
           <>
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
             <Hamburger isMenuOpen={isMenuOpen} openMenu={toggleMenu} />
           </>
         )}
