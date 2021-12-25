@@ -9,7 +9,11 @@ class MetaTime extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      time: new Date().toLocaleString()
+      time:
+        new Date().toUTCString().substring(0, 12) +
+        'Ω' +
+        (new Date().getFullYear() - 2021 + 1) +
+        new Date().toUTCString().substring(16)
     }
   }
   componentDidMount() {

@@ -71,8 +71,8 @@ export const MainPageBannerContainer = styled(`div`)`
 export const MainPageMetaTimeBannerContainer = styled(`div`)`
   position: absolute;
   top: 20%;
-  //margin-left: auto;
-  //margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
   left: 0;
   right: 0;
   //background: #ffffff 0%;
@@ -82,7 +82,6 @@ export const MainPageMetaTimeBannerContainer = styled(`div`)`
   padding: 15px 0px;
   font-size: 18px;
   color: #fff;
-  margin: 0px auto;
   a {
     display: grid;
     grid-template-columns: 73px 1fr 50px;
