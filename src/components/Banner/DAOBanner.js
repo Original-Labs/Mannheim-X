@@ -70,7 +70,7 @@ export const MainPageBannerContainer = styled(`div`)`
 
 export const MainPageMetaTimeBannerContainer = styled(`div`)`
   position: absolute;
-  top: 200px;
+  top: 20%;
   //margin-left: auto;
   //margin-right: auto;
   left: 0;

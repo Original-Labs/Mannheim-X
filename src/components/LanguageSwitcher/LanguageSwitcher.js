@@ -14,43 +14,43 @@ const LANGUAGES = [
   {
     value: 'cn',
     label: '简体中文 (CN)'
-  },
-  {
-    value: 'ja',
-    label: '日本語 (JA)'
-  },
-  {
-    value: 'de',
-    label: 'Deutsch (DE)'
-  },
-  {
-    value: 'es',
-    label: 'Español (ES)'
-  },
-  {
-    value: 'fr',
-    label: 'Français (FR)'
-  },
-  {
-    value: 'ko',
-    label: '한국어 (KO)'
-  },
-  {
-    value: 'it',
-    label: 'Italiano (IT)'
-  },
-  {
-    value: 'pl',
-    label: 'Polski (PL)'
-  },
-  {
-    value: 'ru',
-    label: 'Pусский (RU)'
-  },
-  {
-    value: 'vi',
-    label: 'Tiếng Việt (VI)'
   }
+  // {
+  //   value: 'ja',
+  //   label: '日本語 (JA)'
+  // },
+  // {
+  //   value: 'de',
+  //   label: 'Deutsch (DE)'
+  // },
+  // {
+  //   value: 'es',
+  //   label: 'Español (ES)'
+  // },
+  // {
+  //   value: 'fr',
+  //   label: 'Français (FR)'
+  // },
+  // {
+  //   value: 'ko',
+  //   label: '한국어 (KO)'
+  // },
+  // {
+  //   value: 'it',
+  //   label: 'Italiano (IT)'
+  // },
+  // {
+  //   value: 'pl',
+  //   label: 'Polski (PL)'
+  // },
+  // {
+  //   value: 'ru',
+  //   label: 'Pусский (RU)'
+  // },
+  // {
+  //   value: 'vi',
+  //   label: 'Tiếng Việt (VI)'
+  // }
 ]
 
 function getLang(lang) {

@@ -367,9 +367,9 @@ export default ({ match }) => {
           )} */}
         </NetworkStatus>
       </HeroTop>
-      {/*<MainPageBannerContainer>*/}
-      {/*  <DAOBannerContent />*/}
-      {/*</MainPageBannerContainer>*/}
+      {/* <MainPageBannerContainer>
+       <DAOBannerContent />
+      </MainPageBannerContainer> */}
 
       <MainPageMetaTimeBannerContainer>
         <MetaTime />
