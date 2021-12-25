@@ -50,6 +50,8 @@ const SearchForm = styled('form')`
   }
 
   button {
+    ${p => (p && p.hasSearch ? 'background: #eb8b8c;' : 'background: #eee;')}
+    //background: #eb8b8c;
     color: white;
     font-size: 22px;
     font-family: Overpass;
@@ -62,6 +64,9 @@ const SearchForm = styled('form')`
     ${mq.medium`
       display: block;
     `}
+    &:hover {
+      ${p => (p && p.hasSearch ? 'cursor: pointer;' : 'cursor: default;')}
+    }
   }
 `
 
