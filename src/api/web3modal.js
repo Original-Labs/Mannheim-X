@@ -22,29 +22,29 @@ const option = {
   network: 'mainnet', // optional
   cacheProvider: true, // optional
   providerOptions: {
-    walletconnect: {
-      package: () => import('@walletconnect/web3-provider'),
-      packageFactory: true,
-      options: {
-        infuraId: INFURA_ID
-      }
-    },
-    walletlink: {
-      package: () => import('walletlink'),
-      packageFactory: true,
-      options: {
-        appName: 'sns-app',
-        jsonRpcUrl: `https://polygon-mainnet.infura.io/v3/${INFURA_ID}`
-      }
-    },
-    mewconnect: {
-      package: () => import('@myetherwallet/mewconnect-web-client'),
-      packageFactory: true,
-      options: {
-        infuraId: INFURA_ID,
-        description: ' '
-      }
-    },
+    // walletconnect: {
+    //   package: () => import('@walletconnect/web3-provider'),
+    //   packageFactory: true,
+    //   options: {
+    //     infuraId: INFURA_ID
+    //   }
+    // },
+    // walletlink: {
+    //   package: () => import('walletlink'),
+    //   packageFactory: true,
+    //   options: {
+    //     appName: 'sns-app',
+    //     jsonRpcUrl: `https://polygon-mainnet.infura.io/v3/${INFURA_ID}`
+    //   }
+    // },
+    // mewconnect: {
+    //   package: () => import('@myetherwallet/mewconnect-web-client'),
+    //   packageFactory: true,
+    //   options: {
+    //     infuraId: INFURA_ID,
+    //     description: ' '
+    //   }
+    // },
     // portis: {
     //   package: () => import('@portis/web3'),
     //   packageFactory: true,
@@ -52,10 +52,10 @@ const option = {
     //     id: PORTIS_ID
     //   }
     // },
-    torus: {
-      package: () => import('@toruslabs/torus-embed'),
-      packageFactory: true
-    }
+    // torus: {
+    //   package: () => import('@toruslabs/torus-embed'),
+    //   packageFactory: true
+    // }
   }
 }
 
