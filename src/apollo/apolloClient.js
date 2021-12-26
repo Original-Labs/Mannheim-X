@@ -54,11 +54,24 @@ function fromPromise(promise, operation) {
         observer.complete()
       })
       .catch(e => {
-        if (e && e.data && e.data.code) {
+        if (e && e.data && e.data.code && e.data.message) {
           let errorMessages = e.data.message.split('---')
+          let errorContent
+          if (errorMessages.length == 4) {
+            errorContent = errorMessages[3]
+          } else if (
+            errorMessages.length == 1 &&
+            errorMessages[0].startsWith(
+              'err: insufficient funds for gas * price + value:'
+            )
+          ) {
+            errorContent = 'Your wallet does not have enough matic!!!'
+          } else {
+            errorContent = e.data.message
+          }
           messageMention({
             type: 'error',
-            content: errorMessages[3],
+            content: errorContent,
             duration: 3,
             style: { marginTop: '20vh' }
           })

@@ -63,8 +63,10 @@ let web3Modal
 export const connect = async () => {
   try {
     const Web3Modal = (await import('@ensdomains/web3modal')).default
+    debugger
 
     web3Modal = new Web3Modal(option)
+    debugger
     provider = await web3Modal.connect()
 
     await setupSNS({

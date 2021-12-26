@@ -20,7 +20,7 @@ const ActiveAvatar = styled('div')`
   display: flex;
   justify-content: center;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 25px;
   align-items: center;
   span {
     margin-right: 10px;
