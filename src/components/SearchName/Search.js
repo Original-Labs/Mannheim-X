@@ -126,7 +126,13 @@ function Search({ history, className, style }) {
           history.push(`/name/${searchTerm}`)
           return
         } else {
-          history.push(`/search/${searchTerm}`)
+          let suffix
+          if (searchTerm.split('.').length === 1) {
+            suffix = searchTerm + '.key'
+          } else {
+            suffix = searchTerm
+          }
+          history.push(`/name/${suffix}`)
         }
       }}
     >
