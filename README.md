@@ -12,9 +12,6 @@ Expects Node.js version >=14.17.0
 $> https://github.com/Link-Key/sns-app.git
 $> cd sns-app
 $> yarn install
-$> cd src/lib/ui
-$> yarn install # install lib dependencies package
-$> cd ../../../
 $> yarn start
 ```
 
