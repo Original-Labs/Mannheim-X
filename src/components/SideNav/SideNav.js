@@ -62,7 +62,7 @@ const NavLink = styled(Link)`
   align-items: center;
   justify-content: flex-start;
   font-weight: 200;
-  font-size: 22px;
+  font-size: 16px;
   color: ${p => (p.active ? '#ea6060' : '#C7D3E3')};
   padding: 10px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -70,6 +70,11 @@ const NavLink = styled(Link)`
   ${mq.medium`
     justify-content: start;
     border-bottom: 0;
+  `}
+  ${mq.small`
+    justify-content: start;
+    border-bottom: 0;
+    font-size: 22px;
   `}
 
   &:visited {
@@ -100,13 +105,18 @@ const ThirdPartyLink = styled('a')`
   align-items: center;
   justify-content: center;
   font-weight: 200;
-  font-size: 22px;
+  font-size: 16px;
   color: ${p => (p.active ? '#ea6060' : '#C7D3E3')};
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
   ${mq.medium`
     justify-content: start;
     border-bottom: 0;
+  `}
+  ${mq.small`
+    justify-content: start;
+    border-bottom: 0;
+    font-size: 22px;
   `}
 
   &:visited {
@@ -158,7 +168,7 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
               active={url === '/address/' + accounts[0] ? 1 : 0}
               to={'/address/' + accounts[0]}
             >
-              <File active={url === '/address/' + accounts[0]} />
+              {/*<File active={url === '/address/' + accounts[0]} />*/}
               <span>{t('c.mynames')}</span>
             </NavLink>
           </li>
@@ -166,11 +176,11 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
         {/*<li>*/}
         {/*  <NavLink*/}
         {/*    onClick={toggleMenu}*/}
-        {/*    active={url === '/favourites' ? 1 : 0}*/}
-        {/*    to="/favourites"*/}
+        {/*    active={url === '/faq' ? 1 : 0}*/}
+        {/*    to="/faq"*/}
         {/*  >*/}
-        {/*    <Heart active={url === '/favourites'} />*/}
-        {/*    <span>{t('c.favourites')}</span>*/}
+        {/*    /!*<Heart active={url === '/faq'} />*!/*/}
+        {/*    <span>{t('c.faq')}</span>*/}
         {/*  </NavLink>*/}
         {/*</li>*/}
         <li>
@@ -179,18 +189,18 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
             active={url === '/faq' ? 1 : 0}
             to="/faq"
           >
-            <FaqIcon />
+            {/*<FaqIcon />*/}
             <span>{t('c.faq')}</span>
           </NavLink>
         </li>
-        {/*<li>*/}
-        {/*  <NavLink>*/}
-        {/*    <ThirdPartyLink href={aboutPageURL()}>*/}
-        {/*      <Info />*/}
-        {/*      <span>{t('c.about')}</span>*/}
-        {/*    </ThirdPartyLink>*/}
-        {/*  </NavLink>*/}
-        {/*</li>*/}
+        <li>
+          <NavLink>
+            <ThirdPartyLink href={aboutPageURL()}>
+              {/*<Info />*/}
+              <span>{t('c.linkkey')}</span>
+            </ThirdPartyLink>
+          </NavLink>
+        </li>
       </ul>
     </SideNavContainer>
   )
