@@ -80,7 +80,8 @@ export const getProvider = async reconnect => {
       const provider = await setupSafeApp(safe)
       return provider
     }
-
+    // Used to delete localStorage cache
+    // window.localStorage.clear()
     if (
       window.localStorage.getItem('WEB3_CONNECT_CACHED_PROVIDER') ||
       reconnect
@@ -145,8 +146,8 @@ export const setWeb3Provider = async provider => {
 
 export default async reconnect => {
   try {
-    setFavourites()
-    setSubDomainFavourites()
+    // setFavourites()
+    // setSubDomainFavourites()
     const provider = await getProvider(reconnect)
 
     if (!provider) throw 'Please install a wallet'
