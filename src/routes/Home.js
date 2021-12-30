@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import styled from '@emotion/styled/macro'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import mq from 'mediaQuery'
+import mq, { useMediaMin } from 'mediaQuery'
 
 import SearchDefault from '../components/SearchName/Search'
 import NoAccountsDefault from '../components/NoAccounts/NoAccountsModal'
@@ -27,6 +27,8 @@ import {
 } from '../components/Banner/DAOBanner'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 import MetaTime from '../components/HomePage/MetaTime'
+import Hamburger from 'components/Header/Hamburger'
+import SideNav from 'components/SideNav/SideNav'
 
 const HeroTop = styled('div')`
   display: flex;
@@ -327,6 +329,22 @@ const ReadOnly = styled('span')`
   margin-left: 1em;
 `
 
+const MobileHeaderContainer = styled(`div`)`
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 35px;
+`
+
+const SideNavDropDownContainer = styled(`div`)`
+  position: absolute;
+  top: 90px;
+  width: 100%;
+`
+
+const HamburgerContainer = styled(`div`)`
+  padding: 0 13px;
+`
+
 export const HOME_DATA = gql`
   query getHomeData($address: string) @client {
     network
@@ -354,6 +372,9 @@ const animation = {
 }
 
 export default ({ match }) => {
+  const mediumBP = useMediaMin('medium')
+  const [isMenuOpen, setMenuOpen] = useState(false)
+  const toggleMenu = () => setMenuOpen(!isMenuOpen)
   const { url } = match
   const { t } = useTranslation()
 
@@ -375,39 +396,56 @@ export default ({ match }) => {
   return (
     <Hero>
       <HeroTop>
-        <Nav>
-          {accounts?.length > 0 && !isReadOnly && (
-            <NavLink
-              active={url === '/address/' + accounts[0]}
-              to={'/address/' + accounts[0]}
-            >
-              {t('c.mynames')}
-            </NavLink>
-          )}
-          {/*<NavLink to="/favourites">{t('c.favourites')}</NavLink>*/}
-          <NavLink to="/faq">{t('c.faq')}</NavLink>
-          <ExternalLink href={aboutPageURL()}>{t('c.linkkey')}</ExternalLink>
-          <LanguageSwitcher />
-        </Nav>
-        <NetworkStatus>
-          <Network>
-            {`${network} ${t('c.network')}`}
-            {isReadOnly && <ReadOnly>({t('c.readonly')})</ReadOnly>}
-            {!isReadOnly && displayName && (
-              <Name data-testid="display-name">({displayName})</Name>
-            )}
-          </Network>
-          <NoAccounts
-            onClick={isReadOnly ? connectProvider : disconnectProvider}
-            buttonText={isReadOnly ? t('c.connect') : t('c.disconnect')}
-          />
-          {/* {!isSafeApp && (
+        {mediumBP ? (
+          <>
+            <Nav>
+              {accounts?.length > 0 && !isReadOnly && (
+                <NavLink
+                  active={url === '/address/' + accounts[0]}
+                  to={'/address/' + accounts[0]}
+                >
+                  {t('c.mynames')}
+                </NavLink>
+              )}
+              {/*<NavLink to="/favourites">{t('c.favourites')}</NavLink>*/}
+              <NavLink to="/faq">{t('c.faq')}</NavLink>
+              <ExternalLink href={aboutPageURL()}>
+                {t('c.linkkey')}
+              </ExternalLink>
+              <LanguageSwitcher />
+            </Nav>
+            <NetworkStatus>
+              <Network>
+                {`${network} ${t('c.network')}`}
+                {isReadOnly && <ReadOnly>({t('c.readonly')})</ReadOnly>}
+                {!isReadOnly && displayName && (
+                  <Name data-testid="display-name">({displayName})</Name>
+                )}
+              </Network>
+              <NoAccounts
+                onClick={isReadOnly ? connectProvider : disconnectProvider}
+                buttonText={isReadOnly ? t('c.connect') : t('c.disconnect')}
+              />
+              {/* {!isSafeApp && (
+              <NoAccounts
+                onClick={isReadOnly ? connectProvider : disconnectProvider}
+                buttonText={isReadOnly ? t('c.connect') : t('c.disconnect')}
+              />
+            )} */}
+            </NetworkStatus>
+          </>
+        ) : (
+          <MobileHeaderContainer>
+            <LanguageSwitcher />
             <NoAccounts
               onClick={isReadOnly ? connectProvider : disconnectProvider}
               buttonText={isReadOnly ? t('c.connect') : t('c.disconnect')}
             />
-          )} */}
-        </NetworkStatus>
+            <HamburgerContainer>
+              <Hamburger isMenuOpen={isMenuOpen} openMenu={toggleMenu} />
+            </HamburgerContainer>
+          </MobileHeaderContainer>
+        )}
       </HeroTop>
       {/* <MainPageBannerContainer>
        <DAOBannerContent />
@@ -448,6 +486,11 @@ export default ({ match }) => {
           </LinkkeyCopyRight>
         </>
       </SearchContainer>
+      {!mediumBP && (
+        <SideNavDropDownContainer>
+          <SideNav isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        </SideNavDropDownContainer>
+      )}
     </Hero>
   )
 }
