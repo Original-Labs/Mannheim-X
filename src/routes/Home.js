@@ -361,7 +361,7 @@ export default ({ match }) => {
   const TwitterUrl = 'https://twitter.com/linkkey_'
   const TelegramUrl = 'https://t.me/linkkeydao'
   const DiscordUrl = 'https://discord.com/invite/UMNRQryyts'
-  const GithubUrl = 'https://github.com/Link-Key/sns-app'
+  const GithubUrl = 'https://github.com/Link-Key'
   const LinkkeyUrl = 'https://linkkey.io'
 
   const {
