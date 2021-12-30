@@ -63,6 +63,10 @@ const SearchHeader = styled(Search)`
   `}
 `
 
+const SideNavContainer = styled(`div`)`
+  margin-top: 60px;
+`
+
 const Logo = styled(DefaultLogo)`
   background: transparent;
   position: relative;
@@ -134,8 +138,10 @@ function HeaderContainer() {
       )}
       {mediumBPMax && (
         <>
-          <SearchHeader />
-          <SideNav isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+          {!isMenuOpen && <SearchHeader />}
+          <SideNavContainer>
+            <SideNav isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+          </SideNavContainer>
         </>
       )}
     </>
