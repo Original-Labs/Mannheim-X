@@ -4,7 +4,9 @@
 
 ## ⚠️Contribute your code for a fee ⚠️
 
-Community developers are welcome to contribute code to the project, and we will provide 10-100 Matic(cryptocurrency) as a reward
+Community developers are welcome to contribute code to the project, and we will provide 10-100 Matic(cryptocurrency) as a reward.
+
+You can contribute code via PR(Pull Request) and leave your Polygon address, after the code is merged, we will pay you in cryptocurrency.
 
 ## Installation
 
