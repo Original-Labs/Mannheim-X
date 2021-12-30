@@ -282,22 +282,26 @@ const SocialIconLarge = styled(motion.div)`
   display: flow;
   margin: 50px auto 20px;
   text-align: center;
-  > img {
-    width: 25px;
-    margin: 0 15px;
+  > a {
+    img {
+      width: 25px;
+      margin: 0 15px;
+    }
   }
   ${mq.small`
-    > img{
+    > a{img{
       width: 30px;
       margin: 0 20px;
-    }
+    }}
   `}
 `
 const LinkkeyCopyRight = styled(motion.div)`
   display: block;
   width: 100%;
   margin: 0 auto 0;
-  color: #fff;
+  > a {
+    color: #fff;
+  }
   font-size: 14px;
   text-align: center;
   ${mq.small`
@@ -353,6 +357,11 @@ export default ({ match }) => {
   const { url } = match
   const { t } = useTranslation()
 
+  const TwitterUrl = 'https://twitter.com/linkkey_'
+  const TelegramUrl = 'https://t.me/linkkeydao'
+  const DiscordUrl = 'https://discord.com/invite/UMNRQryyts'
+  const LinkkeyUrl = 'https://linkkey.io'
+
   const {
     data: { accounts }
   } = useQuery(GET_ACCOUNT)
@@ -376,7 +385,8 @@ export default ({ match }) => {
             </NavLink>
           )}
           {/*<NavLink to="/favourites">{t('c.favourites')}</NavLink>*/}
-          <ExternalLink href={aboutPageURL()}>{t('c.whitelist')}</ExternalLink>
+          <NavLink to="/faq">{t('c.faq')}</NavLink>
+          <ExternalLink href={aboutPageURL()}>{t('c.linkkey')}</ExternalLink>
           <LanguageSwitcher />
         </Nav>
         <NetworkStatus>
@@ -422,12 +432,20 @@ export default ({ match }) => {
           </PermanentRegistrarLogo>
           <Search />
           <SocialIconLarge>
-            <img src={TelegramIcon} alt="" />
-            <img src={TwitterIcon} alt="" />
-            <img src={DiscordIcon} alt="" />
+            <a href={TwitterUrl}>
+              <img src={TwitterIcon} alt="twitter" />
+            </a>
+            <a href={TelegramUrl}>
+              <img src={TelegramIcon} alt="telegram" />
+            </a>
+            <a href={DiscordUrl}>
+              <img src={DiscordIcon} alt="discord" />
+            </a>
           </SocialIconLarge>
 
-          <LinkkeyCopyRight>@2021 By Linkkey DAO</LinkkeyCopyRight>
+          <LinkkeyCopyRight>
+            <a href={LinkkeyUrl}>@2021 By Linkkey DAO</a>
+          </LinkkeyCopyRight>
         </>
       </SearchContainer>
     </Hero>
