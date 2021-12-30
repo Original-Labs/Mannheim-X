@@ -140,9 +140,7 @@ export default function AvatarAndInfoDropdown() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
           >
-            {/*<Loading loading={false}>*/}
             <SideNav />
-            {/*</Loading>*/}
           </Dropdown>
         </AnimatePresence>
       )}

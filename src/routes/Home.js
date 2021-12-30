@@ -17,6 +17,7 @@ import ENSLogo from '../components/HomePage/images/logo.svg'
 import DiscordIcon from '../assets/D.png'
 import TelegramIcon from '../assets/tg.png'
 import TwitterIcon from '../assets/t.png'
+import GithubIcon from '../assets/github.png'
 import { aboutPageURL } from '../utils/utils'
 import { connectProvider, disconnectProvider } from '../utils/providerUtils'
 import { gql } from '@apollo/client'
@@ -360,6 +361,7 @@ export default ({ match }) => {
   const TwitterUrl = 'https://twitter.com/linkkey_'
   const TelegramUrl = 'https://t.me/linkkeydao'
   const DiscordUrl = 'https://discord.com/invite/UMNRQryyts'
+  const GithubUrl = 'https://github.com/Link-Key/sns-app'
   const LinkkeyUrl = 'https://linkkey.io'
 
   const {
@@ -441,6 +443,9 @@ export default ({ match }) => {
             <a href={DiscordUrl}>
               <img src={DiscordIcon} alt="discord" />
             </a>
+            {/*<a href={GithubUrl}>*/}
+            {/*  <img src={GithubIcon} alt="github" />*/}
+            {/*</a>*/}
           </SocialIconLarge>
 
           <LinkkeyCopyRight>
