@@ -73,8 +73,8 @@ const EthRegistrationGasPrice = ({ price, ethUsdPrice, gasPrice }) => {
   return (
     <PriceContainer>
       <TotalValue>
-        {ethVal.toFixed(3)} Matic + at most {registerGasFast.toFixed(3)} Matic
-        gas fee = at most {totalFast.toFixed(3)} Matic
+        {ethVal.toFixed(3)} Matic + equal to about {registerGasFast.toFixed(3)}{' '}
+        Matic gas fee = equal to about {totalFast.toFixed(3)} Matic
         {ethVal && ethUsdPrice && (
           <USD>
             {' '}

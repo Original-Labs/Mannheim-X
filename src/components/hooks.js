@@ -208,7 +208,13 @@ export function useGasPrice(enabled = true) {
           }
           setPrice(price)
         } else {
-          setPrice({ slow: 0, fast: 0 })
+          // Polygon default baseFee
+          const baseFeeWei = ethers.utils.formatUnits(30000000000, 'wei')
+          const price = {
+            slow: baseFeeWei + 2 * Math.pow(10, 9),
+            fast: baseFeeWei * 1.1 + 2 * Math.pow(10, 9)
+          }
+          setPrice(price)
         }
         setLoading(false)
       }
