@@ -2,6 +2,10 @@
 
 > fork from [ens-app](git@github.com:ensdomains/ens-app.git)
 
+## ⚠️Contribute your code for a fee ⚠️
+
+Community developers are welcome to contribute code to the project, and we will provide 10-100 Matic(cryptocurrency) as a reward
+
 ## Installation
 
 ### Manual
