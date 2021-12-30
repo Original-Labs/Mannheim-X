@@ -443,9 +443,9 @@ export default ({ match }) => {
             <a href={DiscordUrl}>
               <img src={DiscordIcon} alt="discord" />
             </a>
-            {/*<a href={GithubUrl}>*/}
-            {/*  <img src={GithubIcon} alt="github" />*/}
-            {/*</a>*/}
+            <a href={GithubUrl}>
+              <img src={GithubIcon} alt="github" />
+            </a>
           </SocialIconLarge>
 
           <LinkkeyCopyRight>
