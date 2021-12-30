@@ -57,7 +57,6 @@ const SearchForm = styled('form')`
       p && p.hasSearch
         ? 'background: #eb8b8c;color: white;'
         : 'background: #c7d3e3; color:#fff;'}
-    //background: #ddd;
     font-size: 22px;
     font-family: Overpass;
     padding: 20px 0;
