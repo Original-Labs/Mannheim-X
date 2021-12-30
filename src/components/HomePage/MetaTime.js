@@ -32,7 +32,8 @@ class MetaTime extends Component {
     })
   }
   render() {
-    return <p className="App-clock">The Metaverse Time | {this.state.time}</p>
+    // TODO Add metadverse time lable
+    return <p className="App-clock">{this.state.time}</p>
   }
 }
 

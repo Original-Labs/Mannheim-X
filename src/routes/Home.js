@@ -14,6 +14,9 @@ import QuestionMarkDefault from '../components/Icons/QuestionMark'
 import HowToUseDefault from '../components/HowToUse/HowToUse'
 // import ENSLogo from '../components/HomePage/images/ENSLogo.svg'
 import ENSLogo from '../components/HomePage/images/logo.svg'
+import DiscordIcon from '../assets/D.png'
+import TelegramIcon from '../assets/tg.png'
+import TwitterIcon from '../assets/t.png'
 import { aboutPageURL } from '../utils/utils'
 import { connectProvider, disconnectProvider } from '../utils/providerUtils'
 import { gql } from '@apollo/client'
@@ -273,6 +276,34 @@ const LogoLarge = styled(motion.img)`
   `}
 `
 
+const SocialIconLarge = styled(motion.div)`
+  bottom: 50px;
+  display: flow;
+  margin: 50px auto 20px;
+  text-align: center;
+  > img {
+    width: 25px;
+    margin: 0 15px;
+  }
+  ${mq.small`
+    > img{
+      width: 30px;
+      margin: 0 20px;
+    }
+  `}
+`
+const LinkkeyCopyRight = styled(motion.div)`
+  display: block;
+  width: 100%;
+  margin: 0 auto 0;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  ${mq.small`
+    font-size: 16px;
+  `}
+`
+
 const PermanentRegistrarLogo = styled(motion.h1)`
   font-family: Overpass;
   font-weight: 800;
@@ -389,6 +420,13 @@ export default ({ match }) => {
             Everyone needs to register for the WEB3.0
           </PermanentRegistrarLogo>
           <Search />
+          <SocialIconLarge>
+            <img src={TelegramIcon} alt="" />
+            <img src={TwitterIcon} alt="" />
+            <img src={DiscordIcon} alt="" />
+          </SocialIconLarge>
+
+          <LinkkeyCopyRight>@2021 By Linkkey DAO</LinkkeyCopyRight>
         </>
       </SearchContainer>
     </Hero>
