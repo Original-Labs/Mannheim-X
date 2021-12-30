@@ -436,14 +436,14 @@ export default ({ match }) => {
           </>
         ) : (
           <MobileHeaderContainer>
-            <LanguageSwitcher />
+            <HamburgerContainer>
+              <Hamburger isMenuOpen={isMenuOpen} openMenu={toggleMenu} />
+            </HamburgerContainer>
             <NoAccounts
               onClick={isReadOnly ? connectProvider : disconnectProvider}
               buttonText={isReadOnly ? t('c.connect') : t('c.disconnect')}
             />
-            <HamburgerContainer>
-              <Hamburger isMenuOpen={isMenuOpen} openMenu={toggleMenu} />
-            </HamburgerContainer>
+            <LanguageSwitcher />
           </MobileHeaderContainer>
         )}
       </HeroTop>
