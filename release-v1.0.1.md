@@ -1,4 +1,4 @@
-# RELEASE V1.0.1
+# RELEASE V1.1.0
 
 > 2021.12.30 by MetaBowen
 
@@ -12,3 +12,5 @@
 ## Repair list
 
 1. Fixed gas estimation failure
+2. Loading ICONS fixed
+3. Sidebar mask fixed
