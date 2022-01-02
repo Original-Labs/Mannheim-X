@@ -379,7 +379,7 @@ export default ({ match }) => {
   const { url } = match
   const { t } = useTranslation()
 
-  const TwitterUrl = 'https://twitter.com/linkkey_'
+  const TwitterUrl = 'https://twitter.com/LinkkeyOfficial'
   const TelegramUrl = 'https://t.me/linkkeydao'
   const DiscordUrl = 'https://discord.com/invite/UMNRQryyts'
   const GithubUrl = 'https://github.com/Link-Key'
