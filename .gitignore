@@ -3,9 +3,6 @@
 # dependencies
 /node_modules
 
-# src/lib/ui
-/src/lib/ui/node_modules
-
 # testing
 /coverage
 
@@ -39,3 +36,6 @@ package-lock.json
 #IDE
 
 .idea
+
+#ZIP
+*.zip
