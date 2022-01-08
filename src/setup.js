@@ -22,6 +22,7 @@ import { setupAnalytics } from './utils/analytics'
 import { getReverseRecord } from './apollo/sideEffects'
 import { safeInfo, setupSafeApp } from './utils/safeApps'
 import getSNS from './apollo/mutations/sns'
+import messageMention from 'utils/messageMention'
 
 export const setFavourites = () => {
   favouritesReactive(
@@ -150,7 +151,11 @@ export default async reconnect => {
     // setSubDomainFavourites()
     const provider = await getProvider(reconnect)
 
-    if (!provider) throw 'Please install a wallet'
+    console.log('provider:', provider)
+
+    if (!provider) {
+      throw 'Please install a wallet'
+    }
 
     const networkId = await getNetworkId()
 
@@ -180,6 +185,7 @@ export default async reconnect => {
      */
     const sns = getSNS()
   } catch (e) {
+    messageMention('请登录钱包!')
     console.error('setup error: ', e)
   }
 }

@@ -377,5 +377,23 @@
   "z": {
     "transferSending": "Transaction sending......",
     "transferSuccess": "Transaction sent successfully！！！"
+  },
+  "errorCode": {
+    "001": "over freeMintEndTime!!! ",
+    "002": "over freeMintQuantity!!!",
+    "003": "Name register fail!!!",
+    "004": "msg.value should be 1 ether!!!",
+    "005": "msg.value error",
+    "006": "please set defaultResolverAddress!!!",
+    "007": "name length is less than 4!!!",
+    "008": "the address has _registered!!!",
+    "009": "onlyOwner can setNewResolverInfo",
+    "010": "transferName fail!!!",
+    "011": "to_ has a name!!!",
+    "012": "form_ is not the owner of name!!!",
+    "013": "recordsStr error!!!",
+    "014": "addr_ is not in _shortNameAllowedlist!!!",
+    "015": "send matic to feeto address fail!!!",
+    "016": "manager can't mint"
   }
 }
