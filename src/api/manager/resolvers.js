@@ -388,11 +388,12 @@ const resolvers = {
     getSnsName: async (_, { address }) => {
       try {
         const sns = getSNS()
-        const newVar = await sns.getSNSName(address)
+        console.log('sns...', sns)
+        const newVar = await sns.getNameOfOwner(address)
         // console.log('newVar...', newVar)
         return newVar
       } catch (e) {
-        console.log('Error in getSnsName', e)
+        console.log('Error in getNameOfOwner', e)
         throw e
       }
     },
@@ -489,7 +490,7 @@ const resolvers = {
           // getTestEntry(name),
           // getRegistrant(name),
           await snsResolver.getAllProperties(name),
-          await ens.isOverDeadline(),
+          // await ens.isOverDeadline(),
           await ens.getResolverAddress(name)
         ]
         const [
@@ -500,7 +501,7 @@ const resolvers = {
           // testEntry,
           // registrant
           allProperties,
-          isOverDeadline,
+          // isOverDeadline,
           resolverAddress
         ] = await Promise.all(dataSources)
 
@@ -519,7 +520,7 @@ const resolvers = {
           //   : null,
           parent,
           parentOwner,
-          isOverDeadline,
+          // isOverDeadline,
           allProperties,
           resolverAddress,
           __typename: 'Node'
