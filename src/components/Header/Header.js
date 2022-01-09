@@ -128,6 +128,7 @@ function HeaderContainer() {
                 target="_blank"
                 href="https://en.wikipedia.org/wiki/IDN_homograph_attack"
                 rel="noreferrer"
+                style={{ color: '#ddd' }}
               >
                 {t('warnings.homoglyph.link')}
               </a>

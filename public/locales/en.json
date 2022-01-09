@@ -183,7 +183,7 @@
       "warning": "Click register to move to the 3rd step"
     },
     "favourite": "* Favorite the name for easy access in case you close out of your browser.",
-    "increaseRegistrationPeriod": "The first 10,000 names are 1 Matic each, and after 10,000, each 10Matic, the names are permanent.",
+    "increaseRegistrationPeriod": "The registration fee will be increased by 50% for every 10,000 new registrations.",
     "notifications": {
       "ready": "is ready to be registered"
     },
