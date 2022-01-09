@@ -20,11 +20,11 @@ const TabLink = styled(Link)`
     color: ${({ active }) => (active ? 'white' : '#D2D2D2')};
   }
   &:first-child {
-    border-radius: 4px 0 0 4px;
+    border-radius: 14px;
   }
 
   &:last-child {
-    border-radius: 0 4px 4px 0;
+    border-radius: 14px;
   }
 `
 
@@ -32,7 +32,7 @@ const TabContainer = styled('div')`
   display: inline-flex;
   justify-content: flex-start;
   border: 2px solid #dfdfdf;
-  border-radius: 4px;
+  border-radius: 14px;
   margin-left: 20px;
   margin-top: 20px;
 
