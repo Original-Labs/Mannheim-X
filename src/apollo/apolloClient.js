@@ -88,7 +88,9 @@ function fromPromise(promise, operation) {
           let errorMessages = e.data.message.split('---')
           let errorContent
           if (errorMessages.length == 4) {
-            errorContent = errorMessages[3]
+            // get errorCode
+            let errCode = errorMessages[0].split(':')[1].trim()
+            errorContent = <Trans i18nKey={`errorCode.${errCode}`} />
           } else if (
             errorMessages.length == 1 &&
             errorMessages[0].startsWith(
