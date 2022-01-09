@@ -231,7 +231,7 @@
   "reminder": {
     "everywhere": "everywhere",
     "release": {
-      "description": "Register {{name}} at https://app.sns.domains/name/{{name}}/register",
+      "description": "Register {{name}} at https://sns.chat/name/{{name}}/register",
       "title": "Register {{name}}"
     },
     "renewal": {
@@ -379,21 +379,21 @@
     "transferSuccess": "Transaction sent successfully！！！"
   },
   "errorCode": {
-    "001": "over freeMintEndTime!!! ",
-    "002": "over freeMintQuantity!!!",
-    "003": "Name register fail!!!",
-    "004": "msg.value should be 1 ether!!!",
-    "005": "msg.value error",
-    "006": "please set defaultResolverAddress!!!",
-    "007": "name length is less than 4!!!",
-    "008": "the address has _registered!!!",
-    "009": "onlyOwner can setNewResolverInfo",
-    "010": "transferName fail!!!",
-    "011": "to_ has a name!!!",
-    "012": "form_ is not the owner of name!!!",
-    "013": "recordsStr error!!!",
-    "014": "addr_ is not in _shortNameAllowedlist!!!",
-    "015": "send matic to feeto address fail!!!",
-    "016": "manager can't mint"
+    "001": "Over the free registration time",
+    "002": "Over the number of free registrations",
+    "003": "The name has been registered",
+    "004": "The amount sent should be 1 Matic",
+    "005": "Incorrect amount sent when casting",
+    "006": "The contract does not set the default resolver address",
+    "007": "The name should contain more than 4 characters",
+    "008": "The address is already registered",
+    "009": "Only the owner can change the parser address",
+    "010": "Transfer name failed",
+    "011": "The receiving address already has a SNS name",
+    "012": "The sending address is not the owner of the name",
+    "013": "Record string format error",
+    "014": "The address is not in the list of allowed casting short names",
+    "015": "Failed to send casting fee",
+    "016": "Manager can't mint"
   }
 }
