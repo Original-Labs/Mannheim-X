@@ -124,8 +124,7 @@
     "subdomainFavouriteTitle": "お気に入りサブドメイン"
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
       "body": "ENSアプリは、非技術者向けのグラフィカル・ユーザー・インターフェースです。名前の検索、アドレスやリソースの管理、サブドメインの作成などが可能です。",
       "title": "ENSの使い方"
@@ -369,7 +368,8 @@
       "content": "This name contains non-ASCII characters. Please be aware that there are characters that look identical or very similar to English letters, especially characters from Cyrillic and Greek. Also, traditional Chinese characters can look identical or very similar to simplified variants. For more information, please see this",
       "link": "Wikipedia article",
       "title": "ATTENTION"
-    }
+    },
+    "wallerCon": "ウォレットを接続してください!"
   },
   "z": {
     "transferSending": "トランザクション送信......",

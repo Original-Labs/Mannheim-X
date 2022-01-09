@@ -1,4 +1,5 @@
 // import { getAccounts, getNetwork, getNetworkId } from '@ensdomains/ui'
+import { Trans } from 'react-i18next'
 import { getAccounts, getNetwork, getNetworkId } from 'sns-app-contract-api'
 
 import { isReadOnly } from 'sns-app-contract-api/src/web3'
@@ -151,8 +152,6 @@ export default async reconnect => {
     // setSubDomainFavourites()
     const provider = await getProvider(reconnect)
 
-    console.log('provider:', provider)
-
     if (!provider) {
       throw 'Please install a wallet'
     }
@@ -185,7 +184,10 @@ export default async reconnect => {
      */
     const sns = getSNS()
   } catch (e) {
-    messageMention('请登录钱包!')
+    messageMention({
+      type: 'warn',
+      content: <Trans i18nKey={'warnings.wallerCon'} />
+    })
     console.error('setup error: ', e)
   }
 }
