@@ -57,6 +57,7 @@ const SearchHeader = styled(Search)`
   background-color: transparent;
   margin-top: 50px;
   width: 100%;
+  padding: 0 20px;
   ${mq.medium`
     margin-top: 0;
     width: calc(100% - 200px);
@@ -128,6 +129,7 @@ function HeaderContainer() {
                 target="_blank"
                 href="https://en.wikipedia.org/wiki/IDN_homograph_attack"
                 rel="noreferrer"
+                style={{ color: '#ddd' }}
               >
                 {t('warnings.homoglyph.link')}
               </a>

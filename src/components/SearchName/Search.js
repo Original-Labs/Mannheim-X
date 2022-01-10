@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/client'
 import { parseSearchTerm } from '../../utils/utils'
 import '../../api/subDomainRegistrar'
 import { withRouter } from 'react-router'
-import searchIcon from '../../assets/search.svg'
+import searchIcon from '../../assets/search.png'
 import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
 
 const SearchForm = styled('form')`
@@ -60,7 +60,7 @@ const SearchForm = styled('form')`
     font-size: 22px;
     font-family: Overpass;
     padding: 20px 0;
-    width: calc(100% - 162px);
+    width: calc(100% - 240px);
     border: none;
     border-radius: 0 14px 14px 0;
     ${mq.medium`
@@ -71,6 +71,10 @@ const SearchForm = styled('form')`
     `}
     &:hover {
       ${p => (p && p.hasSearch ? 'cursor: pointer;' : 'cursor: default;')}
+    }
+    img {
+      width:30px;
+      height:30px;
     }
   }
 `
@@ -168,7 +172,11 @@ function Search({ history, className, style }) {
           type="submit"
           data-testid={'home-search-button'}
         >
-          {t('search.button')}
+          {mediumBP ? (
+            t('search.button')
+          ) : (
+            <img src={searchIcon} alt="search" />
+          )}
         </button>
       </SearchForm>
       {foucsState && (

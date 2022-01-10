@@ -1,6 +1,6 @@
 {
   "address": {
-    "etherscanButton": "Etherscanで確認",
+    "etherscanButton": "Polygonscanで確認",
     "filter": {
       "controller": "コントローラー",
       "registrant": "登録者"
@@ -33,11 +33,11 @@
     "Controller": "コントローラー",
     "Expiration Date": "有効期限",
     "Resolver": "リゾルバ",
-    "about": "ENSとは",
+    "about": "SNSとは",
     "whitelist": "White List",
     "addresses": "Addresses",
     "cancel": "キャンセル",
-    "cannotclaimDns": "You cannot claim names under .{{ name }} on this site.",
+    "cannotclaimDns": "このサイトで.{{name}}のドメイン名を取り戻すことはできません",
     "claim": "請求",
     "connect": "Connect",
     "disconnect": "Disconnect",
@@ -49,7 +49,7 @@
     "learnmore": "詳細",
     "learnmoreenglishonly": "詳細 (English Only)",
     "migrate": "移行",
-    "mynames": "マイENS",
+    "mynames": "私の口座",
     "network": "ネットワーク",
     "otheraddresses": "その他のアドレス",
     "parent": "ペアレント",
@@ -58,7 +58,7 @@
     "register": "登録",
     "registrant": "登録者",
     "registrationDate": "登録日",
-    "renew": "更新",
+    "renew": "リニューアル",
     "return": "Return",
     "save": "保存",
     "search": "検索",
@@ -70,8 +70,8 @@
     "year": "年"
   },
   "certificate": {
-    "button": "Request SSL certificate",
-    "warning": "SSL certificate for {{ name }}.link is not created yet"
+    "button": "SSL認証をリクエスト",
+    "warning": "{{name}}.keyのSSL証明書が作成されていません"
   },
   "childDomainItem": {
     "notmigrated": "移行されていません"
@@ -96,13 +96,13 @@
       "manage": {
         "text1": "あなたは所有者ですので、ここで名前の管理が可能です。",
         "text2": "あなたは所有者ではありませんので、管理画面で名前の閲覧のみ可能です。",
-        "title": "おめでとうございます！このDNSドメインがENSレジストリに追加されました。"
+        "title": "おめでとうございます！このDNSドメインがSNSレジストリに追加されました。"
       },
       "proof": {
         "text1": "DNSのTXTレコードに表示されるアドレスは、あなたのものと同じアドレスです。",
         "text2": "あなたがこのドメインの所有である場合は、TXTレコードにあなたのイーサリアムアドレスが含まれているように変更し、このページを更新してDNSSECの検証を再度実行してください。",
-        "title1": "あなたはこのアドレスの所有者です。ENSレジストリにドメインを追加してください。",
-        "title2": "あなたはこのドメインのDNS所有者ではないようです。しかし、誰でもこのドメインをENSレジストリに追加することができます。"
+        "title1": "あなたはこのアドレスの所有者です。SNSレジストリにドメインを追加してください。",
+        "title2": "あなたはこのドメインのDNS所有者ではないようです。しかし、誰でもこのドメインをSNSレジストリに追加することができます。"
       }
     },
     "viewinmanager": "管理画面で確認"
@@ -124,15 +124,14 @@
     "subdomainFavouriteTitle": "お気に入りサブドメイン"
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
-      "body": "ENSアプリは、非技術者向けのグラフィカル・ユーザー・インターフェースです。名前の検索、アドレスやリソースの管理、サブドメインの作成などが可能です。",
-      "title": "ENSの使い方"
+      "body": "SNSアプリは、非技術者向けのグラフィカル・ユーザー・インターフェースです。名前の検索、アドレスやリソースの管理、サブドメインの作成などが可能です。",
+      "title": "SNSの使い方"
     },
     "whatisens": {
-      "body": "イーサリアム・ネーム・サービスは、イーサリアム・ブロックチェーンをベースにした分散型のオープンで拡張性の高いネーミングシステムです。ENSは、長いアドレスをコピーしたりタイプしたりする必要がありません。",
-      "title": "ENSとは"
+      "body": "イーサリアム・ネーム・サービスは、イーサリアム・ブロックチェーンをベースにした分散型のオープンで拡張性の高いネーミングシステムです。SNSは、長いアドレスをコピーしたりタイプしたりする必要がありません。",
+      "title": "SNSとは"
     }
   },
   "howtouse": {
@@ -154,71 +153,71 @@
     }
   },
   "linegraph": {
-    "daysRemaining": "{{daysRemaining}} (out of {{totalDays}}) days remaining",
-    "endPrice": "End price",
-    "startingPrice": "Starting price",
-    "title": "Buy now for {{premiumInEth}}"
+    "daysRemaining": "{{daysRemaining}}残り日数（{{totalDays}}合計日数",
+    "endPrice": "最終価格",
+    "startingPrice": "開始価格",
+    "title": "現在の購入価格は{{premiumInEth}}"
   },
   "pendingTx": {
     "text": "保留中のTx"
   },
   "pricer": {
-    "gasDescription": "Estimated Gas Price (Step 1 + Step 3). The gas price will flucuate.",
-    "pricePerAmount": "Price per amount of time selected",
+    "gasDescription": "推定Gas価格（ステップ1 +ステップ3）。 Gas価格は変動します。",
+    "pricePerAmount": "現在選択されている期間の登録価格",
     "registrationPeriodLabel": "登録期間",
-    "registrationPriceLabel": "Registration price to pay",
-    "totalDescription": "Estimated Total (Price + Gas). The gas price is based at {{gasPriceToGweiFast}} Gwei",
+    "registrationPriceLabel": "登録料",
+    "totalDescription": "推定総費用（登録料+Gas）.Gas価格は{{gasPriceToGweiFast}} Gweiに基づいています.",
     "totalPriceLabel": "お支払合計額",
     "yearUnit": "年"
   },
   "register": {
     "buttons": {
-      "insufficient": "Insufficient balance on your wallet. Fill in your wallet and reload the page.",
-      "manage": "管理",
+      "insufficient": "ウォレットの残高が不足している場合は、ウォレットを再充電してページをリロードしてください",
+      "manage": "ドメインの管理",
       "register": "登録",
       "request": "登録のリクエスト",
-      "setreverserecord": "Set reverse record",
+      "setreverserecord": "登録名を見る",
       "warning": "ステップ３に移るために登録をクリックしてください"
     },
     "favourite": "* ブラウザを閉じた時にアクセスしやすいよう名前をお気に入りに登録する",
-    "increaseRegistrationPeriod": "Increase registration period to avoid paying gas every year",
+    "increaseRegistrationPeriod": "登録けんすー件数が10000けん件ふえる増えるごとにとーろく登録りょー料が50%あがる上がる",
     "notifications": {
       "ready": "は登録の準備ができています"
     },
     "notify": "通知する",
     "premium": {
-      "dateDescription": "Date and time shown in local time zone",
-      "invalid": "Any number over 2k is invalid",
-      "title": "Premium"
+      "dateDescription": "保険料がその価格に達した時刻（現地時間帯）",
+      "invalid": "2kを超える価格は無効です",
+      "title": "プレミアム"
     },
     "premiumWarning": {
-      "description": "To ensure everyone has a fair opportunity to register a newly expired name, these names have a premium that starts at $2,000 and reduces over 28 days until the premium is gone. Enter the amount you're willing to pay as a premium to learn which date to revisit the app to register the name.",
-      "title": "This name has a temporary premium."
+      "description": "有効期限が切れたばかりのドメイン名を誰もが確実に登録できるようにするため、これらのドメインのプレミアムは$ 2,000から始まり、プレミアムがなくなるまで28日で徐々に減っていきます。 支払うプレミアム料金を入力すると、ドメイン名を登録するタイミングが自動的に表示されます。",
+      "title": "このドメイン名には一時的なプレミアムがあります。"
     },
     "step1": {
       "label": "ステップ１",
-      "text": "ウォレットが開き、登録に必要な2つのトランザクションのうち最初のトランザクションの確認を求められます。",
-      "text2": "If the second transaction is not processed within 7 days of the first, you will need to start again from step 1.",
+      "text": "ウォレットで取引を確認する必要があります。これにより、あなたの名前のためにNFTが鋳造されます。",
+      "text2": "プロセスは失敗するかもしれませんが、やり直しができます。",
       "title": "登録のリクエスト"
     },
     "step2": {
       "label": "ステップ２",
-      "text": "リクエスト後、別の人が同じ名前を登録しようとしなかったことを確認し、あなたのリクエストを保護するために待ち時間が必要となります。",
-      "title": "1分間お待ちください"
+      "text": "他の人が同じ名前を登録しようとしないことを確認するために、あなたの登録要求を保護するために、しばらく待つ必要があります。",
+      "title": "10 ~ 30秒待つ"
     },
     "step3": {
       "label": "ステップ３",
-      "text": "‘登録’をクリックするとウォレットが再度開きます。2回目のトランザクションが確認されて初めて、ドメインを取得したかどうかがわかります。",
+      "text": "‘ウォレットが取引に成功すると、登録された名前が成功する。",
       "title": "登録の完了"
     },
     "titles": [
-      "名前を登録するには、3つのステップを完了する必要があります。",
-      "すぐに名前の管理ができるようになります。",
-      "すべての手順が完了しました！今すぐ名前を管理しましょう！"
+      "SNSの名前を登録するには3つのステップ",
+      "名前(SNS)の登録はすぐにできます",
+      "名前(SNS)の登録が完了し、名前の管理ができるようになりました!"
     ]
   },
   "registrymigration": {
-    "donotaccept": "*ENSの名前をトレードする場合は、この名前を受け入れないでください！",
+    "donotaccept": "*SNSの名前をトレードする場合は、この名前を受け入れないでください！",
     "messages": {
       "controller": "この名前はコントラクトで管理されているため、自動的に移行することはできません。新しいコントローラーを設定する前に、新しいレジストリを使用するようにコントラクトを再デプロイしてください。",
       "default": "この名前は新しいレジストリに移行する必要があります。この名前({{parent}})のペアレントのみがこれを行えます。",
@@ -233,8 +232,8 @@
       "title": "Register {{name}}"
     },
     "renewal": {
-      "description": "Your ENS name is expiring soon, please renew it",
-      "title": "Renew your ENS domain {{name}}"
+      "description": "Your SNS name is expiring soon, please renew it",
+      "title": "Renew your SNS domain {{name}}"
     }
   },
   "search": {
@@ -294,7 +293,7 @@
     },
     "learnmore": {
       "step1": {
-        "text": "Once you register your name, Go to 'My Account' page and set a reverse record. This allows dapps to find and display your ENS name when you connect to them with your Ethereum account. ",
+        "text": "Once you register your name, Go to 'My Account' page and set a reverse record. This allows dapps to find and display your SNS name when you connect to them with your Ethereum account. ",
         "title": "1. Set a reverse record"
       },
       "step2": {
@@ -302,7 +301,7 @@
         "title": "2. Set other records"
       },
       "step3": {
-        "text": "You can host your static html/css/images on IPFS and put the hash in your ENS name's Content record. Then it can be resolved by ENS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.link' appended to the end (e.g. ens.eth.link).",
+        "text": "You can host your static html/css/images on IPFS and put the hash in your SNS name's Content record. Then it can be resolved by SNS-aware browsers (e.g. Opera), browser extensions (Metamask), or any browser with '.key' appended to the end (e.g. sns.eth.key).",
         "title": "3. Set a content hash of a decentralized website"
       },
       "title": "名前の管理についてもっと知る"
@@ -320,10 +319,10 @@
       "messages": {
         "explanation": "The Reverse Resolution translates an address into a name. It allows Dapps to show in their interfaces '{{name}}' rather than the long address '{{account}}'. If you would like to set up your reverse for a different account, please switch accounts in your dapp browser",
         "explanation2": "You can only select names you set this Ethereum Address as.",
-        "noForwardRecordAavilable": "You either do not own any ENS names, or your ENS names have no ETH records set to this address.",
+        "noForwardRecordAavilable": "You either do not own any SNS names, or your SNS names have no ETH records set to this address.",
         "notSet": "Reverse record: not set",
         "reverseRecordRemoval": "Are you sure you want to delete the reverse record?",
-        "selectPlaceholder": "Select your ENS name",
+        "selectPlaceholder": "Select your SNS name",
         "setTo": "Reverse record: Set to ",
         "setToDifferent": "Reverse record: Set to a different name:"
       },
@@ -369,10 +368,29 @@
       "content": "This name contains non-ASCII characters. Please be aware that there are characters that look identical or very similar to English letters, especially characters from Cyrillic and Greek. Also, traditional Chinese characters can look identical or very similar to simplified variants. For more information, please see this",
       "link": "Wikipedia article",
       "title": "ATTENTION"
-    }
+    },
+    "wallerCon": "ウォレットを接続してください!"
   },
   "z": {
     "transferSending": "トランザクション送信......",
     "transferSuccess": "トランザクションは正常に送信されました！！！"
+  },
+  "errorCode": {
+    "001": "無料登録時間を超えました",
+    "002": "無料登録数を超えました",
+    "003": "名前が登録されました",
+    "004": "送金金額は 1 Matic",
+    "005": "キャスト時に送信された金額が間違っています",
+    "006": "コントラクトはデフォルトのリゾルバーアドレスを設定しません",
+    "007": "名前の長さは4桁を超える必要があります",
+    "008": "アドレスはすでに登録されています",
+    "009": "所有者のみがリゾルバーアドレスを変更できます",
+    "010": "トランザクション名が失敗しました",
+    "011": "受信アドレスにはすでにSNS名が付いています",
+    "012": "送信アドレスは名前の所有者ではありません",
+    "013": "レコード文字列フォーマットエラー",
+    "014": "そのアドレスは、許可されている短い名前のリストに含まれていません",
+    "015": "鋳造費を送れなかった",
+    "016": "管理者は鋳造できません"
   }
 }

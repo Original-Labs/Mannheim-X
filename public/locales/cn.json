@@ -48,7 +48,7 @@
     "learnmore": "了解更多",
     "learnmoreenglishonly": "了解更多 (仅提供英文内容)",
     "migrate": "迁移",
-    "mynames": "我的域名",
+    "mynames": "我的账户",
     "network": "网络",
     "otheraddresses": "其他地址",
     "parent": "父域名",
@@ -69,7 +69,7 @@
   },
   "certificate": {
     "button": "请求 SSL 证书",
-    "warning": "{{ name }}.link 的 SSL 证书还没有创建"
+    "warning": "{{ name }}.key 的 SSL 证书还没有创建"
   },
   "childDomainItem": {
     "notmigrated": "暂未迁移"
@@ -94,13 +94,13 @@
       "manage": {
         "text1": "作为域名的所有者，您现在可以管理域名了。",
         "text2": "由于您不是该域名的所有者，所以只能在管理器中查看域名。",
-        "title": "恭喜你！你已经成功将该 DNS 域名添加到 ENS 注册表中了。"
+        "title": "恭喜你！你已经成功将该 DNS 域名添加到 SNS 注册表中了。"
       },
       "proof": {
         "text1": "这里显示的 DNS 文本中的以太坊地址应该和你的地址一致。",
         "text2": "如果您持有该域名，请更改它的 TXT 记录以包含您的以太坊地址，并刷新此页面以再次执行 DNSSEC 验证。",
-        "title1": "您是这个地址的主人，现在可以将域名加入 ENS 注册表了。",
-        "title2": "您似乎不是该 DNS 域名的所有者，但任何人都可以将该域名添加到 ENS 注册表。"
+        "title1": "您是这个地址的主人，现在可以将域名加入 SNS 注册表了。",
+        "title2": "您似乎不是该 DNS 域名的所有者，但任何人都可以将该域名添加到 SNS 注册表。"
       }
     },
     "viewinmanager": "在管理器中查看"
@@ -122,15 +122,14 @@
     "subdomainFavouriteTitle": "子域名收藏夹"
   },
   "home": {
-    "announcements": {
-    },
+    "announcements": {},
     "howtouse": {
-      "body": "ENS 管理器是一个面向非技术用户的图形化界面。您可以利用它查询域名，管理域名指向的地址或资源，还可以为域名创建子域名。",
-      "title": "如何使用 ENS"
+      "body": "SNS 管理器是一个面向非技术用户的图形化界面。您可以利用它查询域名，管理域名指向的地址或资源，还可以为域名创建子域名。",
+      "title": "如何使用 SNS"
     },
     "whatisens": {
       "body": "以太坊域名服务（Ethereum Name Service）是一个基于以太坊区块链的分布式、开放和可扩展的域名系统。ENS 域名让人们不用再复制或输入冗长的区块链地址。通俗地说，ENS 就是区块链中的域名系统。",
-      "title": "ENS 是什么"
+      "title": "SNS 是什么"
     }
   },
   "howtouse": {
@@ -179,7 +178,7 @@
       "warning": "点击“注册”进入第 3 步"
     },
     "favourite": "* 您可以收藏喜欢的域名，以便于浏览器关闭以后重新查看这个域名。",
-    "increaseRegistrationPeriod": "前10000个名称每个1 Matic，10000个之后每个10Matic，名称永久有效。",
+    "increaseRegistrationPeriod": "注册数量每新增10000，注册费上调50%。",
     "notifications": {
       "ready": "已经可以正式注册了"
     },
@@ -202,7 +201,7 @@
     "step2": {
       "label": "第 2 步",
       "text": "需要等待一段时间，以确保其他人没有尝试注册相同的名字，同时也是在保护你的注册请求。",
-      "title": "等待3-10秒"
+      "title": "等待10-30秒"
     },
     "step3": {
       "label": "第 3 步",
@@ -216,7 +215,7 @@
     ]
   },
   "registrymigration": {
-    "donotaccept": "* 如果您在交易 ENS 域名，现在不要交易这个域名！",
+    "donotaccept": "* 如果您在交易 SNS 域名，现在不要交易这个域名！",
     "messages": {
       "controller": "该域名由智能合约控制，不能自动迁移。在设置新控制器之前，请重新部署您的合约以使用新的注册表。",
       "default": "该名称需要迁移到新的注册表，只有它的父域名（{{parent}}）可以执行这一操作。",
@@ -227,12 +226,12 @@
   "reminder": {
     "everywhere": "任意地点",
     "release": {
-      "description": "在 https://app.ens.domains/name/{{name}}/register 注册 {{name}}",
+      "description": "在 https://sns.chat/name/{{name}}/register 注册 {{name}}",
       "title": "注册 {{name}}"
     },
     "renewal": {
-      "description": "您的 ENS 域名即将过期，请续费",
-      "title": "为你的 ENS 域名 {{name}} 进行续费"
+      "description": "您的 SNS 域名即将过期，请续费",
+      "title": "为你的 SNS 域名 {{name}} 进行续费"
     }
   },
   "search": {
@@ -292,7 +291,7 @@
     },
     "learnmore": {
       "step1": {
-        "text": "域名注册完成后，打开“我的域名”页面，并设置一个反向解析记录。这样您用以太坊账户连接 Dapp 时，它们就可以直接显示你的 ENS 域名。",
+        "text": "域名注册完成后，打开“我的域名”页面，并设置一个反向解析记录。这样您用以太坊账户连接 Dapp 时，它们就可以直接显示你的 SNS 域名。",
         "title": "设置反向解析记录"
       },
       "step2": {
@@ -300,13 +299,13 @@
         "title": "设置其他记录"
       },
       "step3": {
-        "text": "您可以将在 IPFS 部署静态网站（html/css/images），并将其哈希值记录在 SNS 域名的内容记录中，然后那些支持 SNS 的浏览器（比如 Opera）、浏览器插件（比如 Metamask）或是在做任意浏览器中加上 ‘.link’ 后缀，就可以解析这类记录。",
+        "text": "您可以将在 IPFS 部署静态网站（html/css/images），并将其哈希值记录在 SNS 域名的内容记录中，然后那些支持 SNS 的浏览器（比如 Opera）、浏览器插件（比如 Metamask）或是在做任意浏览器中加上 ‘.key’ 后缀，就可以解析这类记录。",
         "title": "设置去中心化网站的内容哈希"
       },
       "title": "学习如何管理你的域名"
     },
     "messages": {
-      "alreadyregistered": "这个名字已经注册了",
+      "alreadyregistered": "该域名已被注册",
       "noowner": "暂无注册人",
       "noresolver": "暂未设置解析器",
       "notfinalised": "（未完成）",
@@ -318,10 +317,10 @@
       "messages": {
         "explanation": "反向解析将地址转换为域名。它能让 dapp 在其界面上显示 “{{name}}”，而不是 “{{account}}” 这个冗长的地址。如果您想为另一个账户设置反向解析，请先在 dapp 浏览器中切换帐户。",
         "explanation2": "您只能选择已经解析至这个以太坊地址的域名。",
-        "noForwardRecordAavilable": "您尚未拥有 ENS 域名，或者您 ENS 域名的 ETH 记录没有设置为此地址。",
+        "noForwardRecordAavilable": "您尚未拥有 SNS 域名，或者您 SNS 域名的 ETH 记录没有设置为此地址。",
         "notSet": "反向记录：未设置",
         "reverseRecordRemoval": "您确定要删除反向解析记录？",
-        "selectPlaceholder": "选择您的 ENS 域名",
+        "selectPlaceholder": "选择您的 SNS 域名",
         "setTo": "反向记录：解析至 ",
         "setToDifferent": "反向记录：已解析至另一个域名："
       },
@@ -367,10 +366,29 @@
       "content": "该域名包含非 ASCII 字符。请注意，有些字符看起来与英文字母相同或非常相似，特别是西里尔字母和希腊字母。此外，中文的繁体字与简体字看起来相同或非常相似。要了解更多信息，请参阅",
       "link": "维基百科的相关文章",
       "title": "注意"
-    }
+    },
+    "wallerCon": "请连接钱包!"
   },
   "z": {
     "transferSending": "交易发送中......",
     "transferSuccess": "交易发送成功！！！"
+  },
+  "errorCode": {
+    "001": "超过免费注册时间",
+    "002": "超过免费注册数量",
+    "003": "名称已经被注册",
+    "004": "发送金额应为 1 Matic",
+    "005": "铸造时发送的金额错误",
+    "006": "合约未设置默认解析器地址",
+    "007": "名称长度应超过4位",
+    "008": "该地址已经注册过",
+    "009": "只有拥有者可以修改解析器地址",
+    "010": "交易名称失败",
+    "011": "接受地址已经拥有一个SNS名称",
+    "012": "发送地址不是该名称的拥有者",
+    "013": "记录字符串格式错误",
+    "014": "地址不在允许铸造短名称列表中",
+    "015": "发送铸造费失败",
+    "016": "管理员不能铸造"
   }
 }
