@@ -175,7 +175,8 @@
       "register": "注册",
       "request": "请求注册",
       "setreverserecord": "查看注册的名称",
-      "warning": "点击“注册”进入第 3 步"
+      "warning": "点击“注册”进入第 3 步",
+      "suspend": "暂停注册"
     },
     "favourite": "* 您可以收藏喜欢的域名，以便于浏览器关闭以后重新查看这个域名。",
     "increaseRegistrationPeriod": "注册数量每新增10000，注册费上调50%。",

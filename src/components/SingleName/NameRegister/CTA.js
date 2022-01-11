@@ -65,7 +65,8 @@ function getCTA({
   history,
   t,
   ethUsdPrice,
-  account
+  account,
+  isSuspendRegister
 }) {
   const CTAs = {
     PRICE_DECISION: (
@@ -82,9 +83,15 @@ function getCTA({
         {mutate =>
           isAboveMinDuration && !readOnly ? (
             // hasSufficientBalance ? (
-            <Button data-testid="request-register-button" onClick={mutate}>
-              {t('register.buttons.request')}
-            </Button>
+            !isSuspendRegister ? (
+              <Button data-testid="request-register-button" onClick={mutate}>
+                {t('register.buttons.request')}
+              </Button>
+            ) : (
+              <Button data-testid="request-register-button" type="disabled">
+                {t('register.buttons.suspend')}
+              </Button>
+            )
           ) : //   : (
           //     <>
           //       <Prompt>
@@ -249,7 +256,8 @@ const CTA = ({
   price,
   years,
   premium,
-  ethUsdPrice
+  ethUsdPrice,
+  isSuspendRegister
 }) => {
   const { t } = useTranslation()
   const history = useHistory()
@@ -289,7 +297,8 @@ const CTA = ({
         history,
         t,
         ethUsdPrice,
-        account
+        account,
+        isSuspendRegister
       })}
     </CTAContainer>
   )

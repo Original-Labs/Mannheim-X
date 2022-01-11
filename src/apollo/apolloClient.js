@@ -97,7 +97,7 @@ function fromPromise(promise, operation) {
               'err: insufficient funds for gas * price + value:'
             )
           ) {
-            errorContent = 'Your wallet does not have enough matic!!!'
+            errorContent = 'Your wallet does not have enough matic!'
           } else {
             errorContent = e.data.message
           }

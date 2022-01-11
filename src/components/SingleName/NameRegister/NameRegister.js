@@ -318,6 +318,7 @@ const NameRegister = ({
         years={years}
         premium={currentPremium}
         ethUsdPrice={!ethUsdPriceLoading && ethUsdPrice}
+        isSuspendRegister={true}
       />
     </NameRegisterContainer>
   )
