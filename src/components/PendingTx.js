@@ -61,14 +61,14 @@ function PendingTx(props) {
 
   const { t } = useTranslation()
 
-  if (lastTransaction.txState === 'Pending') {
+  if (lastTransaction && lastTransaction.txState === 'Pending') {
     messageMention({
       type: 'loading',
       content: t('z.transferSending'),
       duration: 5,
       style: { marginTop: '20vh' }
     })
-  } else if (lastTransaction.txState === 'Confirmed') {
+  } else if (lastTransaction && lastTransaction.txState === 'Confirmed') {
     messageMention({
       type: 'success',
       content: t('z.transferSuccess'),

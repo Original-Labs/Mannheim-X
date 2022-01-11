@@ -263,7 +263,7 @@ function DetailsContainer({
             domain={domain}
             keyName="registrant"
             value={registrant}
-            canEdit={isRegistrant && !isExpired}
+            canEdit={isOwner}
             isExpiredRegistrant={isRegistrant && isExpired}
             type="address"
             editButton={t('c.transfer')}
