@@ -17,7 +17,8 @@ import {
   networkReactive,
   reverseRecordReactive,
   subDomainFavouritesReactive,
-  web3ProviderReactive
+  web3ProviderReactive,
+  snsNameReactive
 } from './apollo/reactiveVars'
 import { setupAnalytics } from './utils/analytics'
 import { getReverseRecord } from './apollo/sideEffects'
@@ -127,6 +128,10 @@ export const setWeb3Provider = async provider => {
   if (provider) {
     provider.removeAllListeners()
     accountsReactive(accounts)
+    const account = accounts[0]
+    const sns = getSNS()
+    const name = await sns.getNameOfOwner(account)
+    snsNameReactive(name)
   }
 
   provider?.on('chainChanged', async _chainId => {
@@ -141,6 +146,10 @@ export const setWeb3Provider = async provider => {
 
   provider?.on('accountsChanged', async accounts => {
     accountsReactive(accounts)
+    const account = accounts[0]
+    const sns = getSNS()
+    const name = await sns.getNameOfOwner(account)
+    snsNameReactive(name)
   })
 
   return provider
@@ -183,6 +192,8 @@ export default async reconnect => {
      * @type {*|{}}
      */
     const sns = getSNS()
+    // const resolverOwner = await sns.getResolverOwner('peifeng.key')
+    // console.log('resolverOwner------',resolverOwner)
   } catch (e) {
     messageMention({
       type: 'warn',

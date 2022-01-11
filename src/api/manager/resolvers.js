@@ -271,8 +271,10 @@ async function getRegistrant(name) {
  * @param name
  * @returns {Promise<null>}
  */
-async function getSNSResolverAddress(name) {
-  return null
+async function getResolverAddress(name) {
+  const sns = getSNS()
+  const resolverAddress = await sns.getResolverAddress(name)
+  return resolverAddress
 }
 
 async function setDNSSECTldOwner(ens, tld, networkId) {
@@ -372,9 +374,10 @@ const resolvers = {
       try {
         // const ens = getENS()
         const sns = getSNS()
-        const snsResolver = sns.getSNSAddress()
+        const snsResolver = getSnsResolver()
+        console.log('snsResolver----', snsResolver)
         return {
-          address: snsResolver,
+          address: snsResolver.resolverAddress,
           __typename: 'Resolver'
         }
       } catch (e) {
@@ -383,14 +386,14 @@ const resolvers = {
     },
     getOwner: (_, { name }) => {
       const ens = getSNS()
-      return ens.getOwner(name)
+      return ens.getResolverOwner(name)
     },
     getSnsName: async (_, { address }) => {
       try {
         const sns = getSNS()
         console.log('sns...', sns)
         const newVar = await sns.getNameOfOwner(address)
-        // console.log('newVar...', newVar)
+        console.log('newVar...', newVar)
         return newVar
       } catch (e) {
         console.log('Error in getNameOfOwner', e)
@@ -471,7 +474,10 @@ const resolvers = {
         if (handleName) {
           node.name = handleName
         }
-        let resolverOwner = await ens.getResolverOwner(name)
+
+        const resolverOwner = await ens.getResolverOwner(name)
+        // console.log('resolverOwner------',resolverOwner);
+        // console.log('emptyAddress------',emptyAddress);
         if (resolverOwner !== emptyAddress) {
           node.state = 'Open'
           node.available = false
@@ -751,8 +757,12 @@ const resolvers = {
     },
     setResolver: async (_, { name, address }) => {
       try {
-        const ens = getENS()
-        const tx = await ens.setResolver(name, address)
+        const sns = getSNS()
+        const snsResolver = await sns.getResolverAddress(name)
+        if (snsResolver === address) {
+          return null
+        }
+        const tx = await sns.setResolverInfo(name, address)
         return sendHelper(tx)
       } catch (e) {
         console.log(e)
