@@ -180,7 +180,8 @@
       "register": "Register",
       "request": "Request to register",
       "setreverserecord": "View the registered name",
-      "warning": "Click register to move to the 3rd step"
+      "warning": "Click register to move to the 3rd step",
+      "suspend": "Suspend register"
     },
     "favourite": "* Favorite the name for easy access in case you close out of your browser.",
     "increaseRegistrationPeriod": "The registration fee will be increased by 50% for every 10,000 new registrations.",
