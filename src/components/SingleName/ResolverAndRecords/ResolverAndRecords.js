@@ -50,6 +50,8 @@ function hasAResolver(resolver) {
   return parseInt(resolver, 16) !== 0
 }
 
+//TODO show when not the name owner
+
 export default function ResolverAndRecords({
   domain,
   isOwner,
@@ -68,8 +70,8 @@ export default function ResolverAndRecords({
     variables: {
       name: domain.name,
       resolver: domain.resolver
-    },
-    skip: !hasResolver
+    }
+    // skip: !hasResolver
   })
 
   if (data && data.getResolverMigrationInfo) {

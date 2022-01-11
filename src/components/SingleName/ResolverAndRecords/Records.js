@@ -415,9 +415,9 @@ export default function Records({
     hasResolver,
     hasAnyRecord(domain)
   )
-  if (!shouldShowRecords) {
-    return null
-  }
+  // if (!shouldShowRecords) {
+  //   return null
+  // }
 
   const canEditRecords =
     !isOldPublicResolver && !isDeprecatedResolver && isOwner && !isReadOnly
