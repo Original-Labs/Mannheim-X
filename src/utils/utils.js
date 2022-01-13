@@ -285,3 +285,54 @@ export function isCID(hash) {
     return false
   }
 }
+
+// str -> zeroWidthStr
+function strToZeroWidth(str) {
+  return str
+    .split('')
+    .map(char => char.charCodeAt(0).toString(2)) // 1 0 Space
+    .join(' ')
+    .split('')
+    .map(binaryNum => {
+      if (binaryNum === '1') {
+        return '​' // &#8203;
+      } else if (binaryNum === '0') {
+        return '‌' // &#8204;
+      } else {
+        return '‍' // &#8205;
+      }
+    })
+    .join('‎') // &#8206;
+}
+
+// zeroWidthStr -> str
+export function zeroWidthToStr(zeroWidthStr) {
+  return zeroWidthStr
+    .split('‎') // &#8206;
+    .map(char => {
+      if (char === '​') {
+        // &#8203;
+        return '1'
+      } else if (char === '‌') {
+        // &#8204;
+        return '0'
+      } else {
+        // &#8205;
+        return ' '
+      }
+    })
+    .join('')
+    .split(' ')
+    .map(binaryNum => String.fromCharCode(parseInt(binaryNum, 2)))
+    .join('')
+}
+
+export function containZeroWidthStr(str) {
+  let toStr = zeroWidthToStr(
+    str.replace(/[^\u200b-\u200f\uFEFF\u202a-\u202e]/g, '')
+  )
+  if (toStr === '\x00\x00') {
+    return false
+  }
+  return true
+}
