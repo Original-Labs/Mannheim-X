@@ -199,14 +199,18 @@ const Search = styled(SearchDefault)`
 
   input {
     width: 100%;
-    border-radius: 16px 0 0 16px;
+    border-radius: 7px 0 0 7px;
     ${mq.medium`
       font-size: 28px;
+      border-radius: 16px 0 0 16px;
     `}
   }
 
   button {
+    border-radius: 0 7px 7px 0;
+    ${mq.medium`
     border-radius: 0 16px 16px 0;
+    `}
   }
 `
 
@@ -409,7 +413,7 @@ export default ({ match }) => {
                   {t('c.mynames')}
                 </NavLink>
               )}
-              {/*<NavLink to="/favourites">{t('c.favourites')}</NavLink>*/}
+              <NavLink to="/regisertProcess">{t('c.registProcess')}</NavLink>
               <NavLink to="/faq">{t('c.faq')}</NavLink>
               <ExternalLink href={aboutPageURL()}>
                 {t('c.linkkey')}

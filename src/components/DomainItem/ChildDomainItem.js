@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled/macro'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -15,6 +15,8 @@ import Bin from '../Forms/Bin'
 import { useEditable } from '../hooks'
 import PendingTx from '../PendingTx'
 import AddFavourite from '../AddFavourite/AddFavourite'
+import axios from 'axios'
+import messageMention from 'utils/messageMention'
 
 const ChildDomainItemContainer = styled('div')`
   padding: 30px 0;
@@ -26,8 +28,9 @@ const ChildDomainItemContainer = styled('div')`
 
 const DomainLink = styled(Link)`
   display: grid;
-  grid-template-columns: 250px auto 50px;
-  grid-gap: 10px;
+  grid-template-columns: 300px;
+  grid-row: 2;
+  grid-gap: 50px;
   width: 100%;
   background-color: ${props => (props.warning ? 'hsla(37,91%,55%,0.1)' : '')};
   color: #2b2b2b;
@@ -37,12 +40,17 @@ const DomainLink = styled(Link)`
   ${p =>
     !p.showBlockies &&
     mq.small`
-        grid-template-columns: 1fr minmax(150px, 350px) 35px 23px;
-        grid-template-rows: 50px
+        grid-template-columns: 1fr minmax(150px, 450px) 35px 23px;
+        grid-template-rows: 50px/3;
       `}
 
   span {
     align-self: center;
+  }
+
+  h5 {
+    text-align: center;
+    font-weight: 100;
   }
 
   h3 {
@@ -64,6 +72,20 @@ const DomainLink = styled(Link)`
   }
 `
 
+const BlockMsgContainer = styled('div')`
+  padding: 20px 0 10px 10px;
+  border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  color: #2b2b2b;
+  :hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 10px;
+    transition: all 0.5s;
+  }
+  h5 {
+    text-align: left;
+  }
+`
+
 export default function ChildDomainItem({
   name,
   owner,
@@ -80,6 +102,13 @@ export default function ChildDomainItem({
   const { state, actions } = useEditable()
   const { txHash, pending, confirmed } = state
   const { startPending, setConfirmed } = actions
+  const [blockMsg, setBlockMsg] = useState({
+    address: '-',
+    keyAmount: '-',
+    keyName: '-',
+    totalSupply: '-',
+    curBlockNumber: '-'
+  })
 
   let { t } = useTranslation()
   const smallBP = useMediaMin('small')
@@ -97,6 +126,50 @@ export default function ChildDomainItem({
       name: name
     }
   })
+
+  // get block info
+  const getBlockMsgFn = () => {
+    axios
+      .get(
+        `/api/v1/accountService/account/queryAccount?KeyName=${label}&address=${owner}`
+      )
+      .then(resp => {
+        if (resp && resp.data && resp.data.code === 200) {
+          setBlockMsg(resp.data.data)
+        } else if (resp && resp.data && resp.data.code === 500) {
+          messageMention({
+            type: 'error',
+            content: `${t('serviceMsg.servErr')}`
+          })
+        } else if (resp && resp.data && resp.data.code === 10001) {
+          messageMention({
+            type: 'warn',
+            content: `${t('serviceMsg.paramsIsNull')}`
+          })
+        } else {
+          messageMention({
+            type: 'error',
+            content: `${t('serviceMsg.unkonwErr')}`
+          })
+        }
+      })
+      .catch(() => {
+        messageMention({
+          type: 'error',
+          content: `${t('serviceMsg.unkonwErr')}`
+        })
+      })
+  }
+
+  useEffect(() => {
+    getBlockMsgFn()
+    const timer = setInterval(() => {
+      getBlockMsgFn()
+    }, 1000)
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [])
 
   return (
     <ChildDomainItemContainer>
@@ -120,6 +193,18 @@ export default function ChildDomainItem({
             <SingleNameBlockies imageSize={24} address={owner} />
           )}
           <h3>{label}</h3>
+
+          <BlockMsgContainer>
+            <h5>
+              {t('blockMsg.amtToBeAllocated')}:{blockMsg.keyAmount}
+            </h5>
+            <h5>
+              {t('blockMsg.blockDate')}:{blockMsg.totalSupply}
+            </h5>
+            <h5>
+              {t('blockMsg.blockHeight')}:{blockMsg.curBlockNumber}
+            </h5>
+          </BlockMsgContainer>
           {canDeleteSubdomain ? (
             <Bin
               data-testid={'delete-name'}
