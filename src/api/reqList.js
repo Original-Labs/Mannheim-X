@@ -1,13 +1,11 @@
 import http from './axios'
 import messageMention from '../utils/messageMention'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 
 /**
  * Get airdrop token data
  */
 function getAirdropData(params) {
-  let { t } = useTranslation()
-
   return new Promise((resolve, reject) => {
     http(
       'get',
@@ -21,24 +19,24 @@ function getAirdropData(params) {
         } else if (resp && resp.data && resp.data.code === 500) {
           messageMention({
             type: 'error',
-            content: `${t('serviceMsg.servErr')}`
+            content: <Trans i18nKey={'serviceMsg.servErr'} />
           })
         } else if (resp && resp.data && resp.data.code === 10001) {
           messageMention({
             type: 'warn',
-            content: `${t('serviceMsg.paramsIsNull')}`
+            content: <Trans i18nKey={'serviceMsg.paramsIsNull'} />
           })
         } else {
           messageMention({
             type: 'error',
-            content: `${t('serviceMsg.unkonwErr')}`
+            content: <Trans i18nKey={'serviceMsg.unkonwErr'} />
           })
         }
       })
       .catch(() => {
         messageMention({
           type: 'error',
-          content: `${t('serviceMsg.unkonwErr')}`
+          content: <Trans i18nKey={'serviceMsg.unkonwErr'} />
         })
       })
   })

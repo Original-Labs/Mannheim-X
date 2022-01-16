@@ -4,7 +4,7 @@ import { ReactComponent as ExternalLinkIcon } from '../Icons/externalLink.svg'
 import { gql } from '@apollo/client'
 import { useQuery } from '@apollo/client'
 
-const EtherScanLinkContainer = styled('a')`
+const OpenseaLinkContainer = styled('a')`
   display: inline-block;
   align-items: center;
   text-overflow: ellipsis;
@@ -23,29 +23,29 @@ const EtherScanLinkContainer = styled('a')`
   }
 `
 
-export const GET_ETHER_SCAN_LINK = gql`
-  query getEtherScanLink @client {
+export const GET_OPENSEA_LINK = gql`
+  query getOpenseaLink @client {
     network
   }
 `
 
-const EtherScanLink = ({ children, address, className }) => {
+const OpenseaLink = ({ children, className }) => {
   const {
     data: { network }
-  } = useQuery(GET_ETHER_SCAN_LINK)
+  } = useQuery(GET_OPENSEA_LINK)
   const subdomain = network?.toLowerCase() === 'main' ? '' : `${network}.`
   return (
-    <EtherScanLinkContainer
+    <OpenseaLinkContainer
       data-testid="ether-scan-link-container"
       target="_blank"
       rel="noopener"
-      href={`https://polygonscan.com/address/${address}`}
+      href={`https://opensea.io/collection/snskey`}
       className={className}
     >
       {children}
       {/*<ExternalLinkIcon />*/}
-    </EtherScanLinkContainer>
+    </OpenseaLinkContainer>
   )
 }
 
-export default EtherScanLink
+export default OpenseaLink

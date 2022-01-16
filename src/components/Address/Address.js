@@ -21,6 +21,7 @@ import AddressContainer from '../Basic/MainContainer'
 import DefaultTopBar from '../Basic/TopBar'
 import { Title as DefaultTitle } from '../Typography/Basic'
 import DefaultEtherScanLink from '../Links/EtherScanLink'
+import DefaultOpenseaLink from '../Links/OpenseaLink'
 import { getEtherScanAddr, filterNormalised } from '../../utils/utils'
 import { calculateIsExpiredSoon } from '../../utils/dates'
 import DomainList from './DomainList'
@@ -43,6 +44,7 @@ import {
   DAOBannerContent
 } from '../Banner/DAOBanner'
 import getSNS from '../../apollo/mutations/sns'
+import * as PropTypes from 'prop-types'
 
 const DEFAULT_RESULTS_PER_PAGE = 25
 
@@ -58,6 +60,11 @@ const Title = styled(DefaultTitle)`
 `
 
 const EtherScanLink = styled(DefaultEtherScanLink)`
+  min-width: 165px;
+  margin-left: auto;
+  padding-bottom: 10px;
+`
+const OpenseaLink = styled(DefaultOpenseaLink)`
   min-width: 165px;
   margin-left: auto;
 `
@@ -106,6 +113,12 @@ const SelectAll = styled('div')`
   ${mq.large`
     padding-right: 10px;
   `}
+`
+
+const LinkList = styled('div')`
+  display: block;
+  justify-content: center;
+  text-align: right;
 `
 
 function filterOutReverse(domains) {
@@ -217,6 +230,7 @@ export const useResetState = (
   }, [networkId])
 }
 
+LinkList.propTypes = { children: PropTypes.node }
 export default function Address({
   url,
   address,
@@ -355,11 +369,14 @@ export default function Address({
         <TopBar>
           <SingleNameBlockies address={address} />
           <Title>{address}</Title>
-          {etherScanAddr && (
-            <EtherScanLink address={address}>
-              {t('address.etherscanButton')}
-            </EtherScanLink>
-          )}
+          <LinkList>
+            {etherScanAddr && (
+              <EtherScanLink address={address}>
+                {t('address.etherscanButton')}
+              </EtherScanLink>
+            )}
+            <OpenseaLink>{t('address.openseaButton')}</OpenseaLink>
+          </LinkList>
         </TopBar>
         {/*<AddReverseRecord account={account} currentAddress={address} />*/}
         {/*<Controls>*/}

@@ -1,6 +1,7 @@
 {
   "address": {
     "etherscanButton": "Polygonscanで確認",
+    "openseaButton": "Openseaで確認",
     "filter": {
       "controller": "コントローラー",
       "registrant": "登録者"
@@ -286,6 +287,7 @@
         "owner": "所有済み"
       }
     },
+    "containZeroWidth": "このドメイン名は0幅の文字を含んで、注意して判別してください!実際のドメイン名は:",
     "expiry": {
       "cannotown": "所有していない名前を更新しても、所有権は得られません。",
       "expired": "有効期限切れ",
@@ -420,8 +422,9 @@
     "unkonwErr": "不明な間違い"
   },
   "blockMsg":{
-    "amtToBeAllocated":"配分される金額",
+    "amtToBeAllocated":"配分される金額(key)",
     "blockDate":"ブロック時間",
-    "blockHeight":"ブロックの高さ"
+    "blockHeight":"データが同期するブロックの高さ",
+    "totalAmtTobeAirdrop": "割り当て待ちの総額(key)"
   }
 }

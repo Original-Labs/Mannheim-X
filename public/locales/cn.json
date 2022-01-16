@@ -1,6 +1,7 @@
 {
   "address": {
     "etherscanButton": "在 Polygonscan 上查看",
+    "openseaButton": "在 Opensea 上查看域名",
     "filter": {
       "controller": "管理员",
       "registrant": "注册人"
@@ -291,6 +292,7 @@
       "gracePeriodEnds": "宽限期截至 ",
       "isUnderPremiumSale": "可通过支付溢价进行注册"
     },
+    "containZeroWidth": "该域名含有零宽字符，请注意辨别！真实域名为：",
     "learnmore": {
       "step1": {
         "text": "域名注册完成后，打开“我的域名”页面，并设置一个反向解析记录。这样您用以太坊账户连接 Dapp 时，它们就可以直接显示你的 SNS 域名。",
@@ -418,8 +420,9 @@
     "unkonwErr": "未知错误"
   },
   "blockMsg": {
-    "amtToBeAllocated": "待分配金额",
+    "amtToBeAllocated": "待分配数额(key)",
     "blockDate": "区块时间",
-    "blockHeight": "区块高度"
+    "blockHeight": "数据同步的区块高度",
+    "totalAmtTobeAirdrop": "待分配总额(key)"
   }
 }

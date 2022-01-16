@@ -20,7 +20,7 @@ import { SingleNameBlockies } from '../Blockies'
 import You from '../Icons/You'
 import SubmitProof from './SubmitProof'
 import Tooltip from '../Tooltip/Tooltip'
-import { HR } from '../Typography/Basic'
+import { H2, HR } from '../Typography/Basic'
 import { formatDate } from '../../utils/dates'
 import ResolverAndRecords from './ResolverAndRecords'
 import NameClaimTestDomain from './NameClaimTestDomain'
@@ -29,6 +29,8 @@ import DefaultButton from '../Forms/Button'
 import DefaultAddressLink from '../Links/AddressLink'
 
 import { ReactComponent as DefaultOrangeExclamation } from '../Icons/OrangeExclamation.svg'
+import { containZeroWidthStr } from '../../utils/utils'
+import * as PropTypes from 'prop-types'
 
 const Details = styled('section')`
   padding: 20px;
@@ -156,6 +158,14 @@ const Expiration = styled('span')`
   font-weight: bold;
 `
 
+const ZeroWidth = styled('div')`
+  background: #f0f6fa;
+  padding: 20px 40px;
+  margin-bottom: 40px;
+  color: #adbbcd;
+  font-size: 18px;
+`
+
 const GracePeriodWarning = ({ date, expiryTime }) => {
   let { t } = useTranslation()
   let isExpired = new Date() > new Date(expiryTime)
@@ -178,6 +188,8 @@ function canClaim(domain) {
   if (!domain.name?.match(/\.test$/)) return false
   return parseInt(domain.owner) === 0 || domain.expiryTime < new Date()
 }
+
+ZeroWidth.propTypes = { children: PropTypes.node }
 
 function DetailsContainer({
   isMigratedToNewRegistry,
@@ -216,8 +228,19 @@ function DetailsContainer({
     domain.parent !== 'key' &&
     !domain.isDNSRegistrar
 
+  const containZeroWidth = containZeroWidthStr(domain.name)
+  const encodeName = encodeURI(domain.name)
+
   return (
     <Details data-testid="name-details">
+      {containZeroWidth ? (
+        <ZeroWidth>
+          {' '}
+          ⚠️{t('singleName.containZeroWidth')} + {encodeName}{' '}
+        </ZeroWidth>
+      ) : (
+        ''
+      )}
       {isOwner && <SetupName initialState={showExplainer} />}
       {/*{parseInt(domain.owner, 16) !== 0 &&*/}
       {/*  !loadingIsMigrated &&*/}

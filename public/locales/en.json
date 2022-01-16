@@ -1,6 +1,7 @@
 {
   "address": {
     "etherscanButton": "View on Polygonscan",
+    "openseaButton": "View on Opensea",
     "filter": {
       "controller": "Controller",
       "registrant": "Registrant"
@@ -289,6 +290,7 @@
         "owner": "Owner"
       }
     },
+    "containZeroWidth": "This domain contains zeroWidth characters, please recognize! Real domain name:",
     "expiry": {
       "cannotown": "Extending the registration of a name you do not own does not give you ownership of it.",
       "expired": "Expired",
@@ -423,8 +425,9 @@
     "unkonwErr": "Unknown error"
   },
   "blockMsg": {
-    "amtToBeAllocated": "Amount to be allocated",
+    "amtToBeAllocated": "Amount to be allocated(key)",
     "blockDate": "Block Date",
-    "blockHeight": "Block Height"
+    "blockHeight": "Block height for data sync",
+    "totalAmtTobeAirdrop": "Total amount to be allocated(key)"
   }
 }

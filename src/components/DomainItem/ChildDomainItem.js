@@ -41,7 +41,7 @@ const DomainLink = styled(Link)`
   ${p =>
     !p.showBlockies &&
     mq.small`
-        grid-template-columns: 1fr minmax(150px, 450px) 35px 23px;
+        // grid-template-columns: 1fr minmax(150px, 450px) 35px 23px;
         grid-template-rows: 50px/3;
       `}
 
@@ -207,7 +207,7 @@ export default function ChildDomainItem({
               {t('blockMsg.amtToBeAllocated')}:{blockMsg.keyAmount}
             </h5>
             <h5>
-              {t('blockMsg.blockDate')}:{blockMsg.totalSupply}
+              {t('blockMsg.totalAmtTobeAirdrop')}:{blockMsg.totalSupply}
             </h5>
             <h5>
               {t('blockMsg.blockHeight')}:{blockMsg.curBlockNumber}

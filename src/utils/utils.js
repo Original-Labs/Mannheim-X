@@ -316,7 +316,7 @@ export function zeroWidthToStr(zeroWidthStr) {
       } else if (char === '‌') {
         // &#8204;
         return '0'
-      } else {
+      } else if (char === '‍') {
         // &#8205;
         return ' '
       }
@@ -328,10 +328,14 @@ export function zeroWidthToStr(zeroWidthStr) {
 }
 
 export function containZeroWidthStr(str) {
-  let toStr = zeroWidthToStr(
-    str.replace(/[^\u200b-\u200f\uFEFF\u202a-\u202e]/g, '')
-  )
-  if (toStr === '\x00\x00') {
+  // let toStr = zeroWidthToStr(
+  //   str.replace(/[^\u200b-\u200f\uFEFF\u202a-\u202e]/g, '')
+  // )
+  // if (toStr.length == 0) {
+  //   return false
+  // }
+  // return true
+  if (str.replace(/[^\u200b-\u200f\uFEFF\u202a-\u202e]/g, '').length == 0) {
     return false
   }
   return true
