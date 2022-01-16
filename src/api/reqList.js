@@ -14,14 +14,14 @@ function getAirdropData(params) {
       }&address=${params.owner}`
     )
       .then(resp => {
-        if (resp && resp.data && resp.data.code === 200) {
-          resolve(resp.data.data)
-        } else if (resp && resp.data && resp.data.code === 500) {
+        if (resp && resp.code === 200) {
+          resolve(resp.data)
+        } else if (resp && resp.code === 500) {
           messageMention({
             type: 'error',
             content: <Trans i18nKey={'serviceMsg.servErr'} />
           })
-        } else if (resp && resp.data && resp.data.code === 10001) {
+        } else if (resp && resp.code === 10001) {
           messageMention({
             type: 'warn',
             content: <Trans i18nKey={'serviceMsg.paramsIsNull'} />

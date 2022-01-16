@@ -4,7 +4,7 @@
 import axios from 'axios'
 
 axios.defaults.timeout = 100000
-axios.defaults.baseURL = 'http://47.115.58.34/'
+axios.defaults.baseURL = '/api'
 
 /**
  * http request 拦截器
