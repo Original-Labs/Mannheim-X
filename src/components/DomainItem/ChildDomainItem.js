@@ -129,45 +129,45 @@ export default function ChildDomainItem({
   })
 
   // get block info
-  // const getBlockMsgFn = () => {
-  //   axios
-  //     .get(
-  //       `/api/v1/accountService/account/queryAccount?KeyName=${label}&address=${owner}`
-  //     )
-  //     .then(resp => {
-  //       if (resp && resp.data && resp.data.code === 200) {
-  //         setBlockMsg(resp.data.data)
-  //       } else if (resp && resp.data && resp.data.code === 500) {
-  //         messageMention({
-  //           type: 'error',
-  //           content: `${t('serviceMsg.servErr')}`
-  //         })
-  //       } else if (resp && resp.data && resp.data.code === 10001) {
-  //         messageMention({
-  //           type: 'warn',
-  //           content: `${t('serviceMsg.paramsIsNull')}`
-  //         })
-  //       } else {
-  //         messageMention({
-  //           type: 'error',
-  //           content: `${t('serviceMsg.unkonwErr')}`
-  //         })
-  //       }
-  //     })
-  //     .catch(() => {
-  //       messageMention({
-  //         type: 'error',
-  //         content: `${t('serviceMsg.unkonwErr')}`
-  //       })
-  //     })
-  // }
   const getBlockMsgFn = () => {
-    getAirdropData({ label, owner }).then(res => {
-      if (res) {
-        setBlockMsg(res)
-      }
-    })
+    axios
+      .get(
+        `/api/v1/accountService/account/queryAccount?KeyName=${label}&address=${owner}`
+      )
+      .then(resp => {
+        if (resp && resp.data && resp.data.code === 200) {
+          setBlockMsg(resp.data.data)
+        } else if (resp && resp.data && resp.data.code === 500) {
+          messageMention({
+            type: 'error',
+            content: `${t('serviceMsg.servErr')}`
+          })
+        } else if (resp && resp.data && resp.data.code === 10001) {
+          messageMention({
+            type: 'warn',
+            content: `${t('serviceMsg.paramsIsNull')}`
+          })
+        } else {
+          messageMention({
+            type: 'error',
+            content: `${t('serviceMsg.unkonwErr')}`
+          })
+        }
+      })
+      .catch(() => {
+        messageMention({
+          type: 'error',
+          content: `${t('serviceMsg.unkonwErr')}`
+        })
+      })
   }
+  // const getBlockMsgFn = () => {
+  //   getAirdropData({ label, owner }).then(res => {
+  //     if (res) {
+  //       setBlockMsg(res)
+  //     }
+  //   })
+  // }
 
   useEffect(() => {
     getBlockMsgFn()
