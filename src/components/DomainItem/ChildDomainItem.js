@@ -29,7 +29,7 @@ const ChildDomainItemContainer = styled('div')`
 
 const DomainLink = styled(Link)`
   display: grid;
-  grid-template-columns: 300px;
+  grid-template-columns: 350px;
   grid-row: 2;
   grid-gap: 50px;
   width: 100%;
@@ -41,7 +41,7 @@ const DomainLink = styled(Link)`
   ${p =>
     !p.showBlockies &&
     mq.small`
-        // grid-template-columns: 1fr minmax(150px, 450px) 35px 23px;
+        grid-template-columns: 1fr minmax(150px, 450px) 35px 23px;
         grid-template-rows: 50px/3;
       `}
 
@@ -50,7 +50,6 @@ const DomainLink = styled(Link)`
   }
 
   h5 {
-    text-align: center;
     font-weight: 100;
   }
 
