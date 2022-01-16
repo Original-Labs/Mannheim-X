@@ -76,6 +76,10 @@ const Blockies = styled(UnstyledBlockies)`
   top: 25px;
 `
 
+const DefaultAvatarContainer = styled('div')`
+  width: 50px;
+`
+
 const DefaultAvatar = styled('img')`
   position: relative;
   width: 37px;
@@ -125,11 +129,13 @@ export default function AvatarAndInfoDropdown() {
           )}
         </ActiveAvatar>
       ) : (
-        <DefaultAvatar
-          ref={togglerRef}
-          onClick={() => setShowDropdown(show => !show)}
-          src={avatar}
-        />
+        <DefaultAvatarContainer>
+          <DefaultAvatar
+            ref={togglerRef}
+            onClick={() => setShowDropdown(show => !show)}
+            src={avatar}
+          />
+        </DefaultAvatarContainer>
       )}
 
       {showDropdown && (
