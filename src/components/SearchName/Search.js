@@ -29,9 +29,8 @@ const SearchForm = styled('form')`
   input {
     padding: 20px 10px;
     width: 100%;
-    height:36px;
     border: none;
-    border-radius: 7px 0 0 7px;
+    border-radius: 14px 0 0 14px;
     // ${p =>
       p.mediumBP ? `border-radius:14px 0 0 14px;` : `border-radius:0;`}
     font-size: 18px;
@@ -39,7 +38,6 @@ const SearchForm = styled('form')`
     font-weight: 100;
     ${mq.medium`
       width: calc(100% - 162px);
-      height:90px;
       font-size: 28px;
       padding: 20px 30px;
     `}
@@ -60,12 +58,11 @@ const SearchForm = styled('form')`
         ? 'background: #eb8b8c;color: white;'
         : 'background: #ddd; color:#fff;'}
     font-size: 22px;
-    height:40px;
     font-family: Overpass;
-    line-height:36px;
+    padding: 20px 0;
     width: calc(100% - 240px);
     border: none;
-    border-radius: 0 7px 7px 0;
+    border-radius: 0 14px 14px 0;
     ${mq.medium`
       display: block;
       width: 162px;
@@ -76,8 +73,8 @@ const SearchForm = styled('form')`
       ${p => (p && p.hasSearch ? 'cursor: pointer;' : 'cursor: default;')}
     }
     img {
-      width:25px;
-      height:25px;
+      width:30px;
+      height:30px;
     }
   }
 `

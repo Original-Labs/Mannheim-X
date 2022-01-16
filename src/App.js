@@ -42,13 +42,6 @@ const Favourites = lazy(() =>
   )
 )
 
-const RegisertProcess = lazy(() =>
-  import(
-    /* webpackChunkName: "RegisertProcess", webpackPrefetch:true */
-    './routes/RegisertProcess'
-  )
-)
-
 const Faq = lazy(() =>
   import(
     /* webpackChunkName: "Faq", webpackPrefetch:true */
@@ -136,7 +129,6 @@ const App = () => {
         <Route path="/test-registrar" component={TestRegistrar} />
         <Route path="/favourites" component={Favourites} />
         <Route path="/faq" component={Faq} />
-        <Route path="/regisertProcess" component={RegisertProcess} />
         <Route path="/my-bids" component={SearchResults} />
         <Route path="/how-it-works" component={SearchResults} />
         <Route path="/search/:searchTerm" component={SearchResults} />

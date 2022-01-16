@@ -52,7 +52,6 @@
     "learnmoreenglishonly": "Learn More",
     "migrate": "Migrate",
     "mynames": "My Account",
-    "registProcess": "Registration Process",
     "network": "network",
     "otheraddresses": "Other Addresses",
     "parent": "parent",
@@ -380,25 +379,6 @@
     "transferSending": "Transaction sending......",
     "transferSuccess": "Transaction sent successfully！！！"
   },
-  "registerPageInfo": {
-    "NeedToPrepare": "Need to prepare",
-    "NeedToPrepare1": "1.Install the metamask wallet plug-in in the browser (recommended: chrome,firefox)",
-    "NeedToPrepare2": "2.Login to the wallet to ensure that the account balance is sufficient (1-10 maticare required to register a name)",
-    "RegistrationProcess": "Registration process",
-    "RegistrationProcess1": "1. Enterthe sns website: https://sns.chat/",
-    "RegistrationProcess2": "2.Connect the wallet to the website",
-    "RegistrationProcess3": "3.Click \"Connect\".",
-    "RegistrationProcess4": "4.After the connection is successful, a prompt will appear on the page:",
-    "RegistrationProcess5": "5.Enter the name you want to register, click search, if the following pictureshows, it means the name has been taken:",
-    "RegistrationProcess6": "6. Ifit is shown as the picture below, it means that the name can be registered:",
-    "RegistrationProcess7": "7.Click to register, the website will call up the wallet to register (actuallyminting NFT), as shown in the picture below:",
-    "RegistrationProcess8": "8.After clicking \"Confirm\" in the wallet, wait for a while, and thefollowing prompt will appear after the transaction is confirmed by the network:",
-    "RegistrationProcess9": "9. At this point, your name has been successfully registered, and then you can setyour name information or transfer it:",
-    "Note": "Note",
-    "Note1": "Theregistered name is actually an NFT. You can view the name you own on opensea.This NFT can be resold and you will fully own the registered name.",
-    "Note2": "Onlyone name can be registered for each account. If you need to register more thanone name, you need to prepare multiple addresses.",
-    "Note3": "Whenmodifying the binding information of the name (such as BTC, ETH address), thestate in the contract is changed by initiating a transaction, so the wallet isrequired to initiate the transaction and charge a low gas fee."
-  },
   "errorCode": {
     "001": "Over the free registration time",
     "002": "Over the number of free registrations",
@@ -416,15 +396,5 @@
     "014": "The address is not in the list of allowed casting short names",
     "015": "Failed to send casting fee",
     "016": "Manager can't mint"
-  },
-  "serviceMsg": {
-    "servErr": "Internal server error",
-    "paramsIsNull": "Query param all empty",
-    "unkonwErr": "Unknown error"
-  },
-  "blockMsg": {
-    "amtToBeAllocated": "Amount to be allocated",
-    "blockDate": "Block Date",
-    "blockHeight": "Block Height"
   }
 }

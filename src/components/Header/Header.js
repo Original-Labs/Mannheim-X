@@ -42,7 +42,6 @@ const Header = styled('header')`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background: #ea6060;
   position: fixed;
   left: 0;
   top: 0;

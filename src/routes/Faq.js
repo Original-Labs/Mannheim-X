@@ -6,10 +6,15 @@ import mq from 'mediaQuery'
 import { H2 as DefaultH2, Title } from '../components/Typography/Basic'
 import Anchor from '../components/Icons/Anchor'
 import slugify from 'slugify'
+import ReverseRecordImageSrc from '../assets/reverseRecordImage.png'
+import {
+  NonMainPageBannerContainer,
+  DAOBannerContent
+} from '../components/Banner/DAOBanner'
+
 const H2 = styled(DefaultH2)`
   margin-top: 50px;
   margin-left: 20px;
-  color: black;
   ${mq.medium`
     margin-left: 0;
   `}
@@ -219,7 +224,6 @@ const FaqContainer = styled('div')`
   margin: 1em;
   padding: 20px 40px;
   background-color: white;
-  border-radius: 6px;
 `
 
 export default Faq
