@@ -428,6 +428,7 @@
     "amtToBeAllocated": "Amount to be allocated(key)",
     "blockDate": "Block Date",
     "blockHeight": "Block height for data sync",
-    "totalAmtTobeAirdrop": "Total amount to be allocated(key)"
+    "totalAmtTobeAirdrop": "Total amount to be allocated(key)",
+    "EstimatedTimeOfAirdrop": "Airdrop is expected to begin in March 2022"
   }
 }

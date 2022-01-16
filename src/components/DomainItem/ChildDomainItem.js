@@ -212,6 +212,9 @@ export default function ChildDomainItem({
             <h5>
               {t('blockMsg.blockHeight')}:{blockMsg.curBlockNumber}
             </h5>
+            <h6 style={{ color: '#ddd' }}>
+              * {t('blockMsg.EstimatedTimeOfAirdrop')}
+            </h6>
           </BlockMsgContainer>
           {canDeleteSubdomain ? (
             <Bin

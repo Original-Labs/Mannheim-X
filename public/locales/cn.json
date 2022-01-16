@@ -423,6 +423,7 @@
     "amtToBeAllocated": "待分配数额(key)",
     "blockDate": "区块时间",
     "blockHeight": "数据同步的区块高度",
-    "totalAmtTobeAirdrop": "待分配总额(key)"
+    "totalAmtTobeAirdrop": "待分配总额(key)",
+    "EstimatedTimeOfAirdrop": "预计2022年3月开始代币空投分配"
   }
 }
