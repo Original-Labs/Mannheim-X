@@ -379,7 +379,7 @@
     "NeedToPrepare": "Need to prepare",
     "NeedToPrepare1": "1.Install the metamask wallet plug-in in the browser (recommended: chrome,firefox)",
     "NeedToPrepare2": "2.Login to the wallet to ensure that the account balance is sufficient (1-10 maticare required to register a name)",
-    "RegistrationProcess": "Registration process",
+    "RegistrationProcess": "Registration tutorial",
     "RegistrationProcess1": "1. Enterthe sns website: https://sns.chat/",
     "RegistrationProcess2": "2.Connect the wallet to the website",
     "RegistrationProcess3": "3.Click \"Connect\".",

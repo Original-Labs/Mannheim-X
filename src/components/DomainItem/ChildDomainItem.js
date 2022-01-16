@@ -17,6 +17,7 @@ import PendingTx from '../PendingTx'
 import AddFavourite from '../AddFavourite/AddFavourite'
 import axios from 'axios'
 import messageMention from 'utils/messageMention'
+import { getAirdropData } from '../../api/reqList'
 
 const ChildDomainItemContainer = styled('div')`
   padding: 30px 0;
@@ -128,46 +129,53 @@ export default function ChildDomainItem({
   })
 
   // get block info
+  // const getBlockMsgFn = () => {
+  //   axios
+  //     .get(
+  //       `/api/v1/accountService/account/queryAccount?KeyName=${label}&address=${owner}`
+  //     )
+  //     .then(resp => {
+  //       if (resp && resp.data && resp.data.code === 200) {
+  //         setBlockMsg(resp.data.data)
+  //       } else if (resp && resp.data && resp.data.code === 500) {
+  //         messageMention({
+  //           type: 'error',
+  //           content: `${t('serviceMsg.servErr')}`
+  //         })
+  //       } else if (resp && resp.data && resp.data.code === 10001) {
+  //         messageMention({
+  //           type: 'warn',
+  //           content: `${t('serviceMsg.paramsIsNull')}`
+  //         })
+  //       } else {
+  //         messageMention({
+  //           type: 'error',
+  //           content: `${t('serviceMsg.unkonwErr')}`
+  //         })
+  //       }
+  //     })
+  //     .catch(() => {
+  //       messageMention({
+  //         type: 'error',
+  //         content: `${t('serviceMsg.unkonwErr')}`
+  //       })
+  //     })
+  // }
   const getBlockMsgFn = () => {
-    axios
-      .get(
-        `/api/v1/accountService/account/queryAccount?KeyName=${label}&address=${owner}`
-      )
-      .then(resp => {
-        if (resp && resp.data && resp.data.code === 200) {
-          setBlockMsg(resp.data.data)
-        } else if (resp && resp.data && resp.data.code === 500) {
-          messageMention({
-            type: 'error',
-            content: `${t('serviceMsg.servErr')}`
-          })
-        } else if (resp && resp.data && resp.data.code === 10001) {
-          messageMention({
-            type: 'warn',
-            content: `${t('serviceMsg.paramsIsNull')}`
-          })
-        } else {
-          messageMention({
-            type: 'error',
-            content: `${t('serviceMsg.unkonwErr')}`
-          })
-        }
-      })
-      .catch(() => {
-        messageMention({
-          type: 'error',
-          content: `${t('serviceMsg.unkonwErr')}`
-        })
-      })
+    getAirdropData({ label, owner }).then(res => {
+      if (res) {
+        setBlockMsg(res)
+      }
+    })
   }
 
   useEffect(() => {
     getBlockMsgFn()
     const timer = setInterval(() => {
       getBlockMsgFn()
-    }, 1000)
+    }, 1000 * 60)
     return () => {
-      clearTimeout(timer)
+      clearInterval(timer)
     }
   }, [])
 
