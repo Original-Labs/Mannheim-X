@@ -186,14 +186,6 @@ export default async reconnect => {
     setupAnalytics()
 
     isAppReadyReactive(true)
-
-    /**
-     * SNS Test
-     * @type {*|{}}
-     */
-    const sns = getSNS()
-    // const resolverOwner = await sns.getResolverOwner('peifeng.key')
-    // console.log('resolverOwner------',resolverOwner)
   } catch (e) {
     messageMention({
       type: 'warn',
