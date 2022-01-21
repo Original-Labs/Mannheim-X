@@ -17,14 +17,13 @@ import AvatarAndInfoDropdown from '../AvatarAndInfoDropdown'
 const StyledBanner = styled(Banner)`
   margin-bottom: 0;
   text-align: center;
-  z-index: 1;
+  z-index: 0;
   margin-top: 50px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  border: 1px solid #fff;
 
   ${mq.medium`
     top: 90px;
