@@ -41,16 +41,6 @@ export async function setup({
 }
 
 export function getSnsResolver() {
-  // if (JSON.stringify(snsResolver) === '{}') {
-  //   snsResolver = await setupSNSResolver({
-  //     reloadOnAccountsChange: false,
-  //     enforceReadOnly: true,
-  //     enforceReload: false,
-  //     infura: INFURA_ID,
-  //     name: name,
-  //     sns: sns
-  //   })
-  // }
   return snsResolver
 }
 
