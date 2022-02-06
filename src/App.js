@@ -70,6 +70,13 @@ const Renew = lazy(() =>
   )
 )
 
+const Shared = lazy(() =>
+  import(
+    /* webpackChunkName: "Shared", webpackPrefetch:true */
+    './routes/Shared'
+  )
+)
+
 // import TestRegistrar from './routes/TestRegistrar'
 // import Home from './routes/Home'
 // import SearchResults from './routes/SearchResults'
@@ -144,6 +151,7 @@ const App = () => {
         <Route path="/address/:address/:domainType" component={Address} />
         <Route path="/address/:address" component={Address} />
         <Route path="/renew" component={Renew} />
+        <Route path="/shared" component={Shared} />
         <Route path="*" component={Error404} />
       </Switch>
     </Router>

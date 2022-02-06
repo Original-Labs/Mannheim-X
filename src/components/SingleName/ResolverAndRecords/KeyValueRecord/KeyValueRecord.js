@@ -34,6 +34,7 @@ const KeyValueItem = styled(RecordsItem)`
     mq.medium`
     flex-direction: column;
   `}
+  ${p => (p.value ? '' : 'margin-bottom:0px;')}
 `
 
 const KeyValueContainer = styled('div')`
@@ -51,6 +52,7 @@ const KeyValuesList = styled('div')`
   display: flex;
   flex-direction: column;
   width: 100%;
+
   ${mq.xLarge`
     width: calc(100% - 200px);
   `};
@@ -104,8 +106,9 @@ const Editable = ({
 }) => {
   const { key, value } = record
   const isValid = validator(record)
+
   return (
-    <KeyValueItem editing={editing} hasRecord={true} noBorder>
+    <KeyValueItem editing={editing} hasRecord={true} value={value} noBorder>
       {editing ? (
         <KeyValuesContent editing={editing}>
           <RecordsSubKey>{key}</RecordsSubKey>
@@ -128,11 +131,13 @@ const Editable = ({
             }}
           />
         </KeyValuesContent>
-      ) : (
+      ) : value ? (
         <KeyValuesContent>
           <RecordsSubKey>{key}</RecordsSubKey>
           <RecordLink textKey={key} value={value} name={domain?.name} />
         </KeyValuesContent>
+      ) : (
+        <></>
       )}
     </KeyValueItem>
   )
@@ -180,11 +185,18 @@ function Record(props) {
 function ViewOnly({ textKey, value, remove, domain }) {
   return (
     <RecordsListItem>
-      <RecordsSubKey>{textKey}</RecordsSubKey>
       {remove ? (
-        <DeleteRecord>Delete Record</DeleteRecord>
+        <>
+          <RecordsSubKey>{textKey}</RecordsSubKey>
+          <DeleteRecord>Delete Record</DeleteRecord>
+        </>
+      ) : value ? (
+        <>
+          <RecordsSubKey>{textKey}</RecordsSubKey>
+          <RecordLink textKey={textKey} value={value} name={domain?.name} />
+        </>
       ) : (
-        <RecordLink textKey={textKey} value={value} name={domain?.name} />
+        <></>
       )}
     </RecordsListItem>
   )

@@ -9,6 +9,7 @@ import { EMPTY_ADDRESS } from '../../utils/records'
 import { Title } from '../Typography/Basic'
 import TopBar from '../Basic/TopBar'
 import DefaultFavourite from '../AddFavourite/Favourite'
+import SharedIcon from 'components/Icons/SharedIcon'
 import NameDetails from './NameDetails'
 import DNSNameRegister from './DNSNameRegister'
 import ShortName from './ShortName'
@@ -16,6 +17,7 @@ import Tabs from './Tabs'
 import NameContainer from '../Basic/MainContainer'
 import Copy from '../CopyToClipboard/'
 import { isOwnerOfParentDomain } from '../../utils/utils'
+import { Link } from 'react-router-dom'
 
 const Owner = styled('div')`
   color: #ccd4da;
@@ -28,6 +30,15 @@ const RightBar = styled('div')`
 `
 
 const Favourite = styled(DefaultFavourite)``
+
+const SharedIconContainer = styled(Link)`
+  cursor: pointer;
+  line-height: 25px;
+  &:active {
+    transform: scale(1.2);
+    transition: all 0.5s;
+  }
+`
 
 function isRegistrationOpen(available, parent, isDeedOwner) {
   return parent === 'key' && available
@@ -64,6 +75,10 @@ export const useRefreshComponent = () => {
   const mainAccount = accounts?.[0]
   useEffect(() => {
     setKey(x => x + 1)
+    let headerElement = document.getElementsByTagName('header')[0]
+    let formElement = document.getElementsByTagName('form')[0]
+    headerElement.style.display = 'flex'
+    formElement.style.display = 'flex'
   }, [mainAccount, networkId])
   return key
 }
@@ -140,7 +155,20 @@ function Name({ details: domain, name, pathname, type, refetch }) {
                 : t('c.Controller')}
             </Owner>
           )}
-          {/*<Favourite domain={domain} />*/}
+          {!smallBP && (
+            <SharedIconContainer
+              onClick={() => {
+                window.localStorage.setItem('domain', JSON.stringify(domain))
+                window.localStorage.setItem('isOwner', isOwner)
+                window.localStorage.setItem('refetch', refetch)
+              }}
+              to={{
+                pathname: `/shared/${name}`
+              }}
+            >
+              <SharedIcon />
+            </SharedIconContainer>
+          )}
           {smallBP && (
             <Tabs
               pathname={pathname}
