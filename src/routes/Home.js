@@ -491,7 +491,7 @@ export default ({ match }) => {
           </SocialIconLarge>
 
           <LinkkeyCopyRight>
-            <a href={LinkkeyUrl}>@2021 By Linkkey DAO</a>
+            <a href={LinkkeyUrl}>@2022 Linkkey DAO</a>
           </LinkkeyCopyRight>
         </>
       </SearchContainer>
