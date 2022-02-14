@@ -1,64 +1,114 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import styled from '@emotion/styled/macro'
+import shareImg from '../assets/share/shareImg.png'
+import backImgItem from '../assets/share/backImgItem.png'
+import searchImg from '../assets/share/ShareSearch.png'
+import whiteLogo from '../assets/share/whiteLogo.png'
+import ploygonGrant from '../assets/share/ploygonGrant.png'
+import DiscordIcon from '../assets/D.png'
+import TelegramIcon from '../assets/tg.png'
+import TwitterIcon from '../assets/t.png'
+import QRCode from 'qrcode.react'
+import Loading from 'components/Loading/Loading'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-import mq from '../../src/mediaQuery'
-import { gql } from '@apollo/client'
-import { useQuery } from '@apollo/client'
+import html2canvas from 'html2canvas'
 import { Modal } from 'antd'
 import 'antd/es/modal/style/css'
 
-import html2canvas from 'html2canvas'
-import {
-  DetailsItem,
-  DetailsKey,
-  DetailsValue
-} from '../../src/components/SingleName/DetailsItem'
-import DetailsItemEditable from '../../src/components/SingleName/DetailsItemEditable'
-import { RENEW, SET_REGISTRANT } from '../../src/graphql/mutations'
-import { IS_MIGRATED } from '../../src/graphql/queries'
-import { HR } from '../../src/components/Typography/Basic'
-import dnssecmodes from '../../src/api/dnssecmodes'
-import { formatDate } from '../../src/utils/dates'
-import { containZeroWidthStr } from '../../src/utils/utils'
-import ResolverAndRecords from '../../src/components/SingleName/ResolverAndRecords'
-import NameClaimTestDomain from '../../src/components/SingleName/NameClaimTestDomain'
-import QRCode from 'qrcode.react'
-import Loading from 'components/Loading/Loading'
-
-const Details = styled('section')`
-  padding: 20px;
-  background-color: white;
-  height: 100%;
-  margin-top: -60px;
-  transition: 0.4s;
-  ${mq.small`
-    padding: 40px;
-  `}
-  z-index:9999999;
+const Share = styled('div')`
+  position: relative;
+  display: block;
+  width: 100%;
+  background-color: #ea6060;
 `
 
-const OwnerFields = styled('div')`
-  background: ${props => (props.outOfSync ? '#fef7e9' : '')};
-  padding: ${props => (props.outOfSync ? '1.5em' : '0')};
-  margin-bottom: ${props => (props.outOfSync ? '1.5em' : '0')};
-`
-
-const NAME_QUERY = gql`
-  query nameQuery {
-    accounts @client
+const ShareImg = styled('img')`
+  position: absolute;
+  ${p => (p.smallBP ? `top:10px;` : `top:-45px;`)}
+  right:15px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  &:active {
+    transform: scale(1.1);
+    color: #dfdfdf;
+    transition: all 1s;
   }
+  z-index: 999999999;
+`
+
+const InnerBackImg = styled('img')`
+  position: relative;
+  width: 100%;
+  height: 80%;
+  ${p => (p.smallBP ? `top:0;` : `top:-260px;`)}
+`
+
+const ShareTextContainer = styled('div')`
+  position: absolute;
+  width: 100%;
+  height: 500px;
+  text-align: center;
+  top: 7%;
+`
+
+const ShareTitle = styled('div')`
+  font-family: Overpass;
+  font-weight: 800;
+  font-size: 120px;
+  line-height: 75px;
+  color: #f7f8f8;
+`
+
+const ShareSubTitle = styled('div')`
+  font-family: Overpass;
+  font-weight: 800;
+  font-size: 60px;
+  color: #3e3a39;
+`
+
+const ShareDes = styled('div')`
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 5px;
+  color: #f7f8f8;
+`
+
+const ShareSign = styled('div')`
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 5px;
+  color: #f7f8f8;
+  margin-top: 24px;
+`
+
+const LogoImg = styled('img')`
+  position: relative;
+  width: 15px;
+  height: 15px;
+  top: 1px;
+`
+
+const ShareSignText = styled('span')`
+  font-family: emoji;
+  font-size: 15px;
+  padding: 0px 6px;
 `
 
 const QRCodeContainer = styled('div')`
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  height: 500px;
+`
+
+const QRCodeConent = styled('div')`
+  position: relative;
   text-align: center;
-  div {
-    font-family: Overpass;
-    font-weight: 300;
-    color: #2b2b2b;
-    margin-bottom: 20px;
-  }
+  background-color: #fff;
   &:active {
     transform: scale(1.1);
     color: #dfdfdf;
@@ -68,16 +118,85 @@ const QRCodeContainer = styled('div')`
 
 const QRCodeItem = styled(QRCode)`
   margin: 10px auto;
+  border-radius: 8px;
+  margin-top: 10%;
+`
+
+const ShareKeyName = styled('div')`
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  span {
+    font-family: sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    border: 1px solid black;
+    padding: 5px 12px;
+    border-radius: 6px;
+  }
+  margin-top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+`
+
+const SearchIcon = styled('img')`
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  margin-left: 5px;
+  margin-top: -4px;
+  backgroud-color: #ea6060;
+`
+
+const WebSiteText = styled('div')`
+  position:absolute;
+  width:100%;
+  font-family: Overpass;
+  font-weight: 1000;
+  font-size:18px;
+  margin-top: 17%;
+}
+`
+
+const SharePolygonImg = styled('img')`
+  position: absolute;
+  width: 120px;
+  height: 18px;
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+`
+
+const ShareFooter = styled('div')`
+  display: flex;
+  bottom: 0;
+  height: 37px;
+  background-color: #3e3a39;
+  justify-content: space-around;
+`
+
+const ShareItem = styled('div')`
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  line-height: 40px;
+  font-weight: 1000;
+  text-align: center;
+  img {
+    color: #fff;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+  }
 `
 
 const ModalTitle = styled('div')`
   text-align: center;
 `
 
-function SharedContainer() {
+function SharedContainer(props) {
+  const { smallBP } = props
   const domain = JSON.parse(window.localStorage.getItem('domain'))
-  const isOwner = window.localStorage.getItem('isOwner')
-  const refetch = window.localStorage.getItem('refetch')
   const [modalVisible, setModalVisible] = useState(false)
   const [modalLoading, setModalLoading] = useState(true)
   const [imageState, setImageState] = useState(
@@ -86,61 +205,13 @@ function SharedContainer() {
     </Loading>
   )
   const history = useHistory()
-  if (!domain || !isOwner || !refetch) {
-    history.push(`/`)
-  }
   const hostName = window.location.host
   const protocol = window.location.protocol
   const { t } = useTranslation()
-  const {
-    data: { isMigrated } = {},
-    loading: loadingIsMigrated,
-    refetch: refetchIsMigrated
-  } = useQuery(IS_MIGRATED, {
-    variables: {
-      name: domain.name
-    }
-  })
-
-  const {
-    data: { accounts }
-  } = useQuery(NAME_QUERY)
-
-  const isExpired = false
-  const account = accounts?.[0]
-  const isMigratedToNewRegistry = !loadingIsMigrated && isMigrated
-  const isLoggedIn = parseInt(account) !== 0
-  const domainParent =
-    domain.name === '[root]' ? null : domain.parent ? domain.parent : '[root]'
-  const registrant =
-    domain.available || domain.registrant === '0x0' ? null : domain.registrant
-  const isRegistrant = !domain.available && domain.registrant === account
-
-  const GracePeriodWarning = ({ date, expiryTime }) => {
-    let { t } = useTranslation()
-    let isExpired = new Date() > new Date(expiryTime)
-    return (
-      <GracePeriodWarningContainer isExpired={isExpired}>
-        <Expiration isExpired={isExpired}>
-          {isExpired
-            ? t('singleName.expiry.expired')
-            : t('singleName.expiry.expiringSoon')}
-        </Expiration>
-        <GracePeriodText isExpired={isExpired}>
-          {t('singleName.expiry.gracePeriodEnds')}{' '}
-          <GracePeriodDate>{formatDate(date)}</GracePeriodDate>
-        </GracePeriodText>
-      </GracePeriodWarningContainer>
-    )
-  }
-
-  function canClaim(domain) {
-    if (!domain.name?.match(/\.test$/)) return false
-    return parseInt(domain.owner) === 0 || domain.expiryTime < new Date()
-  }
 
   const sharedImg = () => {
-    let detailElement = document.getElementsByTagName('section')[0]
+    setModalLoading(true)
+    let detailElement = document.getElementById('share')
     html2canvas(detailElement, {
       allowTaint: false,
       useCORS: true
@@ -149,150 +220,81 @@ function SharedContainer() {
       const dataImg = new Image()
       dataImg.src = canvas.toDataURL('image/png')
       setImageState(<img width="100%" src={dataImg.src} />)
+      if (!smallBP) {
+        setModalVisible(true)
+      } else {
+        const alink = document.createElement('a')
+        alink.href = dataImg.src
+        alink.download = `${domain.name}.png`
+        alink.click()
+      }
     })
+    setModalLoading(false)
   }
 
   useEffect(() => {
     let headerElement = document.getElementsByTagName('header')[0]
     let formElement = document.getElementsByTagName('form')[0]
-    headerElement.style.display = 'none'
-    formElement.style.display = 'none'
-    if (!domain || !isOwner || !refetch) {
+    if (!smallBP) {
+      headerElement.style.display = 'none'
+      formElement.style.display = 'none'
+    }
+    if (!domain) {
       headerElement.style.display = 'flex'
       formElement.style.display = 'flex'
       history.push(`/`)
     }
   }, [])
 
-  const containZeroWidth = containZeroWidthStr(domain.name)
-  const encodeName = encodeURI(domain.name)
-  const showExplainer = !parseInt(domain.resolver)
-
-  let dnssecmode, canSubmit
-  if ([5, 6].includes(domain.state) && !isMigrated) {
-    dnssecmode = dnssecmodes[7]
-    canSubmit =
-      isLoggedIn && domain.isDNSRegistrar && dnssecmode.state === 'SUBMIT_PROOF'
-  } else {
-    dnssecmode = dnssecmodes[domain.state]
-    canSubmit =
-      isLoggedIn &&
-      domain.isDNSRegistrar &&
-      dnssecmode.state === 'SUBMIT_PROOF' && // This is for not allowing the case user does not have record rather than having empty address record.
-      domain.owner.toLowerCase() !== domain.dnsOwner.toLowerCase()
-  }
-  const outOfSync = dnssecmode && dnssecmode.outOfSync
-
   return (
-    <Details data-testid="name-details">
-      {containZeroWidth ? (
-        <ZeroWidth>
-          {' '}
-          ⚠️{t('singleName.containZeroWidth')} + {encodeName}{' '}
-        </ZeroWidth>
-      ) : (
-        ''
-      )}
-      {/* {isOwner && <SetupName initialState={showExplainer} />} */}
-      <QRCodeContainer
+    <Share id="share">
+      <ShareImg
+        src={shareImg}
+        smallBP={smallBP}
         onClick={() => {
-          setModalLoading(true)
           sharedImg()
-          setModalVisible(true)
-          setModalLoading(false)
         }}
-      >
-        <QRCodeItem
-          value={`${protocol}//${hostName}/name/${domain.name}/details`}
-          size={200}
-          fgColor="#ea6060"
-        />
-        <div>{t('c.clickToQRCode')}</div>
-      </QRCodeContainer>
-      {domainParent ? (
-        <DetailsItem uneditable>
-          <DetailsKey>{t('c.parent')}</DetailsKey>
-          <DetailsValue>
-            <Link to={`/name/${domainParent}`}>{domainParent}</Link>
-          </DetailsValue>
-        </DetailsItem>
-      ) : (
-        ''
-      )}
-      <OwnerFields outOfSync={outOfSync}>
-        <>
-          <DetailsItemEditable
-            domain={domain}
-            keyName="registrant"
-            value={registrant}
-            canEdit={isOwner}
-            isExpiredRegistrant={isRegistrant && isExpired}
-            type="address"
-            editButton={t('c.transfer')}
-            mutationButton={t('c.transfer')}
-            mutation={SET_REGISTRANT}
-            refetch={refetch}
-            confirm={true}
-            copyToClipboard={true}
-          />
-        </>
-        {domain.registrationDate ? (
-          <DetailsItem uneditable>
-            <DetailsKey>{t('c.registrationDate')}</DetailsKey>
-            <DetailsValue>{formatDate(domain.registrationDate)}</DetailsValue>
-          </DetailsItem>
-        ) : (
-          ''
-        )}
-        {!domain.available ? (
-          domain.isNewRegistrar || domain.gracePeriodEndDate ? (
-            <>
-              <DetailsItemEditable
-                domain={domain}
-                keyName="Expiration Date"
-                value={domain.expiryTime}
-                canEdit={parseInt(account, 16) !== 0}
-                type="date"
-                editButton={t('c.renew')}
-                mutationButton={t('c.renew')}
-                mutation={RENEW}
-                refetch={refetch}
-                confirm={true}
-              />
-              {domain.gracePeriodEndDate ? (
-                <GracePeriodWarning
-                  expiryTime={domain.expiryTime}
-                  date={domain.gracePeriodEndDate}
-                />
-              ) : (
-                ''
-              )}
-            </>
-          ) : domain.expiryTime ? (
-            <DetailsItem uneditable>
-              <DetailsKey>{t("c['Expiration Date']")}</DetailsKey>
-              <ExpirationDetailsValue isExpired={isExpired}>
-                {formatDate(domain.expiryTime)}
-              </ExpirationDetailsValue>
-            </DetailsItem>
-          ) : (
-            ''
-          )
-        ) : (
-          ''
-        )}
-      </OwnerFields>
-      <HR />
-      <ResolverAndRecords
-        domain={domain}
-        isOwner={isOwner}
-        refetch={refetch}
-        account={account}
-        isMigratedToNewRegistry={isMigratedToNewRegistry}
       />
-      {canClaim(domain) ? (
-        <NameClaimTestDomain domain={domain} refetch={refetch} />
-      ) : null}
+      <InnerBackImg src={backImgItem} smallBP={smallBP} />
+      <ShareTextContainer>
+        <ShareTitle>WEB3</ShareTitle>
+        <ShareSubTitle>NAME CARD</ShareSubTitle>
+        <ShareDes>Control your own data</ShareDes>
+        <ShareSign>
+          <LogoImg src={whiteLogo} />
+          <ShareSignText>LINKKEY</ShareSignText>
+        </ShareSign>
+      </ShareTextContainer>
+      <QRCodeContainer>
+        <QRCodeConent>
+          <QRCodeItem
+            value={`${protocol}//${hostName}/name/${domain.name}/details`}
+            size={110}
+            fgColor="#ea6060"
+            iconRadius={10}
+          />
+          <ShareKeyName>
+            <span>{domain.name}</span>
+            <SearchIcon src={searchImg} />
+          </ShareKeyName>
+          <WebSiteText>www.sns.chat</WebSiteText>
+        </QRCodeConent>
+      </QRCodeContainer>
+      <SharePolygonImg src={ploygonGrant} />
+      <ShareFooter>
+        <ShareItem>
+          <img src={DiscordIcon} />
+          linkkey.io
+        </ShareItem>
+        <ShareItem>
+          <img src={TelegramIcon} />
+          @linkkeydao
+        </ShareItem>
+        <ShareItem>
+          <img src={TwitterIcon} />
+          @LinkkeyOfficial
+        </ShareItem>
+      </ShareFooter>
       <Modal
         title={<ModalTitle>{t('c.pressSaveImg')}</ModalTitle>}
         width="80%"
@@ -307,7 +309,7 @@ function SharedContainer() {
       >
         {imageState}
       </Modal>
-    </Details>
+    </Share>
   )
 }
 

@@ -3,6 +3,7 @@ import styled from '@emotion/styled/macro'
 import { useTranslation } from 'react-i18next'
 import { gql } from '@apollo/client'
 import { useQuery } from '@apollo/client'
+import { useHistory } from 'react-router'
 
 import { useMediaMin } from 'mediaQuery'
 import { EMPTY_ADDRESS } from '../../utils/records'
@@ -18,6 +19,10 @@ import NameContainer from '../Basic/MainContainer'
 import Copy from '../CopyToClipboard/'
 import { isOwnerOfParentDomain } from '../../utils/utils'
 import { Link } from 'react-router-dom'
+import Loading from 'components/Loading/Loading'
+import { Modal } from 'antd'
+import 'antd/es/modal/style/css'
+import SharedContainer from 'routes/Shared'
 
 const Owner = styled('div')`
   color: #ccd4da;
@@ -31,7 +36,7 @@ const RightBar = styled('div')`
 
 const Favourite = styled(DefaultFavourite)``
 
-const SharedIconContainer = styled(Link)`
+const SharedIconContainer = styled('div')`
   cursor: pointer;
   line-height: 25px;
   &:active {
@@ -89,8 +94,18 @@ const NAME_QUERY = gql`
   }
 `
 
+const Share = styled(SharedContainer)``
+
 function Name({ details: domain, name, pathname, type, refetch }) {
   const { t } = useTranslation()
+  const [modalVisible, setModalVisible] = useState(false)
+  const [modalLoading, setModalLoading] = useState(true)
+  const [imageState, setImageState] = useState(
+    <Loading loading={modalLoading} size="large">
+      <img width="100%" height="300px" />
+    </Loading>
+  )
+  const history = useHistory()
   const smallBP = useMediaMin('small')
   const percentDone = 100
 
@@ -155,7 +170,7 @@ function Name({ details: domain, name, pathname, type, refetch }) {
                 : t('c.Controller')}
             </Owner>
           )}
-          {!smallBP && (
+          {/* {!smallBP && (
             <SharedIconContainer
               onClick={() => {
                 window.localStorage.setItem('domain', JSON.stringify(domain))
@@ -168,7 +183,21 @@ function Name({ details: domain, name, pathname, type, refetch }) {
             >
               <SharedIcon />
             </SharedIconContainer>
-          )}
+          )} */}
+          <SharedIconContainer
+            onClick={() => {
+              window.localStorage.setItem('domain', JSON.stringify(domain))
+              window.localStorage.setItem('isOwner', isOwner)
+              window.localStorage.setItem('refetch', refetch)
+              if (smallBP) {
+                setModalVisible(true)
+              } else {
+                history.push(`/shared/${name}`)
+              }
+            }}
+          >
+            <SharedIcon />
+          </SharedIconContainer>
           {smallBP && (
             <Tabs
               pathname={pathname}
@@ -211,6 +240,19 @@ function Name({ details: domain, name, pathname, type, refetch }) {
           registrationOpen={registrationOpen}
         />
       )}
+      <Modal
+        visible={modalVisible}
+        width="30%"
+        centered
+        footer={null}
+        bodyStyle={{ width: '60%', margin: '0 auto' }}
+        onCancel={() => {
+          setModalVisible(false)
+          setModalLoading(false)
+        }}
+      >
+        <Share smallBP />
+      </Modal>
     </NameContainer>
   )
 }
