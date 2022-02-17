@@ -20,6 +20,7 @@ const Share = styled('div')`
   position: relative;
   display: block;
   width: 100%;
+  height: 80%;
   background-color: #ea6060;
 `
 
@@ -109,11 +110,7 @@ const QRCodeConent = styled('div')`
   position: relative;
   text-align: center;
   background-color: #fff;
-  &:active {
-    transform: scale(1.1);
-    color: #dfdfdf;
-    transition: all 1s;
-  }
+  top: 18%;
 `
 
 const QRCodeItem = styled(QRCode)`

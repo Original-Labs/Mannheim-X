@@ -170,20 +170,6 @@ function Name({ details: domain, name, pathname, type, refetch }) {
                 : t('c.Controller')}
             </Owner>
           )}
-          {/* {!smallBP && (
-            <SharedIconContainer
-              onClick={() => {
-                window.localStorage.setItem('domain', JSON.stringify(domain))
-                window.localStorage.setItem('isOwner', isOwner)
-                window.localStorage.setItem('refetch', refetch)
-              }}
-              to={{
-                pathname: `/shared/${name}`
-              }}
-            >
-              <SharedIcon />
-            </SharedIconContainer>
-          )} */}
           <SharedIconContainer
             onClick={() => {
               window.localStorage.setItem('domain', JSON.stringify(domain))
