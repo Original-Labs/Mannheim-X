@@ -72,7 +72,9 @@
     "transfer": "Transfer",
     "warning": "Warning",
     "year": "year",
-    "year_plural": "years"
+    "year_plural": "years",
+    "clickToQRCode": "Click the QR code to save the page",
+    "pressSaveImg": "Long press to save image"
   },
   "certificate": {
     "button": "Request SSL certificate",

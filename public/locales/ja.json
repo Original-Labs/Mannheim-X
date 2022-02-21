@@ -69,7 +69,9 @@
     "textrecord": "テキストレコード",
     "transfer": "譲渡",
     "warning": "Warning",
-    "year": "年"
+    "year": "年",
+    "clickToQRCode": "QRコードをクリックしてページを保存します",
+    "pressSaveImg": "写真を保存するために長押し"
   },
   "certificate": {
     "button": "SSL認証をリクエスト",
@@ -418,13 +420,13 @@
   },
   "serviceMsg": {
     "servErr": "内部サーバーエラー",
-    "paramsIsNull":"クエリパラメータはすべて空です",
+    "paramsIsNull": "クエリパラメータはすべて空です",
     "unkonwErr": "不明な間違い"
   },
-  "blockMsg":{
-    "amtToBeAllocated":"配分される金額(key)",
-    "blockDate":"ブロック時間",
-    "blockHeight":"データが同期するブロックの高さ",
+  "blockMsg": {
+    "amtToBeAllocated": "配分される金額(key)",
+    "blockDate": "ブロック時間",
+    "blockHeight": "データが同期するブロックの高さ",
     "totalAmtTobeAirdrop": "割り当て待ちの総額(key)",
     "EstimatedTimeOfAirdrop": "2022年3月にトークン投下分配開始予定"
   }

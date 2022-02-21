@@ -67,7 +67,9 @@
     "sync": "同步",
     "textrecord": "文本记录",
     "transfer": "转让",
-    "warning": "警告"
+    "warning": "警告",
+    "clickToQRCode": "点击二维码保存页面",
+    "pressSaveImg": "长按保存图片"
   },
   "certificate": {
     "button": "请求 SSL 证书",
