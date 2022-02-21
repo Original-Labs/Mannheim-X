@@ -226,19 +226,21 @@ function Name({ details: domain, name, pathname, type, refetch }) {
           registrationOpen={registrationOpen}
         />
       )}
-      <Modal
-        visible={modalVisible}
-        width="30%"
-        centered
-        footer={null}
-        bodyStyle={{ width: '60%', margin: '0 auto' }}
-        onCancel={() => {
-          setModalVisible(false)
-          setModalLoading(false)
-        }}
-      >
-        <Share smallBP />
-      </Modal>
+      {smallBP && (
+        <Modal
+          visible={modalVisible}
+          width="575px"
+          centered
+          footer={null}
+          bodyStyle={{ width: '425px', margin: '0 auto' }}
+          onCancel={() => {
+            setModalVisible(false)
+            setModalLoading(false)
+          }}
+        >
+          <Share smallBP />
+        </Modal>
+      )}
     </NameContainer>
   )
 }
