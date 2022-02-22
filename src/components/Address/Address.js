@@ -390,10 +390,12 @@ export default function Address({
                 {t('address.etherscanButton')}
               </EtherScanLink>
             )}
-            {tokenIdState && (
+            {tokenIdState ? (
               <OpenseaLink tokenId={tokenIdState}>
                 {t('address.openseaButton')}
               </OpenseaLink>
+            ) : (
+              ''
             )}
           </LinkList>
         </TopBar>
