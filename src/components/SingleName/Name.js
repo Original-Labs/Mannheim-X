@@ -19,12 +19,11 @@ import Tabs from './Tabs'
 import NameContainer from '../Basic/MainContainer'
 import Copy from '../CopyToClipboard/'
 import { isOwnerOfParentDomain } from '../../utils/utils'
-import { Link } from 'react-router-dom'
 import Loading from 'components/Loading/Loading'
 import { Modal } from 'antd'
 import 'antd/es/modal/style/css'
 import SharedContainer from 'routes/Shared'
-import OpenseaLink from '../Links/OpenseaLink'
+import getSNS from '../../apollo/mutations/sns'
 
 const Owner = styled('div')`
   color: #ccd4da;
@@ -38,7 +37,7 @@ const RightBar = styled('div')`
 
 const Favourite = styled(DefaultFavourite)``
 
-const OpenseaIconContainer = styled('div')`
+const OpenseaIconContainer = styled('a')`
   cursor: pointer;
   line-height: 0px;
   margin-right: 10px;
@@ -120,6 +119,15 @@ function Name({ details: domain, name, pathname, type, refetch }) {
   const history = useHistory()
   const smallBP = useMediaMin('small')
   const percentDone = 100
+  const [tokenIdState, setTokenId] = useState(() => {
+    const sns = getSNS()
+    let tokenId = ''
+    sns.getTokenIdOfName(name).then(res => {
+      tokenId = parseInt(res._hex, 16)
+      setTokenId(tokenId)
+    })
+    return tokenId
+  })
 
   const {
     data: { accounts }
@@ -182,9 +190,14 @@ function Name({ details: domain, name, pathname, type, refetch }) {
           {/*      : t('c.Controller')}*/}
           {/*  </Owner>*/}
           {/*)}*/}
-          <OpenseaIconContainer>
-            <OpenseaIcon />
-          </OpenseaIconContainer>
+          {tokenIdState && (
+            <OpenseaIconContainer
+              href={`https://opensea.io/assets/matic/0x19ad2b1f012349645c3173ea63f98948a2b43d27/${tokenIdState}`}
+              target="_blank"
+            >
+              <OpenseaIcon />
+            </OpenseaIconContainer>
+          )}
           <SharedIconContainer
             onClick={() => {
               window.localStorage.setItem('domain', JSON.stringify(domain))

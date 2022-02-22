@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled/macro'
-import { ReactComponent as ExternalLinkIcon } from '../Icons/externalLink.svg'
 import { gql } from '@apollo/client'
 import { useQuery } from '@apollo/client'
 
@@ -29,17 +28,18 @@ export const GET_OPENSEA_LINK = gql`
   }
 `
 
-const OpenseaLink = ({ children, className }) => {
+const OpenseaLink = ({ children, className, tokenId }) => {
   const {
     data: { network }
   } = useQuery(GET_OPENSEA_LINK)
   const subdomain = network?.toLowerCase() === 'main' ? '' : `${network}.`
+
   return (
     <OpenseaLinkContainer
       data-testid="ether-scan-link-container"
       target="_blank"
       rel="noopener"
-      href={`https://opensea.io/collection/snskey`}
+      href={`https://opensea.io/assets/matic/0x19ad2b1f012349645c3173ea63f98948a2b43d27/${tokenId}`}
       className={className}
     >
       {children}
