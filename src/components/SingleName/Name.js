@@ -11,6 +11,7 @@ import { Title } from '../Typography/Basic'
 import TopBar from '../Basic/TopBar'
 import DefaultFavourite from '../AddFavourite/Favourite'
 import SharedIcon from 'components/Icons/SharedIcon'
+import OpenseaIcon from 'components/Icons/OpenseaIcon'
 import NameDetails from './NameDetails'
 import DNSNameRegister from './DNSNameRegister'
 import ShortName from './ShortName'
@@ -23,6 +24,7 @@ import Loading from 'components/Loading/Loading'
 import { Modal } from 'antd'
 import 'antd/es/modal/style/css'
 import SharedContainer from 'routes/Shared'
+import OpenseaLink from '../Links/OpenseaLink'
 
 const Owner = styled('div')`
   color: #ccd4da;
@@ -35,6 +37,16 @@ const RightBar = styled('div')`
 `
 
 const Favourite = styled(DefaultFavourite)``
+
+const OpenseaIconContainer = styled('div')`
+  cursor: pointer;
+  line-height: 0px;
+  margin-right: 10px;
+  &:active {
+    transform: scale(1.2);
+    transition: all 0.5s;
+  }
+`
 
 const SharedIconContainer = styled('div')`
   cursor: pointer;
@@ -163,13 +175,16 @@ function Name({ details: domain, name, pathname, type, refetch }) {
           />
         </Title>
         <RightBar>
-          {!!ownerType && (
-            <Owner data-testid="owner-type">
-              {ownerType === 'Registrant'
-                ? t('c.registrant')
-                : t('c.Controller')}
-            </Owner>
-          )}
+          {/*{!!ownerType && (*/}
+          {/*  <Owner data-testid="owner-type">*/}
+          {/*    {ownerType === 'Registrant'*/}
+          {/*      ? t('c.registrant')*/}
+          {/*      : t('c.Controller')}*/}
+          {/*  </Owner>*/}
+          {/*)}*/}
+          <OpenseaIconContainer>
+            <OpenseaIcon />
+          </OpenseaIconContainer>
           <SharedIconContainer
             onClick={() => {
               window.localStorage.setItem('domain', JSON.stringify(domain))
