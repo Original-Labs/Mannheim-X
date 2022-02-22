@@ -18,6 +18,7 @@ import DiscordIcon from '../assets/D.png'
 import TelegramIcon from '../assets/tg.png'
 import TwitterIcon from '../assets/t.png'
 import GithubIcon from '../assets/github.png'
+import OpenseaIcon from '../assets/opensea-white.svg'
 import { aboutPageURL } from '../utils/utils'
 import { connectProvider, disconnectProvider } from '../utils/providerUtils'
 import { gql } from '@apollo/client'
@@ -388,6 +389,7 @@ export default ({ match }) => {
   const DiscordUrl = 'https://discord.com/invite/UMNRQryyts'
   const GithubUrl = 'https://github.com/Link-Key'
   const LinkkeyUrl = 'https://linkkey.io'
+  const OpenseaUrl = 'https://opensea.io/collection/snskey'
 
   const {
     data: { accounts }
@@ -485,13 +487,16 @@ export default ({ match }) => {
             <a href={DiscordUrl}>
               <img src={DiscordIcon} alt="discord" />
             </a>
-            <a href={GithubUrl}>
-              <img src={GithubIcon} alt="github" />
+            {/*<a href={GithubUrl}>*/}
+            {/*  <img src={GithubIcon} alt="github" />*/}
+            {/*</a>*/}
+            <a href={OpenseaUrl}>
+              <img src={OpenseaIcon} alt="opensea" />
             </a>
           </SocialIconLarge>
 
           <LinkkeyCopyRight>
-            <a href={LinkkeyUrl}>@2022 Linkkey DAO</a>
+            <a href={LinkkeyUrl}>© 2022 Linkkey DAO</a>
           </LinkkeyCopyRight>
         </>
       </SearchContainer>
