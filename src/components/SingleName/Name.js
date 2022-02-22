@@ -38,7 +38,7 @@ const Favourite = styled(DefaultFavourite)``
 
 const SharedIconContainer = styled('div')`
   cursor: pointer;
-  line-height: 25px;
+  line-height: 0px;
   &:active {
     transform: scale(1.2);
     transition: all 0.5s;

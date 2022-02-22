@@ -103,11 +103,11 @@ const QRCodeContainer = styled('div')`
   position: relative;
   width: 100%;
   background-color: #fff;
-  height: 500px;
+  height: 350px;
 `
 
 const QRCodeConent = styled('div')`
-  position: relative;
+  //position: relative;
   text-align: center;
   background-color: #fff;
   top: 18%;
@@ -129,7 +129,7 @@ const ShareKeyName = styled('div')`
     font-weight: 700;
     border: 1px solid black;
     padding: 5px 12px;
-    border-radius: 6px;
+    border-radius: 3px;
   }
   margin-top: 5%;
   left: 50%;
@@ -138,8 +138,8 @@ const ShareKeyName = styled('div')`
 
 const SearchIcon = styled('img')`
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   margin-left: 5px;
   margin-top: -4px;
   backgroud-color: #ea6060;
