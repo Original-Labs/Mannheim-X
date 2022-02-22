@@ -43,7 +43,7 @@ import {
   NonMainPageBannerContainerWithMarginBottom,
   DAOBannerContent
 } from '../Banner/DAOBanner'
-import getSNS from '../../apollo/mutations/sns'
+import getSNS from 'apollo/mutations/sns'
 import * as PropTypes from 'prop-types'
 
 const DEFAULT_RESULTS_PER_PAGE = 25
@@ -273,6 +273,18 @@ export default function Address({
 
   let snsNameInfo = getSNSNameInfo(address)
 
+  const [tokenIdState, setTokenId] = useState(() => {
+    const sns = getSNS()
+    let tokenId = ''
+    sns.getNameOfOwner(address).then(resp => {
+      sns.getTokenIdOfName(resp).then(res => {
+        tokenId = parseInt(res._hex, 16)
+        setTokenId(tokenId)
+      })
+    })
+    return tokenId
+  })
+
   // console.log('snsNameInfo-----', snsNameInfo)
 
   // const { loading, data, error, refetch } = useDomains({
@@ -375,7 +387,11 @@ export default function Address({
                 {t('address.etherscanButton')}
               </EtherScanLink>
             )}
-            <OpenseaLink>{t('address.openseaButton')}</OpenseaLink>
+            {tokenIdState && (
+              <OpenseaLink tokenId={tokenIdState}>
+                {t('address.openseaButton')}
+              </OpenseaLink>
+            )}
           </LinkList>
         </TopBar>
         {/*<AddReverseRecord account={account} currentAddress={address} />*/}
