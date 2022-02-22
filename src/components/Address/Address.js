@@ -276,13 +276,16 @@ export default function Address({
   const [tokenIdState, setTokenId] = useState(() => {
     const sns = getSNS()
     let tokenId = ''
-    sns.getNameOfOwner(address).then(resp => {
-      sns.getTokenIdOfName(resp).then(res => {
-        tokenId = parseInt(res._hex, 16)
-        setTokenId(tokenId)
+    try {
+      sns.getNameOfOwner(address).then(resp => {
+        sns.getTokenIdOfName(resp).then(res => {
+          tokenId = parseInt(res._hex, 16)
+          setTokenId(tokenId)
+        })
       })
-    })
-    return tokenId
+    } finally {
+      return tokenId
+    }
   })
 
   // console.log('snsNameInfo-----', snsNameInfo)
