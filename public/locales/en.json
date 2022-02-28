@@ -427,10 +427,10 @@
     "unkonwErr": "Unknown error"
   },
   "blockMsg": {
-    "amtToBeAllocated": "Amount to be allocated(key)",
+    "amtToBeAllocated": "Your KEYs(Unallocated)",
     "blockDate": "Block Date",
     "blockHeight": "Block height for data sync",
-    "totalAmtTobeAirdrop": "Total amount to be allocated(key)",
-    "EstimatedTimeOfAirdrop": "Airdrop is expected to begin in March 2022"
+    "totalAmtTobeAirdrop": "All User`s KEYs(Unallocated)",
+    "EstimatedTimeOfAirdrop": "Airdrop is expected to begin in mid-March 2022"
   }
 }

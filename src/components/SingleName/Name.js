@@ -190,13 +190,15 @@ function Name({ details: domain, name, pathname, type, refetch }) {
           {/*      : t('c.Controller')}*/}
           {/*  </Owner>*/}
           {/*)}*/}
-          {tokenIdState && (
+          {tokenIdState ? (
             <OpenseaIconContainer
               href={`https://opensea.io/assets/matic/0x19ad2b1f012349645c3173ea63f98948a2b43d27/${tokenIdState}`}
               target="_blank"
             >
               <OpenseaIcon />
             </OpenseaIconContainer>
+          ) : (
+            ''
           )}
           <SharedIconContainer
             onClick={() => {

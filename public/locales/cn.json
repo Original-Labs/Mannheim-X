@@ -422,10 +422,10 @@
     "unkonwErr": "未知错误"
   },
   "blockMsg": {
-    "amtToBeAllocated": "待分配数额(key)",
+    "amtToBeAllocated": "你拥有的KEY(未分配)",
     "blockDate": "区块时间",
     "blockHeight": "数据同步的区块高度",
-    "totalAmtTobeAirdrop": "待分配总额(key)",
-    "EstimatedTimeOfAirdrop": "预计2022年3月开始代币空投分配"
+    "totalAmtTobeAirdrop": "全网用户KEY总量(未分配)",
+    "EstimatedTimeOfAirdrop": "预计2022年3月中旬开始代币空投分配"
   }
 }

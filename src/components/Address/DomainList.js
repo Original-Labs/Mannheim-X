@@ -40,7 +40,7 @@ const DomainsContainer = styled('div')`
   padding-right: 40px;
 `
 
-function hasName(nameInstance) {
+export function hasName(nameInstance) {
   if (nameInstance && nameInstance.singleName && nameInstance.singleName.name) {
     return true
   }
