@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { useQuery } from '@apollo/client'
 import { useLocation } from 'react-router-dom'
@@ -22,7 +23,11 @@ import DefaultTopBar from '../Basic/TopBar'
 import { Title as DefaultTitle } from '../Typography/Basic'
 import DefaultEtherScanLink from '../Links/EtherScanLink'
 import DefaultOpenseaLink from '../Links/OpenseaLink'
-import { getEtherScanAddr, filterNormalised } from '../../utils/utils'
+import {
+  getEtherScanAddr,
+  filterNormalised,
+  getOwnerNameAndAddress
+} from '../../utils/utils'
 import { calculateIsExpiredSoon } from '../../utils/dates'
 import DomainList from './DomainList'
 import RenewAll from './RenewAll'
@@ -45,28 +50,70 @@ import {
 } from '../Banner/DAOBanner'
 import getSNS from 'apollo/mutations/sns'
 import * as PropTypes from 'prop-types'
+import PolygonscanIcon from 'components/Icons/PolygonscanIcon'
+import { Tooltip } from 'antd'
+import OpenseaIcon from 'components/Icons/OpenseaIcon'
+import TooltipAnt from 'utils/tooltipAnt'
 
 const DEFAULT_RESULTS_PER_PAGE = 25
 
 const TopBar = styled(DefaultTopBar)`
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-bottom: 40px;
 `
 
-const Title = styled(DefaultTitle)`
-  white-space: nowrap;
+const AddressTitleContainer = styled('div')`
+  display: flex;
   overflow: hidden;
   text-overflow: ellipsis;
 `
 
-const EtherScanLink = styled(DefaultEtherScanLink)`
-  min-width: 165px;
-  margin-left: auto;
-  padding-bottom: 10px;
+const SingleNameBlockiesWrapper = styled('div')`
+  display: block;
 `
-const OpenseaLink = styled(DefaultOpenseaLink)`
-  min-width: 165px;
+
+const Title = styled(DefaultTitle)`
+  white-space: nowrap;
+  line-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const GoToIconWrapper = styled('div')`
+  display: flex;
+`
+
+const EtherScanLink = styled(DefaultEtherScanLink)`
+  width: 25px;
+  height: 25px;
+  color: #8247e5;
   margin-left: auto;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(1.2);
+  }
+`
+
+const TooltipTitleWrapper = styled('div')`
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
+`
+
+const OpenseaLink = styled(DefaultOpenseaLink)`
+  margin-left: 10px;
+  svg {
+    opacity: 1;
+    transition: 0.1s;
+  }
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(1.2);
+  }
 `
 
 const Close = styled('img')`
@@ -353,6 +400,8 @@ export default function Address({
     calculateIsExpiredSoon(domain.expiryDate)
   )
 
+  let ownerMsgObj = getOwnerNameAndAddress()
+
   return (
     <>
       {/*<NonMainPageBannerContainerWithMarginBottom>*/}
@@ -382,22 +431,36 @@ export default function Address({
 
       <AddressContainer>
         <TopBar>
-          <SingleNameBlockies address={address} />
-          <Title>{address}</Title>
-          <LinkList>
-            {etherScanAddr && (
-              <EtherScanLink address={address}>
-                {t('address.etherscanButton')}
-              </EtherScanLink>
-            )}
-            {tokenIdState ? (
-              <OpenseaLink tokenId={tokenIdState}>
-                {t('address.openseaButton')}
-              </OpenseaLink>
-            ) : (
-              ''
-            )}
-          </LinkList>
+          <AddressTitleContainer>
+            <SingleNameBlockiesWrapper>
+              <SingleNameBlockies address={address} />
+            </SingleNameBlockiesWrapper>
+            <Link to={`/name/${ownerMsgObj?.displayName}`}>
+              <Title>{ownerMsgObj?.displayName}</Title>
+            </Link>
+          </AddressTitleContainer>
+          <GoToIconWrapper>
+            <TooltipAnt title={t('address.etherscanButton')}>
+              <LinkList>
+                {etherScanAddr && (
+                  <EtherScanLink address={address}>
+                    <PolygonscanIcon />
+                  </EtherScanLink>
+                )}
+              </LinkList>
+            </TooltipAnt>
+            <TooltipAnt title={t('address.openseaButton')}>
+              <LinkList>
+                {tokenIdState ? (
+                  <OpenseaLink tokenId={tokenIdState}>
+                    <OpenseaIcon />
+                  </OpenseaLink>
+                ) : (
+                  ''
+                )}
+              </LinkList>
+            </TooltipAnt>
+          </GoToIconWrapper>
         </TopBar>
         {/*<AddReverseRecord account={account} currentAddress={address} />*/}
         {/*<Controls>*/}

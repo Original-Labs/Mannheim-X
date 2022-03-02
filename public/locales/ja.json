@@ -353,7 +353,8 @@
     "tabs": {
       "details": "詳細",
       "register": "登録",
-      "subdomains": "サブドメイン"
+      "subdomains": "サブドメイン",
+      "shareBtn": "シェアリングページを見る"
     },
     "test": {
       "note": "注：.testドメインは、誰でもテスト目的で未使用の名前を請求することができ、28日後に有効期限が切れます。"
@@ -424,10 +425,14 @@
     "unkonwErr": "不明な間違い"
   },
   "blockMsg": {
-    "amtToBeAllocated": "配分される金額(key)",
+    "keyAmount": "冷凍KEYs",
+    "availableAmount": "抽出可能なKEY数",
+    "totalSupply": "抽出可能なKEY数(Network)",
+    "totalFrozenSupply": "冷凍KEYs(Network)",
     "blockDate": "ブロック時間",
     "blockHeight": "データが同期するブロックの高さ",
-    "totalAmtTobeAirdrop": "割り当て待ちの総額(key)",
-    "EstimatedTimeOfAirdrop": "2022年3月中旬にトークン投下分配開始予定"
+    "EstimatedTimeOfAirdrop": "2022年3月中旬にトークン投下分配開始予定",
+    "withdraw": "コイン引き出し",
+    "withdrawRule": "コイン引き出しルール"
   }
 }

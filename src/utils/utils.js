@@ -17,6 +17,8 @@ import { saveName } from '../api/labels'
 import { useEffect, useRef } from 'react'
 import { EMPTY_ADDRESS } from './records'
 import getSNS from '../apollo/mutations/sns'
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 
 // From https://github.com/0xProject/0x-monorepo/blob/development/packages/utils/src/address_utils.ts
 
@@ -339,4 +341,35 @@ export function containZeroWidthStr(str) {
     return false
   }
   return true
+}
+
+// get owner's name or other msg search graphQL
+export const HOME_DATA = gql`
+  query getHomeData($address: string) @client {
+    network
+    displayName(address: $address)
+    isReadOnly
+    isSafeApp
+  }
+`
+// get owner's address search graphQL
+export const GET_ACCOUNT = gql`
+  query getAccounts @client {
+    accounts
+  }
+`
+
+// Get the owner's address and name
+export function getOwnerNameAndAddress() {
+  const {
+    data: { accounts }
+  } = useQuery(GET_ACCOUNT)
+
+  const {
+    data: { network, displayName, isReadOnly, isSafeApp }
+  } = useQuery(HOME_DATA, {
+    variables: { address: accounts?.[0] }
+  })
+
+  return { accounts, network, displayName, isReadOnly, isSafeApp }
 }

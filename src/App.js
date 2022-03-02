@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
+import 'antd/dist/antd.css'
 
 const TestRegistrar = lazy(() =>
   import(

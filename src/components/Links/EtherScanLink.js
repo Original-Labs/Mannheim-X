@@ -8,19 +8,6 @@ const EtherScanLinkContainer = styled('a')`
   display: inline-block;
   align-items: center;
   text-overflow: ellipsis;
-
-  svg {
-    margin-left: 10px;
-    transition: 0.1s;
-    opacity: 0;
-    flex-shrink: 0;
-  }
-
-  &:hover {
-    svg {
-      opacity: 1;
-    }
-  }
 `
 
 export const GET_ETHER_SCAN_LINK = gql`
@@ -43,7 +30,7 @@ const EtherScanLink = ({ children, address, className }) => {
       className={className}
     >
       {children}
-      {/*<ExternalLinkIcon />*/}
+      {/* <ExternalLinkIcon /> */}
     </EtherScanLinkContainer>
   )
 }

@@ -356,7 +356,8 @@
     "tabs": {
       "details": "Details",
       "register": "Register",
-      "subdomains": "Subdomains"
+      "subdomains": "Subdomains",
+      "shareBtn": "View share page"
     },
     "test": {
       "note": "Note: .test domain allows anyone to claim an unused name for test purposes, which expires after 28 days"
@@ -427,10 +428,14 @@
     "unkonwErr": "Unknown error"
   },
   "blockMsg": {
-    "amtToBeAllocated": "Your KEYs(Unallocated)",
+    "keyAmount": "User-frozen KEYs",
+    "availableAmount": "Withdrawable KEYs(User)",
+    "totalSupply": "Withdrawable KEYs(Network)",
+    "totalFrozenSupply": "Frozen KEYs(Network)",
     "blockDate": "Block Date",
     "blockHeight": "Block height for data sync",
-    "totalAmtTobeAirdrop": "All User`s KEYs(Unallocated)",
-    "EstimatedTimeOfAirdrop": "Airdrop is expected to begin in mid-March 2022"
+    "EstimatedTimeOfAirdrop": "Airdrop is expected to begin in mid-March 2022",
+    "withdraw": "Withdraw",
+    "withdrawRule": "Withdraw rules"
   }
 }

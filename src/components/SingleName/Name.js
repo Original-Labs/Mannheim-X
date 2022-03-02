@@ -24,6 +24,7 @@ import { Modal } from 'antd'
 import 'antd/es/modal/style/css'
 import SharedContainer from 'routes/Shared'
 import getSNS from '../../apollo/mutations/sns'
+import TooltipAnt from 'utils/tooltipAnt'
 
 const Owner = styled('div')`
   color: #ccd4da;
@@ -41,18 +42,16 @@ const OpenseaIconContainer = styled('a')`
   cursor: pointer;
   line-height: 0px;
   margin-right: 10px;
-  &:active {
-    transform: scale(1.2);
-    transition: all 0.5s;
+  &:hover {
+    transform: scale(1.1);
   }
 `
 
 const SharedIconContainer = styled('div')`
   cursor: pointer;
   line-height: 0px;
-  &:active {
-    transform: scale(1.2);
-    transition: all 0.5s;
+  &:hover {
+    transform: scale(1.1);
   }
 `
 
@@ -191,29 +190,33 @@ function Name({ details: domain, name, pathname, type, refetch }) {
           {/*  </Owner>*/}
           {/*)}*/}
           {tokenIdState ? (
-            <OpenseaIconContainer
-              href={`https://opensea.io/assets/matic/0x19ad2b1f012349645c3173ea63f98948a2b43d27/${tokenIdState}`}
-              target="_blank"
-            >
-              <OpenseaIcon />
-            </OpenseaIconContainer>
+            <TooltipAnt title={t('address.openseaButton')}>
+              <OpenseaIconContainer
+                href={`https://opensea.io/assets/matic/0x19ad2b1f012349645c3173ea63f98948a2b43d27/${tokenIdState}`}
+                target="_blank"
+              >
+                <OpenseaIcon />
+              </OpenseaIconContainer>
+            </TooltipAnt>
           ) : (
             ''
           )}
-          <SharedIconContainer
-            onClick={() => {
-              window.localStorage.setItem('domain', JSON.stringify(domain))
-              window.localStorage.setItem('isOwner', isOwner)
-              window.localStorage.setItem('refetch', refetch)
-              if (smallBP) {
-                setModalVisible(true)
-              } else {
-                history.push(`/shared/${name}`)
-              }
-            }}
-          >
-            <SharedIcon />
-          </SharedIconContainer>
+          <TooltipAnt title={t('singleName.tabs.shareBtn')}>
+            <SharedIconContainer
+              onClick={() => {
+                window.localStorage.setItem('domain', JSON.stringify(domain))
+                window.localStorage.setItem('isOwner', isOwner)
+                window.localStorage.setItem('refetch', refetch)
+                if (smallBP) {
+                  setModalVisible(true)
+                } else {
+                  history.push(`/shared/${name}`)
+                }
+              }}
+            >
+              <SharedIcon />
+            </SharedIconContainer>
+          </TooltipAnt>
           {smallBP && (
             <Tabs
               pathname={pathname}

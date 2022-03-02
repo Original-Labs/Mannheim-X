@@ -351,7 +351,8 @@
     "tabs": {
       "details": "详情",
       "register": "注册",
-      "subdomains": "子域名"
+      "subdomains": "子域名",
+      "shareBtn": "分享页"
     },
     "test": {
       "note": "注意：谁都可以注册尚未使用的 <1>.test</1> 域名，域名会在申请 28 天后到期。"
@@ -422,10 +423,14 @@
     "unkonwErr": "未知错误"
   },
   "blockMsg": {
-    "amtToBeAllocated": "你拥有的KEY(未分配)",
+    "keyAmount": "冻结的KEYs",
+    "availableAmount": "可提取的KEYs",
+    "totalSupply": "全网可提取的KEYs",
+    "totalFrozenSupply": "全网冻结的KEYs",
     "blockDate": "区块时间",
-    "blockHeight": "数据同步的区块高度",
-    "totalAmtTobeAirdrop": "全网用户KEY总量(未分配)",
-    "EstimatedTimeOfAirdrop": "预计2022年3月中旬开始代币空投分配"
+    "blockHeight": "区块高度",
+    "EstimatedTimeOfAirdrop": "预计2022年3月中旬开始代币空投分配",
+    "withdraw": "提币",
+    "withdrawRule": "提币规则"
   }
 }
