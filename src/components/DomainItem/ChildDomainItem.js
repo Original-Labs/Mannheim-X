@@ -21,7 +21,7 @@ import messageMention from 'utils/messageMention'
 import { getAirdropData } from '../../api/reqList'
 import { Card, Row, Col, Typography } from 'antd'
 import Button from 'components/Forms/Button'
-import getSNS from 'apollo/mutations/sns'
+import getSNS, { getSNSWithdraw } from 'apollo/mutations/sns'
 import OpenseaIcon from 'components/Icons/OpenseaIcon'
 import { H2 } from 'components/Typography/Basic'
 import { InfoCircleFilled, InfoCircleOutlined } from '@ant-design/icons'
@@ -326,23 +326,33 @@ export default function ChildDomainItem({
             <BlockMsgContainer hoverable size="default">
               <BlockTextWrapper>
                 <BlockText>
-                  {t('blockMsg.keyAmount')}:
-                  <TextContainer
-                    ellipsis={true}
-                    style={{ backgroundColor: '#fff' }}
-                  >
-                    {blockMsg.keyAmount}
-                  </TextContainer>
+                  {t('blockMsg.availableAmount')}:{blockMsg.availableAmount}
                 </BlockText>
                 <ButtonAndIcon>
-                  <ButtonWrapper>{t('blockMsg.withdraw')}</ButtonWrapper>
+                  <ButtonWrapper
+                    onClick={async () => {
+                      const withdrawInstance = getSNSWithdraw()
+                      const feeValue = await withdrawInstance.getFeeValue()
+                      console.log('feeValue:', parseInt(feeValue, 16))
+                      const resp = await withdrawInstance.withdraw()
+                      console.log('resp:', resp)
+                    }}
+                  >
+                    {t('blockMsg.withdraw')}
+                  </ButtonWrapper>
                   <TooltipAnt title={t('blockMsg.withdrawRule')}>
                     <InfoCircleOutlinedContainer />
                   </TooltipAnt>
                 </ButtonAndIcon>
               </BlockTextWrapper>
               <BlockText>
-                {t('blockMsg.availableAmount')}:{blockMsg.availableAmount}
+                {t('blockMsg.keyAmount')}:
+                <TextContainer
+                  ellipsis={true}
+                  style={{ backgroundColor: '#fff' }}
+                >
+                  {blockMsg.keyAmount}
+                </TextContainer>
               </BlockText>
               <BlockText>
                 {t('blockMsg.totalSupply')}:{blockMsg.totalSupply}
