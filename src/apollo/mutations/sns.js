@@ -41,11 +41,6 @@ export async function setup({
   snsResolver = snsResolverInstance
   snsWithdraw = snsWithdrawInstance
 
-  console.log('snsTest:', sns)
-  const resp = await sns.SNS.getPrice()
-  console.log('resp16', resp)
-  console.log('Price:', parseInt(resp._hex, 16))
-
   isENSReadyReactive(true)
   return { sns, snsResolver, providerObject, snsWithdraw }
 }

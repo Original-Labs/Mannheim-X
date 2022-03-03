@@ -332,10 +332,15 @@ export default function ChildDomainItem({
                   <ButtonWrapper
                     onClick={async () => {
                       const withdrawInstance = getSNSWithdraw()
-                      const feeValue = await withdrawInstance.getFeeValue()
-                      console.log('feeValue:', parseInt(feeValue, 16))
-                      const resp = await withdrawInstance.withdraw()
-                      console.log('resp:', resp)
+
+                      withdrawInstance
+                        .callWithdraw()
+                        .then(resp => {
+                          console.log('resp:', resp)
+                        })
+                        .catch(e => {
+                          console.log('e:', e)
+                        })
                     }}
                   >
                     {t('blockMsg.withdraw')}
