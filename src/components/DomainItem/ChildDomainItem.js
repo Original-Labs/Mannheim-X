@@ -24,13 +24,17 @@ import Button from 'components/Forms/Button'
 import getSNS, { getSNSWithdraw } from 'apollo/mutations/sns'
 import OpenseaIcon from 'components/Icons/OpenseaIcon'
 import { H2 } from 'components/Typography/Basic'
-import { InfoCircleFilled, InfoCircleOutlined } from '@ant-design/icons'
+import { InfoCircleOutlined } from '@ant-design/icons'
 import TooltipAnt from 'utils/tooltipAnt'
+import Loading from 'components/Loading/Loading'
+import { Trans } from 'react-i18next'
 
 const { Text } = Typography
 
 const ChildDomainItemContainer = styled('div')`
-  padding: 30px 0;
+  ${mq.small`
+    padding: 30px 0;
+  `}
   border-bottom: 1px dashed #d3d3d3;
   &:last-child {
     border: none;
@@ -102,13 +106,12 @@ const BlockTextWrapper = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-flow: row wrap;
+  flex-flow: row;
 `
 
 const ButtonWrapper = styled(Button)`
-  min-width: 130px;
+  min-width: 127px;
   height: 46px;
-  margin-bottom: 10px;
 `
 
 const ButtonAndIcon = styled('div')`
@@ -116,6 +119,7 @@ const ButtonAndIcon = styled('div')`
 `
 
 const BlockText = styled(H2)`
+  font-size: 15px;
   color: #000;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -172,6 +176,8 @@ export default function ChildDomainItem({
   const { state, actions } = useEditable()
   const { txHash, pending, confirmed } = state
   const { startPending, setConfirmed } = actions
+  const [withdrawLoading, setWithdrawLoading] = useState(false)
+  const [blockMsgLoading, setBlockMsgLoading] = useState(false)
   const [blockMsg, setBlockMsg] = useState({
     address: '-',
     keyAmount: '-',
@@ -215,6 +221,7 @@ export default function ChildDomainItem({
 
   // get block info
   const getBlockMsgFn = () => {
+    setBlockMsgLoading(true)
     axios
       .get(
         `/api/v1/accountService/account/queryAccount?KeyName=${label}&address=${owner}`
@@ -238,12 +245,58 @@ export default function ChildDomainItem({
             content: `${t('serviceMsg.unkonwErr')}`
           })
         }
+        setBlockMsgLoading(false)
       })
       .catch(() => {
         messageMention({
           type: 'error',
           content: `${t('serviceMsg.unkonwErr')}`
         })
+      })
+  }
+
+  const callWithdraw = () => {
+    setWithdrawLoading(true)
+    const withdrawInstance = getSNSWithdraw()
+    withdrawInstance
+      .withdraw()
+      .then(resp => {
+        if (resp && resp.hash) {
+          // call getBlockMsgFn function refresh block info
+          getBlockMsgFn()
+
+          messageMention({
+            type: 'success',
+            content: `${t('z.transferSuccess')}`,
+            style: { marginTop: '10vh' }
+          })
+        }
+        setWithdrawLoading(false)
+      })
+      .catch(e => {
+        let errorContent = 'error'
+        // handle contract response error code
+        if (e && e.data && e.data.code && e.data.message) {
+          let errorMessages = e.data.message.split('---')
+          if (errorMessages.length === 4) {
+            // get errorCode
+            let errCode = errorMessages[0].split(':')[1].trim()
+            errorContent = <Trans i18nKey={`withdrawErrCode.${errCode}`} />
+          }
+        }
+        // handle metamask wallet response error code
+        if (e.code === 4001) {
+          errorContent = (
+            <Trans i18nKey={`withdrawErrCode.${e.code.toString()}`} />
+          )
+        }
+        messageMention({
+          type: 'error',
+          content: errorContent,
+          duration: 3,
+          style: { marginTop: '10vh' }
+        })
+        setWithdrawLoading(false)
       })
   }
 
@@ -323,55 +376,51 @@ export default function ChildDomainItem({
             </DomainLinkContainer>
           </Col>
           <Col flex="1 1 400px">
-            <BlockMsgContainer hoverable size="default">
-              <BlockTextWrapper>
+            <Loading loading={blockMsgLoading} defaultColor="#ea6060">
+              <BlockMsgContainer
+                hoverable
+                size="default"
+                bodyStyle={{ padding: '0 10px' }}
+              >
+                <BlockTextWrapper>
+                  <BlockText>
+                    {t('blockMsg.availableAmount')}:{blockMsg.availableAmount}
+                  </BlockText>
+                  <ButtonAndIcon>
+                    <Loading loading={withdrawLoading}>
+                      <ButtonWrapper
+                        onClick={() => {
+                          callWithdraw()
+                        }}
+                      >
+                        {t('blockMsg.withdraw')}
+                      </ButtonWrapper>
+                    </Loading>
+                    <TooltipAnt title={t('blockMsg.withdrawRule')}>
+                      <InfoCircleOutlinedContainer />
+                    </TooltipAnt>
+                  </ButtonAndIcon>
+                </BlockTextWrapper>
                 <BlockText>
-                  {t('blockMsg.availableAmount')}:{blockMsg.availableAmount}
-                </BlockText>
-                <ButtonAndIcon>
-                  <ButtonWrapper
-                    onClick={async () => {
-                      const withdrawInstance = getSNSWithdraw()
-
-                      withdrawInstance
-                        .callWithdraw()
-                        .then(resp => {
-                          console.log('resp:', resp)
-                        })
-                        .catch(e => {
-                          console.log('e:', e)
-                        })
-                    }}
+                  {t('blockMsg.keyAmount')}:
+                  <TextContainer
+                    ellipsis={true}
+                    style={{ backgroundColor: '#fff' }}
                   >
-                    {t('blockMsg.withdraw')}
-                  </ButtonWrapper>
-                  <TooltipAnt title={t('blockMsg.withdrawRule')}>
-                    <InfoCircleOutlinedContainer />
-                  </TooltipAnt>
-                </ButtonAndIcon>
-              </BlockTextWrapper>
-              <BlockText>
-                {t('blockMsg.keyAmount')}:
-                <TextContainer
-                  ellipsis={true}
-                  style={{ backgroundColor: '#fff' }}
-                >
-                  {blockMsg.keyAmount}
-                </TextContainer>
-              </BlockText>
-              <BlockText>
-                {t('blockMsg.totalSupply')}:{blockMsg.totalSupply}
-              </BlockText>
-              <BlockText>
-                {t('blockMsg.totalFrozenSupply')}:{blockMsg.totalFrozenSupply}
-              </BlockText>
-              <BlockText>
-                {t('blockMsg.blockHeight')}:{blockMsg.curBlockNumber}
-              </BlockText>
-              <h4 style={{ color: '#ddd' }}>
-                * {t('blockMsg.EstimatedTimeOfAirdrop')}
-              </h4>
-            </BlockMsgContainer>
+                    {blockMsg.keyAmount}
+                  </TextContainer>
+                </BlockText>
+                <BlockText>
+                  {t('blockMsg.totalSupply')}:{blockMsg.totalSupply}
+                </BlockText>
+                <BlockText>
+                  {t('blockMsg.blockHeight')}:{blockMsg.curBlockNumber}
+                </BlockText>
+                <h4 style={{ color: '#ddd' }}>
+                  * {t('blockMsg.EstimatedTimeOfAirdrop')}
+                </h4>
+              </BlockMsgContainer>
+            </Loading>
           </Col>
         </Row>
       )}

@@ -419,6 +419,16 @@
     "015": "鋳造費を送れなかった",
     "016": "管理者は鋳造できません"
   },
+  "withdrawErrCode": {
+    "001": "gas金の不足!",
+    "002": "gas金上限を超えている!",
+    "003": "maticを料金コレクトアドレスに送信失敗!",
+    "004": "ガス代は最大料金より安くなければならない!",
+    "005": "最大料金はガソリン代より高いはず!",
+    "006": "料金コレクトアドレスはゼロアドレス",
+    "007": "単位は0以上でなければならない!",
+    "4001": "ユーザーが支払いを拒否!"
+  },
   "serviceMsg": {
     "servErr": "内部サーバーエラー",
     "paramsIsNull": "クエリパラメータはすべて空です",
@@ -427,7 +437,7 @@
   "blockMsg": {
     "keyAmount": "冷凍KEYs",
     "availableAmount": "抽出可能なKEY数",
-    "totalSupply": "抽出可能なKEY数(Network)",
+    "totalSupply": "ユーザーのためのKEYs(All Network)",
     "totalFrozenSupply": "冷凍KEYs(Network)",
     "blockDate": "ブロック時間",
     "blockHeight": "データが同期するブロックの高さ",

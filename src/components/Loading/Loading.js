@@ -1,6 +1,6 @@
 import React from 'react'
 import { Spin } from 'antd'
-import { SyncOutlined } from '@ant-design/icons'
+import { LoadingOutlined } from '@ant-design/icons'
 import 'antd/es/spin/style/css'
 import styled from '@emotion/styled/macro'
 
@@ -16,7 +16,7 @@ export default function Loading(props) {
       <Spin
         {...props}
         indicator={
-          <SyncOutlined
+          <LoadingOutlined
             spin
             style={{
               color: props.defaultColor ? props.defaultColor : '#ea6060'

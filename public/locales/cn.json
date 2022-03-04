@@ -417,6 +417,16 @@
     "015": "发送铸造费失败",
     "016": "管理员不能铸造"
   },
+  "withdrawErrCode": {
+    "001": "gas费不足!",
+    "002": "gas费超出限制!",
+    "003": "发送Matic到费用归集地址失败!",
+    "004": "gas费必须低于最高费用!",
+    "005": "最高费用必须超过gas费!",
+    "006": "归集地址是零地址!",
+    "007": "单位必须多于零!",
+    "4001": "用户拒绝交易!"
+  },
   "serviceMsg": {
     "servErr": "网络服务出错",
     "paramsIsNull": "参数为空",
@@ -425,7 +435,7 @@
   "blockMsg": {
     "keyAmount": "冻结的KEYs",
     "availableAmount": "可提取的KEYs",
-    "totalSupply": "全网可提取的KEYs",
+    "totalSupply": "全网用户的KEYs",
     "totalFrozenSupply": "全网冻结的KEYs",
     "blockDate": "区块时间",
     "blockHeight": "区块高度",
