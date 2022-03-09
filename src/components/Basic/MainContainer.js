@@ -6,13 +6,13 @@ const MainContainer = styled('div')`
   margin: 0 auto;
   background: white;
   box-shadow: 3px 4px 6px 0 rgba(229, 236, 241, 0.3);
-  border-radius: 0;
+  border-radius: 14px 14px 0 0;
   margin-bottom: 60px;
   position: relative;
   overflow: hidden;
 
   ${mq.small`
-    border-radius: 6px;
+    border-radius: 14px;
   `}
 
   &:before {

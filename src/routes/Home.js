@@ -200,17 +200,17 @@ const Search = styled(SearchDefault)`
 
   input {
     width: 100%;
-    border-radius: 7px 0 0 7px;
+    border-radius: 14px 0 0 14px;
     ${mq.medium`
       font-size: 28px;
-      border-radius: 16px 0 0 16px;
+      border-radius: 14px 0 0 14px;
     `}
   }
 
   button {
-    border-radius: 0 7px 7px 0;
+    border-radius: 0 14px 14px 0;
     ${mq.medium`
-    border-radius: 0 16px 16px 0;
+    border-radius: 0 14px 14px 0;
     `}
   }
 `

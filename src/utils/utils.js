@@ -373,3 +373,11 @@ export function getOwnerNameAndAddress() {
 
   return { accounts, network, displayName, isReadOnly, isSafeApp }
 }
+
+// display '-' when the value is empty
+export function handleEmptyValue(value) {
+  if (value) {
+    return value
+  }
+  return '-'
+}

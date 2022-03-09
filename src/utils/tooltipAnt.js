@@ -13,7 +13,7 @@ export default function TooltipAnt(props) {
       {...props}
       title={<TooltipTitleWrapper>{props.title}</TooltipTitleWrapper>}
       overlayInnerStyle={{
-        borderRadius: '6px'
+        borderRadius: '14px'
       }}
       color="white"
     >

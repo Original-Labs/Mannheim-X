@@ -1,0 +1,15 @@
+.NoticeModalBody {
+  border-radius: 14px;
+}
+
+.NoticeModalBody > .ant-modal-content {
+  border-radius: 14px;
+}
+
+.NoticeModalBody > .ant-modal-content > .ant-modal-header {
+  border-radius: 14px 14px 0 0;
+}
+
+.NoticeModalBody > .ant-modal-content > .ant-modal-body {
+  padding: 32px 15px 15px;
+}

@@ -19,17 +19,18 @@ import AddFavourite from '../AddFavourite/AddFavourite'
 import axios from 'axios'
 import messageMention from 'utils/messageMention'
 import { getAirdropData } from '../../api/reqList'
-import { Card, Row, Col, Typography } from 'antd'
-import Button from 'components/Forms/Button'
+import { Card, Row, Col, Typography, Button, Modal } from 'antd'
 import getSNS, { getSNSWithdraw } from 'apollo/mutations/sns'
 import OpenseaIcon from 'components/Icons/OpenseaIcon'
-import { H2 } from 'components/Typography/Basic'
+import { H2, Title } from 'components/Typography/Basic'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import TooltipAnt from 'utils/tooltipAnt'
 import Loading from 'components/Loading/Loading'
 import { Trans } from 'react-i18next'
+import { handleEmptyValue } from 'utils/utils'
+import './ChildDomainItem.css'
 
-const { Text } = Typography
+const { Text, Paragraph } = Typography
 
 const ChildDomainItemContainer = styled('div')`
   ${mq.small`
@@ -93,7 +94,7 @@ const BlockMsgContainer = styled(Card)`
   height: 100%;
   min-width: 300px;
   padding: 20px 0 10px 10px;
-  border-radius: 6px;
+  border-radius: 14px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   color: #2b2b2b;
   :hover {
@@ -112,10 +113,22 @@ const BlockTextWrapper = styled('div')`
 const ButtonWrapper = styled(Button)`
   min-width: 127px;
   height: 46px;
+  font-weight: 700;
+  &:hover {
+    box-shadow: 0 10px 21px 0 rgb(161 175 184 / 89%);
+    ${p =>
+      !p.disabled &&
+      `
+      border-color: #2c46a6 !important;
+      background: #2c46a6 !important;`}
+  }
 `
 
 const ButtonAndIcon = styled('div')`
   display: flex;
+  .ant-btn-round {
+    height: 46px;
+  }
 `
 
 const BlockText = styled(H2)`
@@ -139,7 +152,7 @@ const TextContainer = styled(Text)`
 const InfoCircleOutlinedContainer = styled(InfoCircleOutlined)`
   padding: 0 10px;
   font-size: 25px;
-  line-height: 56px;
+  line-height: 60px;
   color: #ea6060;
   &:hover {
     transform: scale(1.1);
@@ -151,12 +164,19 @@ const DomainLinkContainer = styled(Card)`
   height: 100%;
   min-width: 300px;
   padding: 20px 0 10px 10px;
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   color: #2b2b2b;
   :hover {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 10px;
     transition: all 0.5s;
+  }
+`
+
+const WithdrawRuleModal = styled(Modal)`
+  .ant-modal-title {
+    font-weight: 700;
+    text-align: center;
   }
 `
 
@@ -178,6 +198,7 @@ export default function ChildDomainItem({
   const { startPending, setConfirmed } = actions
   const [withdrawLoading, setWithdrawLoading] = useState(false)
   const [blockMsgLoading, setBlockMsgLoading] = useState(false)
+  const [ruleVisible, setRuleVisible] = useState(false)
   const [blockMsg, setBlockMsg] = useState({
     address: '-',
     keyAmount: '-',
@@ -255,9 +276,47 @@ export default function ChildDomainItem({
       })
   }
 
+  // Tips for success after clicking the button
+  const withdrawInfoMsgModal = hash => {
+    Modal.warning({
+      title: (
+        <span style={{ color: '#ea6060', fontWeight: '700' }}>
+          {' '}
+          {t('blockMsg.withdrawTitle')}
+        </span>
+      ),
+      content: (
+        <span>
+          {t('blockMsg.withdrawDes1')}
+          <a
+            style={{ fontWeight: '700' }}
+            href={`https://polygonscan.com/tx/${hash}`}
+            target="_blank"
+          >
+            {t('c.here')}
+          </a>
+          {t('blockMsg.withdrawDes2')}
+        </span>
+      ),
+      okText: <span style={{ lineHeight: '26px' }}>OK</span>,
+      okButtonProps: {
+        shape: 'round',
+        danger: true
+      },
+      width: smallBP ? '500px' : '',
+      className: 'NoticeModalBody',
+      style: { marginTop: '20vh' }
+    })
+  }
+
+  // handle call withdraw contract of funciton
   const callWithdraw = () => {
-    setWithdrawLoading(true)
+    // setWithdrawLoading(true)
+
+    // get withdraw contract instance
     const withdrawInstance = getSNSWithdraw()
+
+    // call withdraw function
     withdrawInstance
       .withdraw()
       .then(resp => {
@@ -265,12 +324,16 @@ export default function ChildDomainItem({
           // call getBlockMsgFn function refresh block info
           getBlockMsgFn()
 
+          // call success modal info tip
+          withdrawInfoMsgModal(resp.hash)
+
           messageMention({
             type: 'success',
             content: `${t('z.transferSuccess')}`,
             style: { marginTop: '10vh' }
           })
         }
+
         setWithdrawLoading(false)
       })
       .catch(e => {
@@ -384,11 +447,22 @@ export default function ChildDomainItem({
               >
                 <BlockTextWrapper>
                   <BlockText>
-                    {t('blockMsg.availableAmount')}:{blockMsg.availableAmount}
+                    {t('blockMsg.availableAmount')}:
+                    {handleEmptyValue(blockMsg.availableAmount)}
                   </BlockText>
                   <ButtonAndIcon>
                     <Loading loading={withdrawLoading}>
                       <ButtonWrapper
+                        disabled={
+                          blockMsg.availableAmount &&
+                          blockMsg.availableAmount !== '0'
+                            ? false
+                            : true
+                        }
+                        type="primary"
+                        shape="round"
+                        size="middle"
+                        danger
                         onClick={() => {
                           callWithdraw()
                         }}
@@ -397,7 +471,9 @@ export default function ChildDomainItem({
                       </ButtonWrapper>
                     </Loading>
                     <TooltipAnt title={t('blockMsg.withdrawRule')}>
-                      <InfoCircleOutlinedContainer />
+                      <InfoCircleOutlinedContainer
+                        onClick={() => setRuleVisible(true)}
+                      />
                     </TooltipAnt>
                   </ButtonAndIcon>
                 </BlockTextWrapper>
@@ -424,6 +500,29 @@ export default function ChildDomainItem({
           </Col>
         </Row>
       )}
+      <WithdrawRuleModal
+        title={t('blockMsg.withdrawRule')}
+        visible={ruleVisible}
+        onCancel={() => setRuleVisible(false)}
+        style={{ top: '20vh' }}
+        maskClosable={false}
+        className="NoticeModalBody"
+        footer={[
+          <Button
+            onClick={() => setRuleVisible(false)}
+            type="primary"
+            shape="round"
+            danger
+          >
+            {t('c.gotIt')}
+          </Button>
+        ]}
+      >
+        <Paragraph>{t('blockMsg.withdrawRuleContent')}</Paragraph>
+        <Paragraph>{t('blockMsg.withdrawRuleContent1')}</Paragraph>
+        <Paragraph>{t('blockMsg.withdrawRuleContent2')}</Paragraph>
+        <Paragraph>{t('blockMsg.withdrawRuleContent3')}</Paragraph>
+      </WithdrawRuleModal>
     </ChildDomainItemContainer>
   )
 }

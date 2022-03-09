@@ -74,7 +74,9 @@
     "year": "year",
     "year_plural": "years",
     "clickToQRCode": "Click the QR code to save the page",
-    "pressSaveImg": "Long press to save image"
+    "pressSaveImg": "Long press to save image",
+    "here": "here",
+    "gotIt":"Got it"
   },
   "certificate": {
     "button": "Request SSL certificate",
@@ -446,6 +448,13 @@
     "blockHeight": "Block height for data sync",
     "EstimatedTimeOfAirdrop": "Airdrop is expected to begin in mid-March 2022",
     "withdraw": "Withdraw",
-    "withdrawRule": "Withdraw rules"
+    "withdrawRule": "Withdraw rules",
+    "withdrawTitle": "Note: Please don't click withdraw coins repeatedly, otherwise you will lose your commission",
+    "withdrawDes1": "Withdrawal application has been submitted, you can click ",
+    "withdrawDes2": " to check the application status",
+    "withdrawRuleContent": "After the team and community research, in order to prevent the excessive release of tokens from causing dumping pressure and thus affecting the sustainable development of the project. The following withdrawal rules are set:",
+    "withdrawRuleContent1": "1. Each account can withdraw tokens: 10 KEY/week, need to meet the frozen KEY ≥ 10.",
+    "withdrawRuleContent2": "2. Tokens can be withdrawn in a cumulative system, and can be withdrawn at once after several cycles. ",
+    "withdrawRuleContent3": "3. A small withdrawal fee will be charged when you click on the token withdrawal request, and the exact amount will be indicated when you initiate the transaction."
   }
 }

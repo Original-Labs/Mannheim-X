@@ -71,7 +71,9 @@
     "warning": "Warning",
     "year": "年",
     "clickToQRCode": "QRコードをクリックしてページを保存します",
-    "pressSaveImg": "写真を保存するために長押し"
+    "pressSaveImg": "写真を保存するために長押し",
+    "here": "これ",
+    "gotIt": "よっしゃ"
   },
   "certificate": {
     "button": "SSL認証をリクエスト",
@@ -443,6 +445,13 @@
     "blockHeight": "データが同期するブロックの高さ",
     "EstimatedTimeOfAirdrop": "2022年3月中旬にトークン投下分配開始予定",
     "withdraw": "コイン引き出し",
-    "withdrawRule": "コイン引き出しルール"
+    "withdrawRule": "コイン引き出しルール",
+    "withdrawTitle": "注意：コインを引き出すためにダブルクリックしないでください。",
+    "withdrawDes1": "出金依頼が送信されましたので、",
+    "withdrawDes2": "をクリックすると、出金依頼の状況を確認することができます",
+    "withdrawRuleContent": "チームとコミュニティは、トークンの過剰な放出がダンピング圧力を引き起こし、その結果プロジェクトの持続可能性に影響を与えることを防ぐために研究してきました。 以下のような出金ルールが設定されています。",
+    "withdrawRuleContent1": "1. アカウントごとに引き出せるトークン：10 KEY/週、KEY≥10の凍結を条件とする。",
+    "withdrawRuleContent2": "2. トークンの引き出しは累計で行い、何回かに分けて1回分の引き出しが可能です。",
+    "withdrawRuleContent3": "3. 引き出し要求をクリックすると、少額の引き出し手数料が発生します。正確な金額は、取引が開始されたときに表示されます。"
   }
 }

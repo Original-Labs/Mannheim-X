@@ -13,7 +13,7 @@ const NoAccountsContainer = styled('div')`
     `1px solid ${active ? '#fff' : colour}`};
   border-right: ${({ active, colour }) =>
     `1px solid ${active ? '#fff' : colour}`};
-  border-radius: ${({ active }) => (active ? '6px 6px 0 0' : '6px')};
+  border-radius: ${({ active }) => (active ? '6px 6px 0 0' : '14px')};
   background: ${({ active }) => (active ? 'white' : 'transparent')};
   display: flex;
   align-items: center;

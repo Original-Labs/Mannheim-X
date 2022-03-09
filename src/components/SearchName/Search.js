@@ -31,7 +31,7 @@ const SearchForm = styled('form')`
     width: 100%;
     height:36px;
     border: none;
-    border-radius: 7px 0 0 7px;
+    border-radius: 14px 0 0 14px;
     // ${p =>
       p.mediumBP ? `border-radius:14px 0 0 14px;` : `border-radius:0;`}
     font-size: 18px;
@@ -65,7 +65,7 @@ const SearchForm = styled('form')`
     line-height:36px;
     width: calc(100% - 240px);
     border: none;
-    border-radius: 0 7px 7px 0;
+    border-radius: 0 14px 14px 0;
     ${mq.medium`
       display: block;
       width: 162px;
