@@ -71,7 +71,9 @@
     "warning": "Warning",
     "year": "年",
     "clickToQRCode": "QRコードをクリックしてページを保存します",
-    "pressSaveImg": "写真を保存するために長押し"
+    "pressSaveImg": "写真を保存するために長押し",
+    "here": "これ",
+    "gotIt": "よっしゃ"
   },
   "certificate": {
     "button": "SSL認証をリクエスト",
@@ -353,7 +355,8 @@
     "tabs": {
       "details": "詳細",
       "register": "登録",
-      "subdomains": "サブドメイン"
+      "subdomains": "サブドメイン",
+      "shareBtn": "シェアリングページを見る"
     },
     "test": {
       "note": "注：.testドメインは、誰でもテスト目的で未使用の名前を請求することができ、28日後に有効期限が切れます。"
@@ -418,16 +421,37 @@
     "015": "鋳造費を送れなかった",
     "016": "管理者は鋳造できません"
   },
+  "withdrawErrCode": {
+    "001": "gas金の不足!",
+    "002": "gas金上限を超えている!",
+    "003": "maticを料金コレクトアドレスに送信失敗!",
+    "004": "ガス代は最大料金より安くなければならない!",
+    "005": "最大料金はガソリン代より高いはず!",
+    "006": "料金コレクトアドレスはゼロアドレス",
+    "007": "単位は0以上でなければならない!",
+    "4001": "ユーザーが支払いを拒否!"
+  },
   "serviceMsg": {
     "servErr": "内部サーバーエラー",
     "paramsIsNull": "クエリパラメータはすべて空です",
     "unkonwErr": "不明な間違い"
   },
   "blockMsg": {
-    "amtToBeAllocated": "配分される金額(key)",
+    "keyAmount": "冷凍KEYs",
+    "availableAmount": "抽出可能なKEY数",
+    "totalSupply": "ユーザーのためのKEYs(All Network)",
+    "totalFrozenSupply": "冷凍KEYs(Network)",
     "blockDate": "ブロック時間",
     "blockHeight": "データが同期するブロックの高さ",
-    "totalAmtTobeAirdrop": "割り当て待ちの総額(key)",
-    "EstimatedTimeOfAirdrop": "2022年3月中旬にトークン投下分配開始予定"
+    "EstimatedTimeOfAirdrop": "2022年3月中旬にトークン投下分配開始予定",
+    "withdraw": "コイン引き出し",
+    "withdrawRule": "コイン引き出しルール",
+    "withdrawTitle": "注意：コインを引き出すためにダブルクリックしないでください。",
+    "withdrawDes1": "出金依頼が送信されましたので、",
+    "withdrawDes2": "をクリックすると、出金依頼の状況を確認することができます",
+    "withdrawRuleContent": "チームとコミュニティは、トークンの過剰な放出がダンピング圧力を引き起こし、その結果プロジェクトの持続可能性に影響を与えることを防ぐために研究してきました。 以下のような出金ルールが設定されています。",
+    "withdrawRuleContent1": "1. アカウントごとに引き出せるトークン：10 KEY/週、KEY≥10の凍結を条件とする。",
+    "withdrawRuleContent2": "2. トークンの引き出しは累計で行い、何回かに分けて1回分の引き出しが可能です。",
+    "withdrawRuleContent3": "3. 引き出し要求をクリックすると、少額の引き出し手数料が発生します。正確な金額は、取引が開始されたときに表示されます。"
   }
 }

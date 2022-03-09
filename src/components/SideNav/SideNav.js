@@ -156,7 +156,6 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
   const {
     data: { accounts, isReadOnly }
   } = useQuery(SIDENAV_QUERY)
-  console.log('SideNav:', this)
 
   return (
     <SideNavContainer isMenuOpen={isMenuOpen} hasNonAscii={hasNonAscii()}>

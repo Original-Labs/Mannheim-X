@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled/macro'
+import mq from 'mediaQuery'
 
 import DomainItem from '../DomainItem/ChildDomainItem'
 
@@ -35,9 +36,12 @@ const NoDomainsContainer = styled('div')`
 
 const DomainsContainer = styled('div')`
   margin-top: 20px;
+  padding: 0 20px;
   padding-bottom: 30px;
-  padding-left: 40px;
-  padding-right: 40px;
+  ${mq.small`
+    padding-left: 40px;
+    padding-right: 40px;
+  `}
 `
 
 export function hasName(nameInstance) {

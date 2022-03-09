@@ -74,7 +74,9 @@
     "year": "year",
     "year_plural": "years",
     "clickToQRCode": "Click the QR code to save the page",
-    "pressSaveImg": "Long press to save image"
+    "pressSaveImg": "Long press to save image",
+    "here": "here",
+    "gotIt":"Got it"
   },
   "certificate": {
     "button": "Request SSL certificate",
@@ -356,7 +358,8 @@
     "tabs": {
       "details": "Details",
       "register": "Register",
-      "subdomains": "Subdomains"
+      "subdomains": "Subdomains",
+      "shareBtn": "View share page"
     },
     "test": {
       "note": "Note: .test domain allows anyone to claim an unused name for test purposes, which expires after 28 days"
@@ -421,16 +424,37 @@
     "015": "Failed to send casting fee",
     "016": "Manager can't mint"
   },
+  "withdrawErrCode": {
+    "001": "gas fee not enough!",
+    "002": "gas fee over limit!",
+    "003": "send matic to fee collect address fail!",
+    "004": "gas fee must less than max fee!",
+    "005": "max fee must more than gas fee!",
+    "006": "fee collect address is the zero address!",
+    "007": "unit must more than zero!",
+    "4001": "User denied transaction!"
+  },
   "serviceMsg": {
     "servErr": "Internal server error",
     "paramsIsNull": "Query param all empty",
     "unkonwErr": "Unknown error"
   },
   "blockMsg": {
-    "amtToBeAllocated": "Your KEYs(Unallocated)",
+    "keyAmount": "User-frozen KEYs",
+    "availableAmount": "Withdrawable KEYs(User)",
+    "totalSupply": "User's KEYs(All Network)",
+    "totalFrozenSupply": "Frozen KEYs(Network)",
     "blockDate": "Block Date",
     "blockHeight": "Block height for data sync",
-    "totalAmtTobeAirdrop": "All User`s KEYs(Unallocated)",
-    "EstimatedTimeOfAirdrop": "Airdrop is expected to begin in mid-March 2022"
+    "EstimatedTimeOfAirdrop": "Airdrop is expected to begin in mid-March 2022",
+    "withdraw": "Withdraw",
+    "withdrawRule": "Withdraw rules",
+    "withdrawTitle": "Note: Please don't click withdraw coins repeatedly, otherwise you will lose your commission",
+    "withdrawDes1": "Withdrawal application has been submitted, you can click ",
+    "withdrawDes2": " to check the application status",
+    "withdrawRuleContent": "After the team and community research, in order to prevent the excessive release of tokens from causing dumping pressure and thus affecting the sustainable development of the project. The following withdrawal rules are set:",
+    "withdrawRuleContent1": "1. Each account can withdraw tokens: 10 KEY/week, need to meet the frozen KEY ≥ 10.",
+    "withdrawRuleContent2": "2. Tokens can be withdrawn in a cumulative system, and can be withdrawn at once after several cycles. ",
+    "withdrawRuleContent3": "3. A small withdrawal fee will be charged when you click on the token withdrawal request, and the exact amount will be indicated when you initiate the transaction."
   }
 }

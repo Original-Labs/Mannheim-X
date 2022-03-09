@@ -86,12 +86,10 @@ function fromPromise(promise, operation) {
       .catch(e => {
         if (e && e.data && e.data.code && e.data.message) {
           let errorMessages = e.data.message.split('---')
-          console.log('errorMessages-------', errorMessages)
           let errorContent
           if (errorMessages.length == 2) {
             // get errorCode
             let errCode = errorMessages[0].split(':')[1].trim()
-            console.log('errCode-------', errCode)
             errorContent = <Trans i18nKey={`errorCode.${errCode}`} />
           } else if (
             errorMessages.length == 1 &&

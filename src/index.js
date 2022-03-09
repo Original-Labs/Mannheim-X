@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import { ApolloProvider } from '@apollo/client'
-
 import App from 'App'
 import 'globalStyles'
 import './i18n'

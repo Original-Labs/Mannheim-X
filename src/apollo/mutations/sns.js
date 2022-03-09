@@ -10,6 +10,7 @@ const INFURA_ID =
 let sns = {},
   snsResolver = {},
   snsAddress = undefined
+let snsWithdraw = {}
 
 export async function setup({
   reloadOnAccountsChange,
@@ -32,12 +33,16 @@ export async function setup({
   const {
     sns: snsInstance,
     snsResolver: snsResolverInstance,
+    snsWithdraw: snsWithdrawInstance,
     providerObject
   } = await setupSNS(option)
+
   sns = snsInstance
   snsResolver = snsResolverInstance
+  snsWithdraw = snsWithdrawInstance
+
   isENSReadyReactive(true)
-  return { sns, snsResolver, providerObject }
+  return { sns, snsResolver, providerObject, snsWithdraw }
 }
 
 export function getSnsResolver() {
@@ -50,4 +55,8 @@ export default function getSNS() {
 
 export function getSNSAddress() {
   return sns.registryAddress
+}
+
+export function getSNSWithdraw() {
+  return snsWithdraw
 }
