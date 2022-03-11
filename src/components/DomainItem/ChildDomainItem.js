@@ -134,16 +134,10 @@ const ButtonAndIcon = styled('div')`
 const BlockText = styled(H2)`
   font-size: 15px;
   color: #000;
-  overflow: hidden;
-  text-overflow: ellipsis;
   text-align: left;
 `
 
 const TextContainer = styled(Text)`
-  width: 70px;
-  ${mq.small`
-    width:80px;
-  `}
   .ant-tooltip-inner {
     background: color;
   }
@@ -201,8 +195,8 @@ export default function ChildDomainItem({
   const [ruleVisible, setRuleVisible] = useState(false)
   const [blockMsg, setBlockMsg] = useState({
     address: '-',
-    keyAmount: '-',
-    availableAmount: '-',
+    keyAmountRound: '-',
+    availableAmountRound: '-',
     keyName: '-',
     totalSupply: '-',
     totalFrozenSupply: '-',
@@ -243,6 +237,7 @@ export default function ChildDomainItem({
   // get block info
   const getBlockMsgFn = () => {
     setBlockMsgLoading(true)
+    console.log('NODE_ENV:', process.env.NODE_ENV)
     axios
       .get(
         `/api/v1/accountService/account/queryAccount?KeyName=${label}&address=${owner}`
@@ -448,14 +443,14 @@ export default function ChildDomainItem({
                 <BlockTextWrapper>
                   <BlockText>
                     {t('blockMsg.availableAmount')}:
-                    {handleEmptyValue(blockMsg.availableAmount)}
+                    {handleEmptyValue(blockMsg.availableAmountRound)}
                   </BlockText>
                   <ButtonAndIcon>
                     <Loading loading={withdrawLoading}>
                       <ButtonWrapper
                         disabled={
-                          blockMsg.availableAmount &&
-                          blockMsg.availableAmount !== '0'
+                          blockMsg.availableAmountRound &&
+                          blockMsg.availableAmountRound !== '0'
                             ? false
                             : true
                         }
@@ -483,7 +478,7 @@ export default function ChildDomainItem({
                     ellipsis={true}
                     style={{ backgroundColor: '#fff' }}
                   >
-                    {blockMsg.keyAmount}
+                    {blockMsg.keyAmountRound}
                   </TextContainer>
                 </BlockText>
                 <BlockText>

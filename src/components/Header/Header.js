@@ -65,7 +65,10 @@ const SearchHeader = styled(Search)`
 `
 
 const SideNavContainer = styled(`div`)`
-  margin-top: 60px;
+  position: absolute;
+  display: flex;
+  flex-flow: row-reverse;
+  right: 0;
 `
 
 const Logo = styled(DefaultLogo)`
@@ -115,7 +118,11 @@ function HeaderContainer() {
         ) : (
           <>
             <LanguageSwitcher />
-            <Hamburger isMenuOpen={isMenuOpen} openMenu={toggleMenu} />
+            <Hamburger
+              isMenuOpen={isMenuOpen}
+              openMenu={toggleMenu}
+              closeMenu={setMenuOpen}
+            />
           </>
         )}
       </Header>
@@ -140,7 +147,8 @@ function HeaderContainer() {
       )}
       {mediumBPMax && (
         <>
-          {!isMenuOpen && <SearchHeader />}
+          {/* {!isMenuOpen && <SearchHeader />} */}
+          <SearchHeader />
           <SideNavContainer>
             <SideNav isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           </SideNavContainer>

@@ -445,7 +445,11 @@ export default ({ match }) => {
         ) : (
           <MobileHeaderContainer>
             <HamburgerContainer>
-              <Hamburger isMenuOpen={isMenuOpen} openMenu={toggleMenu} />
+              <Hamburger
+                isMenuOpen={isMenuOpen}
+                openMenu={toggleMenu}
+                closeMenu={setMenuOpen}
+              />
             </HamburgerContainer>
             <NoAccounts
               onClick={isReadOnly ? connectProvider : disconnectProvider}

@@ -12,7 +12,7 @@ import { connectProvider, disconnectProvider } from '../../utils/providerUtils'
 const NetworkInformationContainer = styled('div')`
   position: relative;
   display: flex;
-  justify-content: center;
+  margin-left: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   ${mq.medium`
     display: block;
