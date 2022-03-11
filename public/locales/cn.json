@@ -435,7 +435,7 @@
     "unkonwErr": "未知错误"
   },
   "blockMsg": {
-    "keyAmount": "冻结的KEYs",
+    "keyAmount": "已分配的KEYs",
     "availableAmount": "可提取的KEYs",
     "totalSupply": "全网用户的KEYs",
     "totalFrozenSupply": "全网冻结的KEYs",

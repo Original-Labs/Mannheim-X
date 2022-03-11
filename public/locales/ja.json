@@ -437,7 +437,7 @@
     "unkonwErr": "不明な間違い"
   },
   "blockMsg": {
-    "keyAmount": "冷凍KEYs",
+    "keyAmount": "割当済みKEYs",
     "availableAmount": "抽出可能なKEY数",
     "totalSupply": "ユーザーのためのKEYs(All Network)",
     "totalFrozenSupply": "冷凍KEYs(Network)",
