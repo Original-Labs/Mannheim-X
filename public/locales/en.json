@@ -440,7 +440,7 @@
     "unkonwErr": "Unknown error"
   },
   "blockMsg": {
-    "keyAmount": "User-frozen KEYs",
+    "keyAmount": "Allocated KEYs",
     "availableAmount": "Withdrawable KEYs(User)",
     "totalSupply": "User's KEYs(All Network)",
     "totalFrozenSupply": "Frozen KEYs(Network)",

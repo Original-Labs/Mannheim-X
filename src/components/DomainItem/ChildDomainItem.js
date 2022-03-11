@@ -450,8 +450,8 @@ export default function ChildDomainItem({
                     <Loading loading={withdrawLoading}>
                       <ButtonWrapper
                         disabled={
-                          blockMsg.availableAmountRound !== '-' &&
-                          blockMsg.availableAmountRound !== '0'
+                          handleEmptyValue(blockMsg.availableAmountRound) !==
+                            '-' && blockMsg.availableAmountRound !== '0'
                             ? false
                             : true
                         }
@@ -479,14 +479,16 @@ export default function ChildDomainItem({
                     ellipsis={true}
                     style={{ backgroundColor: '#fff' }}
                   >
-                    {blockMsg.keyAmountRound}
+                    {handleEmptyValue(blockMsg.keyAmountRound)}
                   </TextContainer>
                 </BlockText>
                 <BlockText>
-                  {t('blockMsg.totalSupply')}:{blockMsg.totalSupply}
+                  {t('blockMsg.totalSupply')}:
+                  {handleEmptyValue(blockMsg.totalSupply)}
                 </BlockText>
                 <BlockText>
-                  {t('blockMsg.blockHeight')}:{blockMsg.curBlockNumber}
+                  {t('blockMsg.blockHeight')}:
+                  {handleEmptyValue(blockMsg.curBlockNumber)}
                 </BlockText>
                 <h4 style={{ color: '#ddd' }}>
                   * {t('blockMsg.EstimatedTimeOfAirdrop')}
