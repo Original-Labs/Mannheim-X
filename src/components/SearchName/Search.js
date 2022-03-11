@@ -14,6 +14,7 @@ const SearchForm = styled('form')`
   display: flex;
   position: relative;
   ${p => (p && p.pathName === '/' ? ` z-index:100;` : ``)}
+  align-self:center;
 
   &:before {
     content: '';
@@ -29,19 +30,20 @@ const SearchForm = styled('form')`
   input {
     padding: 20px 10px;
     width: 100%;
-    height:36px;
+    height:40px;
     border: none;
     border-radius: 14px 0 0 14px;
     // ${p =>
       p.mediumBP ? `border-radius:14px 0 0 14px;` : `border-radius:0;`}
-    font-size: 18px;
+    font-size: 16px;
     font-family: Overpass;
     font-weight: 100;
+    padding: 3px 15px 0;
     ${mq.medium`
-      width: calc(100% - 162px);
-      height:90px;
-      font-size: 28px;
-      padding: 20px 30px;
+      width: calc(600px - 162px);
+      height:45px;
+      font-size: 18px;
+      padding: 3px 15px 0;
     `}
 
     &:focus {
@@ -51,6 +53,7 @@ const SearchForm = styled('form')`
     &::-webkit-input-placeholder {
       /* Chrome/Opera/Safari */
       color: #ccd4da;
+      line-height:47px;
     }
   }
 
@@ -59,17 +62,18 @@ const SearchForm = styled('form')`
       p && p.hasSearch
         ? 'background: #eb8b8c;color: white;'
         : 'background: #ddd; color:#fff;'}
-    font-size: 22px;
+    font-size: 18px;
     height:40px;
     font-family: Overpass;
     line-height:36px;
-    width: calc(100% - 240px);
+    width: calc(350px - 240px);
     border: none;
     border-radius: 0 14px 14px 0;
     ${mq.medium`
       display: block;
-      width: 162px;
-      height: 90px;
+      width: 115px;
+      height: 45px;
+      line-height: 47px;
       border-radius: 0 14px 14px 0;
     `}
     &:hover {

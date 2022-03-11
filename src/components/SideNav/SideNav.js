@@ -24,7 +24,7 @@ const SideNavContainer = styled('nav')`
   left: 0;
   height: auto;
   background: white;
-  width: 100%;
+  width: 230px;
   margin-top: -10px;
   border-radius: 14px;
   ${mq.medium`

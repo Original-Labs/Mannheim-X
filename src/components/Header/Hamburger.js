@@ -117,7 +117,7 @@ const HamburgerContainer = styled('div')`
   }
 `
 
-const Hamburger = ({ isMenuOpen = false, openMenu }) => (
+const Hamburger = ({ isMenuOpen = false, openMenu, closeMenu }) => (
   <HamburgerContainer isMenuOpen={isMenuOpen}>
     <div className="mobile-nav">
       <button
@@ -126,6 +126,12 @@ const Hamburger = ({ isMenuOpen = false, openMenu }) => (
         }`}
         type="button"
         onClick={openMenu}
+        onBlur={() => {
+          // delay close menu
+          setTimeout(() => {
+            closeMenu(false)
+          }, 100)
+        }}
       >
         <span className="hamburger-box">
           <span className="hamburger-inner" />

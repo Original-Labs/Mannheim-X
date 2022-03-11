@@ -115,15 +115,35 @@ const Nav = styled('div')`
 
 const NavLink = styled(Link)`
   margin-left: 20px;
+  border-radius: 16px;
   &:first-child {
     margin-left: 0;
+  }
+  &:hover {
+    font-weight: 700;
+    padding: 5px 10px;
+    border: 1px solid #fff;
+    border-radius: 16px;
+  }
+  &:foucs {
+    font-weight: 700;
+    padding: 5px 10px;
+    border: 1px solid #fff;
+    border-radius: 16px;
   }
 `
 
 const ExternalLink = styled('a')`
+  border-radius: 16px;
   margin-left: 20px;
   &:first-child {
     margin-left: 0;
+  }
+  &:hover {
+    font-weight: 700;
+    padding: 5px 10px;
+    border: 1px solid #fff;
+    border-radius: 16px;
   }
 `
 
@@ -201,16 +221,20 @@ const Search = styled(SearchDefault)`
   input {
     width: 100%;
     border-radius: 14px 0 0 14px;
+    height: 40px;
     ${mq.medium`
-      font-size: 28px;
-      border-radius: 14px 0 0 14px;
+      height:70px;
+      font-size: 21px;
+      border-radius: 24px 0 0 24px;
     `}
   }
 
   button {
     border-radius: 0 14px 14px 0;
+    font-size: 18px;
     ${mq.medium`
-    border-radius: 0 14px 14px 0;
+      height:70px;
+      border-radius: 0 24px 24px 0;
     `}
   }
 `
@@ -237,44 +261,6 @@ const Section = styled('section')`
   display: flex;
   justify-content: center;
   align-items: center;
-`
-
-const WhatItIs = styled(Section)`
-  padding: 40px 20px 80px;
-  p {
-    font-size: 18px;
-  }
-`
-
-const HowItWorks = styled(Section)`
-  background: #f0f6fa;
-  padding: 40px 20px 80px;
-`
-
-const Inner = styled('div')`
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 350px;
-
-  > p {
-    font-weight: 300;
-    font-size: 20px;
-    margin-bottom: 1.5em;
-  }
-`
-const NameAnimation = styled(Section)`
-  display: block;
-  height: 100%;
-`
-
-const TextBubble = styled(TextBubbleDefault)`
-  margin-right: 10px;
-`
-
-const QuestionMark = styled(QuestionMarkDefault)`
-  transform: scale(1.18);
-  margin-right: 10px;
 `
 
 const LogoLarge = styled(motion.img)`
@@ -420,7 +406,9 @@ export default ({ match }) => {
               <ExternalLink href={aboutPageURL()}>
                 {t('c.linkkey')}
               </ExternalLink>
-              <LanguageSwitcher />
+              <NavLink>
+                <LanguageSwitcher />
+              </NavLink>
             </Nav>
             <NetworkStatus>
               <Network>
@@ -445,7 +433,11 @@ export default ({ match }) => {
         ) : (
           <MobileHeaderContainer>
             <HamburgerContainer>
-              <Hamburger isMenuOpen={isMenuOpen} openMenu={toggleMenu} />
+              <Hamburger
+                isMenuOpen={isMenuOpen}
+                openMenu={toggleMenu}
+                closeMenu={setMenuOpen}
+              />
             </HamburgerContainer>
             <NoAccounts
               onClick={isReadOnly ? connectProvider : disconnectProvider}

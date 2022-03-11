@@ -72,8 +72,8 @@ const Avatar = styled('img')`
 const Blockies = styled(UnstyledBlockies)`
   border-radius: 50%;
   position: absolute;
-  left: 10px;
-  top: 25px;
+  // left: 10px;
+  // top: 25px;
 `
 
 const DefaultAvatarContainer = styled('div')`
