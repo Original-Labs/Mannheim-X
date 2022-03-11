@@ -48,6 +48,7 @@ const Header = styled('header')`
   width: 100%;
   z-index: 2;
   height: 50px;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
   ${mq.medium`
     height: auto;
   `}
@@ -57,9 +58,10 @@ const SearchHeader = styled(Search)`
   background-color: transparent;
   margin-top: 50px;
   width: 100%;
-  padding: 0 20px;
+  padding: 5px 20px 0px;
   ${mq.medium`
     margin-top: 0;
+    padding:0px 20px;
     width: calc(100% - 200px);
   `}
 `
@@ -88,11 +90,9 @@ const Logo = styled(DefaultLogo)`
     &:before {
       background: #d3d3d3;
       height: 32px;
-      margin-top: 30px;
       content: '';
       width: 1px;
       right: 35px;
-      top: 0;
       position: absolute;
     }
   `}

@@ -237,6 +237,7 @@ export default function ChildDomainItem({
   // get block info
   const getBlockMsgFn = () => {
     setBlockMsgLoading(true)
+    console.log('blockMsg:', blockMsg)
     console.log('NODE_ENV:', process.env.NODE_ENV)
     axios
       .get(
@@ -449,7 +450,7 @@ export default function ChildDomainItem({
                     <Loading loading={withdrawLoading}>
                       <ButtonWrapper
                         disabled={
-                          blockMsg.availableAmountRound &&
+                          blockMsg.availableAmountRound !== '-' &&
                           blockMsg.availableAmountRound !== '0'
                             ? false
                             : true
