@@ -195,7 +195,7 @@ export default function ChildDomainItem({
   const [ruleVisible, setRuleVisible] = useState(false)
   const [blockMsg, setBlockMsg] = useState({
     address: '-',
-    keyAmount: '-',
+    keyAmountRound: '-',
     availableAmountRound: '-',
     keyName: '-',
     totalSupply: '-',
@@ -479,7 +479,7 @@ export default function ChildDomainItem({
                     ellipsis={true}
                     style={{ backgroundColor: '#fff' }}
                   >
-                    {handleEmptyValue(blockMsg.keyAmount)}
+                    {handleEmptyValue(blockMsg.keyAmountRound)}
                   </TextContainer>
                 </BlockText>
                 <BlockText>
