@@ -62,21 +62,25 @@ const ActiveLanguage = styled('div')`
   text-transform: uppercase;
   display: flex;
   justify-content: center;
-  height: 100%;
-  padding: 0 20px;
+  padding: 5px 20px;
   align-items: center;
+  border: 1px solid transparent;
   span {
     margin-right: 10px;
   }
 
   &:hover {
     cursor: pointer;
+    border: 1px solid #fff;
+    padding: 5px 20px;
+    border-radius: 16px;
   }
 `
 
 const LanguageSwitcherContainer = styled('div')`
-  //background: white;
   position: relative;
+  height: 100%;
+  align-self: center;
 `
 
 const Dropdown = styled(motion.div)`
