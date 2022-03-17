@@ -5,7 +5,7 @@ module.exports = function(app) {
     createProxyMiddleware('/api', {
       target:
         process.env.NODE_ENV === 'development'
-          ? 'http://test.linkkey.tech'
+          ? 'https://sns.chat'
           : 'https://sns.chat',
       changeOrigin: true
     })
