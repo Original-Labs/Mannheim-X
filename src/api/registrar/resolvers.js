@@ -2,6 +2,7 @@ import { isShortName } from '../../utils/utils'
 
 import getENS, { getRegistrar } from 'apollo/mutations/ens'
 import getSNS, { getSNSIERC20 } from 'apollo/mutations/sns'
+import EthVal from 'ethval'
 
 import modeNames from '../modes'
 import { sendHelper } from '../resolverUtils'
@@ -59,42 +60,53 @@ const resolvers = {
     async commit(_, { label, coinsType, ownerAddress }) {
       const sns = getSNS()
       if (coinsType === 'key') {
-        console.log('ownerAddress:', ownerAddress)
         const keyAddress = await sns.getKeyCoinsAddress()
         const keyCoins = await sns.getKeyCoinsPrice()
-        console.log('keyAddress:', keyAddress)
-        console.log('keyCoins:', keyCoins)
 
         const snsIERC20 = await getSNSIERC20(keyAddress)
 
-        console.log('snsIERC20:', snsIERC20)
+        await snsIERC20.approve(keyAddress, keyCoins)
 
-        const approveValue = await snsIERC20.approve(keyAddress, keyCoins)
-        console.log('approveValue:', approveValue)
-
-        setTimeout(() => {
+        setTimeout(async () => {
           let timer,
-            count = 0
+            count = 0,
+            allowancePrice
           timer = setInterval(async () => {
             try {
               count += 1
-              const isAllowance = await snsIERC20.allowance(
+              allowancePrice = await snsIERC20.allowance(
                 ownerAddress,
                 keyAddress
               )
-              console.log('isAllowance:', isAllowance)
+              console.log('allowancePrice:', allowancePrice)
             } catch (e) {
-              console.log('allowanceError:', e)
-            }
-            if (count === 6) {
-              console.log('count:', count)
+              console.log('allowance:', e)
               clearInterval(timer)
             }
-          }, 1000)
-        }, 1000)
+            try {
+              const price = new EthVal(`${allowancePrice || 0}`)
+                .toEth()
+                .toFixed(3)
+              console.log('type', typeof price)
+              if (price !== '0.00') {
+                console.log('price:', price)
+                const tx = await sns.mintByMoreCoins(label, 1)
+                clearInterval(timer)
+              }
+            } catch (e) {
+              console.log('mintByMoreCoins:', e)
+              clearInterval(timer)
+            }
+            //
+            if (count === 10) {
+              clearInterval(timer)
+            }
+          }, 3000)
+        }, 0)
+      } else {
+        const tx = await sns.registry(label)
+        return sendHelper(tx)
       }
-      const tx = await sns.registry(label)
-      return sendHelper(tx)
     },
     async register(_, { label, duration, secret }) {
       const registrar = getRegistrar()
