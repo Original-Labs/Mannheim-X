@@ -154,8 +154,8 @@ export const RECLAIM = gql`
 `
 
 export const COMMIT = gql`
-  mutation commit($label: String, $secret: String) {
-    commit(label: $label, secret: $secret)
+  mutation commit($label: String, $secret: String, $coinsType: String) {
+    commit(label: $label, secret: $secret, coinsType: $coinsType)
   }
 `
 

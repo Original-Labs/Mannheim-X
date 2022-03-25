@@ -1,7 +1,7 @@
 import { isShortName } from '../../utils/utils'
 
 import getENS, { getRegistrar } from 'apollo/mutations/ens'
-import getSNS, { getSnsResolver } from 'apollo/mutations/sns'
+import getSNS, { getSNSIERC20 } from 'apollo/mutations/sns'
 
 import modeNames from '../modes'
 import { sendHelper } from '../resolverUtils'
@@ -56,8 +56,43 @@ const resolvers = {
     }
   },
   Mutation: {
-    async commit(_, { label }) {
+    async commit(_, { label, coinsType, ownerAddress }) {
       const sns = getSNS()
+      if (coinsType === 'key') {
+        console.log('ownerAddress:', ownerAddress)
+        const keyAddress = await sns.getKeyCoinsAddress()
+        const keyCoins = await sns.getKeyCoinsPrice()
+        console.log('keyAddress:', keyAddress)
+        console.log('keyCoins:', keyCoins)
+
+        const snsIERC20 = await getSNSIERC20(keyAddress)
+
+        console.log('snsIERC20:', snsIERC20)
+
+        const approveValue = await snsIERC20.approve(keyAddress, keyCoins)
+        console.log('approveValue:', approveValue)
+
+        setTimeout(() => {
+          let timer,
+            count = 0
+          timer = setInterval(async () => {
+            try {
+              count += 1
+              const isAllowance = await snsIERC20.allowance(
+                ownerAddress,
+                keyAddress
+              )
+              console.log('isAllowance:', isAllowance)
+            } catch (e) {
+              console.log('allowanceError:', e)
+            }
+            if (count === 6) {
+              console.log('count:', count)
+              clearInterval(timer)
+            }
+          }, 1000)
+        }, 1000)
+      }
       const tx = await sns.registry(label)
       return sendHelper(tx)
     },

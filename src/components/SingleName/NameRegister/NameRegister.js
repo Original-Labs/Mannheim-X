@@ -263,32 +263,6 @@ const NameRegister = ({
           displayGas={true}
         />
       )}
-      {/*{showPremiumWarning ? (*/}
-      {/*  <PremiumWarning>*/}
-      {/*    <h2>{t('register.premiumWarning.title')}</h2>*/}
-      {/*    <p>{t('register.premiumWarning.description')} </p>*/}
-      {/*    <LineGraph*/}
-      {/*      startDate={releasedDate}*/}
-      {/*      currentDate={now}*/}
-      {/*      targetDate={targetDate}*/}
-      {/*      endDate={zeroPremiumDate}*/}
-      {/*      startPremium={startingPremiumInUsd}*/}
-      {/*      currentPremiumInEth={currentPremiumInEth}*/}
-      {/*      currentPremium={currentPremium}*/}
-      {/*      targetPremium={targetPremium}*/}
-      {/*      handleTooltip={handleTooltip}*/}
-      {/*    />*/}
-      {/*    <Premium*/}
-      {/*      handlePremium={handlePremium}*/}
-      {/*      targetPremium={targetPremium}*/}
-      {/*      name={domain.name}*/}
-      {/*      invalid={invalid}*/}
-      {/*      targetDate={targetDate}*/}
-      {/*    />*/}
-      {/*  </PremiumWarning>*/}
-      {/*) : (*/}
-      {/*  ''*/}
-      {/*)}*/}
       <Explainer
         step={step}
         waitTime={waitTime}

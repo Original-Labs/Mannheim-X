@@ -23,6 +23,20 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ant-modal-content {
+  border-radius: 14px !important;
+}
+
+.ant-modal-confirm-btns {
+  border-radius: 16px !important;
+  color: #ea6060 !important;
 }

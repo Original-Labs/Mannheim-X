@@ -1,5 +1,4 @@
-// import { setupENS } from '@ensdomains/ui'
-import { setupSNS, setupSNSResolver } from 'sns-app-contract-api'
+import { setupSNS, setupIERC20 } from 'sns-app-contract-api'
 import { isENSReadyReactive } from '../reactiveVars'
 
 const INFURA_ID =
@@ -59,4 +58,9 @@ export function getSNSAddress() {
 
 export function getSNSWithdraw() {
   return snsWithdraw
+}
+
+export async function getSNSIERC20(address) {
+  const snsIERC20Instance = await setupIERC20({ snsAddress: address })
+  return snsIERC20Instance
 }

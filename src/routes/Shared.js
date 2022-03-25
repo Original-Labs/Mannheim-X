@@ -128,7 +128,7 @@ const ShareKeyName = styled('div')`
     font-size: 19px;
     font-weight: 700;
     border: 1px solid black;
-    padding: 5px 12px;
+    padding: 5px 20px;
     border-radius: 3px;
   }
   margin-top: 5%;
@@ -157,11 +157,9 @@ const WebSiteText = styled('div')`
 
 const SharePolygonImg = styled('img')`
   position: absolute;
-  width: 120px;
-  height: 18px;
-  bottom: 7%;
+  bottom: 2%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(0.23);
 `
 
 const ShareFooter = styled('div')`
