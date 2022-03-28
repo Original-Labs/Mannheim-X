@@ -1,7 +1,7 @@
 import { isShortName } from '../../utils/utils'
 
 import getENS, { getRegistrar } from 'apollo/mutations/ens'
-import getSNS, { getSNSIERC20 } from 'apollo/mutations/sns'
+import getSNS, { getSNSAddress, getSNSIERC20 } from 'apollo/mutations/sns'
 import EthVal from 'ethval'
 
 import modeNames from '../modes'
@@ -58,15 +58,23 @@ const resolvers = {
   },
   Mutation: {
     async commit(_, { label, coinsType, ownerAddress }) {
+      // get sns instance object
       const sns = getSNS()
       if (coinsType === 'key') {
         const keyAddress = await sns.getKeyCoinsAddress()
         const keyCoins = await sns.getKeyCoinsPrice()
 
+        // get IERC20 contract instance object
         const snsIERC20 = await getSNSIERC20(keyAddress)
 
-        await snsIERC20.approve(keyAddress, keyCoins)
+        // get sns address
+        const snsAddress = await getSNSAddress()
 
+        // Authorization to SNS
+        await snsIERC20.approve(snsAddress, keyCoins)
+
+        // Query if the authorization is successful
+        // Query every three seconds, query ten times
         setTimeout(async () => {
           let timer,
             count = 0,
@@ -74,11 +82,11 @@ const resolvers = {
           timer = setInterval(async () => {
             try {
               count += 1
+              // query authorization sns key price
               allowancePrice = await snsIERC20.allowance(
                 ownerAddress,
-                keyAddress
+                snsAddress
               )
-              console.log('allowancePrice:', allowancePrice)
             } catch (e) {
               console.log('allowance:', e)
               clearInterval(timer)
@@ -87,17 +95,16 @@ const resolvers = {
               const price = new EthVal(`${allowancePrice || 0}`)
                 .toEth()
                 .toFixed(3)
-              console.log('type', typeof price)
-              if (price !== '0.00') {
-                console.log('price:', price)
-                const tx = await sns.mintByMoreCoins(label, 1)
+              // Call the mint method if the query value is greater than 0
+              if (parseFloat(price) > 0) {
                 clearInterval(timer)
+                const tx = await sns.mintByMoreCoins(label, 1)
+                return sendHelper(tx)
               }
             } catch (e) {
               console.log('mintByMoreCoins:', e)
               clearInterval(timer)
             }
-            //
             if (count === 10) {
               clearInterval(timer)
             }

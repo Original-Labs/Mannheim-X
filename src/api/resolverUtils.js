@@ -36,9 +36,12 @@ export async function sendHelper(txObj) {
     resolve(txObj.hash)
     let txState = 'Pending'
     addTransaction({ txHash: txObj.hash, txState })
+    debugger
 
     const receipt = await txObj.wait()
+    console.log('receipt:', receipt)
     const txHash = receipt.transactionHash
+    console.log('txHash:', txHash)
     txState = 'Confirmed'
     addTransaction({ txHash, txState })
   })
