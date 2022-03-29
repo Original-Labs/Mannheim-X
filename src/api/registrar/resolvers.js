@@ -57,59 +57,12 @@ const resolvers = {
     }
   },
   Mutation: {
-    async commit(_, { label, coinsType, ownerAddress }) {
+    async commit(_, { label, coinsType }) {
       // get sns instance object
       const sns = getSNS()
       if (coinsType === 'key') {
-        const keyAddress = await sns.getKeyCoinsAddress()
-        const keyCoins = await sns.getKeyCoinsPrice()
-
-        // get IERC20 contract instance object
-        const snsIERC20 = await getSNSIERC20(keyAddress)
-
-        // get sns address
-        const snsAddress = await getSNSAddress()
-
-        // Authorization to SNS
-        await snsIERC20.approve(snsAddress, keyCoins)
-
-        // Query if the authorization is successful
-        // Query every three seconds, query ten times
-        setTimeout(async () => {
-          let timer,
-            count = 0,
-            allowancePrice
-          timer = setInterval(async () => {
-            try {
-              count += 1
-              // query authorization sns key price
-              allowancePrice = await snsIERC20.allowance(
-                ownerAddress,
-                snsAddress
-              )
-            } catch (e) {
-              console.log('allowance:', e)
-              clearInterval(timer)
-            }
-            try {
-              const price = new EthVal(`${allowancePrice || 0}`)
-                .toEth()
-                .toFixed(3)
-              // Call the mint method if the query value is greater than 0
-              if (parseFloat(price) > 0) {
-                clearInterval(timer)
-                const tx = await sns.mintByMoreCoins(label, 1)
-                return sendHelper(tx)
-              }
-            } catch (e) {
-              console.log('mintByMoreCoins:', e)
-              clearInterval(timer)
-            }
-            if (count === 10) {
-              clearInterval(timer)
-            }
-          }, 3000)
-        }, 0)
+        const tx = await sns.mintByMoreCoins(label, 1)
+        return sendHelper(tx)
       } else {
         const tx = await sns.registry(label)
         return sendHelper(tx)

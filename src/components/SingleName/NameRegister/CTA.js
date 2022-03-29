@@ -18,8 +18,8 @@ import AddToCalendar from '../../Calendar/RenewalCalendar'
 import { ReactComponent as DefaultPencil } from '../../Icons/SmallPencil.svg'
 import { ReactComponent as DefaultOrangeExclamation } from '../../Icons/OrangeExclamation.svg'
 import { useAccount } from '../../QueryAccount'
-import { Modal, Button, Select } from 'antd'
-import getSNS from 'apollo/mutations/sns'
+import { Modal, Button, Select, message } from 'antd'
+import getSNS, { getSNSAddress, getSNSIERC20 } from 'apollo/mutations/sns'
 
 const CTAContainer = styled('div')`
   display: flex;
@@ -102,6 +102,58 @@ function getCTA({
     coinsValueRef.current = { ...coinsValueObj }
   }, [coinsValueObj])
 
+  // use key coins register operation
+  const getApproveOfKey = async mutate => {
+    const sns = getSNS()
+    const keyAddress = await sns.getKeyCoinsAddress()
+    const keyCoins = await sns.getKeyCoinsPrice()
+
+    // get IERC20 contract instance object
+    const snsIERC20 = await getSNSIERC20(keyAddress)
+
+    // get sns address
+    const snsAddress = await getSNSAddress()
+
+    // Authorization to SNS
+    await snsIERC20.approve(snsAddress, keyCoins)
+
+    message.loading({
+      key: 1,
+      content: t('z.transferSending'),
+      duration: 0,
+      style: { marginTop: '20vh' }
+    })
+
+    // Query if the authorization is successful
+    // Query every three seconds, query ten times
+    setTimeout(async () => {
+      let timer,
+        count = 0,
+        allowancePrice
+      timer = setInterval(async () => {
+        try {
+          count += 1
+          // query authorization sns key price
+          allowancePrice = await snsIERC20.allowance(account, snsAddress)
+          const price = new EthVal(`${allowancePrice || 0}`).toEth().toFixed(3)
+          if (price > 0) {
+            clearInterval(timer)
+            // destroy message mention
+            message.destroy(1)
+            // mint nft of key
+            mutate()
+          }
+        } catch (e) {
+          console.log('allowance:', e)
+          clearInterval(timer)
+        }
+        if (count === 10) {
+          clearInterval(timer)
+        }
+      }, 3000)
+    }, 0)
+  }
+
   switch (step) {
     case 'PRICE_DECISION':
       return (
@@ -146,9 +198,14 @@ function getCTA({
                                   setCoinsValue(obj)
                                   return obj
                                 })
-                                .then(obj => {
+                                .then(async obj => {
                                   setCoinsValue({ ...obj, coinsType: 'key' })
-                                  mutate()
+                                  try {
+                                    await getApproveOfKey(mutate)
+                                  } catch (e) {
+                                    console.log('getApproveOfKey:', e)
+                                  }
+                                  // mutate()
                                 })
                               Modal.destroyAll()
                             }}
@@ -233,7 +290,7 @@ function getCTA({
           }
         </Mutation>
       )
-    case 'COMMIT_SENT':
+    case 'COMMIT_SENT': // get sns instance object
       return <PendingTx txHash={txHash} />
     case 'COMMIT_CONFIRMED':
       return (
@@ -284,6 +341,7 @@ function getCTA({
         <PendingTx
           txHash={txHash}
           onConfirmed={async () => {
+            5
             if (ethUsdPrice) {
               // this is not set on local test env
               trackReferral({
@@ -364,7 +422,11 @@ const CTA = ({
   const history = useHistory()
   const account = useAccount()
   const [txHash, setTxHash] = useState(undefined)
-  const [coinsValueObj, setCoinsValue] = useState({ label, coinsType: '' })
+  const [coinsValueObj, setCoinsValue] = useState({
+    label,
+    ownerAddress: account,
+    coinsType: ''
+  })
   const coinsValueRef = React.useRef()
 
   useEffect(() => {
