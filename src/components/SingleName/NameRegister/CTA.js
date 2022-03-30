@@ -20,6 +20,7 @@ import { ReactComponent as DefaultOrangeExclamation } from '../../Icons/OrangeEx
 import { useAccount } from '../../QueryAccount'
 import { Modal, Button, Select, message } from 'antd'
 import getSNS, { getSNSAddress, getSNSIERC20 } from 'apollo/mutations/sns'
+import { UnknowErrMsgComponent } from 'components/UnknowErrMsg'
 
 const CTAContainer = styled('div')`
   display: flex;
@@ -146,9 +147,25 @@ function getCTA({
         } catch (e) {
           console.log('allowance:', e)
           clearInterval(timer)
+          message.error({
+            key: 2,
+            content: <UnknowErrMsgComponent />,
+            duration: 3,
+            style: { marginTop: '20vh' }
+          })
+          // destroy message mention
+          message.destroy(1)
         }
-        if (count === 10) {
+        if (count === 2) {
           clearInterval(timer)
+          message.error({
+            key: 3,
+            content: t('z.transferBusy'),
+            duration: 3,
+            style: { marginTop: '20vh' }
+          })
+          // destroy message mention
+          message.destroy(1)
         }
       }, 3000)
     }, 0)
