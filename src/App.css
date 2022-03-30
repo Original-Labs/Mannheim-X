@@ -40,3 +40,15 @@
   border-radius: 16px !important;
   color: #ea6060 !important;
 }
+
+.ant-message {
+  font-weight: bold !important;
+}
+
+.ant-message-notice-content {
+  border-radius: 14px !important;
+}
+
+.ant-message-loading .anticon {
+  color: #ea6060 !important;
+}
