@@ -156,7 +156,7 @@ function getCTA({
           // destroy message mention
           message.destroy(1)
         }
-        if (count === 2) {
+        if (count === 20) {
           clearInterval(timer)
           message.error({
             key: 3,

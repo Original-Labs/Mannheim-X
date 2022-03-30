@@ -35,7 +35,7 @@ export const NetworkError = ({ message }) => (
       <Warning src={warningImage} />
       <H2>{message}</H2>
       <br />
-      Please change your dapp browser to Matic(Polygon) Mainnet
+      Please change your dapp browser to Matic(Polygon) Mainnet, Testnet
     </Message>
   </ErrorContainer>
 )
