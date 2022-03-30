@@ -43,6 +43,7 @@
 
 .ant-message {
   font-weight: bold !important;
+  line-height: 14px !important;
 }
 
 .ant-message-notice-content {

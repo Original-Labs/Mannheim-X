@@ -387,7 +387,8 @@
   },
   "z": {
     "transferSending": "Transaction sending......",
-    "transferSuccess": "Transaction sent successfully！！！"
+    "transferSuccess": "Transaction sent successfully!!!",
+    "transferBusy": "Busy trading, please check the status of your transaction in your wallet!!!"
   },
   "registerPageInfo": {
     "NeedToPrepare": "Need to prepare",

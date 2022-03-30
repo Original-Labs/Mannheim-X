@@ -384,7 +384,8 @@
   },
   "z": {
     "transferSending": "トランザクション送信......",
-    "transferSuccess": "トランザクションは正常に送信されました！！！"
+    "transferSuccess": "トランザクションは正常に送信されました！！！",
+    "transferBusy": "取引にお忙しい方は、ウォレットで取引状況をご確認ください！！！"
   },
   "registerPageInfo": {
     "NeedToPrepare": "Need to prepare",
