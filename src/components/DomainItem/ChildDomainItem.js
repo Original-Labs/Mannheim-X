@@ -29,6 +29,7 @@ import Loading from 'components/Loading/Loading'
 import { Trans } from 'react-i18next'
 import { handleEmptyValue } from 'utils/utils'
 import './ChildDomainItem.css'
+import { UnknowErrMsgComponent } from 'components/UnknowErrMsg'
 
 const { Text, Paragraph } = Typography
 
@@ -353,18 +354,9 @@ export default function ChildDomainItem({
             break
           case -32603:
             errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
-          // break;
+            break
           default:
-            errorContent = (
-              <>
-                <Trans i18nKey={`serviceMsg.unkonwErr`} />,
-                <Trans i18nKey={`serviceMsg.feedback`} />
-                <a target="_blank" href="https://discord.com/invite/UMNRQryyts">
-                  Discord
-                </a>
-                <Trans i18nKey={`serviceMsg.feedback1`} />
-              </>
-            )
+            errorContent = <UnknowErrMsgComponent />
         }
         messageMention({
           type: 'error',
