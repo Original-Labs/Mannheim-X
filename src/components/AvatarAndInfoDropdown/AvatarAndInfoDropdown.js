@@ -28,6 +28,8 @@ const ActiveAvatar = styled('div')`
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.3s;
   }
 `
 
@@ -72,20 +74,18 @@ const Avatar = styled('img')`
 const Blockies = styled(UnstyledBlockies)`
   border-radius: 50%;
   position: absolute;
-  // left: 10px;
-  // top: 25px;
 `
 
 const DefaultAvatarContainer = styled('div')`
-  width: 50px;
+  display: flex;
+  height: 100%;
+  margin-right: 10px;
+  align-items: center;
 `
 
 const DefaultAvatar = styled('img')`
-  position: relative;
   width: 37px;
   height: 37px;
-  left: 10px;
-  top: 25px;
   cursor: pointer;
 `
 

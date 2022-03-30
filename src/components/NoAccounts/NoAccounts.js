@@ -28,7 +28,6 @@ const NoAccountsContainer = styled('div')`
 
   &:hover {
     cursor: ${({ onClick }) => (onClick ? 'pointer' : 'auto')};
-    transform: scale(1.1);
     font-weight: 700;
   }
 `

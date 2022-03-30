@@ -2,6 +2,7 @@ import React, { createRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import styled from '@emotion/styled/macro'
+import mq from 'mediaQuery'
 
 import { useOnClickOutside } from 'components/hooks'
 import RotatingSmallCaret from '../Icons/RotatingSmallCaret'
@@ -62,21 +63,28 @@ const ActiveLanguage = styled('div')`
   text-transform: uppercase;
   display: flex;
   justify-content: center;
-  height: 100%;
-  padding: 0 20px;
+  padding: 10px 20px;
   align-items: center;
+  border: 1px solid transparent;
   span {
     margin-right: 10px;
   }
 
-  &:hover {
-    cursor: pointer;
-  }
+  ${mq.small`
+    padding: 5px 20px;
+    &:hover {
+      cursor: pointer;
+      border: 1px solid #fff;
+      padding: 5px 20px;
+      border-radius: 16px;
+    }
+  `}
 `
 
 const LanguageSwitcherContainer = styled('div')`
-  //background: white;
   position: relative;
+  height: 100%;
+  align-self: center;
 `
 
 const Dropdown = styled(motion.div)`

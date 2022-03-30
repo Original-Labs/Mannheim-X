@@ -55,6 +55,12 @@ const SharedIconContainer = styled('div')`
   }
 `
 
+const ShareModal = styled(Modal)`
+  .ant-modal-content {
+    border-radius: 14px;
+  }
+`
+
 function isRegistrationOpen(available, parent, isDeedOwner) {
   return parent === 'key' && available
 }
@@ -260,19 +266,19 @@ function Name({ details: domain, name, pathname, type, refetch }) {
         />
       )}
       {smallBP && (
-        <Modal
+        <ShareModal
           visible={modalVisible}
           width="575px"
           centered
           footer={null}
-          bodyStyle={{ width: '425px', margin: '0 auto' }}
+          bodyStyle={{ width: '425px', margin: '0 auto', borderRadius: '14px' }}
           onCancel={() => {
             setModalVisible(false)
             setModalLoading(false)
           }}
         >
           <Share smallBP />
-        </Modal>
+        </ShareModal>
       )}
     </NameContainer>
   )

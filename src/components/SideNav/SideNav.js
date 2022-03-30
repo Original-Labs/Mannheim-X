@@ -75,7 +75,7 @@ const NavLink = styled(Link)`
   ${mq.small`
     justify-content: start;
     border-bottom: 0;
-    font-size: 22px;
+    font-size: 18px;
   `}
 
   &:visited {
@@ -117,7 +117,7 @@ const ThirdPartyLink = styled('a')`
   ${mq.small`
     justify-content: start;
     border-bottom: 0;
-    font-size: 22px;
+    font-size: 18px;
   `}
 
   &:visited {

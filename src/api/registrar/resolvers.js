@@ -1,7 +1,8 @@
 import { isShortName } from '../../utils/utils'
 
 import getENS, { getRegistrar } from 'apollo/mutations/ens'
-import getSNS, { getSnsResolver } from 'apollo/mutations/sns'
+import getSNS, { getSNSAddress, getSNSIERC20 } from 'apollo/mutations/sns'
+import EthVal from 'ethval'
 
 import modeNames from '../modes'
 import { sendHelper } from '../resolverUtils'
@@ -56,10 +57,16 @@ const resolvers = {
     }
   },
   Mutation: {
-    async commit(_, { label }) {
+    async commit(_, { label, coinsType }) {
+      // get sns instance object
       const sns = getSNS()
-      const tx = await sns.registry(label)
-      return sendHelper(tx)
+      if (coinsType === 'key') {
+        const tx = await sns.mintByMoreCoins(label, 1)
+        return sendHelper(tx)
+      } else {
+        const tx = await sns.registry(label)
+        return sendHelper(tx)
+      }
     },
     async register(_, { label, duration, secret }) {
       const registrar = getRegistrar()
