@@ -207,7 +207,7 @@
     },
     "step1": {
       "label": "Step 1",
-      "text": "A transaction needs to be confirmed in the wallet, which will create an NFT for your name.",
+      "text": "Need to confirm 1~2 transactions in your wallet, authorize payments in other coins (not Matic coins) and mint NFT for your name.",
       "text2": "The process may fail and you can start over.",
       "title": "Request to register"
     },
