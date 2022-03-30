@@ -77,7 +77,8 @@
     "pressSaveImg": "Long press to save image",
     "here": "here",
     "gotIt": "Got it",
-    "selectCoins": "Select currency"
+    "selectCoins": "Select currency",
+    "feedback": "Question Feedback"
   },
   "certificate": {
     "button": "Request SSL certificate",
@@ -438,7 +439,9 @@
   "serviceMsg": {
     "servErr": "Internal server error",
     "paramsIsNull": "Query param all empty",
-    "unkonwErr": "Unknown error"
+    "unkonwErr": "Unknown error",
+    "feedback": "You can click ",
+    "feedback1": " to give feedback on your question."
   },
   "blockMsg": {
     "keyAmount": "Allocated KEYs",
