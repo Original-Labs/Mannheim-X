@@ -79,6 +79,9 @@ const SearchForm = styled('form')`
     &:hover {
       ${p => (p && p.hasSearch ? 'cursor: pointer;' : 'cursor: default;')}
     }
+    &:active{
+      ${p => (p && p.hasSearch ? 'background:#eb8b8caa;' : '')}
+    }
     img {
       width:25px;
       height:25px;

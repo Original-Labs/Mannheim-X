@@ -73,7 +73,8 @@
     "clickToQRCode": "QRコードをクリックしてページを保存します",
     "pressSaveImg": "写真を保存するために長押し",
     "here": "これ",
-    "gotIt": "よっしゃ"
+    "gotIt": "よっしゃ",
+    "selectCoins": "通貨を選択する"
   },
   "certificate": {
     "button": "SSL認証をリクエスト",

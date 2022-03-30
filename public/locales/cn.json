@@ -71,7 +71,8 @@
     "clickToQRCode": "点击二维码保存页面",
     "pressSaveImg": "长按保存图片",
     "here": "这里",
-    "gotIt": "已知晓"
+    "gotIt": "已知晓",
+    "selectCoins": "选择币种"
   },
   "certificate": {
     "button": "请求 SSL 证书",

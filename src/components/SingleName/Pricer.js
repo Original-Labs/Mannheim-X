@@ -75,7 +75,7 @@ function PricerInner({
       {/*    underPremium={underPremium}*/}
       {/*  />*/}
       {/*</PricingContainer>*/}
-      {displayGas && gasPrice && (
+      {/* {displayGas && gasPrice && (
         <div>
           <EthRegistrationGasPrice
             price={price}
@@ -87,7 +87,7 @@ function PricerInner({
             underPremium={underPremium}
           />
         </div>
-      )}
+      )} */}
     </>
   )
 }

@@ -47,7 +47,8 @@ const Header = styled('header')`
   top: 0;
   width: 100%;
   z-index: 2;
-  height: 50px;
+  height: auto;
+  align-item: center;
   box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
   ${mq.medium`
     height: auto;

@@ -76,7 +76,8 @@
     "clickToQRCode": "Click the QR code to save the page",
     "pressSaveImg": "Long press to save image",
     "here": "here",
-    "gotIt":"Got it"
+    "gotIt": "Got it",
+    "selectCoins": "Select currency"
   },
   "certificate": {
     "button": "Request SSL certificate",

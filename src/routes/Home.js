@@ -116,17 +116,17 @@ const Nav = styled('div')`
 const NavLink = styled(Link)`
   margin-left: 20px;
   border-radius: 16px;
+  padding: 5px 10px;
+  border: 1px solid transparent;
   &:first-child {
     margin-left: 0;
   }
   &:hover {
-    font-weight: 700;
     padding: 5px 10px;
     border: 1px solid #fff;
     border-radius: 16px;
   }
   &:foucs {
-    font-weight: 700;
     padding: 5px 10px;
     border: 1px solid #fff;
     border-radius: 16px;
@@ -136,11 +136,13 @@ const NavLink = styled(Link)`
 const ExternalLink = styled('a')`
   border-radius: 16px;
   margin-left: 20px;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: 1px solid transparent;
   &:first-child {
     margin-left: 0;
   }
   &:hover {
-    font-weight: 700;
     padding: 5px 10px;
     border: 1px solid #fff;
     border-radius: 16px;
@@ -280,6 +282,10 @@ const SocialIconLarge = styled(motion.div)`
     img {
       width: 25px;
       margin: 0 15px;
+      &:hover {
+        transform: scale(1.2);
+        transition: 0.2s;
+      }
     }
   }
   ${mq.small`
@@ -291,7 +297,6 @@ const SocialIconLarge = styled(motion.div)`
 `
 const LinkkeyCopyRight = styled(motion.div)`
   display: block;
-  width: 100%;
   margin: 0 auto 0;
   > a {
     color: #fff;
@@ -301,6 +306,10 @@ const LinkkeyCopyRight = styled(motion.div)`
   ${mq.small`
     font-size: 16px;
   `}
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
+  }
 `
 
 const PermanentRegistrarLogo = styled(motion.h1)`
@@ -406,9 +415,7 @@ export default ({ match }) => {
               <ExternalLink href={aboutPageURL()}>
                 {t('c.linkkey')}
               </ExternalLink>
-              <NavLink>
-                <LanguageSwitcher />
-              </NavLink>
+              <LanguageSwitcher />
             </Nav>
             <NetworkStatus>
               <Network>
