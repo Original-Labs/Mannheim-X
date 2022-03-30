@@ -344,10 +344,27 @@ export default function ChildDomainItem({
           }
         }
         // handle metamask wallet response error code
-        if (e.code === 4001) {
-          errorContent = (
-            <Trans i18nKey={`withdrawErrCode.${e.code.toString()}`} />
-          )
+        console.log('e:', e.code)
+        switch (e.code) {
+          case 4001:
+            errorContent = (
+              <Trans i18nKey={`withdrawErrCode.${e.code.toString()}`} />
+            )
+            break
+          case -32603:
+            errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
+          // break;
+          default:
+            errorContent = (
+              <>
+                <Trans i18nKey={`serviceMsg.unkonwErr`} />,
+                <Trans i18nKey={`serviceMsg.feedback`} />
+                <a target="_blank" href="https://discord.com/invite/UMNRQryyts">
+                  Discord
+                </a>
+                <Trans i18nKey={`serviceMsg.feedback1`} />
+              </>
+            )
         }
         messageMention({
           type: 'error',

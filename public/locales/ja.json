@@ -74,7 +74,8 @@
     "pressSaveImg": "写真を保存するために長押し",
     "here": "これ",
     "gotIt": "よっしゃ",
-    "selectCoins": "通貨を選択する"
+    "selectCoins": "通貨を選択する",
+    "feedback": "質問のフィードバック"
   },
   "certificate": {
     "button": "SSL認証をリクエスト",
@@ -435,7 +436,9 @@
   "serviceMsg": {
     "servErr": "内部サーバーエラー",
     "paramsIsNull": "クエリパラメータはすべて空です",
-    "unkonwErr": "不明な間違い"
+    "unkonwErr": "不明な間違い",
+    "feedback":"フィードバックは",
+    "feedback1":" をクリックすることで可能です。"
   },
   "blockMsg": {
     "keyAmount": "割当済みKEYs",
