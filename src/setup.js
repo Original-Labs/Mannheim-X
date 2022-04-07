@@ -1,8 +1,8 @@
 // import { getAccounts, getNetwork, getNetworkId } from '@ensdomains/ui'
 import { Trans } from 'react-i18next'
-import { getAccounts, getNetwork, getNetworkId } from 'sns-app-contract-api'
+import { getAccounts, getNetwork, getNetworkId } from 'contracts'
 
-import { isReadOnly } from 'sns-app-contract-api/src/web3'
+import { isReadOnly } from 'contracts/src/web3'
 
 // import { setup } from './apollo/mutations/ens'
 import { setup } from './apollo/mutations/sns'

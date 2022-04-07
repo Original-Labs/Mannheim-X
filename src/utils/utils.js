@@ -1,4 +1,4 @@
-import { getNetworkId } from 'sns-app-contract-api'
+import { getNetworkId } from 'contracts'
 import {
   emptyAddress as _emptyAddress,
   validateName as _validateName,
@@ -6,7 +6,7 @@ import {
   getEnsStartBlock as _ensStartBlock,
   isLabelValid as _isLabelValid,
   isEncodedLabelhash
-} from 'sns-app-contract-api/src/utils/index'
+} from 'contracts/src/utils/index'
 import { validate } from '@ensdomains/ens-validation'
 import { normalize } from '@ensdomains/eth-ens-namehash'
 import { CID } from 'multiformats/esm/src/cid'

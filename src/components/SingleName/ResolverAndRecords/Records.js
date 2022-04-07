@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import throttle from 'lodash/throttle'
 import { gql } from '@apollo/client'
 
-import { getNamehash, emptyAddress } from 'sns-app-contract-api'
+import { getNamehash, emptyAddress } from 'contracts'
 import { useEditable } from '../../hooks'
 import { ADD_MULTI_RECORDS } from '../../../graphql/mutations'
 import COIN_LIST from 'constants/coinList'

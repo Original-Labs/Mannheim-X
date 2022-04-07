@@ -30,12 +30,12 @@ import {
   networkReactive
 } from './apollo/reactiveVars'
 
-jest.mock('sns-app-contract-api', () => ({
-  ...jest.requireActual('sns-app-contract-api'),
+jest.mock('contracts', () => ({
+  ...jest.requireActual('contracts'),
   getNetworkId: jest.fn(),
   getNetwork: jest.fn()
 }))
-import { getNetworkId, getNetwork } from 'sns-app-contract-api'
+import { getNetworkId, getNetwork } from 'contracts'
 
 jest.mock('./apollo/sideEffects', () => ({
   ...jest.requireActual('./apollo/sideEffects'),

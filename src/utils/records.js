@@ -1,4 +1,4 @@
-import { encodeContenthash, isValidContenthash } from 'sns-app-contract-api'
+import { encodeContenthash, isValidContenthash } from 'contracts'
 import { addressUtils } from 'utils/utils'
 import { formatsByName } from '@ensdomains/address-encoder'
 

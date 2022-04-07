@@ -26,7 +26,7 @@ import {
   isDecrypted,
   labelhash,
   utils
-} from 'sns-app-contract-api'
+} from 'contracts/index'
 import { formatsByName } from '@ensdomains/address-encoder'
 import isEqual from 'lodash/isEqual'
 import modeNames from '../modes'

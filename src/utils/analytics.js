@@ -1,5 +1,5 @@
 import ReactGA from 'react-ga'
-import { getNetworkId } from 'sns-app-contract-api'
+import { getNetworkId } from 'contracts'
 
 const TrackingID = {
   live: 'UA-138903307-1',

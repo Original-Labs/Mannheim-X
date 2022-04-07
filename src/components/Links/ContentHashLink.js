@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled/macro'
 import { ReactComponent as ExternalLinkIcon } from '../Icons/externalLink.svg'
-import { getProtocolType } from 'sns-app-contract-api'
+import { getProtocolType } from 'contracts'
 
 const ContentHashLinkContainer = styled('a')`
   display: inline-block;

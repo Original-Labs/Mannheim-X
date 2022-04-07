@@ -1,5 +1,5 @@
 import jsSHA3 from 'js-sha3'
-import { isEncodedLabelhash, decodeLabelhash } from 'sns-app-contract-api'
+import { isEncodedLabelhash, decodeLabelhash } from 'contracts'
 
 function getLabels() {
   return JSON.parse(localStorage.getItem('labels')) || {}

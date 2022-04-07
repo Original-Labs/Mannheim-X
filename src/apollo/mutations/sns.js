@@ -1,4 +1,4 @@
-import { setupSNS, setupIERC20 } from 'sns-app-contract-api'
+import { setupSNS, setupIERC20 } from 'contracts'
 import { isENSReadyReactive } from '../reactiveVars'
 
 const INFURA_ID =

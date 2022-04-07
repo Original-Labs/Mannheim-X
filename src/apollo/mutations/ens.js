@@ -1,5 +1,5 @@
 // import { setupENS } from '@ensdomains/ui'
-import { setupENS } from 'sns-app-contract-api'
+import { setupENS } from 'contracts'
 import { isENSReadyReactive } from '../reactiveVars'
 
 const INFURA_ID =

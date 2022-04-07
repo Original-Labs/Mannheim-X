@@ -2,7 +2,7 @@ import { useEffect, useReducer, useRef, useState } from 'react'
 import getEtherPrice from 'api/price'
 import { loggedIn, logout } from './IPFS/auth'
 
-import { getBlock, getProvider, ethers } from 'sns-app-contract-api'
+import { getBlock, getProvider, ethers } from 'contracts'
 import { isCID, networkName, supportedAvatarProtocols } from 'utils/utils'
 
 export function useDocumentTitle(title) {
