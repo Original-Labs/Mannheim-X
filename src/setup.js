@@ -1,10 +1,8 @@
-// import { getAccounts, getNetwork, getNetworkId } from '@ensdomains/ui'
 import { Trans } from 'react-i18next'
 import { getAccounts, getNetwork, getNetworkId } from 'contracts'
 
-import { isReadOnly } from 'contracts/src/web3'
+import { isReadOnly } from 'contracts/web3'
 
-// import { setup } from './apollo/mutations/ens'
 import { setup } from './apollo/mutations/sns'
 import { connect } from './api/web3modal'
 import {
@@ -44,9 +42,11 @@ export const isSupportedNetwork = networkId => {
     // case 3:
     // case 4:
     // case 5:
-    case 137:
-    case 80001:
-      return true
+    case 56:
+    case 97:
+    // case 137:
+    // case 80001:
+    //   return true
     default:
       return false
   }
@@ -166,6 +166,7 @@ export default async reconnect => {
     }
 
     const networkId = await getNetworkId()
+    console.log('[networkId]', networkId)
 
     if (!isSupportedNetwork(networkId)) {
       globalErrorReactive('Unsupported Network')

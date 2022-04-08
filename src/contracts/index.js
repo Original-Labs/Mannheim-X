@@ -57,6 +57,7 @@ export async function setupSNS({
     infura
   })
   const networkId = await getNetworkId()
+  console.log('[networkId]', networkId)
   // get sns and resolver instance
   const sns = new SNS({ provider, networkId, registryAddress: ensAddress })
   // Get the address of the parser
@@ -81,7 +82,7 @@ export async function setupSNS({
   }
 }
 
-export async function setupSNSResolver({
+export async function setupHeim({
   customProvider,
   ensAddress,
   reloadOnAccountsChange,

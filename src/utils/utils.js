@@ -6,7 +6,7 @@ import {
   getEnsStartBlock as _ensStartBlock,
   isLabelValid as _isLabelValid,
   isEncodedLabelhash
-} from 'contracts/src/utils/index'
+} from 'utils/index'
 import { validate } from '@ensdomains/ens-validation'
 import { normalize } from '@ensdomains/eth-ens-namehash'
 import { CID } from 'multiformats/esm/src/cid'
@@ -98,6 +98,9 @@ export async function getEtherScanAddr() {
     case 4:
     case '4':
       return 'https://rinkeby.etherscan.io/'
+    case 56:
+    case '56':
+      return 'https://bscscan.com/'
     case 137:
     case '137':
       return 'https://polygonscan.com/'

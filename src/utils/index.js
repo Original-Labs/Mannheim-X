@@ -38,6 +38,9 @@ async function getEtherScanAddr() {
     case 4:
     case '4':
       return 'https://rinkeby.etherscan.io/'
+    case 56:
+    case '56':
+      return 'https://bscscan.com/'
     case 137:
     case '137':
       return 'https://polygonscan.com/'
