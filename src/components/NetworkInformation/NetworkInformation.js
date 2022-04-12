@@ -12,7 +12,7 @@ import { connectProvider, disconnectProvider } from '../../utils/providerUtils'
 const NetworkInformationContainer = styled('div')`
   position: relative;
   display: flex;
-  margin-left: 16px;
+  padding: 0 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   ${mq.medium`
     display: block;
@@ -57,15 +57,25 @@ const AccountContainer = styled('div')`
   text-align:center
   position: relative;
   ${mq.medium`
-    width: 225px;
+    width: 100%;
     &:hover {
-      width: 225px;
-      background: white;
+      width: 100%;
+      background: #ffc107;
       border-radius: 6px;
+      div{
+        color:#000;
+      }
+      span{
+        color:#ffc107;
+      }
       .account {
         width: 200px;
+        color:#000;
         overflow: visible;
         white-space: normal;
+        span{
+          color:#000;
+        }
       }
     }
   `}

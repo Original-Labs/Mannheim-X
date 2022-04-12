@@ -1,0 +1,20 @@
+.ant-card:hover .cardNo {
+  color: #000;
+  border: 2px solid #000;
+}
+
+.ant-progress-text {
+  color: white !important;
+}
+
+.ant-card:hover .ant-progress-text {
+  color: black !important;
+}
+
+.ant-progress-circle-path {
+  stroke: #ffc107 !important;
+}
+
+.ant-card:hover .ant-progress-circle-path {
+  stroke: #000 !important;
+}

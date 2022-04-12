@@ -32,8 +32,65 @@
   }
 }
 
+html {
+  --antd-wave-shadow-color: #ffc107 !important;
+}
+
+.ant-btn {
+  line-height: 26px;
+  border-color: #d7e41e1d !important;
+}
+
+.ant-btn:hover {
+  color: #212121 !important;
+  border-color: #ffc107 !important;
+}
+
+.ant-btn-primary {
+  color: #ffc107 !important;
+  background: #d7e41e1d !important;
+  border-color: #d7e41e1d !important;
+  line-height: 26px !important;
+}
+
+.ant-input-number:focus,
+.ant-input-number-focused {
+  border-color: #ffc107ff;
+}
+
+.ant-btn-primary:hover {
+  color: #212121 !important;
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+
+.ant-modal-header {
+  text-align: center !important;
+  border-radius: 16px !important;
+  background-color: #212121;
+  border-bottom: none;
+}
+
+.ant-modal-body {
+  color: white !important;
+}
+
+.ant-modal-footer {
+  border-top: none !important;
+}
+
+.ant-modal-title {
+  color: #ffc107 !important;
+  font-weight: bold !important;
+}
+
+.ant-modal-close-x {
+  color: #ffc107 !important;
+}
+
 .ant-modal-content {
-  border-radius: 14px !important;
+  border-radius: 16px !important;
+  background-color: #212121 !important;
 }
 
 .ant-modal-confirm-btns {
@@ -52,4 +109,67 @@
 
 .ant-message-loading .anticon {
   color: #ea6060 !important;
+}
+
+.ant-card {
+  width: 100%;
+  background-color: #212121 !important;
+  color: white !important;
+  border: none;
+  border-radius: 16px;
+}
+
+.ant-card:hover {
+  background-color: #ffc107 !important;
+  color: black !important;
+}
+
+.ant-card .ant-card-body .ant-card-meta-detail > div {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.ant-card:hover .ant-card-body .ant-card-meta-detail > div {
+  color: black !important;
+  font-weight: bold !important;
+}
+
+.ant-card > div {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.ant-card:hover > div {
+  color: black !important;
+  border-bottom: 1px solid black !important;
+  font-weight: bold !important;
+}
+
+.ant-progress-text {
+  color: white !important;
+}
+
+.ant-card:hover .ant-progress-text {
+  color: black !important;
+}
+
+.ant-progress-circle-path {
+  stroke: #ffc107 !important;
+}
+
+.ant-card:hover .ant-progress-circle-path {
+  stroke: #000 !important;
+}
+
+.ant-alert-banner {
+  border-radius: 16px;
+}
+
+.ant-input-number:hover {
+  border-color: #d7e41e1d !important;
+}
+
+.ant-input-number:focus,
+.ant-input-number-focused {
+  box-shadow: 0 0 0 2px rgb(255 216 24 / 20%) !important;
 }

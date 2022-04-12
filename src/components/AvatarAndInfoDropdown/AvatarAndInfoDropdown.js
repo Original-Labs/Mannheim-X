@@ -12,7 +12,6 @@ import UnstyledBlockies from '../Blockies'
 import { useOnClickOutside } from 'components/hooks'
 import { imageUrl } from '../../utils/utils'
 import SideNav from 'components/SideNav/SideNav'
-import Loading from 'components/Loading/Loading'
 
 const ActiveAvatar = styled('div')`
   color: #fff;
@@ -39,9 +38,9 @@ const AvatarAndInfoDropdownContainer = styled('div')`
 
 const Dropdown = styled(motion.div)`
   position: absolute;
-  background: white;
+  background: #212121;
   top: 100%;
-  right: -83px;
+  right: 0px;
   margin-top: 20px;
   border-radius: 8px;
   box-shadow: -4px 18px 70px 0 rgba(108, 143, 167, 0.32);
@@ -86,6 +85,8 @@ const DefaultAvatarContainer = styled('div')`
 const DefaultAvatar = styled('img')`
   width: 37px;
   height: 37px;
+  background: #ffc107;
+  border-radius: 16px;
   cursor: pointer;
 `
 

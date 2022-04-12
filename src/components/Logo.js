@@ -17,21 +17,20 @@ const IconLogo = styled('img')`
 const LogoContainer = styled(Link)`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   padding-left: 0px;
   align-items: center;
-  width: auto;
+  width: 100px;
   background-color: transparent;
 
   ${mq.medium`
-    width: 160px;
+    width: 100px;
   `}
 `
 
 const Logo = ({ color, className, to = '' }) => (
   <LogoContainer className={className} to={to}>
     <IconLogo src={ENSLogo} />
-    {/*<LogoTyped color={color} />*/}
   </LogoContainer>
 )
 

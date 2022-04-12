@@ -30,19 +30,20 @@ const SearchForm = styled('form')`
   input {
     padding: 20px 10px;
     width: 100%;
-    height:40px;
+    height: 35px;
     border: none;
     border-radius: 14px 0 0 14px;
-    // ${p =>
-      p.mediumBP ? `border-radius:14px 0 0 14px;` : `border-radius:0;`}
-    font-size: 16px;
+    font-size: 14px;
     font-family: Overpass;
-    font-weight: 100;
+    font-weight: bold;
     padding: 3px 15px 0;
+    color: #ffc107;
+    background: #605a5a;
     ${mq.medium`
       width: calc(600px - 162px);
       height:45px;
       font-size: 18px;
+      font-weight:500;
       padding: 3px 15px 0;
     `}
 
@@ -52,20 +53,23 @@ const SearchForm = styled('form')`
 
     &::-webkit-input-placeholder {
       /* Chrome/Opera/Safari */
-      color: #ccd4da;
-      line-height:47px;
+      color: #ffc107;
+      line-height: 33px;
+      font-weight: 500;
+      ${p => (p && p.mediumBP ? 'font-size:16px;' : 'font-size:14px;')}
     }
   }
 
   button {
     ${p =>
       p && p.hasSearch
-        ? 'background: #eb8b8c;color: white;'
-        : 'background: #ddd; color:#fff;'}
+        ? 'background: #ffc107;color: #000;'
+        : 'background: #ffc107; color:#605a5a;'}
     font-size: 18px;
-    height:40px;
-    font-family: Overpass;
-    line-height:36px;
+    font-weight: bold;
+    height: 35px;
+    font-family: 'Permanent Marker', cursive;
+    line-height: 33px;
     width: calc(350px - 240px);
     border: none;
     border-radius: 0 14px 14px 0;
@@ -79,12 +83,12 @@ const SearchForm = styled('form')`
     &:hover {
       ${p => (p && p.hasSearch ? 'cursor: pointer;' : 'cursor: default;')}
     }
-    &:active{
-      ${p => (p && p.hasSearch ? 'background:#eb8b8caa;' : '')}
+    &:active {
+      ${p => (p && p.hasSearch ? 'background:#ffc107aa;' : '')}
     }
     img {
-      width:25px;
-      height:25px;
+      width: 25px;
+      height: 25px;
     }
   }
 `
@@ -189,12 +193,6 @@ function Search({ history, className, style }) {
           )}
         </button>
       </SearchForm>
-      {foucsState && (
-        <GlobalContainer
-          mediumBP={mediumBP}
-          pathName={history.location.pathname}
-        />
-      )}
     </>
   )
 }
