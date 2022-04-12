@@ -8,18 +8,18 @@ import { useOnClickOutside } from 'components/hooks'
 import RotatingSmallCaret from '../Icons/RotatingSmallCaret'
 
 const LANGUAGES = [
-  {
-    value: 'en',
-    label: 'English (EN)'
-  },
+  // {
+  //   value: 'en',
+  //   label: 'English (EN)'
+  // },
   {
     value: 'cn',
     label: '简体中文 (CN)'
-  },
-  {
-    value: 'ja',
-    label: '日本語 (JA)'
   }
+  // {
+  //   value: 'ja',
+  //   label: '日本語 (JA)'
+  // }
   // {
   //   value: 'de',
   //   label: 'Deutsch (DE)'

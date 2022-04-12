@@ -78,6 +78,20 @@ const Shared = lazy(() =>
   )
 )
 
+const MyRecord = lazy(() =>
+  import(
+    /* webpackChunkName: "Shared", webpackPrefetch:true */
+    './pages/MyRecord'
+  )
+)
+
+const SubscriptionPoolDetails = lazy(() =>
+  import(
+    /* webpackChunkName: "Shared", webpackPrefetch:true */
+    './pages/SubscriptionPoolDetails'
+  )
+)
+
 // import TestRegistrar from './routes/TestRegistrar'
 // import Home from './routes/Home'
 // import SearchResults from './routes/SearchResults'
@@ -141,6 +155,11 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={Home} layout={HomePageLayout} />
+        <Route path="/myRecord" component={MyRecord} />
+        <Route
+          path="/SubscriptionPoolDetails"
+          component={SubscriptionPoolDetails}
+        />
         <Route path="/test-registrar" component={TestRegistrar} />
         <Route path="/favourites" component={Favourites} />
         <Route path="/faq" component={Faq} />

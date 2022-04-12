@@ -4,26 +4,22 @@ import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
 
 import NetworkInformation from '../NetworkInformation/NetworkInformation'
-import Heart from '../Icons/Heart'
-import File from '../Icons/File'
 import { aboutPageURL, hasNonAscii } from '../../utils/utils'
-import SpeechBubble from '../Icons/SpeechBubble'
-import { ReactComponent as FaqIcon } from '../../assets/faqIcon.svg'
 
 import mq from 'mediaQuery'
 import { Link, withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
-import Info from 'components/Icons/Info'
 
 const SideNavContainer = styled('nav')`
-  display: ${p => (p.isMenuOpen ? 'block' : 'none')};
+  // display: ${p => (p.isMenuOpen ? 'block' : 'none')};
+  display: block;
   z-index: 999;
   ${mq.medium`
     z-index: 999;
   `}
   left: 0;
   height: auto;
-  background: white;
+  background: #212121;
   width: 230px;
   margin-top: -10px;
   border-radius: 14px;
@@ -32,7 +28,7 @@ const SideNavContainer = styled('nav')`
     left: 35px;
     height: auto;
     background: transparent;
-    width: 165px;
+    width: 100%;
     display: block;
   `}
 
@@ -64,9 +60,8 @@ const NavLink = styled(Link)`
   justify-content: flex-start;
   font-weight: 200;
   font-size: 16px;
-  color: ${p => (p.active ? '#ea6060' : '#C7D3E3')};
+  color: ${p => (p.active ? '#ffc107' : '#C7D3E3')};
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
   ${mq.medium`
     justify-content: start;
@@ -79,66 +74,24 @@ const NavLink = styled(Link)`
   `}
 
   &:visited {
-    color: #c7d3e3;
+    color: #ffc107;
   }
 
   span {
     transition: 0.2s;
     margin-left: 15px;
-    color: ${p => (p.active ? '#ea6060' : '#C7D3E3')};
+    color: ${p => (p.active ? '#ffc107' : '#C7D3E3')};
   }
 
   &:hover {
     span {
-      color: #ea6060;
+      color: #ffc107;
     }
     path {
-      fill: #ea6060;
+      fill: #ffc107;
     }
     g {
-      fill: #ea6060;
-    }
-  }
-`
-
-const ThirdPartyLink = styled('a')`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 200;
-  font-size: 16px;
-  color: ${p => (p.active ? '#ea6060' : '#C7D3E3')};
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-
-  ${mq.medium`
-    justify-content: start;
-    border-bottom: 0;
-  `}
-  ${mq.small`
-    justify-content: start;
-    border-bottom: 0;
-    font-size: 18px;
-  `}
-
-  &:visited {
-    color: #c7d3e3;
-  }
-
-  span {
-    transition: 0.2s;
-    margin-left: 15px;
-    color: ${p => (p.active ? '#ea6060' : '#C7D3E3')};
-  }
-
-  &:hover {
-    span {
-      color: #ea6060;
-    }
-    path {
-      fill: #ea6060;
-    }
-    g {
-      fill: #ea6060;
+      fill: #ffc107;
     }
   }
 `
@@ -157,6 +110,8 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
     data: { accounts, isReadOnly }
   } = useQuery(SIDENAV_QUERY)
 
+  console.log('isMenuOpen:', isMenuOpen)
+
   return (
     <SideNavContainer isMenuOpen={isMenuOpen} hasNonAscii={hasNonAscii()}>
       <NetworkInformation />
@@ -165,42 +120,13 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
           <li>
             <NavLink
               onClick={toggleMenu}
-              active={url === '/address/' + accounts[0] ? 1 : 0}
-              to={'/address/' + accounts[0]}
+              active={url === '/myRecord/' ? 1 : 0}
+              to={'/myRecord/'}
             >
-              {/*<File active={url === '/address/' + accounts[0]} />*/}
-              <span>{t('c.mynames')}</span>
+              <span>我的认购记录</span>
             </NavLink>
           </li>
         ) : null}
-        {/*<li>*/}
-        {/*  <NavLink*/}
-        {/*    onClick={toggleMenu}*/}
-        {/*    active={url === '/faq' ? 1 : 0}*/}
-        {/*    to="/faq"*/}
-        {/*  >*/}
-        {/*    /!*<Heart active={url === '/faq'} />*!/*/}
-        {/*    <span>{t('c.faq')}</span>*/}
-        {/*  </NavLink>*/}
-        {/*</li>*/}
-        <li>
-          <NavLink
-            onClick={toggleMenu}
-            active={url === '/faq' ? 1 : 0}
-            to="/faq"
-          >
-            {/*<FaqIcon />*/}
-            <span>{t('c.faq')}</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink>
-            <ThirdPartyLink href={aboutPageURL()}>
-              {/*<Info />*/}
-              <span>{t('c.linkkey')}</span>
-            </ThirdPartyLink>
-          </NavLink>
-        </li>
       </ul>
     </SideNavContainer>
   )

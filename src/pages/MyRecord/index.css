@@ -1,0 +1,28 @@
+.MyRecordContainer {
+  padding: 20px;
+}
+
+.MyRecordContainer .ant-card {
+  margin: 10px 0;
+}
+
+.CardTotalContainer .ant-card-head-title {
+  text-align: center;
+  line-height: normal;
+}
+
+.CardTotalContainer .ant-card {
+  margin: 10px 0;
+}
+
+.transRecord .ant-card-head {
+  border: none;
+}
+
+.transRecord:hover div {
+  border: none !important;
+}
+
+.transRecord .ant-card-head-title {
+  padding-bottom: 0px;
+}

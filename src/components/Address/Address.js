@@ -404,31 +404,6 @@ export default function Address({
 
   return (
     <>
-      {/*<NonMainPageBannerContainerWithMarginBottom>*/}
-      {/*  <DAOBannerContent />*/}
-      {/*</NonMainPageBannerContainerWithMarginBottom>*/}
-
-      {/*{showOriginBanner && showOriginBannerFlag && (*/}
-      {/*  <Banner>*/}
-      {/*    <Close onClick={() => setShowOriginBannerFlag(false)} src={close} />*/}
-      {/*    {t('address.transactionBanner')}*/}
-      {/*  </Banner>*/}
-      {/*)}*/}
-      {/*{hasNamesExpiringSoon && (*/}
-      {/*  <Banner>*/}
-      {/*    <h3>*/}
-      {/*      <img alt="exclamation mark" src={warning} />*/}
-      {/*      &nbsp; {t('address.namesExpiringSoonBanner.title')}*/}
-      {/*      <p>*/}
-      {/*        <Trans i18nKey="address.namesExpiringSoonBanner.text">*/}
-      {/*          One or more names are expiring soon, renew them all in one*/}
-      {/*          transaction by selecting multiple names and click "Renew"*/}
-      {/*        </Trans>*/}
-      {/*      </p>*/}
-      {/*    </h3>*/}
-      {/*  </Banner>*/}
-      {/*)}*/}
-
       <AddressContainer>
         <TopBar>
           <AddressTitleContainer>

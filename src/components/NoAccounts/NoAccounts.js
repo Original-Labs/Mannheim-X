@@ -14,7 +14,7 @@ const NoAccountsContainer = styled('div')`
   border-right: ${({ active, colour }) =>
     `1px solid ${active ? '#fff' : colour}`};
   border-radius: ${({ active }) => (active ? '6px 6px 0 0' : '14px')};
-  background: ${({ active }) => (active ? 'white' : 'transparent')};
+  background: ${({ active }) => (active ? 'white' : 'black')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,6 +28,7 @@ const NoAccountsContainer = styled('div')`
 
   &:hover {
     cursor: ${({ onClick }) => (onClick ? 'pointer' : 'auto')};
+    color: black;
     font-weight: 700;
   }
 `

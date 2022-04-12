@@ -1,0 +1,91 @@
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { Avatar, Card, Modal, Progress } from 'antd'
+import styled from '@emotion/styled/macro'
+import './index.css'
+import mq from 'mediaQuery'
+
+const { Meta } = Card
+
+export default () => {
+  const history = useHistory()
+  const [modalVisible, setModalVisible] = useState(false)
+
+  return (
+    <>
+      <CardContainer
+        title={
+          <>
+            <Avatar src="https://joeschmoe.io/api/v1/random" />
+            <Title> #认购池ASD</Title>
+          </>
+        }
+        extra={<CardNo className="cardNo">01</CardNo>}
+        hoverable
+        onClick={() => {
+          setModalVisible(true)
+        }}
+      >
+        <Meta
+          avatar={<Progress type="circle" percent={30} width={50} />}
+          title="#认购池ASD"
+          description="认购池简要描述内容"
+          style={{ color: 'white' }}
+        />
+      </CardContainer>
+      <Modal
+        title="获得认购资格"
+        width={300}
+        maskClosable={false}
+        style={{ top: '30vh' }}
+        visible={modalVisible}
+        onOk={() => {
+          history.push({ pathname: '/SubscriptionPoolDetails' })
+          setModalVisible(false)
+        }}
+        okButtonProps={{
+          shape: 'round'
+        }}
+        onCancel={() => {
+          setModalVisible(false)
+        }}
+        cancelButtonProps={{
+          shape: 'round'
+        }}
+      >
+        进入该认购池后将自动获得认购资格，该地址兑币
+        仅可在此池中进行，无法进入其他认购池进行兑币 。
+        当且仅当该池认购已满时，可再加入其他认购池。
+      </Modal>
+    </>
+  )
+}
+
+const CardContainer = styled(Card)`
+  margin: 10px 0;
+  ${mq.medium`
+        width:300px;
+        margin:10px;
+    `}
+  &:hover {
+    margin-bottom: 9px;
+  }
+`
+
+const CardNo = styled('div')`
+  width: 34px;
+  height: 34px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 34px;
+  border: 2px solid white;
+  border-radius: 50%;
+`
+const Title = styled('div')`
+  display: inline-block;
+  height: 32px;
+  margin-left: 10px;
+  line-height: 32px;
+`

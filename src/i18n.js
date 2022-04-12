@@ -12,8 +12,8 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: true,
-    lng: defaultLanguage ? defaultLanguage : 'en',
-    fallbackLng: 'en',
+    lng: 'cn',
+    fallbackLng: 'cn',
     whitelist: [
       'en',
       'cn',

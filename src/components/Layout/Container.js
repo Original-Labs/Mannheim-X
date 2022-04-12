@@ -2,7 +2,7 @@ import styled from '@emotion/styled/macro'
 import mq from 'mediaQuery'
 
 const Container = styled('div')`
-  padding: 0;
+  padding: 20px 0 0;
   margin: 0 auto 0;
 
   ${mq.medium`

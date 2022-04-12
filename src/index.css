@@ -1,3 +1,7 @@
+html {
+  --antd-wave-shadow-color: #ffc107 !important;
+}
+
 body {
   margin: 0;
   padding: 0;
