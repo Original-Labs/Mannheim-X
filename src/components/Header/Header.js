@@ -36,7 +36,7 @@ const SearchHeader = styled(Search)`
   background-color: transparent;
   width: 100%;
   padding: 0px 20px;
-  flex: 7;
+  flex: 8;
   ${mq.medium`
     margin-top: 0;
     padding:0px 20px;
@@ -48,7 +48,9 @@ const Logo = styled(DefaultLogo)`
   background: transparent;
   position: relative;
   display: flex;
+  justify-content: flex-start;
   width: 100%;
+  margin-left: 10px;
   ${p =>
     p.isMenuOpen
       ? `
@@ -57,15 +59,7 @@ const Logo = styled(DefaultLogo)`
       : ''}
 
   ${mq.medium`
-    opacity: 1;
-    &:before {
-      background: #d3d3d3;
-      height: 32px;
-      content: '';
-      width: 1px;
-      right: 35px;
-      position: absolute;
-    }
+    width:200px;
   `}
 `
 

@@ -1,16 +1,14 @@
 import React from 'react'
 import styled from '@emotion/styled/macro'
 import { Link } from 'react-router-dom'
-import mq from 'mediaQuery'
-
-// import ENSLogo from '../assets/ensIconLogo.svg'
-import ENSLogo from '../assets/logo_single.svg'
-import LogoTyped from '../assets/TypeLogo'
+import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
+import BigLogo from '../assets/logo_single.png'
+import SmallLogo from '../assets/logo.png'
 
 const IconLogo = styled('img')`
-  width: 60px;
+  width: 50px;
   ${mq.medium`
-    width: 100px
+    width: 200px;
   `}
 `
 
@@ -28,10 +26,14 @@ const LogoContainer = styled(Link)`
   `}
 `
 
-const Logo = ({ color, className, to = '' }) => (
-  <LogoContainer className={className} to={to}>
-    <IconLogo src={ENSLogo} />
-  </LogoContainer>
-)
+const Logo = ({ color, className, to = '' }) => {
+  const mediumBP = useMediaMin('medium')
+
+  return (
+    <LogoContainer className={className} to={to}>
+      {mediumBP ? <IconLogo src={BigLogo} /> : <IconLogo src={SmallLogo} />}
+    </LogoContainer>
+  )
+}
 
 export default Logo
