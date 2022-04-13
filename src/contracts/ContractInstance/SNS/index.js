@@ -7,10 +7,10 @@ import {
   getProvider,
   getAccount,
   getSigner
-} from './web3'
+} from '../../web3'
 import { formatsByName } from '@ensdomains/address-encoder'
 
-import { decryptHashes } from './preimage'
+import { decryptHashes } from '../../preimage'
 
 import {
   uniq,
@@ -24,7 +24,7 @@ import {
 } from 'utils'
 import { encodeLabelhash } from 'utils/labelhash'
 
-import { getSNSContract } from './contracts'
+import { getSNSContract } from '../../contracts'
 import { nameRemoveSuffix } from 'utils/namehash'
 
 /* Utils */

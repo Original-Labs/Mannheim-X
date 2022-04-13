@@ -8,10 +8,10 @@ import {
 import { ENS } from './ens.js'
 import { setupRegistrar } from './registrar'
 export { utils, ethers } from 'ethers'
-import { SNS } from './sns.js'
-import { SNSResolver } from './sns.resolver'
-import { SNSWithdraw } from './withdraw.js'
-import { SNSIERC20 } from './IERC20'
+import { SNS } from './ContractInstance/SNS/index.js'
+import { SNSResolver } from './ContractInstance/Resolver/index.js'
+import { SNSWithdraw } from './ContractInstance/Withdraw/index.js'
+import { SNSIERC20 } from './ContractInstance/IERC20/index.js'
 
 export async function setupENS({
   customProvider,
@@ -156,5 +156,5 @@ export * from './web3'
 export * from './constants/interfaces'
 export * from 'utils'
 export * from './contracts'
-export * from './sns'
-export * from './sns.resolver'
+export * from './ContractInstance/SNS'
+export * from './ContractInstance/Resolver'

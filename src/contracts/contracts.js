@@ -15,10 +15,10 @@ import { abi as dnsRegistrarContractOld } from '@ensdomains/contracts/abis/dnsre
 import { abi as legacyAuctionRegistrarContract } from '@ensdomains/contracts/abis/ens/HashRegistrar'
 import { abi as deedContract } from '@ensdomains/contracts/abis/ens/Deed'
 
-import snsContract from './sns.json'
-import snsResolverContract from './sns.resolver.json'
-import withdrawContract from './withdraw.json'
-import IERC20Contract from './IERC20.json'
+import snsContract from './ContractInstance/SNS/index.json'
+import snsResolverContract from './ContractInstance/Resolver/index.json'
+import withdrawContract from './ContractInstance/Withdraw/index.json'
+import IERC20Contract from './ContractInstance/IERC20/index.json'
 
 function getReverseRegistrarContract({ address, provider }) {
   return new Contract(address, reverseRegistrarContract, provider)

@@ -1,6 +1,6 @@
 import has from 'lodash/has'
-import { getWithdrawContract } from './contracts'
-import { getSigner } from './web3'
+import { getWithdrawContract } from '../../contracts'
+import { getSigner } from '../../web3'
 
 const contracts = {
   1: {

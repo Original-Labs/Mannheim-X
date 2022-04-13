@@ -5,7 +5,11 @@ import mq from 'mediaQuery'
 import { hasNonAscii } from '../../utils/utils'
 
 const MainContainer = styled('main')`
-  margin-top: 100px;
+  margin-top: 30px;
+
+  ${mq.medium`
+    margin-top: 100px;
+`}
 `
 
 const Main = ({ children }) => (

@@ -1,5 +1,5 @@
-import { getIERC20Contract } from './contracts'
-import { getSigner } from './web3'
+import { getIERC20Contract } from '../../contracts'
+import { getSigner } from '../../web3'
 
 export class SNSIERC20 {
   constructor({ registryAddress, provider }) {
