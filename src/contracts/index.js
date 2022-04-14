@@ -12,6 +12,8 @@ import { SNS } from './ContractInstance/SNS/index.js'
 import { SNSResolver } from './ContractInstance/Resolver/index.js'
 import { SNSWithdraw } from './ContractInstance/Withdraw/index.js'
 import { SNSIERC20 } from './ContractInstance/IERC20/index.js'
+import { ERC20Exchange } from './ContractInstance/ERC20ExchangeContract/index.js'
+import { SNSERC20 } from './ContractInstance/ERC20/index.js'
 
 export async function setupENS({
   customProvider,
@@ -148,6 +150,30 @@ export async function setupIERC20({ snsAddress, provider } = {}) {
   // get IERC20 instance
   const snsIERC20 = new SNSIERC20({ registryAddress: snsAddress, provider })
   return snsIERC20
+}
+
+// ERC20 Instance
+export async function setupERC20Exchange({ snsAddress, provider } = {}) {
+  const networkId = await getNetworkId()
+  // get ERC20Exchange instance
+  const snsERC20Exchange = new ERC20Exchange({
+    networkId,
+    registryAddress: snsAddress,
+    provider
+  })
+  return snsERC20Exchange
+}
+
+// ERC20 Instance
+export async function setupERC20({ snsAddress, provider } = {}) {
+  const networkId = await getNetworkId()
+  // get ERC20Exchange instance
+  const snsERC20 = new SNSERC20({
+    networkId,
+    registryAddress: snsAddress,
+    provider
+  })
+  return snsERC20
 }
 
 export * from './ens'

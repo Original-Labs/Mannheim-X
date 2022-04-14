@@ -93,19 +93,6 @@ const SearchForm = styled('form')`
   }
 `
 
-const GlobalContainer = styled(`div`)`
-  ${p =>
-    p && !p.mediumBP && p.pathName === '/'
-      ? `display:block; z-index:10;`
-      : `display:none;z-index:-10;`}
-  position:absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #ea6060;
-`
-
 const SEARCH_QUERY = gql`
   query searchQuery {
     isENSReady @client
@@ -130,6 +117,7 @@ function Search({ history, className, style }) {
         .join('.')
     )
   }
+
   const hasSearch = inputValue && inputValue.length > 0 && isENSReady
   return (
     <>

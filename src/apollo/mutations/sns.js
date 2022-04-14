@@ -1,4 +1,9 @@
-import { setupSNS, setupIERC20 } from 'contracts'
+import {
+  setupSNS,
+  setupIERC20,
+  setupERC20Exchange,
+  setupERC20
+} from 'contracts'
 import { isENSReadyReactive } from '../reactiveVars'
 
 const INFURA_ID =
@@ -65,5 +70,19 @@ export function getSNSWithdraw() {
 
 export async function getSNSIERC20(address) {
   const snsIERC20Instance = await setupIERC20({ snsAddress: address, provider })
+  return snsIERC20Instance
+}
+
+export async function getSNSERC20Exchange(address) {
+  console.log('address:', address)
+  const snsIERC20Instance = await setupERC20Exchange({
+    snsAddress: address,
+    provider
+  })
+  return snsIERC20Instance
+}
+
+export async function getSNSERC20(address) {
+  const snsIERC20Instance = await setupERC20({ snsAddress: address, provider })
   return snsIERC20Instance
 }

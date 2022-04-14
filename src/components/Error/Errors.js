@@ -4,7 +4,7 @@ import styled from '@emotion/styled/macro'
 import warningImage from '../../assets/warning.svg'
 
 const ErrorContainer = styled('div')`
-  color: black;
+  color: #ffc107;
   padding: 40px 20px;
   text-align: center;
   display: flex;
@@ -23,7 +23,7 @@ const H2 = styled('h2')`
   font-family: Overpass;
   font-weight: 300;
   font-size: 28px;
-  color: #2b2b2b;
+  color: #ffc107;
   text-align: center;
 `
 

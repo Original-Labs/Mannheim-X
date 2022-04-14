@@ -41,6 +41,11 @@ html {
   border-color: #d7e41e1d !important;
 }
 
+.ant-btn:focus {
+  color: #212121 !important;
+  border-color: #ffc107 !important;
+}
+
 .ant-btn:hover {
   color: #212121 !important;
   border-color: #ffc107 !important;

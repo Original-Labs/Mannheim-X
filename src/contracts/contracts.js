@@ -19,6 +19,8 @@ import snsContract from './ContractInstance/SNS/index.json'
 import snsResolverContract from './ContractInstance/Resolver/index.json'
 import withdrawContract from './ContractInstance/Withdraw/index.json'
 import IERC20Contract from './ContractInstance/IERC20/index.json'
+import ERC20ExchangeContract from './ContractInstance/ERC20ExchangeContract/index.json'
+import ERC20Contract from './ContractInstance/ERC20/index.json'
 
 function getReverseRegistrarContract({ address, provider }) {
   return new Contract(address, reverseRegistrarContract, provider)
@@ -84,6 +86,14 @@ function getIERC20Contract({ address, provider }) {
   return new Contract(address, IERC20Contract, provider)
 }
 
+function getERC20ExchangeContract({ address, provider }) {
+  return new Contract(address, ERC20ExchangeContract, provider)
+}
+
+function getERC20Contract({ address, provider }) {
+  return new Contract(address, ERC20Contract, provider)
+}
+
 export {
   getTestRegistrarContract,
   getReverseRegistrarContract,
@@ -100,5 +110,7 @@ export {
   getSNSContract,
   getSNSResolverContract,
   getWithdrawContract,
-  getIERC20Contract
+  getIERC20Contract,
+  getERC20ExchangeContract,
+  getERC20Contract
 }

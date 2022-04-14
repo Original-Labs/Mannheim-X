@@ -65,10 +65,6 @@ const Logo = styled(DefaultLogo)`
 
 function HeaderContainer() {
   const [isMenuOpen, setMenuOpen] = useState(false)
-  const mediumBP = useMediaMin('medium')
-  const mediumBPMax = useMediaMax('medium')
-  const toggleMenu = () => setMenuOpen(!isMenuOpen)
-  const { t } = useTranslation()
 
   return (
     <>

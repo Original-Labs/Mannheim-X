@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Avatar, Card, Modal, Progress } from 'antd'
+import { Avatar, Card, message, Modal, Progress } from 'antd'
 import styled from '@emotion/styled/macro'
 import './index.css'
 import mq from 'mediaQuery'
+import { getSNSERC20Exchange, getSNSERC20 } from 'apollo/mutations/sns'
 
 const { Meta } = Card
 
-export default () => {
+export default props => {
+  const { rank } = props
+
   const history = useHistory()
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -23,13 +26,19 @@ export default () => {
         extra={<CardNo className="cardNo">01</CardNo>}
         hoverable
         onClick={() => {
-          setModalVisible(true)
+          if (rank !== 100) {
+            setModalVisible(true)
+          } else {
+            message.warning({
+              content: '认购池已满'
+            })
+          }
         }}
       >
         <Meta
-          avatar={<Progress type="circle" percent={30} width={50} />}
-          title="#认购池ASD"
-          description="认购池简要描述内容"
+          avatar={<Progress type="circle" percent={rank} width={50} />}
+          // title="#认购池ASD"
+          description="认购池简要描述内容,认购池简要描述内容,认购池简要描述内容,认购池简要描述内容,认购池简要描述内容"
           style={{ color: 'white' }}
         />
       </CardContainer>
@@ -46,7 +55,19 @@ export default () => {
         okButtonProps={{
           shape: 'round'
         }}
-        onCancel={() => {
+        onCancel={async () => {
+          const ERC20Exchange = await getSNSERC20Exchange(
+            '0xc9c135951Be7b8442068B783E26ebD730d6Ad633'
+          )
+          console.log('ERC20Exchange:', ERC20Exchange)
+          const fromAddress = await ERC20Exchange.fromTokenAddress()
+          console.log('fromAddress:', fromAddress)
+
+          const ERC20 = await getSNSERC20()
+          console.log('ERC20:', ERC20)
+
+          // const fromAddress = await ERC20Exchange.fromTokenAddress();
+          // console.log("fromAddress:", fromAddress)
           setModalVisible(false)
         }}
         cancelButtonProps={{

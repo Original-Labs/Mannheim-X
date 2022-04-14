@@ -11,7 +11,6 @@ import { validate } from '@ensdomains/ens-validation'
 import { normalize } from '@ensdomains/eth-ens-namehash'
 import { CID } from 'multiformats/esm/src/cid'
 
-import getENS from '../apollo/mutations/ens'
 import * as jsSHA3 from 'js-sha3'
 import { saveName } from '../api/labels'
 import { useEffect, useRef } from 'react'
@@ -383,4 +382,10 @@ export function handleEmptyValue(value) {
     return value
   }
   return '-'
+}
+
+export function copyArray(originArr) {
+  return originArr.map(item => {
+    return item
+  })
 }
