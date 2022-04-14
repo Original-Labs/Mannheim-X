@@ -56,17 +56,35 @@ export default props => {
           shape: 'round'
         }}
         onCancel={async () => {
-          const ERC20Exchange = await getSNSERC20Exchange(
+          const ERC20FromTokenAddress = await getSNSERC20Exchange(
             '0xc9c135951Be7b8442068B783E26ebD730d6Ad633'
           )
-          console.log('ERC20Exchange:', ERC20Exchange)
-          const fromAddress = await ERC20Exchange.fromTokenAddress()
-          console.log('fromAddress:', fromAddress)
+          console.log('ERC20FromTokenAddress:', ERC20FromTokenAddress)
+
+          const ERC20ExchagePoolMaxId = await getSNSERC20Exchange(
+            '0x5f191D8dA9d519738299d340F8f6c06eC44Ab870'
+          )
+
+          console.log('')
+
+          try {
+            const poolMaxId = await ERC20ExchagePoolMaxId.poolMaxId()
+            console.log('poolMaxId:', poolMaxId)
+          } catch (error) {
+            console.log('poolMaxIdError:', error)
+          }
+
+          try {
+            const fromAddress = await ERC20FromTokenAddress.fromTokenAddress()
+            console.log('fromAddress:', fromAddress)
+          } catch (error) {
+            console.log('fromAddressError:', error)
+          }
 
           const ERC20 = await getSNSERC20()
           console.log('ERC20:', ERC20)
 
-          // const fromAddress = await ERC20Exchange.fromTokenAddress();
+          // const fromAddress = await ERC20FromTokenAddress.fromTokenAddress();
           // console.log("fromAddress:", fromAddress)
           setModalVisible(false)
         }}

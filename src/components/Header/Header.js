@@ -1,18 +1,12 @@
 import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import styled from '@emotion/styled/macro'
 
 import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
 
 import DefaultLogo from '../Logo'
 import Search from '../SearchName/Search'
-import Hamburger from './Hamburger'
-import SideNav from '../SideNav/SideNav'
-import Banner from '../Banner'
-
-import { hasNonAscii } from '../../utils/utils'
-import LanguageSwitcher from '../LanguageSwitcher'
 import AvatarAndInfoDropdown from '../AvatarAndInfoDropdown'
+import HeaderSearch from './HeaderSearch'
 
 const Header = styled('header')`
   display: flex;
@@ -32,7 +26,7 @@ const Header = styled('header')`
   `}
 `
 
-const SearchHeader = styled(Search)`
+const HeaderSearchWraaper = styled(HeaderSearch)`
   background-color: transparent;
   width: 100%;
   padding: 0px 20px;
@@ -70,8 +64,7 @@ function HeaderContainer() {
     <>
       <Header isMenuOpen={isMenuOpen}>
         <Logo />
-
-        <SearchHeader />
+        <HeaderSearchWraaper />
         <AvatarAndInfoDropdown />
       </Header>
     </>

@@ -1,41 +1,5 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_fromTokenAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_toTokenAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_feeTokenAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_exchangeRatio",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_feeRatio",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_ratioDecimal",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -128,6 +92,49 @@
     ],
     "name": "OwnershipTransferred",
     "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_fromTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_toTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_feeTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_exchangeRatio",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_feeRatio",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_ratioDecimal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_banner",
+        "type": "string"
+      }
+    ],
+    "name": "_init",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [
@@ -238,6 +245,19 @@
   },
   {
     "inputs": [],
+    "name": "getBanner",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "owner",
     "outputs": [
       {
@@ -277,6 +297,19 @@
       }
     ],
     "name": "poolExchangeAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "poolMaxId",
     "outputs": [
       {
         "internalType": "uint256",
@@ -348,6 +381,19 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "_banner",
+        "type": "string"
+      }
+    ],
+    "name": "setBanner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "poolId",
         "type": "uint256"
@@ -406,25 +452,6 @@
       }
     ],
     "name": "userExchangeAvailable",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
-      }
-    ],
-    "name": "userExchangeBalance",
     "outputs": [
       {
         "internalType": "uint256",

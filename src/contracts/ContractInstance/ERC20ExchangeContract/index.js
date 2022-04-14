@@ -63,8 +63,8 @@ export class ERC20Exchange {
   }
 
   // subscription address
-  async feeTokenAddress() {
-    return await this.ERC20Trans.feeTokenAddress()
+  async feeTokenAddress(address) {
+    return await this.ERC20Trans.feeTokenAddress(address)
   }
 
   // subscription
@@ -77,6 +77,11 @@ export class ERC20Exchange {
     const singner = await getSigner()
     const ERC20Instance = this.ERC20Trans.connect(singner)
     return await ERC20Instance.userBurn(amount)
+  }
+
+  // 查询兑换池ID
+  async poolMaxId() {
+    return await this.ERC20Trans.poolMaxId()
   }
 
   // 查询用户可兑换的余额

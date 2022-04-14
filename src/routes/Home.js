@@ -11,7 +11,8 @@ const obj = {
   poolId: '',
   avatar: '',
   title: '',
-  description: ''
+  description: '',
+  banner: ''
 }
 
 const poolList = [
@@ -93,10 +94,12 @@ export default () => {
       }
     })
 
+    const tempArr = copyArray(poolList)
+
     // delete 100 percent pool
-    const spliceArr = poolList.splice(0, posArr.length)
+    const spliceArr = tempArr.splice(0, posArr.length)
     // contact deleted 100 percent pool
-    const contactArr = poolList.concat(spliceArr)
+    const contactArr = tempArr.concat(spliceArr)
     console.log('contactArr:', contactArr)
 
     setPoolListState(contactArr)
