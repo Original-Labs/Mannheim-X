@@ -61,18 +61,30 @@ export async function setupSNS({
   const networkId = await getNetworkId()
   console.log('[networkId]', networkId)
   // get sns and resolver instance
-  const sns = new SNS({ provider, networkId, registryAddress: ensAddress })
-  // Get the address of the parser
-  // const name = await sns.getSNSName(getAccount())
-  const snsResolver = new SNSResolver({ networkId, provider })
-  // get widthdraw instance
-  const snsWithdraw = new SNSWithdraw({
-    provider,
-    networkId,
-    registryAddress: ensAddress
-  })
+  // const sns = new SNS({ provider, networkId, registryAddress: ensAddress })
+  // // Get the address of the parser
+  // // const name = await sns.getSNSName(getAccount())
+  // const snsResolver = new SNSResolver({ networkId, provider })
+  // // get widthdraw instance
+  // const snsWithdraw = new SNSWithdraw({
+  //   provider,
+  //   networkId,
+  //   registryAddress: ensAddress
+  // })
 
   const network = await getNetwork()
+
+  // return {
+  //   sns,
+  //   snsWithdraw,
+  //   snsResolver,
+  //   provider: customProvider,
+  //   network,
+  //   providerObject: provider
+  // }
+  const sns = {}
+  const snsWithdraw = {}
+  const snsResolver = {}
 
   return {
     sns,
