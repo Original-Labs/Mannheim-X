@@ -51,10 +51,10 @@ export class ERC20Exchange {
   /* Main methods */
 
   // binding subscription pool
-  async subscribe() {
+  async subscribe(poolId) {
     const singner = await getSigner()
     const ERC20Instance = this.ERC20Trans.connect(singner)
-    return await ERC20Instance.subscribe()
+    return await ERC20Instance.subscribe(poolId)
   }
 
   // get burn address

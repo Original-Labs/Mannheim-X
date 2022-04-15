@@ -48,43 +48,52 @@ export default props => {
         maskClosable={false}
         style={{ top: '30vh' }}
         visible={modalVisible}
-        onOk={() => {
-          history.push({ pathname: '/SubscriptionPoolDetails' })
+        onOk={async () => {
+          const ERC20Exchange = await getSNSERC20Exchange(
+            '0x5f191D8dA9d519738299d340F8f6c06eC44Ab870'
+          )
+
+          let poolMaxId
+
+          try {
+            const resPoolMaxId = await ERC20Exchange.poolMaxId()
+            poolMaxId = parseInt(resPoolMaxId._hex, 16)
+          } catch (error) {
+            console.log('poolMaxIdError:', error)
+          }
+
+          console.log('poolMaxId:', poolMaxId)
+          try {
+            const isBind = await ERC20Exchange.subscribe(poolMaxId)
+            console.log('isBind:', isBind)
+          } catch (error) {
+            console.log('subscribeError:', error)
+          }
+
+          // history.push({ pathname: '/SubscriptionPoolDetails' })
           setModalVisible(false)
         }}
         okButtonProps={{
           shape: 'round'
         }}
         onCancel={async () => {
-          const ERC20FromTokenAddress = await getSNSERC20Exchange(
-            '0xc9c135951Be7b8442068B783E26ebD730d6Ad633'
-          )
-          console.log('ERC20FromTokenAddress:', ERC20FromTokenAddress)
-
-          const ERC20ExchagePoolMaxId = await getSNSERC20Exchange(
+          const ERC20Exchange = await getSNSERC20Exchange(
             '0x5f191D8dA9d519738299d340F8f6c06eC44Ab870'
           )
 
-          console.log('')
+          console.log('ERC20Exchange:', ERC20Exchange)
 
           try {
-            const poolMaxId = await ERC20ExchagePoolMaxId.poolMaxId()
-            console.log('poolMaxId:', poolMaxId)
-          } catch (error) {
-            console.log('poolMaxIdError:', error)
-          }
-
-          try {
-            const fromAddress = await ERC20FromTokenAddress.fromTokenAddress()
+            const fromAddress = await ERC20Exchange.fromTokenAddress()
             console.log('fromAddress:', fromAddress)
           } catch (error) {
             console.log('fromAddressError:', error)
           }
 
-          const ERC20 = await getSNSERC20()
-          console.log('ERC20:', ERC20)
+          // const ERC20 = await getSNSERC20()
+          // console.log('ERC20:', ERC20)
 
-          // const fromAddress = await ERC20FromTokenAddress.fromTokenAddress();
+          // const fromAddress = await ERC20Exchange.fromTokenAddress();
           // console.log("fromAddress:", fromAddress)
           setModalVisible(false)
         }}
