@@ -1,6 +1,6 @@
 import has from 'lodash/has'
 import { getERC20ExchangeContract } from '../../contracts'
-import { getSigner } from '../../web3'
+import { getSigner, getAccount } from '../../web3'
 
 const contracts = {
   1: {
@@ -79,14 +79,20 @@ export class ERC20Exchange {
     return await ERC20Instance.userBurn(amount)
   }
 
+  async getUserPool() {
+    const usrAccount = await getAccount()
+    return await this.ERC20Trans.getUserPool(usrAccount)
+  }
+
   // 查询兑换池ID
   async poolMaxId() {
     return await this.ERC20Trans.poolMaxId()
   }
 
   // 查询用户可兑换的余额
-  async userExchangeAvailable(account) {
-    return await this.ERC20Trans.userExchangeAvailable(account)
+  async userExchangeAvailable() {
+    const usrAccount = await getAccount()
+    return await this.ERC20Trans.userExchangeAvailable(usrAccount)
   }
 
   // 查询兑换池已兑换的数量

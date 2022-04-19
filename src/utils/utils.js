@@ -29,6 +29,8 @@ export const MAINNET_DNSREGISTRAR_ADDRESS =
 export const ROPSTEN_DNSREGISTRAR_ADDRESS =
   '0xdB328BA5FEcb432AF325Ca59E3778441eF5aa14F'
 
+export const ERC20ExchangeAddress = '0xa6be150640f3fFfd034174ca63d0113CFB143Fd8'
+
 export const networkName = {
   main: 'mainnet',
   goerli: 'goerli',

@@ -1,6 +1,6 @@
 import has from 'lodash/has'
 import { getERC20Contract } from '../../contracts'
-import { getSigner } from '../../web3'
+import { getSigner, getAccount } from '../../web3'
 
 const contracts = {
   1: {
@@ -55,5 +55,15 @@ export class SNSERC20 {
     const singner = await getSigner()
     const ERC20Instance = this.SNSERC20.connect(singner)
     return await ERC20Instance.approve(address, amount)
+  }
+
+  async allowance(spender) {
+    const ownerAccount = await getAccount()
+    return await this.SNSERC20.allowance(ownerAccount, spender)
+  }
+
+  async balanceOf() {
+    const ownerAccount = await getAccount()
+    return await this.SNSERC20.balanceOf(ownerAccount)
   }
 }

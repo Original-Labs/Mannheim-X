@@ -166,7 +166,6 @@ export async function setupIERC20({ snsAddress, provider } = {}) {
 
 // ERC20 Instance
 export async function setupERC20Exchange({ snsAddress, provider } = {}) {
-  console.log('setupERC20ExchangeAddress:', snsAddress)
   const networkId = await getNetworkId()
   // get ERC20Exchange instance
   const snsERC20Exchange = new ERC20Exchange({

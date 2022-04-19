@@ -5,39 +5,68 @@ import styled from '@emotion/styled/macro'
 import './index.css'
 import mq from 'mediaQuery'
 import { getSNSERC20Exchange, getSNSERC20 } from 'apollo/mutations/sns'
+import { ERC20ExchangeAddress } from 'utils/utils'
 
 const { Meta } = Card
 
 export default props => {
-  const { rank } = props
+  const { poolItem } = props
 
   const history = useHistory()
   const [modalVisible, setModalVisible] = useState(false)
+
+  // 获取用户绑定的兑换池ID
+  const getUserPoolId = async () => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    try {
+      const usrPoolId = await ERC20Exchange.getUserPool()
+      console.log('usrPoolId:', usrPoolId)
+      return parseInt(usrPoolId._hex, 16)
+    } catch (error) {
+      console.log('getUserPoolError:', error)
+      return 0
+    }
+  }
 
   return (
     <>
       <CardContainer
         title={
           <>
-            <Avatar src="https://joeschmoe.io/api/v1/random" />
-            <Title> #认购池ASD</Title>
+            <Avatar src={poolItem.avatar} />
+            <Title> {poolItem.title}</Title>
           </>
         }
-        extra={<CardNo className="cardNo">01</CardNo>}
+        extra={<CardNo className="cardNo">{poolItem.poolId}</CardNo>}
         hoverable
-        onClick={() => {
-          if (rank !== 100) {
-            setModalVisible(true)
-          } else {
-            message.warning({
-              content: '认购池已满'
+        onClick={async () => {
+          const usrPoolId = await getUserPoolId()
+          console.log('usrPoolId:', usrPoolId)
+
+          // 用户已经绑定了此认购池,则跳转到认购池详情页面
+          if (poolItem.poolId === usrPoolId) {
+            history.push({
+              pathname: '/SubscriptionPoolDetails',
+              state: { details: poolItem }
             })
+          } else if (usrPoolId === 0) {
+            // 用户未绑定认购池,点击显示弹窗,进行绑定
+            if (poolItem.rank !== 100) {
+              setModalVisible(true)
+            } else {
+              message.warning({
+                content: '认购池已满'
+              })
+            }
+          } else {
+            // 用户如果有绑定认购池,则进行提示
+            message.warning({ content: '不能重复绑定认购池' })
           }
         }}
       >
         <Meta
-          avatar={<Progress type="circle" percent={rank} width={50} />}
-          // title="#认购池ASD"
+          avatar={<Progress type="circle" percent={poolItem.rank} width={50} />}
+          // title={getUserPoolId() }
           description="认购池简要描述内容,认购池简要描述内容,认购池简要描述内容,认购池简要描述内容,认购池简要描述内容"
           style={{ color: 'white' }}
         />
@@ -49,52 +78,21 @@ export default props => {
         style={{ top: '30vh' }}
         visible={modalVisible}
         onOk={async () => {
-          const ERC20Exchange = await getSNSERC20Exchange(
-            '0x5f191D8dA9d519738299d340F8f6c06eC44Ab870'
-          )
-
-          let poolMaxId
-
+          const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
           try {
-            const resPoolMaxId = await ERC20Exchange.poolMaxId()
-            poolMaxId = parseInt(resPoolMaxId._hex, 16)
-          } catch (error) {
-            console.log('poolMaxIdError:', error)
-          }
-
-          console.log('poolMaxId:', poolMaxId)
-          try {
-            const isBind = await ERC20Exchange.subscribe(poolMaxId)
+            const isBind = await ERC20Exchange.subscribe(poolItem.poolId)
             console.log('isBind:', isBind)
+            history.push({ pathname: '/SubscriptionPoolDetails' })
           } catch (error) {
             console.log('subscribeError:', error)
           }
 
-          // history.push({ pathname: '/SubscriptionPoolDetails' })
           setModalVisible(false)
         }}
         okButtonProps={{
           shape: 'round'
         }}
-        onCancel={async () => {
-          const ERC20Exchange = await getSNSERC20Exchange(
-            '0x5f191D8dA9d519738299d340F8f6c06eC44Ab870'
-          )
-
-          console.log('ERC20Exchange:', ERC20Exchange)
-
-          try {
-            const fromAddress = await ERC20Exchange.fromTokenAddress()
-            console.log('fromAddress:', fromAddress)
-          } catch (error) {
-            console.log('fromAddressError:', error)
-          }
-
-          // const ERC20 = await getSNSERC20()
-          // console.log('ERC20:', ERC20)
-
-          // const fromAddress = await ERC20Exchange.fromTokenAddress();
-          // console.log("fromAddress:", fromAddress)
+        onCancel={() => {
           setModalVisible(false)
         }}
         cancelButtonProps={{

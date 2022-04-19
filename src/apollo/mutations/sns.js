@@ -74,7 +74,6 @@ export async function getSNSIERC20(address) {
 }
 
 export async function getSNSERC20Exchange(address) {
-  console.log('address:', address)
   const snsIERC20Instance = await setupERC20Exchange({
     snsAddress: address,
     provider

@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import styled from '@emotion/styled/macro'
 import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
 import searchIcon from '../../assets/search.png'
 import { gql, useQuery } from '@apollo/client'
+import store from 'Store/index.js'
 
 const SEARCH_QUERY = gql`
   query searchQuery {
@@ -12,35 +14,52 @@ const SEARCH_QUERY = gql`
 `
 
 function HeaderSearch({ className, style }) {
-  const [isMenuOpen, setMenuOpen] = useState(false)
-  const [inputValue, setInputValue] = useState(null)
   const mediumBP = useMediaMin('medium')
   const mediumBPMax = useMediaMax('medium')
-  const { t } = useTranslation()
-  const {
-    data: { isENSReady }
-  } = useQuery(SEARCH_QUERY)
+  const history = useHistory()
+
+  const handleSearch = () => {
+    const filterArr = []
+    store.getState().poolList.filter(item => {
+      if (item.title.includes(store.getState().inputValue)) {
+        filterArr.push(item)
+      }
+    })
+    return filterArr
+  }
 
   let input
-  const hasSearch = inputValue && inputValue.length > 0 && isENSReady
 
   return (
     <SearchForm
       className={className}
       style={style}
-      hasSearch={hasSearch}
       mediumBP={mediumBP}
       mediumBPMax={mediumBPMax}
     >
       <input
-        placeholder={t('search.placeholder')}
+        placeholder="输入认购池名称"
         ref={el => (input = el)}
         onChange={e => {
-          setInputValue(e.target.value)
+          const action = {
+            type: 'changeInput',
+            value: e.target.value
+          }
+          store.dispatch(action)
         }}
+        value={store.getState().inputValue}
       />
-      <button disabled={!hasSearch}>
-        {mediumBP ? t('search.button') : <img src={searchIcon} alt="search" />}
+      <button
+        onClick={() => {
+          const action = {
+            type: 'searchList',
+            value: handleSearch()
+          }
+          store.dispatch(action)
+          history.push({ pathname: '/' })
+        }}
+      >
+        {mediumBP ? '查询' : <img src={searchIcon} alt="search" />}
       </button>
     </SearchForm>
   )
@@ -99,10 +118,8 @@ const SearchForm = styled('div')`
   }
 
   button {
-    ${p =>
-      p && p.hasSearch
-        ? 'background: #ffc107;color: #000;'
-        : 'background: #ffc107; color:#605a5a;'}
+    background: #ffc107;
+    color: #000;
     font-size: 18px;
     font-weight: bold;
     height: 35px;
@@ -119,10 +136,10 @@ const SearchForm = styled('div')`
       border-radius: 0 14px 14px 0;
     `}
     &:hover {
-      ${p => (p && p.hasSearch ? 'cursor: pointer;' : 'cursor: default;')}
+      cursor: pointer;
     }
     &:active {
-      ${p => (p && p.hasSearch ? 'background:#ffc107aa;' : '')}
+      background: #ffc107aa;
     }
     img {
       width: 25px;

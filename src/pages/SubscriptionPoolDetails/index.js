@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import mq from 'mediaQuery'
 import {
   Card,
@@ -13,9 +13,111 @@ import {
 import './index.css'
 import styled from '@emotion/styled'
 import AlertBanner from 'components/AlertBanner'
+import { getSNSERC20Exchange, getSNSERC20 } from 'apollo/mutations/sns'
+import { ERC20ExchangeAddress } from 'utils/utils'
+import EthVal from 'ethval'
 
-export default () => {
+const coinsAmount = 200
+
+export default props => {
   const [modalVisible, setModalVisible] = useState(false)
+  const poolDetails = props.location.state.details
+
+  // 用户输入的认购数量
+  const [inputSubscribe, setInputSubscribe] = useState(1)
+  // 用户输入的销毁数量
+  const [inputBurn, setInputBurn] = useState(1)
+
+  // 已兑换池数量状态值
+  const [exchangeAmountState, setExchangeAmountState] = useState('-')
+  // 剩余可兑换数量状态值
+  const [exchangeableAmountState, setExchangeableAmountState] = useState('-')
+  // 用户可兑换数量状态值
+  const [usrExchangeAmountState, setUsrExchangeAmountState] = useState('-')
+  // 可销毁的数量状态值
+  const [burnAmountState, setBurnAmountState] = useState('-')
+
+  // 获取ERC20实例
+  const getERC20Instance = async () => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    const fromTokenAdd = await ERC20Exchange.fromTokenAddress()
+    const ERC20 = await getSNSERC20(fromTokenAdd)
+    return ERC20
+  }
+
+  // 获取兑换池已兑换的数量
+  const getPoolExchangeAmount = async () => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    try {
+      const exchangedAmount = await ERC20Exchange.poolExchangeAmount(
+        poolDetails.poolId
+      )
+      console.log('exchangedAmount:', parseInt(exchangedAmount._hex, 16))
+      setExchangeAmountState(parseInt(exchangedAmount._hex, 16))
+    } catch (error) {
+      console.log('poolExchangeAmountError:', error)
+      return '-'
+    }
+  }
+
+  // 获取兑换池剩余的可兑换数量
+  const getPoolBalance = async () => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    try {
+      const exchangeableAmount = await ERC20Exchange.poolBalance(
+        poolDetails.poolId
+      )
+      const handleAmount = parseInt(exchangeableAmount._hex, 16)
+      const amountVal = new EthVal(`${exchangeableAmount._hex}`)
+        .toEth()
+        .toFixed(3)
+      console.log('amountVal:', amountVal)
+      setExchangeableAmountState(amountVal)
+    } catch (error) {
+      console.log('poolBalanceError:', error)
+    }
+  }
+
+  // 获取用户可以兑换的余额
+  const getUserExchangeAvailable = async () => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    try {
+      const usrExchangeAmount = await ERC20Exchange.userExchangeAvailable()
+      console.log('usrExchangeAmount:', usrExchangeAmount)
+      const ethVal = new EthVal(`${usrExchangeAmount}`).toEth().toFixed(3)
+      setUsrExchangeAmountState(ethVal)
+    } catch (error) {
+      console.log('userExchangeAvailableError:', error)
+    }
+  }
+
+  // 授权ERC20合约
+  const handleApprove = async () => {
+    const ERC20 = await getERC20Instance()
+    try {
+      // const callApprove = await
+    } catch (error) {}
+  }
+
+  // 用户可销毁的金额
+  const getBurnAmount = async () => {
+    const ERC20 = await getERC20Instance()
+    try {
+      const allowanceAmount = await ERC20.balanceOf()
+      const ethVal = new EthVal(`${allowanceAmount}`).toEth().toFixed(3)
+      setBurnAmountState(ethVal)
+    } catch (error) {
+      console.log('allowanceError:', error)
+    }
+  }
+
+  useEffect(() => {
+    getPoolExchangeAmount()
+    getPoolBalance()
+    getUserExchangeAvailable()
+    getBurnAmount()
+  }, [])
+
   return (
     <DetailsContainer>
       <AlertBanner />
@@ -24,12 +126,14 @@ export default () => {
         title={
           <>
             <Avatar src="https://joeschmoe.io/api/v1/random" />
-            <Title> #认购池ASD</Title>
+            <Title> {poolDetails.title}</Title>
           </>
         }
-        extra={<Progress type="circle" percent={30} width={40} />}
+        extra={<Progress type="circle" percent={poolDetails.rank} width={40} />}
       >
-        <div>已认购数量: 888 | 剩余122</div>
+        <div>
+          已认购数量: {exchangeAmountState} | 剩余:{exchangeableAmountState}
+        </div>
         <div>
           认购池专属链接:{' '}
           <a href="https://www.baidu.com" target="_blank">
@@ -39,10 +143,12 @@ export default () => {
 
         <PuchaseAndDestroy>
           <InpAndBtnWrapper>
-            <PushchaseAndDestroyText>可销毁的数量:200</PushchaseAndDestroyText>
+            <PushchaseAndDestroyText>
+              可销毁的数量:{burnAmountState}
+            </PushchaseAndDestroyText>
             <InpAndBtnCompact>
               <Input.Group compact>
-                <Input disabled value="200" style={{ width: '50px' }} />
+                <Input disabled value={coinsAmount} style={{ width: '50px' }} />
                 <InputNumber
                   addonAfter="份"
                   defaultValue={1}
@@ -50,6 +156,9 @@ export default () => {
                   min="0"
                   controls={false}
                   precision={0}
+                  onChange={value => {
+                    setInputBurn(value)
+                  }}
                 />
               </Input.Group>
               <ButtonWrapper type="primary">销毁</ButtonWrapper>
@@ -57,17 +166,22 @@ export default () => {
           </InpAndBtnWrapper>
 
           <InpAndBtnWrapper>
-            <PushchaseAndDestroyText>可认购的数量:200</PushchaseAndDestroyText>
+            <PushchaseAndDestroyText>
+              可认购的数量:{usrExchangeAmountState}
+            </PushchaseAndDestroyText>
             <InpAndBtnCompact>
               <Input.Group compact>
-                <Input disabled value="200" style={{ width: '50px' }} />
+                <Input disabled value={coinsAmount} style={{ width: '50px' }} />
                 <InputNumber
                   addonAfter="份"
-                  defaultValue={1}
+                  defaultValue={inputSubscribe}
                   style={{ width: '90px' }}
                   min="0"
                   controls={false}
                   precision={0}
+                  onChange={value => {
+                    setInputSubscribe(value)
+                  }}
                 />
               </Input.Group>
               <ButtonWrapper
@@ -106,9 +220,15 @@ export default () => {
           shape: 'round'
         }}
       >
-        <div>认购数量:200 X 3份 = 600</div>
+        <div>
+          认购数量:{coinsAmount} X {inputSubscribe}份 ={' '}
+          {coinsAmount * inputSubscribe}
+        </div>
         <div>剩余可认购数量: xxx</div>
-        <div>需支付: 0.3 U X 600 = 180 U</div>
+        <div>
+          需支付: 0.3 U X {coinsAmount * inputSubscribe} ={' '}
+          {coinsAmount * inputSubscribe * 0.3} U
+        </div>
       </Modal>
     </DetailsContainer>
   )
