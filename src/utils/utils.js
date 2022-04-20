@@ -13,11 +13,14 @@ import { CID } from 'multiformats/esm/src/cid'
 
 import * as jsSHA3 from 'js-sha3'
 import { saveName } from '../api/labels'
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { EMPTY_ADDRESS } from './records'
 import getSNS from '../apollo/mutations/sns'
 import { gql } from '@apollo/client'
 import { useQuery } from '@apollo/client'
+import { Trans } from 'react-i18next'
+import { UnknowErrMsgComponent } from '../components/UnknowErrMsg'
+import { message } from 'antd'
 
 // From https://github.com/0xProject/0x-monorepo/blob/development/packages/utils/src/address_utils.ts
 
@@ -55,6 +58,48 @@ export const supportedAvatarProtocols = [
   'ipfs://',
   'eip155'
 ]
+
+export const catchHandle = e => {
+  if (e && e.data && e.data.code && e.data.message) {
+    let errorMessages = e.data.message.split('-')
+    let errorContent
+    if (errorMessages.length == 2) {
+      // get errorCode
+      let errCode = errorMessages[1].split(':')[0].trim()
+      console.log('[errorCode]', errCode)
+      errorContent = <Trans i18nKey={`errorCode.${errCode}`} />
+    } else if (
+      errorMessages.length == 1 &&
+      errorMessages[0].startsWith(
+        'err: insufficient funds for gas * price + value:'
+      )
+    ) {
+      errorContent = 'Your wallet does not have enough asset!'
+    } else {
+      errorContent = e.data.message
+    }
+    // handle metamask wallet response error code
+    console.log('e:', e.code)
+    switch (e.code) {
+      case 4001:
+        errorContent = (
+          <Trans i18nKey={`withdrawErrCode.${e.code.toString()}`} />
+        )
+        break
+      case -32603:
+        errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
+        break
+      default:
+        errorContent = <UnknowErrMsgComponent />
+    }
+    message.error({
+      key: 1,
+      content: errorContent,
+      duration: 3,
+      style: { marginTop: '20vh' }
+    })
+  }
+}
 
 export const addressUtils = {
   isChecksumAddress(address) {
