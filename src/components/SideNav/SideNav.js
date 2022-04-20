@@ -123,12 +123,16 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
     const usrPoolId = await ERC20Exchange.getUserPool()
     console.log('usrPoolId:', parseInt(usrPoolId, 16))
     const { poolList } = store.getState()
+    console.log('poolList:', poolList)
     poolList.map(item => {
+      console.log('item:', item)
       if (item.poolId === parseInt(usrPoolId, 16)) {
         setPoolItem(item)
       }
     })
   }
+
+  console.log('poolItemId:', poolItem.poolId)
 
   useEffect(() => {
     getPoolItemDetails()
@@ -155,8 +159,7 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
               onClick={toggleMenu}
               active={url === '/SubscriptionPoolDetails' ? 1 : 0}
               to={{
-                pathname: '/SubscriptionPoolDetails/',
-                state: { details: poolItem }
+                pathname: `/SubscriptionPoolDetails/${poolItem.poolId}`
               }}
             >
               <span>我的认购池</span>

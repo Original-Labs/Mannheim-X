@@ -9,7 +9,8 @@ import {
   InputNumber,
   Button,
   Modal,
-  message
+  message,
+  Typography
 } from 'antd'
 import './index.css'
 import styled from '@emotion/styled'
@@ -31,13 +32,16 @@ import { BigNumber } from '@0xproject/utils'
 import { Trans, useTranslation } from 'react-i18next'
 import messageMention from '../../utils/messageMention'
 import { useHistory } from 'react-router'
-
+import store from 'Store/index.js'
+const { Paragraph } = Typography
 const coinsAmount = 200
 
 export default props => {
   const [modalVisible, setModalVisible] = useState(false)
-  const poolDetails = props.location.state.details
-  console.log('props:', props)
+  const [obtainSubsVisible, setObtainSubsVisible] = useState(false)
+  const [poolItemId, setPoolItemId] = useState(
+    Number(props.match.params.poolId)
+  )
 
   let { t } = useTranslation()
 
@@ -62,20 +66,32 @@ export default props => {
   const [ratioDecimal, setRatioDecimal] = useState('-')
   const [feeShare, setFeeShare] = useState('-')
 
-  // const [poolDetails, setPoolDetails] = useState({})
+  const [poolDetails, setPoolDetails] = useState({})
+
+  const getPoolInfo = () => {
+    const { poolList } = store.getState()
+    poolList.map(item => {
+      if (item.poolId === poolItemId) {
+        setPoolDetails(item)
+      }
+    })
+  }
 
   // 获取该用户的认购池详情
-  // const getPoolItemDetails = async () => {
-  //   const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
-  //   const usrPoolId = await ERC20Exchange.getUserPool()
-  //   console.log('usrPoolId:', parseInt(usrPoolId, 16))
-  //   const { poolList } = store.getState()
-  //   poolList.map(item => {
-  //     if (item.poolId === parseInt(usrPoolId, 16)) {
-  //       setPoolDetails(item)
-  //     }
-  //   })
-  // }
+  const getPoolItemDetails = async () => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    const usrPoolId = await ERC20Exchange.getUserPool()
+    const usrPoolIdVal = parseInt(usrPoolId, 16)
+    console.log('usrPoolIdVal:', usrPoolIdVal)
+    console.log('poolItemId:', poolItemId)
+    if (usrPoolIdVal !== 0 && poolItemId !== usrPoolIdVal) {
+      history.push('/')
+      message.warning({ content: '你已绑定池子,不可进入此池子' })
+    }
+    if (usrPoolIdVal === 0) {
+      setObtainSubsVisible(true)
+    }
+  }
 
   // 获取FromToken实例
   const getFromTokenInstance = async () => {
@@ -100,7 +116,6 @@ export default props => {
       const exchangedAmount = await ERC20Exchange.poolExchangeAmount(
         poolDetails.poolId
       )
-      console.log('exchangedAmount:', parseInt(exchangedAmount._hex, 16))
       // setExchangeAmountState(parseInt(exchangedAmount._hex, 16))
       setExchangeAmountState(
         new EthVal(`${exchangedAmount._hex}`).toEth().toFixed(3)
@@ -122,7 +137,6 @@ export default props => {
       const amountVal = new EthVal(`${exchangeableAmount._hex}`)
         .toEth()
         .toFixed(3)
-      console.log('amountVal:', amountVal)
       setExchangeableAmountState(amountVal)
     } catch (error) {
       console.log('poolBalanceError:', error)
@@ -137,7 +151,6 @@ export default props => {
       const allowanceAmount = await ERC20.allowance(ERC20ExchangeAddress)
       const ethVal = new EthVal(`${allowanceAmount}`).toEth().toFixed(3)
       if (ethVal > 0) {
-        console.log('ethVal', parseInt(ethVal, 10))
         const exchangeRatioHex = await exchangeInstance.exchangeRatio()
         const ratioDecimalHex = await exchangeInstance.ratioDecimal()
         const exchangeRatio = parseInt(exchangeRatioHex._hex, 16)
@@ -233,7 +246,6 @@ export default props => {
       })
       return
     }
-    console.log('[subscribeAmount]', subscribeAmount)
     // 授权USDT支付，支付金额为 授权认购新币数量的 30%
     try {
       const feeRatioHex = await erc20Exchange.feeRatio()
@@ -281,7 +293,6 @@ export default props => {
       const exchangeTx = await erc20Exchange.exchange(
         etherUnitHandle(coinsAmount * inputSubscribe)
       )
-      console.log('[exchangeTx]', exchangeTx)
       if (exchangeTx && exchangeTx.hash) {
         message.loading({
           key: 1,
@@ -308,7 +319,6 @@ export default props => {
       setRatioDecimal(parseInt(ratioDecimalOrigin._hex, 16))
       setFeeShare(parseInt(feeShareOrigin._hex, 16))
       const poolMaxId = await exchangeInstance.poolMaxId()
-      console.log('[poolMaxId]', poolMaxId)
     } catch (e) {
       console.log(e)
     }
@@ -328,7 +338,9 @@ export default props => {
   }
 
   useEffect(() => {
-    // getPoolItemDetails()
+    setPoolItemId(Number(props.match.params.poolId))
+    getPoolInfo()
+    getPoolItemDetails()
     getExchangePublicProperty()
     getPoolExchangeAmount()
     getPoolBalance()
@@ -353,10 +365,9 @@ export default props => {
           已认购数量: {exchangeAmountState} | 剩余:{exchangeableAmountState}
         </div>
         <div>
-          认购池专属链接:{' '}
-          <a href="https://www.baidu.com" target="_blank">
-            百度
-          </a>
+          <Paragraph copyable={{ text: window.location.href }}>
+            认购池专属链接
+          </Paragraph>
         </div>
 
         <PuchaseAndDestroy>
@@ -454,6 +465,45 @@ export default props => {
           需支付: 0.3 U X {coinsAmount * inputSubscribe} ={' '}
           {coinsAmount * inputSubscribe * 0.3} U
         </div>
+      </Modal>
+
+      <Modal
+        title="获得认购资格"
+        width={300}
+        maskClosable={false}
+        style={{ top: '30vh' }}
+        visible={obtainSubsVisible}
+        onOk={async () => {
+          const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+          try {
+            const isBind = await ERC20Exchange.subscribe(poolItemId)
+            if (isBind) {
+              message.success({ content: '绑定成功!' })
+            }
+            history.push({
+              pathname: `/SubscriptionPoolDetails/${poolDetails.poolId}`
+            })
+          } catch (error) {
+            history.push('/')
+            catchHandle(error)
+          }
+
+          setObtainSubsVisible(false)
+        }}
+        okButtonProps={{
+          shape: 'round'
+        }}
+        onCancel={() => {
+          setObtainSubsVisible(false)
+          history.push('/')
+        }}
+        cancelButtonProps={{
+          shape: 'round'
+        }}
+      >
+        进入该认购池后将自动获得认购资格，该地址兑币
+        仅可在此池中进行，无法进入其他认购池进行兑币 。
+        当且仅当该池认购已满时，可再加入其他认购池。
       </Modal>
     </DetailsContainer>
   )

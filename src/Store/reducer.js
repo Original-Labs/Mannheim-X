@@ -172,6 +172,7 @@ export default (state = defaultState, action) => {
   if (action.type === 'changeInput') {
     let newState = JSON.parse(JSON.stringify(state)) //深度拷贝state
     newState.inputValue = action.value
+    console.log('newState:', newState.inputValue)
     return newState
   }
   if (action.type === 'searchList') {
@@ -182,6 +183,11 @@ export default (state = defaultState, action) => {
   if (action.type === 'getList') {
     let newState = JSON.parse(JSON.stringify(state)) //深度拷贝state
     newState.poolList = action.value
+    return newState
+  }
+  if (action.type === 'setBanner') {
+    let newState = JSON.parse(JSON.stringify(state)) //深度拷贝state
+    newState.banner = action.value
     return newState
   }
   return state
