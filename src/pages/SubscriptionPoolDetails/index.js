@@ -80,16 +80,21 @@ export default props => {
   // 获取该用户的认购池详情
   const getPoolItemDetails = async () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
-    const usrPoolId = await ERC20Exchange.getUserPool()
-    const usrPoolIdVal = parseInt(usrPoolId, 16)
-    console.log('usrPoolIdVal:', usrPoolIdVal)
-    console.log('poolItemId:', poolItemId)
-    if (usrPoolIdVal !== 0 && poolItemId !== usrPoolIdVal) {
+    console.log('ERC20Exchange:', ERC20Exchange)
+    try {
+      const usrPoolId = await ERC20Exchange.getUserPool()
+      const usrPoolIdVal = parseInt(usrPoolId, 16)
+      if (usrPoolIdVal !== 0 && poolItemId !== usrPoolIdVal) {
+        history.push('/')
+        message.warning({ content: '你已绑定池子,不可进入此池子' })
+      }
+      if (usrPoolIdVal === 0) {
+        setObtainSubsVisible(true)
+      }
+    } catch (error) {
       history.push('/')
-      message.warning({ content: '你已绑定池子,不可进入此池子' })
-    }
-    if (usrPoolIdVal === 0) {
-      setObtainSubsVisible(true)
+      message.error({ content: '未知错误,请检查是否连接钱包!' })
+      console.log('getUserPoolError:', error)
     }
   }
 

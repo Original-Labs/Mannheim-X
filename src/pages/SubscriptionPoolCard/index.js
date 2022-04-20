@@ -6,6 +6,7 @@ import './index.css'
 import mq from 'mediaQuery'
 import { getSNSERC20Exchange, getSNSERC20 } from 'apollo/mutations/sns'
 import { ERC20ExchangeAddress } from 'utils/utils'
+import { isReadOnly } from 'contracts'
 
 const { Meta } = Card
 
@@ -26,6 +27,8 @@ export default props => {
     }
   }
 
+  console.log('isReadyOnly:', isReadOnly())
+
   return (
     <>
       <CardContainer
@@ -38,40 +41,24 @@ export default props => {
         extra={<CardNo className="cardNo">{poolItem.poolId}</CardNo>}
         hoverable
         onClick={async () => {
-          const usrPoolId = await getUserPoolId()
-          if (usrPoolId !== 0 && poolItem.poolId !== usrPoolId) {
-            message.warning({ content: '不能重复绑定认购池' })
+          if (!isReadOnly()) {
+            const usrPoolId = await getUserPoolId()
+            if (usrPoolId !== 0 && poolItem.poolId !== usrPoolId) {
+              message.warning({ content: '不能重复绑定认购池' })
+            }
+            if (poolItem.rank === 100) {
+              message.warning({
+                content: '认购池已满'
+              })
+            }
+            if (usrPoolId === 0 || usrPoolId === poolItem.poolId) {
+              history.push({
+                pathname: `/SubscriptionPoolDetails/${poolItem.poolId}`
+              })
+            }
+          } else {
+            message.warning({ content: '请连接钱包!' })
           }
-          if (poolItem.rank === 100) {
-            message.warning({
-              content: '认购池已满'
-            })
-          }
-          if (usrPoolId === 0 || usrPoolId === poolItem.poolId) {
-            history.push({
-              pathname: `/SubscriptionPoolDetails/${poolItem.poolId}`
-            })
-          }
-
-          // 用户已经绑定了此认购池,则跳转到认购池详情页面
-          // if (poolItem.poolId === usrPoolId) {
-          //   history.push({
-          //     pathname: `/SubscriptionPoolDetails/${poolItem.poolId}`,
-          //     state: { details: poolItem }
-          //   })
-          // } else if (usrPoolId === 0) {
-          //   // 用户未绑定认购池,点击显示弹窗,进行绑定
-          //   if (poolItem.rank !== 100) {
-          //     setObtainSubsVisible(true)
-          //   } else {
-          //     message.warning({
-          //       content: '认购池已满'
-          //     })
-          //   }
-          // } else {
-          //   // 用户如果有绑定认购池,则进行提示
-          //   message.warning({ content: '不能重复绑定认购池' })
-          // }
         }}
       >
         <Meta

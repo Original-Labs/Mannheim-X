@@ -6,6 +6,8 @@ import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
 import searchIcon from '../../assets/search.png'
 import { gql, useQuery } from '@apollo/client'
 import store from 'Store/index.js'
+import { isReadOnly } from 'contracts'
+import { message } from 'antd'
 
 const SEARCH_QUERY = gql`
   query searchQuery {
@@ -51,12 +53,16 @@ function HeaderSearch({ className, style }) {
       />
       <button
         onClick={() => {
-          const action = {
-            type: 'searchList',
-            value: handleSearch()
+          if (!isReadOnly()) {
+            const action = {
+              type: 'searchList',
+              value: handleSearch()
+            }
+            store.dispatch(action)
+            history.push({ pathname: '/' })
+          } else {
+            message.warning({ content: '请连接钱包!' })
           }
-          store.dispatch(action)
-          history.push({ pathname: '/' })
         }}
       >
         {mediumBP ? '查询' : <img src={searchIcon} alt="search" />}
