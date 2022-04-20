@@ -31,6 +31,16 @@ export const ROPSTEN_DNSREGISTRAR_ADDRESS =
 
 export const ERC20ExchangeAddress = '0xcE637DDE179fF471d221BA623ecd51a76b9C7E8e'
 
+export const etherUnit = 10 ** 18
+export const etherUnitStr = '000000000000000000'
+
+export const etherUnitHandle = amount => {
+  return amount.toString() + etherUnitStr
+}
+
+// oldCoin : newCoin = 1: 200
+export const exchangeRate = 200
+
 export const networkName = {
   main: 'mainnet',
   goerli: 'goerli',
