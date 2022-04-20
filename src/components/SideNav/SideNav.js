@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled/macro'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
 
 import NetworkInformation from '../NetworkInformation/NetworkInformation'
-import { aboutPageURL, hasNonAscii } from '../../utils/utils'
+import {
+  aboutPageURL,
+  ERC20ExchangeAddress,
+  hasNonAscii
+} from '../../utils/utils'
 
 import mq from 'mediaQuery'
 import { Link, withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
+import { getSNSERC20Exchange } from 'apollo/mutations/sns'
+import store from 'Store/index.js'
 
 const SideNavContainer = styled('nav')`
   // display: ${p => (p.isMenuOpen ? 'block' : 'none')};
@@ -105,12 +111,28 @@ const SIDENAV_QUERY = gql`
 
 function SideNav({ match, isMenuOpen, toggleMenu }) {
   const { url } = match
-  const { t } = useTranslation()
   const {
     data: { accounts, isReadOnly }
   } = useQuery(SIDENAV_QUERY)
 
-  console.log('isMenuOpen:', isMenuOpen)
+  const [poolItem, setPoolItem] = useState({})
+
+  // 获取该用户的认购池详情
+  const getPoolItemDetails = async () => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    const usrPoolId = await ERC20Exchange.getUserPool()
+    console.log('usrPoolId:', parseInt(usrPoolId, 16))
+    const { poolList } = store.getState()
+    poolList.map(item => {
+      if (item.poolId === parseInt(usrPoolId, 16)) {
+        setPoolItem(item)
+      }
+    })
+  }
+
+  useEffect(() => {
+    getPoolItemDetails()
+  }, [])
 
   return (
     <SideNavContainer isMenuOpen={isMenuOpen} hasNonAscii={hasNonAscii()}>
@@ -124,6 +146,20 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
               to={'/myRecord/'}
             >
               <span>我的认购记录</span>
+            </NavLink>
+          </li>
+        ) : null}
+        {accounts?.length > 0 && !isReadOnly ? (
+          <li>
+            <NavLink
+              onClick={toggleMenu}
+              active={url === '/SubscriptionPoolDetails' ? 1 : 0}
+              to={{
+                pathname: '/SubscriptionPoolDetails/',
+                state: { details: poolItem }
+              }}
+            >
+              <span>我的认购池</span>
             </NavLink>
           </li>
         ) : null}

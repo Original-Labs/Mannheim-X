@@ -42,7 +42,7 @@ html {
 }
 
 .ant-btn:focus {
-  color: #212121 !important;
+  color: #fff !important;
   border-color: #ffc107 !important;
 }
 

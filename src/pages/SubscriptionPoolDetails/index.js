@@ -36,6 +36,7 @@ const coinsAmount = 200
 export default props => {
   const [modalVisible, setModalVisible] = useState(false)
   const poolDetails = props.location.state.details
+  console.log('props:', props)
 
   let { t } = useTranslation()
 
@@ -59,6 +60,21 @@ export default props => {
   const [feeRatio, setFeeRatio] = useState('-')
   const [ratioDecimal, setRatioDecimal] = useState('-')
   const [feeShare, setFeeShare] = useState('-')
+
+  // const [poolDetails, setPoolDetails] = useState({})
+
+  // 获取该用户的认购池详情
+  // const getPoolItemDetails = async () => {
+  //   const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+  //   const usrPoolId = await ERC20Exchange.getUserPool()
+  //   console.log('usrPoolId:', parseInt(usrPoolId, 16))
+  //   const { poolList } = store.getState()
+  //   poolList.map(item => {
+  //     if (item.poolId === parseInt(usrPoolId, 16)) {
+  //       setPoolDetails(item)
+  //     }
+  //   })
+  // }
 
   // 获取FromToken实例
   const getFromTokenInstance = async () => {
@@ -311,6 +327,7 @@ export default props => {
   }
 
   useEffect(() => {
+    // getPoolItemDetails()
     getExchangePublicProperty()
     getPoolExchangeAmount()
     getPoolBalance()
