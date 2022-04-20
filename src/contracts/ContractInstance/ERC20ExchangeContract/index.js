@@ -44,7 +44,7 @@ export class ERC20Exchange {
   }
 
   /* Get the raw Ethers contract object */
-  getERC20TransContractInstance() {
+  getInstance() {
     return this.ERC20Trans
   }
 
@@ -63,19 +63,42 @@ export class ERC20Exchange {
   }
 
   // subscription address
-  async feeTokenAddress(address) {
-    return await this.ERC20Trans.feeTokenAddress(address)
+  async feeTokenAddress() {
+    return await this.ERC20Trans.feeTokenAddress()
+  }
+
+  async exchangeRatio() {
+    return await this.ERC20Trans.exchangeRatio()
+  }
+
+  async feeRatio() {
+    return await this.ERC20Trans.feeRatio()
+  }
+
+  async ratioDecimal() {
+    return await this.ERC20Trans.ratioDecimal()
+  }
+
+  async feeShare() {
+    return await this.ERC20Trans.feeShare()
+  }
+
+  // amount: approval old coin amount
+  async exchangeAvailable(amount) {
+    return await this.ERC20Trans.exchangeAvailable(amount)
   }
 
   // subscription
   async exchange(amount) {
-    return await this.ERC20Trans.exchange(amount)
+    const signer = await getSigner()
+    const ERC20Instance = this.ERC20Trans.connect(signer)
+    return await ERC20Instance.exchange(amount)
   }
 
   // burn old coins
   async userBurn(amount) {
-    const singner = await getSigner()
-    const ERC20Instance = this.ERC20Trans.connect(singner)
+    const signer = await getSigner()
+    const ERC20Instance = this.ERC20Trans.connect(signer)
     return await ERC20Instance.userBurn(amount)
   }
 
@@ -90,9 +113,9 @@ export class ERC20Exchange {
   }
 
   // 查询用户可兑换的余额
-  async userExchangeAvailable() {
+  async exchangeAvailable() {
     const usrAccount = await getAccount()
-    return await this.ERC20Trans.userExchangeAvailable(usrAccount)
+    return await this.ERC20Trans.exchangeAvailable(usrAccount)
   }
 
   // 查询兑换池已兑换的数量

@@ -1,6 +1,8 @@
 import has from 'lodash/has'
 import { getERC20Contract } from '../../contracts'
-import { getSigner, getAccount } from '../../web3'
+import { getSigner, getAccount, getWeb3 } from '../../web3'
+import { utils } from 'ethers'
+import ensContract from './index.json'
 
 const contracts = {
   1: {
@@ -44,7 +46,7 @@ export class SNSERC20 {
   }
 
   /* Get the raw Ethers contract object */
-  getSNSERC20ContractInstance() {
+  getInstance() {
     return this.SNSERC20
   }
 
@@ -65,5 +67,30 @@ export class SNSERC20 {
   async balanceOf() {
     const ownerAccount = await getAccount()
     return await this.SNSERC20.balanceOf(ownerAccount)
+  }
+
+  // Events
+  async getEvent(event, { topics, fromBlock }) {
+    const provider = await getWeb3()
+    const { SNSERC20 } = this
+    const ensInterface = new utils.Interface(ensContract)
+    let Event = SNSERC20.filters[event]()
+    console.log('Event', Event)
+
+    const filter = {
+      fromBlock,
+      toBlock: 'latest',
+      address: Event.address,
+      topics: [...Event.topics, ...topics]
+    }
+
+    const logs = await provider.getLogs(filter)
+
+    const parsed = logs.map(log => {
+      const parsedLog = ensInterface.parseLog(log)
+      return parsedLog
+    })
+
+    return parsed
   }
 }

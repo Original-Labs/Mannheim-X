@@ -29,7 +29,17 @@ export const MAINNET_DNSREGISTRAR_ADDRESS =
 export const ROPSTEN_DNSREGISTRAR_ADDRESS =
   '0xdB328BA5FEcb432AF325Ca59E3778441eF5aa14F'
 
-export const ERC20ExchangeAddress = '0xa6be150640f3fFfd034174ca63d0113CFB143Fd8'
+export const ERC20ExchangeAddress = '0xcE637DDE179fF471d221BA623ecd51a76b9C7E8e'
+
+export const etherUnit = 10 ** 18
+export const etherUnitStr = '000000000000000000'
+
+export const etherUnitHandle = amount => {
+  return amount.toString() + etherUnitStr
+}
+
+// oldCoin : newCoin = 1: 200
+export const exchangeRate = 200
 
 export const networkName = {
   main: 'mainnet',
