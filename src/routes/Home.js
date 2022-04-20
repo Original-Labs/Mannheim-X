@@ -2,215 +2,123 @@ import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled/macro'
 import mq from 'mediaQuery'
 import HeaderContainer from 'components/Header/Header'
-import { Alert, Button } from 'antd'
+import { Alert, Button, message } from 'antd'
 import SubscriptionPoolCard from 'components/SubscriptionPoolCard'
 import AlertBanner from 'components/AlertBanner'
-import { copyArray } from 'utils/utils'
+import { copyArray, ERC20ExchangeAddress } from 'utils/utils'
 import { getSNSERC20Exchange } from 'apollo/mutations/sns'
 import store from 'Store/index.js'
+import EthVal from 'ethval'
 
-const poolList = [
-  {
-    poolId: 1,
-    avatar: 'https://joeschmoe.io/api/v1/jess',
-    title: '1个认购池的标题',
-    description: '1个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 99
-  },
-  {
-    poolId: 2,
-    avatar: 'https://joeschmoe.io/api/v1/joe',
-    title: '2个认购池的标题',
-    description: '2个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 20
-  },
-  {
-    poolId: 3,
-    avatar: 'https://joeschmoe.io/api/v1/josh',
-    title: '3个认购池的标题',
-    description: '3个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 34
-  },
-  {
-    poolId: 4,
-    avatar: 'https://joeschmoe.io/api/v1/jake',
-    title: '4个认购池的标题',
-    description: '4个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 58
-  },
-  {
-    poolId: 5,
-    avatar: 'https://joeschmoe.io/api/v1/jeane',
-    title: '5个认购池的标题',
-    description: '5个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 5
-  },
-  {
-    poolId: 6,
-    avatar: 'https://joeschmoe.io/api/v1/jodi',
-    title: '6个认购池的标题',
-    description: '6个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 6
-  },
-  {
-    poolId: 7,
-    avatar: 'https://joeschmoe.io/api/v1/jai',
-    title: '7个认购池的标题',
-    description: '7个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 7
-  },
-  {
-    poolId: 8,
-    avatar: 'https://joeschmoe.io/api/v1/jordan',
-    title: '8个认购池的标题',
-    description: '8个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 100
-  },
-  {
-    poolId: 9,
-    avatar: 'https://joeschmoe.io/api/v1/jeri',
-    title: '9个认购池的标题',
-    description: '9个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 90
-  },
-  {
-    poolId: 10,
-    avatar: 'https://joeschmoe.io/api/v1/jazebelle',
-    title: '10个认购池的标题',
-    description: '10个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 100
-  },
-  {
-    poolId: 11,
-    avatar: 'https://joeschmoe.io/api/v1/jacques',
-    title: '11个认购池的标题',
-    description: '11个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 11
-  },
-  {
-    poolId: 12,
-    avatar: 'https://joeschmoe.io/api/v1/jana',
-    title: '12个认购池的标题',
-    description: '12个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 21
-  },
-  {
-    poolId: 13,
-    avatar: 'https://joeschmoe.io/api/v1/julie',
-    title: '13个认购池的标题',
-    description: '13个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 31
-  },
-  {
-    poolId: 14,
-    avatar: 'https://joeschmoe.io/api/v1/jerry',
-    title: '14个认购池的标题',
-    description: '14个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 14
-  },
-  {
-    poolId: 15,
-    avatar: 'https://joeschmoe.io/api/v1/jocelyn',
-    title: '15个认购池的标题',
-    description: '15个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 50
-  },
-  {
-    poolId: 16,
-    avatar: 'https://joeschmoe.io/api/v1/josephine',
-    title: '16个认购池的标题',
-    description: '16个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 60
-  },
-  {
-    poolId: 17,
-    avatar: 'https://joeschmoe.io/api/v1/jack',
-    title: '17个认购池的标题',
-    description: '17个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 71
-  },
-  {
-    poolId: 18,
-    avatar: 'https://joeschmoe.io/api/v1/jane',
-    title: '18个认购池的标题',
-    description: '18个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 81
-  },
-  {
-    poolId: 19,
-    avatar: 'https://joeschmoe.io/api/v1/jed',
-    title: '19个认购池的标题',
-    description: '19个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 90
-  },
-  {
-    poolId: 20,
-    avatar: 'https://joeschmoe.io/api/v1/james',
-    title: '20个认购池的标题',
-    description: '20个认购池的描述',
-    banner: '这是页面的广告栏,横向移动,循环播放',
-    rank: 20
-  }
-]
+const poolTotalAmount = 100000
 
 export default () => {
   const [poolListState, setPoolListState] = useState(store.getState().poolList)
+  const [storeState, setStoreState] = useState(store.getState())
+  const { searchList, poolList } = storeState
   const [searchValue, setSearchValue] = useState(store.getState())
 
-  // The subscription pool is sorted from highest to lowest, with the full pool at the bottom
-  const handleRank = () => {
-    poolList.sort((a, b) => {
+  // 降序排列,排名满的在最后
+  const handleRank = poolArr => {
+    // 降序排列
+    poolArr.sort((a, b) => {
       return b.rank - a.rank
     })
 
-    // find positon
+    // 找到池满的位置
     let posArr = []
-    poolList.map((item, index) => {
+    poolArr.map((item, index) => {
       if (item.rank === 100) {
         posArr.push(index)
       }
     })
 
-    const tempArr = copyArray(poolList)
+    const tempArr = copyArray(poolArr)
 
-    // delete 100 percent pool
+    // 将满的池子从头部删除,拼接到尾部
     const spliceArr = tempArr.splice(0, posArr.length)
-    // contact deleted 100 percent pool
     const contactArr = tempArr.concat(spliceArr)
-
-    setPoolListState(contactArr)
+    return contactArr
   }
 
-  const handleSearch = () => {
-    const { searchList } = store.getState()
-    return searchList.length === 0 ? poolListState : searchList
+  console.log('storeState:', storeState)
+  console.log('searchList:', searchList)
+  console.log('poolList:', poolList)
+
+  // const handleSearch = () => {
+  //   const { searchList, poolList } = storeState
+  //   const tempArr = searchList.length === 0 ? poolList : searchList;
+  //   // const action = {
+  //   //   type: 'getList',
+  //   //   value: tempArr
+  //   // }
+  //   // store.dispatch(action)
+  //   return tempArr
+  // }
+
+  // 获取每个池的剩余额度
+  const getPoolBalance = async poolId => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    try {
+      const poolAmount = await ERC20Exchange.poolBalance(poolId)
+      const ethVal = new EthVal(`${poolAmount}`).toEth().toFixed(3)
+      return ethVal
+    } catch (error) {
+      console.log('poolBalanceError:', error)
+      return 0
+    }
   }
+
+  // 获取池的个数
+  const getMaxPoolId = async () => {
+    // const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    getSNSERC20Exchange(ERC20ExchangeAddress).then(ERC20Exchange => {
+      console.log('ERC20Exchange:', ERC20Exchange)
+      ERC20Exchange.poolMaxId()
+        .then(maxPoolId => {
+          console.log('maxPoolId:', parseInt(maxPoolId._hex, 16))
+          return parseInt(maxPoolId._hex, 16)
+        })
+        .catch(e => {
+          console.log('poolMaxIdError:', e)
+          message.error({ content: '未知错误' })
+          return 0
+        })
+    })
+  }
+
+  // 处理池的数据
+  // const handleListData = async () => {
+  //   const { poolList } = storeState
+  //   const poolArr = []
+  //   const maxPoolIdVal = await getMaxPoolId()
+  //   poolList.map(async item => {
+  //     if (item.poolId <= maxPoolIdVal) {
+  //       getPoolBalance(item.poolId).then(balance => {
+  //         item.rank = balance / poolTotalAmount * 100;
+  //         console.log('balance:', balance)
+  //         console.log('rank:', item.rank)
+  //       })
+  //       poolArr.push(item)
+  //     }
+  //   })
+  //   console.log('poolArr:', poolArr)
+  //   const action = {
+  //     type: 'getList',
+  //     value: handleRank(poolArr)
+  //   }
+  //   store.dispatch(action)
+  // }
 
   useEffect(() => {
     // 监听state的变化
     store.subscribe(() => {
       setSearchValue(store.getState().inputValue)
+      setStoreState(store.getState())
+      setPoolListState(poolList)
     })
-    handleRank()
+    // handleListData()
+    getMaxPoolId()
   }, [searchValue])
 
   return (
@@ -219,7 +127,7 @@ export default () => {
       <ContentContainer>
         <AlertBanner />
         <CardContainer>
-          {handleSearch().map(item => {
+          {poolListState.map(item => {
             return <SubscriptionPoolCard poolItem={item} />
           })}
         </CardContainer>

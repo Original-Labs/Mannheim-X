@@ -82,7 +82,10 @@ export default props => {
           try {
             const isBind = await ERC20Exchange.subscribe(poolItem.poolId)
             console.log('isBind:', isBind)
-            history.push({ pathname: '/SubscriptionPoolDetails' })
+            history.push({
+              pathname: '/SubscriptionPoolDetails',
+              state: { details: poolItem }
+            })
           } catch (error) {
             console.log('subscribeError:', error)
           }
