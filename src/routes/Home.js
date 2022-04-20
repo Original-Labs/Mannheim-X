@@ -5,7 +5,7 @@ import HeaderContainer from 'components/Header/Header'
 import { Alert, Button, message } from 'antd'
 import SubscriptionPoolCard from 'pages/SubscriptionPoolCard'
 import AlertBanner from 'components/AlertBanner'
-import { copyArray, ERC20ExchangeAddress } from 'utils/utils'
+import { catchHandle, copyArray, ERC20ExchangeAddress } from 'utils/utils'
 import { getSNSERC20Exchange } from 'apollo/mutations/sns'
 import store from 'Store/index.js'
 import EthVal from 'ethval'
@@ -17,6 +17,14 @@ export default () => {
   const [storeState, setStoreState] = useState(store.getState())
   const { searchList, poolList } = storeState
   const [searchValue, setSearchValue] = useState(store.getState())
+
+  // 监听state的变化
+  store.subscribe(() => {
+    setSearchValue(store.getState().inputValue)
+    console.log('searchValue:', store.getState().inputValue)
+    setStoreState(store.getState())
+    setPoolListState(poolList)
+  })
 
   // 降序排列,排名满的在最后
   const handleRank = poolArr => {
@@ -45,16 +53,11 @@ export default () => {
   console.log('searchList:', searchList)
   console.log('poolList:', poolList)
 
-  // const handleSearch = () => {
-  //   const { searchList, poolList } = storeState
-  //   const tempArr = searchList.length === 0 ? poolList : searchList;
-  //   // const action = {
-  //   //   type: 'getList',
-  //   //   value: tempArr
-  //   // }
-  //   // store.dispatch(action)
-  //   return tempArr
-  // }
+  const handleSearch = () => {
+    const { searchList, poolList } = storeState
+    const tempArr = searchList.length === 0 ? poolList : searchList
+    return tempArr
+  }
 
   // 获取每个池的剩余额度
   const getPoolBalance = async poolId => {
@@ -71,54 +74,42 @@ export default () => {
 
   // 获取池的个数
   const getMaxPoolId = async () => {
-    // const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
-    getSNSERC20Exchange(ERC20ExchangeAddress).then(ERC20Exchange => {
-      console.log('ERC20Exchange:', ERC20Exchange)
-      ERC20Exchange.poolMaxId()
-        .then(maxPoolId => {
-          console.log('maxPoolId:', parseInt(maxPoolId._hex, 16))
-          return parseInt(maxPoolId._hex, 16)
-        })
-        .catch(e => {
-          console.log('poolMaxIdError:', e)
-          message.error({ content: '未知错误' })
-          return 0
-        })
-    })
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    try {
+      let maxPoolId = await ERC20Exchange.poolMaxId()
+      console.log('maxPoolId:', parseInt(maxPoolId._hex, 16))
+      return parseInt(maxPoolId._hex, 16)
+    } catch (e) {
+      console.log(e)
+      catchHandle(e)
+    }
   }
 
   // 处理池的数据
-  // const handleListData = async () => {
-  //   const { poolList } = storeState
-  //   const poolArr = []
-  //   const maxPoolIdVal = await getMaxPoolId()
-  //   poolList.map(async item => {
-  //     if (item.poolId <= maxPoolIdVal) {
-  //       getPoolBalance(item.poolId).then(balance => {
-  //         item.rank = balance / poolTotalAmount * 100;
-  //         console.log('balance:', balance)
-  //         console.log('rank:', item.rank)
-  //       })
-  //       poolArr.push(item)
-  //     }
-  //   })
-  //   console.log('poolArr:', poolArr)
-  //   const action = {
-  //     type: 'getList',
-  //     value: handleRank(poolArr)
-  //   }
-  //   store.dispatch(action)
-  // }
+  const handleListData = async () => {
+    const { poolList } = storeState
+    const poolArr = []
+    const maxPoolIdVal = await getMaxPoolId()
+    poolList.map(async item => {
+      if (item.poolId <= maxPoolIdVal) {
+        getPoolBalance(item.poolId).then(balance => {
+          item.rank = (balance / poolTotalAmount) * 100
+          console.log('balance:', balance)
+          console.log('rank:', item.rank)
+        })
+        poolArr.push(item)
+      }
+    })
+    console.log('poolArr:', poolArr)
+    const action = {
+      type: 'getList',
+      value: handleRank(poolArr)
+    }
+    store.dispatch(action)
+  }
 
   useEffect(() => {
-    // 监听state的变化
-    store.subscribe(() => {
-      setSearchValue(store.getState().inputValue)
-      setStoreState(store.getState())
-      setPoolListState(poolList)
-    })
-    // handleListData()
-    getMaxPoolId()
+    handleListData()
   }, [searchValue])
 
   return (

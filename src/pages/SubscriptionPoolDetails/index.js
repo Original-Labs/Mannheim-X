@@ -16,6 +16,7 @@ import styled from '@emotion/styled'
 import AlertBanner from 'components/AlertBanner'
 import { getSNSERC20Exchange, getSNSERC20 } from 'apollo/mutations/sns'
 import {
+  catchHandle,
   ERC20ExchangeAddress,
   etherUnit,
   etherUnitHandle,
@@ -173,47 +174,47 @@ export default props => {
     }
   }
 
-  const catchHandle = e => {
-    if (e && e.data && e.data.code && e.data.message) {
-      let errorMessages = e.data.message.split('-')
-      let errorContent
-      if (errorMessages.length == 2) {
-        // get errorCode
-        let errCode = errorMessages[1].split(':')[0].trim()
-        console.log('[errorCode]', errCode)
-        errorContent = <Trans i18nKey={`errorCode.${errCode}`} />
-      } else if (
-        errorMessages.length == 1 &&
-        errorMessages[0].startsWith(
-          'err: insufficient funds for gas * price + value:'
-        )
-      ) {
-        errorContent = 'Your wallet does not have enough asset!'
-      } else {
-        errorContent = e.data.message
-      }
-      // handle metamask wallet response error code
-      console.log('e:', e.code)
-      switch (e.code) {
-        case 4001:
-          errorContent = (
-            <Trans i18nKey={`withdrawErrCode.${e.code.toString()}`} />
-          )
-          break
-        case -32603:
-          errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
-          break
-        default:
-          errorContent = <UnknowErrMsgComponent />
-      }
-      message.error({
-        key: 1,
-        content: errorContent,
-        duration: 3,
-        style: { marginTop: '20vh' }
-      })
-    }
-  }
+  // const catchHandle = e => {
+  //   if (e && e.data && e.data.code && e.data.message) {
+  //     let errorMessages = e.data.message.split('-')
+  //     let errorContent
+  //     if (errorMessages.length == 2) {
+  //       // get errorCode
+  //       let errCode = errorMessages[1].split(':')[0].trim()
+  //       console.log('[errorCode]', errCode)
+  //       errorContent = <Trans i18nKey={`errorCode.${errCode}`} />
+  //     } else if (
+  //       errorMessages.length == 1 &&
+  //       errorMessages[0].startsWith(
+  //         'err: insufficient funds for gas * price + value:'
+  //       )
+  //     ) {
+  //       errorContent = 'Your wallet does not have enough asset!'
+  //     } else {
+  //       errorContent = e.data.message
+  //     }
+  //     // handle metamask wallet response error code
+  //     console.log('e:', e.code)
+  //     switch (e.code) {
+  //       case 4001:
+  //         errorContent = (
+  //           <Trans i18nKey={`withdrawErrCode.${e.code.toString()}`} />
+  //         )
+  //         break
+  //       case -32603:
+  //         errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
+  //         break
+  //       default:
+  //         errorContent = <UnknowErrMsgComponent />
+  //     }
+  //     message.error({
+  //       key: 1,
+  //       content: errorContent,
+  //       duration: 3,
+  //       style: { marginTop: '20vh' }
+  //     })
+  //   }
+  // }
 
   // 授权认购
   const handleSubscriptionApproval = async () => {
