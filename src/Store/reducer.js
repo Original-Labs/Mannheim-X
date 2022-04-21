@@ -164,6 +164,7 @@ const defaultState = {
     }
   ],
   searchList: [],
+  subscribeList: [],
   inputValue: null
 }
 
