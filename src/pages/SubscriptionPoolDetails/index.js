@@ -308,7 +308,7 @@ export default props => {
           style: { marginTop: '20vh' }
         })
       }
-      setTimeout(() => history.push('/myRecord'), 3000)
+      setTimeout(() => history.push('/myRecord'), 30000)
     } catch (e) {
       catchHandle(e)
     }
@@ -317,7 +317,7 @@ export default props => {
   const getExchangePublicProperty = async () => {
     const exchangeInstance = await getSNSERC20Exchange(ERC20ExchangeAddress)
     try {
-      const exchangeRatioOrigin = await exchangeInstance.exchangeRatio()
+      let exchangeRatioOrigin = await exchangeInstance.exchangeRatio()
       let feeRatioOrigin = await exchangeInstance.feeRatio()
       let ratioDecimalOrigin = await exchangeInstance.ratioDecimal()
       let feeShareOrigin = await exchangeInstance.feeShare()
@@ -336,6 +336,7 @@ export default props => {
     const ERC20 = await getFromTokenInstance()
     try {
       const allowanceAmount = await ERC20.balanceOf()
+      console.log('allowanceAmount', allowanceAmount)
       const ethVal = new EthVal(`${allowanceAmount}`).toEth().toFixed(3)
       setBurnAmountState(ethVal)
     } catch (error) {

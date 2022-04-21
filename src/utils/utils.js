@@ -37,6 +37,12 @@ export const ERC20ExchangeAddress = '0xcE637DDE179fF471d221BA623ecd51a76b9C7E8e'
 export const etherUnit = 10 ** 18
 export const etherUnitStr = '000000000000000000'
 
+export const payRatio = 30 / 100
+
+export const BUSDT = 'BUSDT'
+export const oldCoin = 'Domino'
+export const newCoin = 'Heim'
+
 export const etherUnitHandle = amount => {
   return amount.toString() + etherUnitStr
 }
@@ -58,6 +64,8 @@ export const supportedAvatarProtocols = [
   'ipfs://',
   'eip155'
 ]
+
+export const bscScanApiKey = 'RTM2A85E55UTC321PVW1MDDDA63VFPYQF9'
 
 export const catchHandle = e => {
   if (e && e.data && e.data.code && e.data.message) {
