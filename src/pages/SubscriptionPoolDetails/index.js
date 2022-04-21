@@ -86,7 +86,7 @@ export default props => {
       const usrPoolIdVal = parseInt(usrPoolId, 16)
       if (usrPoolIdVal !== 0 && poolItemId !== usrPoolIdVal) {
         history.push('/')
-        message.warning({ content: '你已绑定池子,不可进入此池子' })
+        message.warning({ content: '你已绑定认购池,无法进入该池' })
       }
       if (usrPoolIdVal === 0) {
         setObtainSubsVisible(true)
@@ -121,6 +121,7 @@ export default props => {
       const exchangedAmount = await ERC20Exchange.poolExchangeAmount(
         poolDetails.poolId
       )
+      console.log('exchangedAmount', parseInt(exchangedAmount._hex, 16))
       // setExchangeAmountState(parseInt(exchangedAmount._hex, 16))
       setExchangeAmountState(
         new EthVal(`${exchangedAmount._hex}`).toEth().toFixed(3)
