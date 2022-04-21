@@ -87,12 +87,17 @@ export default props => {
     try {
       const usrPoolId = await ERC20Exchange.getUserPool()
       const usrPoolIdVal = parseInt(usrPoolId, 16)
-      if (usrPoolIdVal !== 0 && poolItemId !== usrPoolIdVal) {
+      if (poolItemId) {
+        if (usrPoolIdVal !== 0 && poolItemId !== usrPoolIdVal) {
+          history.push('/')
+          message.warning({ content: '已绑定其他认购池,无法进入该池' })
+        }
+        if (usrPoolIdVal === 0) {
+          setObtainSubsVisible(true)
+        }
+      } else {
         history.push('/')
-        message.warning({ content: '已绑定其他认购池,无法进入该池' })
-      }
-      if (usrPoolIdVal === 0) {
-        setObtainSubsVisible(true)
+        message.warning({ content: '未绑定认购池!' })
       }
     } catch (error) {
       console.log('getUserPoolError:', error)
@@ -158,6 +163,8 @@ export default props => {
         const exchangeRatio = parseInt(exchangeRatioHex._hex, 16)
         const ratioDecimal = parseInt(ratioDecimalHex._hex, 16)
         setUsrExchangeAmountState((ethVal * exchangeRatio) / ratioDecimal)
+      } else {
+        setUsrExchangeAmountState(0)
       }
     } catch (error) {
       console.log('userExchangeAvailableError:', error)
@@ -263,7 +270,7 @@ export default props => {
           style: { marginTop: '20vh' }
         })
       }
-      setTimeout(() => history.push('/myRecord'), 30000)
+      setTimeout(() => history.push('/myRecord'), 3000)
     } catch (e) {
       catchHandle(e)
     }
@@ -301,7 +308,6 @@ export default props => {
 
   const batchCallFn = async () => {
     await getPoolInfo()
-    await getPoolItemDetails()
     await getExchangePublicProperty()
     await getPoolExchangeAmount()
     await getPoolBalance()
@@ -313,12 +319,13 @@ export default props => {
     let timer
     setPoolItemId(Number(props.match.params.poolId))
     setTimeout(() => {
+      getPoolItemDetails()
       batchCallFn()
       timer = setInterval(() => {
         batchCallFn()
       }, 3000)
+      setPageLoading(false)
     }, 1000)
-    setPageLoading(false)
     return () => {
       clearInterval(timer)
     }
