@@ -130,7 +130,6 @@ export default () => {
   // }
 
   useEffect(() => {
-    console.log('运行了?')
     // 定时器的目的是等待钱包连接响应完成,合约可调取
     setTimeout(() => {
       // 获取广告条

@@ -10,7 +10,8 @@ import {
   Button,
   Modal,
   message,
-  Typography
+  Typography,
+  Spin
 } from 'antd'
 import './index.css'
 import styled from '@emotion/styled'
@@ -33,6 +34,7 @@ import { Trans, useTranslation } from 'react-i18next'
 import messageMention from '../../utils/messageMention'
 import { useHistory } from 'react-router'
 import { store } from 'Store/index.js'
+import Loading from 'components/Loading/Loading'
 
 const { Paragraph } = Typography
 const coinsAmount = 200
@@ -43,6 +45,7 @@ export default props => {
   const [poolItemId, setPoolItemId] = useState(
     Number(props.match.params.poolId)
   )
+  const [pageLoading, setPageLoading] = useState(true)
 
   let { t } = useTranslation()
 
@@ -296,183 +299,203 @@ export default props => {
     }
   }
 
+  const batchCallFn = async () => {
+    await getPoolInfo()
+    await getPoolItemDetails()
+    await getExchangePublicProperty()
+    await getPoolExchangeAmount()
+    await getPoolBalance()
+    await getUserExchangeAvailable()
+    await getBurnAmount()
+  }
+
   useEffect(() => {
     let timer
     setPoolItemId(Number(props.match.params.poolId))
     setTimeout(() => {
+      batchCallFn()
       timer = setInterval(() => {
-        getPoolInfo()
-        getPoolItemDetails()
-        getExchangePublicProperty()
-        getPoolExchangeAmount()
-        getPoolBalance()
-        getUserExchangeAvailable()
-        getBurnAmount()
+        batchCallFn()
       }, 3000)
     }, 1000)
+    setPageLoading(false)
     return () => {
       clearInterval(timer)
     }
   }, [])
 
   return (
-    <DetailsContainer>
-      <AlertBanner />
+    <Loading loading={pageLoading} size="large" defaultColor="#ffc107">
+      <DetailsContainer>
+        <AlertBanner />
 
-      <CardDetailsContainer
-        title={
-          <>
-            <Avatar src="https://joeschmoe.io/api/v1/random" />
-            <Title> {poolDetails.title}</Title>
-          </>
-        }
-        extra={<Progress type="circle" percent={poolDetails.rank} width={40} />}
-      >
-        <div>
-          已认购数量: {exchangeAmountState} | 剩余:{exchangeableAmountState}
-        </div>
-        <div>
-          <Paragraph copyable={{ text: window.location.href }}>
-            认购池专属链接
-          </Paragraph>
-        </div>
-
-        <PuchaseAndDestroy>
-          <InpAndBtnWrapper>
-            <PushchaseAndDestroyText>
-              可销毁的数量:{burnAmountState}
-            </PushchaseAndDestroyText>
-            <InpAndBtnCompact>
-              <Input.Group compact>
-                <Input disabled value={coinsAmount} style={{ width: '50px' }} />
-                <InputNumber
-                  addonAfter="份"
-                  defaultValue={1}
-                  style={{ width: '90px' }}
-                  min="0"
-                  controls={false}
-                  precision={0}
-                  onChange={value => {
-                    setInputBurn(value)
-                  }}
-                />
-              </Input.Group>
-              <ButtonWrapper
-                type="primary"
-                onClick={() => {
-                  handleBurnApprove()
-                }}
-              >
-                销毁授权
-              </ButtonWrapper>
-            </InpAndBtnCompact>
-          </InpAndBtnWrapper>
-
-          <InpAndBtnWrapper>
-            <PushchaseAndDestroyText>
-              可认购的数量:{usrExchangeAmountState}
-            </PushchaseAndDestroyText>
-            <InpAndBtnCompact>
-              <Input.Group compact>
-                <Input disabled value={coinsAmount} style={{ width: '50px' }} />
-                <InputNumber
-                  addonAfter="份"
-                  defaultValue={inputSubscribe}
-                  style={{ width: '90px' }}
-                  min="0"
-                  controls={false}
-                  precision={0}
-                  onChange={value => {
-                    setInputSubscribe(value)
-                  }}
-                />
-              </Input.Group>
-              <ButtonWrapper
-                type="primary"
-                onClick={() => {
-                  handleSubscriptionApproval()
-                }}
-              >
-                认购
-              </ButtonWrapper>
-            </InpAndBtnCompact>
-          </InpAndBtnWrapper>
-        </PuchaseAndDestroy>
-
-        <AlertWrapper
-          description={`注：认购新币前需销毁旧币，每销毁${ratioDecimal}枚旧币可获得${exchangeRatio}枚新币认购资格。`}
-          type="warning"
-        />
-      </CardDetailsContainer>
-      <Modal
-        title="认购详情"
-        width={300}
-        maskClosable={false}
-        style={{ top: '30vh' }}
-        visible={modalVisible}
-        onOk={() => {
-          handleSubscription()
-        }}
-        okButtonProps={{
-          shape: 'round'
-        }}
-        onCancel={() => {
-          setModalVisible(false)
-        }}
-        cancelButtonProps={{
-          shape: 'round'
-        }}
-      >
-        <div>
-          认购数量:{coinsAmount} X {inputSubscribe}份 ={' '}
-          {coinsAmount * inputSubscribe}
-        </div>
-        <div>剩余可认购数量: {exchangeableAmountState}</div>
-        <div>
-          需支付: 0.3 U X {coinsAmount * inputSubscribe} ={' '}
-          {coinsAmount * inputSubscribe * 0.3} U
-        </div>
-      </Modal>
-
-      <Modal
-        title="获得认购资格"
-        width={300}
-        maskClosable={false}
-        style={{ top: '30vh' }}
-        visible={obtainSubsVisible}
-        onOk={async () => {
-          const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
-          try {
-            const isBind = await ERC20Exchange.subscribe(poolItemId)
-            if (isBind) {
-              message.success({ content: '绑定成功!' })
-            }
-            history.push({
-              pathname: `/SubscriptionPoolDetails/${poolDetails.poolId}`
-            })
-          } catch (error) {
-            history.push('/')
-            catchHandle(error)
+        <CardDetailsContainer
+          title={
+            <>
+              <Avatar src="https://joeschmoe.io/api/v1/random" />
+              <Title> {poolDetails.title}</Title>
+            </>
           }
+          extra={
+            <Progress type="circle" percent={poolDetails.rank} width={40} />
+          }
+        >
+          <div>
+            已认购数量: {exchangeAmountState} | 剩余:{exchangeableAmountState}
+          </div>
+          <div>
+            <Paragraph copyable={{ text: window.location.href }}>
+              认购池专属链接
+            </Paragraph>
+          </div>
 
-          setObtainSubsVisible(false)
-        }}
-        okButtonProps={{
-          shape: 'round'
-        }}
-        onCancel={() => {
-          setObtainSubsVisible(false)
-          history.push('/')
-        }}
-        cancelButtonProps={{
-          shape: 'round'
-        }}
-      >
-        进入该认购池后将自动获得认购资格，该地址兑币
-        仅可在此池中进行，无法进入其他认购池进行兑币 。
-        当且仅当该池认购已满时，可再加入其他认购池。
-      </Modal>
-    </DetailsContainer>
+          <PuchaseAndDestroy>
+            <InpAndBtnWrapper>
+              <PushchaseAndDestroyText>
+                可销毁的数量:{burnAmountState}
+              </PushchaseAndDestroyText>
+              <InpAndBtnCompact>
+                <Input.Group compact>
+                  <Input
+                    disabled
+                    value={coinsAmount}
+                    style={{ width: '50px' }}
+                  />
+                  <InputNumber
+                    addonAfter="份"
+                    defaultValue={1}
+                    style={{ width: '90px' }}
+                    min="0"
+                    controls={false}
+                    precision={0}
+                    onChange={value => {
+                      setInputBurn(value)
+                    }}
+                  />
+                </Input.Group>
+                <ButtonWrapper
+                  type="primary"
+                  onClick={() => {
+                    handleBurnApprove()
+                  }}
+                >
+                  销毁授权
+                </ButtonWrapper>
+              </InpAndBtnCompact>
+            </InpAndBtnWrapper>
+
+            <InpAndBtnWrapper>
+              <PushchaseAndDestroyText>
+                可认购的数量:{usrExchangeAmountState}
+              </PushchaseAndDestroyText>
+              <InpAndBtnCompact>
+                <Input.Group compact>
+                  <Input
+                    disabled
+                    value={coinsAmount}
+                    style={{ width: '50px' }}
+                  />
+                  <InputNumber
+                    addonAfter="份"
+                    defaultValue={inputSubscribe}
+                    style={{ width: '90px' }}
+                    min="0"
+                    controls={false}
+                    precision={0}
+                    onChange={value => {
+                      setInputSubscribe(value)
+                    }}
+                  />
+                </Input.Group>
+                <ButtonWrapper
+                  type="primary"
+                  onClick={() => {
+                    handleSubscriptionApproval()
+                  }}
+                >
+                  认购
+                </ButtonWrapper>
+              </InpAndBtnCompact>
+            </InpAndBtnWrapper>
+          </PuchaseAndDestroy>
+
+          <AlertWrapper
+            description={`注：认购新币前需销毁旧币，每销毁${ratioDecimal}枚旧币可获得${exchangeRatio}枚新币认购资格。`}
+            type="warning"
+          />
+        </CardDetailsContainer>
+        <Modal
+          title="认购详情"
+          width={300}
+          maskClosable={false}
+          style={{ top: '30vh' }}
+          visible={modalVisible}
+          onOk={() => {
+            handleSubscription()
+          }}
+          okButtonProps={{
+            shape: 'round'
+          }}
+          onCancel={() => {
+            setModalVisible(false)
+          }}
+          cancelButtonProps={{
+            shape: 'round'
+          }}
+        >
+          <div>
+            认购数量:{coinsAmount} X {inputSubscribe}份 ={' '}
+            {coinsAmount * inputSubscribe}
+          </div>
+          <div>剩余可认购数量: {exchangeableAmountState}</div>
+          <div>
+            需支付: 0.3 U X {coinsAmount * inputSubscribe} ={' '}
+            {coinsAmount * inputSubscribe * 0.3} U
+          </div>
+        </Modal>
+
+        <Modal
+          title="获得认购资格"
+          width={300}
+          maskClosable={false}
+          style={{ top: '30vh' }}
+          visible={obtainSubsVisible}
+          onOk={async () => {
+            const ERC20Exchange = await getSNSERC20Exchange(
+              ERC20ExchangeAddress
+            )
+            try {
+              const isBind = await ERC20Exchange.subscribe(poolItemId)
+              if (isBind) {
+                message.success({ content: '绑定成功!' })
+              }
+              history.push({
+                pathname: `/SubscriptionPoolDetails/${poolDetails.poolId}`
+              })
+            } catch (error) {
+              history.push('/')
+              catchHandle(error)
+            }
+
+            setObtainSubsVisible(false)
+          }}
+          okButtonProps={{
+            shape: 'round'
+          }}
+          onCancel={() => {
+            setObtainSubsVisible(false)
+            history.push('/')
+          }}
+          cancelButtonProps={{
+            shape: 'round'
+          }}
+        >
+          进入该认购池后将自动获得认购资格，该地址兑币
+          仅可在此池中进行，无法进入其他认购池进行兑币 。
+          当且仅当该池认购已满时，可再加入其他认购池。
+        </Modal>
+      </DetailsContainer>
+    </Loading>
   )
 }
 
