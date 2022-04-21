@@ -195,48 +195,6 @@ export default props => {
     }
   }
 
-  // const catchHandle = e => {
-  //   if (e && e.data && e.data.code && e.data.message) {
-  //     let errorMessages = e.data.message.split('-')
-  //     let errorContent
-  //     if (errorMessages.length == 2) {
-  //       // get errorCode
-  //       let errCode = errorMessages[1].split(':')[0].trim()
-  //       console.log('[errorCode]', errCode)
-  //       errorContent = <Trans i18nKey={`errorCode.${errCode}`} />
-  //     } else if (
-  //       errorMessages.length == 1 &&
-  //       errorMessages[0].startsWith(
-  //         'err: insufficient funds for gas * price + value:'
-  //       )
-  //     ) {
-  //       errorContent = 'Your wallet does not have enough asset!'
-  //     } else {
-  //       errorContent = e.data.message
-  //     }
-  //     // handle metamask wallet response error code
-  //     console.log('e:', e.code)
-  //     switch (e.code) {
-  //       case 4001:
-  //         errorContent = (
-  //           <Trans i18nKey={`withdrawErrCode.${e.code.toString()}`} />
-  //         )
-  //         break
-  //       case -32603:
-  //         errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
-  //         break
-  //       default:
-  //         errorContent = <UnknowErrMsgComponent />
-  //     }
-  //     message.error({
-  //       key: 1,
-  //       content: errorContent,
-  //       duration: 3,
-  //       style: { marginTop: '20vh' }
-  //     })
-  //   }
-  // }
-
   // 授权认购
   const handleSubscriptionApproval = async () => {
     const feeTokenInstance = await getFeeTokenInstance()
@@ -442,7 +400,7 @@ export default props => {
         </PuchaseAndDestroy>
 
         <AlertWrapper
-          description="注：认购新币前需销毁旧币，每销毁1枚旧币可获得200枚新币认购资格。"
+          description={`注：认购新币前需销毁旧币，每销毁${ratioDecimal}枚旧币可获得${exchangeRatio}枚新币认购资格。`}
           type="warning"
         />
       </CardDetailsContainer>
