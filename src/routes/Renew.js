@@ -8,13 +8,12 @@ import { emptyAddress } from '../utils/utils'
 export default function Renew(props) {
   const account = useAccount()
   if (account !== emptyAddress) {
-    return <Redirect to={`/address/${account}?origin=renew`} />
+    return <Redirect to={'/'} />
   }
   return (
     <Banner>
-      You are here because of a transaction you completed. The reason we sent
-      the transaction is to remind you that your ENS names will be expiring
-      soon. Please login to your wallet to be redirected to your list of names{' '}
+      You are here because of a transaction you completed. Please login to your
+      wallet to be redirected
     </Banner>
   )
 }

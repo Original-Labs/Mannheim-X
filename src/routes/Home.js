@@ -10,6 +10,7 @@ import { getSNSERC20Exchange } from 'apollo/mutations/sns'
 import store from 'Store/index.js'
 import EthVal from 'ethval'
 import Loading from 'components/Loading/Loading'
+import { isReadOnly } from 'contracts'
 
 const poolTotalAmount = 100000
 
@@ -75,7 +76,8 @@ export default () => {
       let maxPoolId = await ERC20Exchange.poolMaxId()
       return parseInt(maxPoolId._hex, 16)
     } catch (e) {
-      console.log(e)
+      console.log('poolMaxIdError', e)
+      message.error('未知错误,请检查是否连接钱包!')
       catchHandle(e)
     }
   }
@@ -98,7 +100,6 @@ export default () => {
   // 处理池的数据
   const handleListData = async () => {
     const { poolList } = storeState
-    const poolArr = []
     const maxPoolIdVal = await getMaxPoolId()
     Promise.all(
       poolList.map(async item => {
@@ -123,7 +124,13 @@ export default () => {
       })
   }
 
+  // if (!isReadOnly()) {
+  //   console.log('isReady:', isReadOnly())
+  //   setSearchValue(null)
+  // }
+
   useEffect(() => {
+    console.log('运行了?')
     // 定时器的目的是等待钱包连接响应完成,合约可调取
     setTimeout(() => {
       // 获取广告条
