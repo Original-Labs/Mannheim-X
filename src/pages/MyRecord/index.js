@@ -163,9 +163,13 @@ export default ({ match }) => {
 
   useEffect(() => {
     getSubscribeRecords()
-    setInterval(() => {
+    let timer
+    timer = setInterval(() => {
       getSubscribeRecords()
     }, 3000)
+    return () => {
+      clearInterval(timer)
+    }
   }, [])
 
   return (
