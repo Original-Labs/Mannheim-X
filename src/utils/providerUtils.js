@@ -5,6 +5,7 @@ import {
   reverseRecordReactive
 } from '../apollo/reactiveVars'
 import { disconnect } from '../api/web3modal'
+import { useHistory } from 'react-router'
 
 export const connectProvider = () => {
   setup(true)

@@ -157,7 +157,7 @@ const App = () => {
         <Route exact path="/" component={Home} layout={HomePageLayout} />
         <Route path="/myRecord" component={MyRecord} />
         <Route
-          path="/SubscriptionPoolDetails"
+          path="/SubscriptionPoolDetails/:poolId"
           component={SubscriptionPoolDetails}
         />
         <Route path="/test-registrar" component={TestRegistrar} />

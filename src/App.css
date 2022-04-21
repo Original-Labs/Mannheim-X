@@ -42,7 +42,7 @@ html {
 }
 
 .ant-btn:focus {
-  color: #212121 !important;
+  color: #fff !important;
   border-color: #ffc107 !important;
 }
 
@@ -177,4 +177,18 @@ html {
 .ant-input-number:focus,
 .ant-input-number-focused {
   box-shadow: 0 0 0 2px rgb(255 216 24 / 20%) !important;
+}
+
+.ant-typography-expand,
+.ant-typography-edit,
+.ant-typography-copy {
+  color: #ea6060 !important;
+}
+
+.ant-typography {
+  color: #fff !important;
+}
+
+.ant-card:hover .ant-typography {
+  color: #000 !important;
 }

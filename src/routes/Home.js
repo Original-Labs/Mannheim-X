@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled/macro'
 import mq from 'mediaQuery'
 import HeaderContainer from 'components/Header/Header'
-import { Alert, Button, message } from 'antd'
-import SubscriptionPoolCard from 'components/SubscriptionPoolCard'
+import { Alert, Button, message, Spin } from 'antd'
+import SubscriptionPoolCard from 'pages/SubscriptionPoolCard'
 import AlertBanner from 'components/AlertBanner'
 import { catchHandle, copyArray, ERC20ExchangeAddress } from 'utils/utils'
 import { getSNSERC20Exchange } from 'apollo/mutations/sns'
 import store from 'Store/index.js'
 import EthVal from 'ethval'
+import Loading from 'components/Loading/Loading'
 
 const poolTotalAmount = 100000
 
 export default () => {
+  const [pageLoading, setPageLoading] = useState(true)
   const [poolListState, setPoolListState] = useState(store.getState().poolList)
   const [storeState, setStoreState] = useState(store.getState())
   const { searchList, poolList } = storeState
@@ -21,7 +23,6 @@ export default () => {
   // 监听state的变化
   store.subscribe(() => {
     setSearchValue(store.getState().inputValue)
-    console.log('searchValue:', store.getState().inputValue)
     setStoreState(store.getState())
     setPoolListState(poolList)
   })
@@ -49,13 +50,8 @@ export default () => {
     return contactArr
   }
 
-  console.log('storeState:', storeState)
-  console.log('searchList:', searchList)
-  console.log('poolList:', poolList)
-
   const handleSearch = () => {
-    const { searchList, poolList } = storeState
-    const tempArr = searchList.length === 0 ? poolList : searchList
+    const tempArr = searchList.length === 0 ? poolListState : searchList
     return tempArr
   }
 
@@ -77,11 +73,25 @@ export default () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     try {
       let maxPoolId = await ERC20Exchange.poolMaxId()
-      console.log('maxPoolId:', parseInt(maxPoolId._hex, 16))
       return parseInt(maxPoolId._hex, 16)
     } catch (e) {
       console.log(e)
       catchHandle(e)
+    }
+  }
+
+  const handleBanner = async () => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    try {
+      ERC20Exchange.getBanner().then(resBanner => {
+        const action = {
+          type: 'setBanner',
+          value: resBanner
+        }
+        store.dispatch(action)
+      })
+    } catch (error) {
+      console.log('bannerError:', error)
     }
   }
 
@@ -90,39 +100,52 @@ export default () => {
     const { poolList } = storeState
     const poolArr = []
     const maxPoolIdVal = await getMaxPoolId()
-    poolList.map(async item => {
-      if (item.poolId <= maxPoolIdVal) {
-        getPoolBalance(item.poolId).then(balance => {
-          item.rank = (balance / poolTotalAmount) * 100
-          console.log('balance:', balance)
-          console.log('rank:', item.rank)
-        })
-        poolArr.push(item)
-      }
-    })
-    console.log('poolArr:', poolArr)
-    const action = {
-      type: 'getList',
-      value: handleRank(poolArr)
-    }
-    store.dispatch(action)
+    Promise.all(
+      poolList.map(async item => {
+        if (item.poolId <= maxPoolIdVal) {
+          const balance = await getPoolBalance(item.poolId)
+          item.rank = ((balance / poolTotalAmount) * 100).toFixed(0)
+          return item
+        }
+        return item
+      })
+    )
+      .then(resList => {
+        const action = {
+          type: 'getList',
+          value: handleRank(resList)
+        }
+        store.dispatch(action)
+      })
+      .catch(e => {
+        console.log('getPoolBalanceError:', e)
+        setSearchValue(null)
+      })
   }
 
   useEffect(() => {
-    handleListData()
+    // 定时器的目的是等待钱包连接响应完成,合约可调取
+    setTimeout(() => {
+      // 获取广告条
+      handleBanner()
+      handleListData()
+      setPageLoading(false)
+    }, 3000)
   }, [searchValue])
 
   return (
     <Hero>
       <HeaderContainer />
-      <ContentContainer>
-        <AlertBanner />
-        <CardContainer>
-          {poolListState.map(item => {
-            return <SubscriptionPoolCard poolItem={item} />
-          })}
-        </CardContainer>
-      </ContentContainer>
+      <Loading loading={pageLoading} size="large" defaultColor="#ffc107">
+        <ContentContainer>
+          <AlertBanner />
+          <CardContainer>
+            {handleSearch().map(item => {
+              return <SubscriptionPoolCard poolItem={item} />
+            })}
+          </CardContainer>
+        </ContentContainer>
+      </Loading>
     </Hero>
   )
 }

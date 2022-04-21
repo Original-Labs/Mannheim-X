@@ -132,4 +132,9 @@ export class ERC20Exchange {
   async poolURI(poolId) {
     return await this.ERC20Trans.poolURI(poolId)
   }
+
+  // 获取广告条
+  async getBanner() {
+    return await this.ERC20Trans.getBanner()
+  }
 }
