@@ -81,7 +81,6 @@ export default props => {
   // 获取该用户的认购池详情
   const getPoolItemDetails = async () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
-    console.log('ERC20Exchange:', ERC20Exchange)
     try {
       const usrPoolId = await ERC20Exchange.getUserPool()
       const usrPoolIdVal = parseInt(usrPoolId, 16)
@@ -289,7 +288,6 @@ export default props => {
     const ERC20 = await getFromTokenInstance()
     try {
       const allowanceAmount = await ERC20.balanceOf()
-      console.log('allowanceAmount', allowanceAmount)
       const ethVal = new EthVal(`${allowanceAmount}`).toEth().toFixed(3)
       setBurnAmountState(ethVal)
     } catch (error) {
@@ -299,16 +297,22 @@ export default props => {
   }
 
   useEffect(() => {
+    let timer
     setPoolItemId(Number(props.match.params.poolId))
     setTimeout(() => {
-      getPoolInfo()
-      getPoolItemDetails()
-      getExchangePublicProperty()
-      getPoolExchangeAmount()
-      getPoolBalance()
-      getUserExchangeAvailable()
-      getBurnAmount()
+      timer = setInterval(() => {
+        getPoolInfo()
+        getPoolItemDetails()
+        getExchangePublicProperty()
+        getPoolExchangeAmount()
+        getPoolBalance()
+        getUserExchangeAvailable()
+        getBurnAmount()
+      }, 3000)
     }, 1000)
+    return () => {
+      clearInterval(timer)
+    }
   }, [])
 
   return (
