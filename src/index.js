@@ -9,6 +9,8 @@ import { clientReactive, networkIdReactive } from './apollo/reactiveVars'
 import { setupClient } from './apollo/apolloClient'
 import Loader from './components/Loader'
 import 'App.css'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor } from 'Store/index.js'
 
 setup(false)
 window.addEventListener('load', async () => {
@@ -16,7 +18,9 @@ window.addEventListener('load', async () => {
   ReactDOM.render(
     <Suspense fallback={<Loader withWrap large />}>
       <ApolloProvider {...{ client }}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </ApolloProvider>
     </Suspense>,
     document.getElementById('root')

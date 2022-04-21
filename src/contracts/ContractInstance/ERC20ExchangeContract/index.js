@@ -120,7 +120,6 @@ export class ERC20Exchange {
 
   // 查询兑换池已兑换的数量
   async poolExchangeAmount(poolId) {
-    console.log('poolId:', poolId)
     return await this.ERC20Trans.poolExchangeAmount(poolId)
   }
 

@@ -15,7 +15,7 @@ import {
   payRatio
 } from '../../utils/utils'
 import { useTranslation } from 'react-i18next'
-import store from '../../Store'
+import { store } from '../../Store'
 import { getSNSERC20Exchange } from '../../apollo/mutations/sns'
 
 const { Meta } = Card

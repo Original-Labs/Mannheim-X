@@ -5,7 +5,7 @@ import styled from '@emotion/styled/macro'
 import mq, { useMediaMin, useMediaMax } from 'mediaQuery'
 import searchIcon from '../../assets/search.png'
 import { gql, useQuery } from '@apollo/client'
-import store from 'Store/index.js'
+import { store } from 'Store/index.js'
 import { isReadOnly } from 'contracts'
 import { message } from 'antd'
 

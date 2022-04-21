@@ -32,7 +32,8 @@ import { BigNumber } from '@0xproject/utils'
 import { Trans, useTranslation } from 'react-i18next'
 import messageMention from '../../utils/messageMention'
 import { useHistory } from 'react-router'
-import store from 'Store/index.js'
+import { store } from 'Store/index.js'
+
 const { Paragraph } = Typography
 const coinsAmount = 200
 
@@ -92,9 +93,9 @@ export default props => {
         setObtainSubsVisible(true)
       }
     } catch (error) {
+      console.log('getUserPoolError:', error)
       history.push('/')
       message.error({ content: '未知错误,请检查是否连接钱包!' })
-      console.log('getUserPoolError:', error)
     }
   }
 
@@ -180,7 +181,7 @@ export default props => {
         ERC20ExchangeAddress,
         etherUnitHandle(coinsAmount * inputBurn)
       ).then(() => {
-        message.info('交易发送有延迟,可在钱包中确认!')
+        message.info('销毁授权交易中,请等待!')
       })
     } catch (error) {
       console.log(error)
@@ -299,13 +300,15 @@ export default props => {
 
   useEffect(() => {
     setPoolItemId(Number(props.match.params.poolId))
-    getPoolInfo()
-    getPoolItemDetails()
-    getExchangePublicProperty()
-    getPoolExchangeAmount()
-    getPoolBalance()
-    getUserExchangeAvailable()
-    getBurnAmount()
+    setTimeout(() => {
+      getPoolInfo()
+      getPoolItemDetails()
+      getExchangePublicProperty()
+      getPoolExchangeAmount()
+      getPoolBalance()
+      getUserExchangeAvailable()
+      getBurnAmount()
+    }, 1000)
   }, [])
 
   return (

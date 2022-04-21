@@ -2,7 +2,7 @@ import React from 'react'
 import { Alert, Button } from 'antd'
 import styled from '@emotion/styled'
 import Marquee from 'react-fast-marquee'
-import store from 'Store/index.js'
+import { store } from 'Store/index.js'
 
 export default props => {
   return (

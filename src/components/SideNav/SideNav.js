@@ -14,7 +14,7 @@ import mq from 'mediaQuery'
 import { Link, withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { getSNSERC20Exchange } from 'apollo/mutations/sns'
-import store from 'Store/index.js'
+import { store } from 'Store/index.js'
 
 const SideNavContainer = styled('nav')`
   // display: ${p => (p.isMenuOpen ? 'block' : 'none')};
