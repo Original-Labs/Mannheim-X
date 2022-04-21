@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client'
 import NoAccountsModal from '../NoAccounts/NoAccountsModal'
 import { GET_REVERSE_RECORD } from '../../graphql/queries'
 import { connectProvider, disconnectProvider } from '../../utils/providerUtils'
+import { useHistory } from 'react-router'
 
 const NetworkInformationContainer = styled('div')`
   position: relative;
@@ -98,6 +99,8 @@ function NetworkInformation() {
     data: { accounts, isSafeApp, network, displayName, isReadOnly }
   } = useQuery(NETWORK_INFORMATION_QUERY)
 
+  const history = useHistory()
+
   const {
     data: { getReverseRecord } = {},
     loading: reverseRecordLoading
@@ -135,7 +138,11 @@ function NetworkInformation() {
             {network} {t('c.network')}
           </NetworkStatus>
           <NoAccountsModal
-            onClick={connectProvider}
+            onClick={() => {
+              connectProvider()
+              console.log('连接')
+              history.push('/renew')
+            }}
             colour={'#F5A623'}
             buttonText={t('c.connect')}
           />

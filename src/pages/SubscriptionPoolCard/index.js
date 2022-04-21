@@ -27,8 +27,6 @@ export default props => {
     }
   }
 
-  console.log('isReadyOnly:', isReadOnly())
-
   return (
     <>
       <CardContainer

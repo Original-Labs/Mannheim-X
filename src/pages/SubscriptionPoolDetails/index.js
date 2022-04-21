@@ -183,10 +183,12 @@ export default props => {
         })
         return
       }
-      await ERC20.approve(
+      ERC20.approve(
         ERC20ExchangeAddress,
         etherUnitHandle(coinsAmount * inputBurn)
-      )
+      ).then(() => {
+        message.info('交易发送有延迟,可在钱包中确认!')
+      })
     } catch (error) {
       console.log(error)
       catchHandle(error)
@@ -403,7 +405,7 @@ export default props => {
                   handleBurnApprove()
                 }}
               >
-                销毁
+                销毁授权
               </ButtonWrapper>
             </InpAndBtnCompact>
           </InpAndBtnWrapper>

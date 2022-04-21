@@ -121,18 +121,13 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
   const getPoolItemDetails = async () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     const usrPoolId = await ERC20Exchange.getUserPool()
-    console.log('usrPoolId:', parseInt(usrPoolId, 16))
     const { poolList } = store.getState()
-    console.log('poolList:', poolList)
     poolList.map(item => {
-      console.log('item:', item)
       if (item.poolId === parseInt(usrPoolId, 16)) {
         setPoolItem(item)
       }
     })
   }
-
-  console.log('poolItemId:', poolItem.poolId)
 
   useEffect(() => {
     getPoolItemDetails()
