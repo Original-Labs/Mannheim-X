@@ -163,7 +163,7 @@ export default ({ match }) => {
 
   useEffect(() => {
     getSubscribeRecords()
-    setTimeout(() => {
+    setInterval(() => {
       getSubscribeRecords()
     }, 3000)
   }, [])
