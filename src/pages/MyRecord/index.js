@@ -86,6 +86,7 @@ export default ({ match }) => {
               exchangeContractTxData.push(txData[i])
             }
           }
+          exchangeContractTxData.reverse()
           console.log('exchangeContractTxData', exchangeContractTxData)
           // 已经存在旧数据，判定新旧数据是否一致，一致则不进行setSubscribeList
           if (
@@ -158,7 +159,7 @@ export default ({ match }) => {
     return numberStr / 10 ** 18
   }
   const getDateTime = item => {
-    return new Date(item * 1000).toUTCString().substring(5)
+    return new Date(item * 1000).toLocaleString()
   }
 
   useEffect(() => {
