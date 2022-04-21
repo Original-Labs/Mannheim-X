@@ -118,11 +118,7 @@ export default props => {
   const getPoolExchangeAmount = async () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     try {
-      const exchangedAmount = await ERC20Exchange.poolExchangeAmount(
-        poolDetails.poolId
-      )
-      console.log('exchangedAmount', parseInt(exchangedAmount._hex, 16))
-      // setExchangeAmountState(parseInt(exchangedAmount._hex, 16))
+      const exchangedAmount = await ERC20Exchange.poolExchangeAmount(poolItemId)
       setExchangeAmountState(
         new EthVal(`${exchangedAmount._hex}`).toEth().toFixed(3)
       )
@@ -136,10 +132,7 @@ export default props => {
   const getPoolBalance = async () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     try {
-      const exchangeableAmount = await ERC20Exchange.poolBalance(
-        poolDetails.poolId
-      )
-      const handleAmount = parseInt(exchangeableAmount._hex, 16)
+      const exchangeableAmount = await ERC20Exchange.poolBalance(poolItemId)
       const amountVal = new EthVal(`${exchangeableAmount._hex}`)
         .toEth()
         .toFixed(3)
