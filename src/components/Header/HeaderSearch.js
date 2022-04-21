@@ -65,7 +65,11 @@ function HeaderSearch({ className, style }) {
           }
         }}
       >
-        {mediumBP ? '查询' : <img src={searchIcon} alt="search" />}
+        {mediumBP ? (
+          <img src={searchIcon} alt="search" />
+        ) : (
+          <img src={searchIcon} alt="search" />
+        )}
       </button>
     </SearchForm>
   )
@@ -150,6 +154,7 @@ const SearchForm = styled('div')`
     img {
       width: 25px;
       height: 25px;
+      margin-top: -5px;
     }
   }
 `
