@@ -41,7 +41,7 @@ html {
 }
 
 .ant-btn {
-  line-height: 26px;
+  line-height: 26px !important;
   border-color: #d7e41e1d !important;
 }
 
@@ -64,7 +64,7 @@ html {
 
 .ant-input-number:focus,
 .ant-input-number-focused {
-  border-color: #ffc107ff;
+  border-color: #ffc107ff !important;
 }
 
 .ant-btn-primary:hover {
@@ -76,8 +76,8 @@ html {
 .ant-modal-header {
   text-align: center !important;
   border-radius: 16px !important;
-  background-color: #212121;
-  border-bottom: none;
+  background-color: #212121 !important;
+  border-bottom: none !important;
 }
 
 .ant-modal-body {
@@ -121,11 +121,11 @@ html {
 }
 
 .ant-card {
-  width: 100%;
+  width: 100% !important;
   background-color: #212121 !important;
   color: white !important;
-  border: none;
-  border-radius: 16px;
+  border: none !important;
+  border-radius: 16px !important;
 }
 
 .ant-card:hover {
@@ -171,7 +171,7 @@ html {
 }
 
 .ant-alert-banner {
-  border-radius: 16px;
+  border-radius: 16px !important;
 }
 
 .ant-input-number:hover {

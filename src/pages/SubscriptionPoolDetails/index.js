@@ -382,6 +382,7 @@ export default props => {
                 </Input.Group>
                 <ButtonWrapper
                   type="primary"
+                  shape="round"
                   onClick={() => {
                     handleBurnApprove()
                   }}
@@ -416,6 +417,7 @@ export default props => {
                 </Input.Group>
                 <ButtonWrapper
                   type="primary"
+                  shape="round"
                   onClick={() => {
                     handleSubscriptionApproval()
                   }}
