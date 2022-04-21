@@ -42,7 +42,7 @@ export default props => {
           if (!isReadOnly()) {
             const usrPoolId = await getUserPoolId()
             if (usrPoolId !== 0 && poolItem.poolId !== usrPoolId) {
-              message.warning({ content: '不能重复绑定认购池' })
+              message.warning({ content: '已绑定其他认购池,无法进入该池' })
             }
             if (poolItem.rank === 100) {
               message.warning({

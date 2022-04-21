@@ -89,7 +89,7 @@ export default props => {
       const usrPoolIdVal = parseInt(usrPoolId, 16)
       if (usrPoolIdVal !== 0 && poolItemId !== usrPoolIdVal) {
         history.push('/')
-        message.warning({ content: '你已绑定认购池,无法进入该池' })
+        message.warning({ content: '已绑定其他认购池,无法进入该池' })
       }
       if (usrPoolIdVal === 0) {
         setObtainSubsVisible(true)
