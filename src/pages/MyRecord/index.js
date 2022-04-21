@@ -15,7 +15,6 @@ import {
   payRatio
 } from '../../utils/utils'
 import { useTranslation } from 'react-i18next'
-import SubscriptionPoolCard from '../../components/SubscriptionPoolCard'
 import store from '../../Store'
 import EthVal from 'ethval'
 import { getSNSERC20Exchange } from '../../apollo/mutations/sns'
