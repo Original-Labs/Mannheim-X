@@ -31,9 +31,9 @@ export async function setup({
     customProvider,
     snsAddress
   }
-  option.infura = INFURA_ID
+  // option.infura = INFURA_ID
   if (enforceReadOnly) {
-    option.infura = INFURA_ID
+    // option.infura = INFURA_ID
   }
   const {
     sns: snsInstance,

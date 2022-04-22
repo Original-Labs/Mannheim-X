@@ -10,8 +10,8 @@ let requested = false
 let address
 
 function getDefaultProvider() {
-  legacyProvider = new Web3(getNetworkProviderUrl(137))
-  return new ethers.getDefaultProvider('matic', 'any')
+  legacyProvider = new Web3(getNetworkProviderUrl(97))
+  return new ethers.getDefaultProvider('bsc', 'any')
 }
 
 function getJsonRpcProvider(providerOrUrl) {
@@ -166,9 +166,12 @@ export function getNetworkProviderUrl(id) {
       return `https://rinkeby.infura.io/v3/5a380f9dfbb44b2abf9f681d39ddc382`
     case '5':
       return `https://goerli.infura.io/v3/5a380f9dfbb44b2abf9f681d39ddc382`
+    case '56':
+      return 'https://bsc-dataseed.binance.org/'
+    case '97':
+      return 'http://data-seed-pre-0-s1.binance.org:80'
     case '137':
       return `https://polygon-mainnet.infura.io/v3/5a380f9dfbb44b2abf9f681d39ddc382`
-    // return `https://polygon-mainnet.g.alchemy.com/v2/w5RH-__tiDbqWERxrvBD4-UO8ifWm-2h`
     case '80001':
       return `https://polygon-mumbai.g.alchemy.com/v2/lzpTmazJeflJIPmTouaSiDo4uYtKC1tw`
     default:

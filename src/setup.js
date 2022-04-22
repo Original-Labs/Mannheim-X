@@ -38,14 +38,8 @@ export const setSubDomainFavourites = () => {
 
 export const isSupportedNetwork = networkId => {
   switch (networkId) {
-    // case 1:
-    // case 3:
-    // case 4:
-    // case 5:
     case 56:
     case 97:
-      // case 137:
-      // case 80001:
       return true
     default:
       return false
@@ -84,7 +78,6 @@ export const getProvider = async reconnect => {
       return provider
     }
     // Used to delete localStorage cache
-    // window.localStorage.clear()
     if (
       window.localStorage.getItem('WEB3_CONNECT_CACHED_PROVIDER') ||
       reconnect
@@ -182,7 +175,8 @@ export default async reconnect => {
   } catch (e) {
     messageMention({
       type: 'warn',
-      content: <Trans i18nKey={'warnings.wallerCon'} />
+      // content: <Trans i18nKey={'warnings.wallerCon'} />
+      content: '请连接钱包!'
     })
     console.error('setup error: ', e)
   }
