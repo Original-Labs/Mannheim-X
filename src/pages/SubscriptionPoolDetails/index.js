@@ -102,7 +102,7 @@ export default props => {
     } catch (error) {
       console.log('getUserPoolError:', error)
       history.push('/')
-      message.error({ content: '未知错误,请检查是否连接钱包!' })
+      message.error({ content: '获取用户池信息失败!' })
     }
   }
 

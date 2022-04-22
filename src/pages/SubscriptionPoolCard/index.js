@@ -73,7 +73,7 @@ export default props => {
 const CardContainer = styled(Card)`
   margin: 10px 0;
   ${mq.medium`
-        width:300px;
+        width:300px !important;
         margin:10px;
     `}
   &:hover {
