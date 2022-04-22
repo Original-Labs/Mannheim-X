@@ -56,6 +56,7 @@ export async function setupWeb3({
   if (provider) {
     return { provider, signer }
   }
+
   if (customProvider) {
     if (typeof customProvider === 'string') {
       // handle raw RPC endpoint URL
