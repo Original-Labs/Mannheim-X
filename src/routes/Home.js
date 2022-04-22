@@ -77,7 +77,7 @@ export default () => {
       return parseInt(maxPoolId._hex, 16)
     } catch (e) {
       console.log('poolMaxIdError', e)
-      message.error('未知错误,请检查是否连接钱包!')
+      message.error('获取认购池数失败,请尝试刷新页面!')
       catchHandle(e)
     }
   }
