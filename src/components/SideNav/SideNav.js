@@ -161,6 +161,19 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
             </NavLink>
           </li>
         ) : null}
+        {accounts?.length > 0 && !isReadOnly ? (
+          <li>
+            <NavLink
+              onClick={toggleMenu}
+              active={url === '/myChainAddress' ? 1 : 0}
+              to={{
+                pathname: `/myChainAddress`
+              }}
+            >
+              <span>新链收款地址</span>
+            </NavLink>
+          </li>
+        ) : null}
       </ul>
     </SideNavContainer>
   )

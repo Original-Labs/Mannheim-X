@@ -100,11 +100,6 @@
         "type": "address"
       },
       {
-        "internalType": "address",
-        "name": "_feeAddress",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
         "name": "_exchangeRatio",
         "type": "uint256"
@@ -117,11 +112,6 @@
       {
         "internalType": "uint256",
         "name": "_ratioDecimal",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_feeShare",
         "type": "uint256"
       },
       {
@@ -181,6 +171,19 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "poolId",
+        "type": "uint256"
+      }
+    ],
+    "name": "closePool",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
       }
@@ -224,33 +227,7 @@
   },
   {
     "inputs": [],
-    "name": "feeAddress",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "feeRatio",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "feeShare",
     "outputs": [
       {
         "internalType": "uint256",
@@ -290,6 +267,25 @@
   {
     "inputs": [],
     "name": "getBanner",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "getBindAddress",
     "outputs": [
       {
         "internalType": "string",
@@ -495,6 +491,19 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "_bindAddress",
+        "type": "string"
+      }
+    ],
+    "name": "setBindAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "_exchangeRatio",
         "type": "uint256"
@@ -508,38 +517,12 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_feeAddress",
-        "type": "address"
-      }
-    ],
-    "name": "setFeeAddress",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint256",
         "name": "_feeRatio",
         "type": "uint256"
       }
     ],
     "name": "setFeeRatio",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_feeShare",
-        "type": "uint256"
-      }
-    ],
-    "name": "setFeeShare",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -563,6 +546,11 @@
         "internalType": "uint256",
         "name": "poolId",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_bindAddress",
+        "type": "string"
       }
     ],
     "name": "subscribe",

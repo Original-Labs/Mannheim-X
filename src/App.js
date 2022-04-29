@@ -85,6 +85,13 @@ const SubscriptionPoolDetails = lazy(() =>
   )
 )
 
+const MyChainAddress = lazy(() =>
+  import(
+    /* webpackChunkName: "Shared", webpackPrefetch:true */
+    './pages/MyChainAddress'
+  )
+)
+
 // import TestRegistrar from './routes/TestRegistrar'
 // import Home from './routes/Home'
 // import SearchResults from './routes/SearchResults'
@@ -153,9 +160,7 @@ const App = () => {
           path="/SubscriptionPoolDetails/:poolId"
           component={SubscriptionPoolDetails}
         />
-        <Route path="/test-registrar" component={TestRegistrar} />
-        <Route path="/favourites" component={Favourites} />
-        <Route path="/faq" component={Faq} />
+        <Route path="/myChainAddress" component={MyChainAddress} />
         <Route path="/my-bids" component={SearchResults} />
         <Route path="/how-it-works" component={SearchResults} />
         <Route path="/search/:searchTerm" component={SearchResults} />

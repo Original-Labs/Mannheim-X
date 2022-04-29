@@ -69,6 +69,18 @@ export default () => {
     }
   }
 
+  // 获取兑换池已兑换的数量
+  const getPoolExchangeAmount = async poolId => {
+    const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
+    try {
+      const exchangedAmount = await ERC20Exchange.poolExchangeAmount(poolId)
+      return new EthVal(`${exchangedAmount._hex}`).toEth().toFixed(0)
+    } catch (error) {
+      console.log('poolExchangeAmountError:', error)
+      return '-'
+    }
+  }
+
   // 获取池的个数
   const getMaxPoolId = async () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
@@ -105,7 +117,11 @@ export default () => {
       poolList.map(async item => {
         if (item.poolId <= maxPoolIdVal) {
           const balance = await getPoolBalance(item.poolId)
-          item.rank = ((balance / poolTotalAmount) * 100).toFixed(0)
+          const exchangeaAmount = await getPoolExchangeAmount(item.poolId)
+          item.rank = (
+            (exchangeaAmount / (balance + exchangeaAmount)) *
+            100
+          ).toFixed(0)
           return item
         }
         return item

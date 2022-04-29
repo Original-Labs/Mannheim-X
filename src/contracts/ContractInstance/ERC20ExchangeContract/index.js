@@ -51,10 +51,10 @@ export class ERC20Exchange {
   /* Main methods */
 
   // binding subscription pool
-  async subscribe(poolId) {
+  async subscribe(poolId, address) {
     const singner = await getSigner()
     const ERC20Instance = this.ERC20Trans.connect(singner)
-    return await ERC20Instance.subscribe(poolId)
+    return await ERC20Instance.subscribe(poolId, address)
   }
 
   // get burn address
@@ -136,5 +136,19 @@ export class ERC20Exchange {
   // 获取广告条
   async getBanner() {
     return await this.ERC20Trans.getBanner()
+  }
+
+  // 设置新链地址
+  async setBindAddress(address) {
+    const signer = await getSigner()
+    const ERC20Instance = this.ERC20Trans.connect(signer)
+    console.log('setAdd:', address)
+    return await ERC20Instance.setBindAddress(address)
+  }
+
+  // 获取新链地址
+  async getBindAddress() {
+    const usrAccount = await getAccount()
+    return await this.ERC20Trans.getBindAddress(usrAccount)
   }
 }

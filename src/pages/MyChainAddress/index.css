@@ -1,0 +1,17 @@
+.CardWrapper {
+  /* width: 400px; */
+}
+
+.CardWrapper .ant-card-head-title {
+  text-align: center;
+  line-height: normal;
+}
+
+.inputAndBtnWrapper {
+  display: flex;
+  margin-top: 5px;
+}
+
+.inputAndBtnWrapper input {
+  width: 200px;
+}

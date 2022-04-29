@@ -11,31 +11,20 @@ import {
   Modal,
   message,
   Typography,
-  Spin
+  Select
 } from 'antd'
 import './index.css'
 import styled from '@emotion/styled'
 import AlertBanner from 'components/AlertBanner'
 import { getSNSERC20Exchange, getSNSERC20 } from 'apollo/mutations/sns'
-import {
-  catchHandle,
-  ERC20ExchangeAddress,
-  etherUnit,
-  etherUnitHandle,
-  etherUnitStr,
-  exchangeRate
-} from 'utils/utils'
+import { catchHandle, ERC20ExchangeAddress, etherUnitHandle } from 'utils/utils'
 import EthVal from 'ethval'
-import { UnknowErrMsgComponent } from '../../components/UnknowErrMsg'
-import { getEnsStartBlock } from '../../utils'
-import { getAccount, getBlock, getERC20ExchangeContract } from '../../contracts'
-import { BigNumber } from '@0xproject/utils'
-import { Trans, useTranslation } from 'react-i18next'
-import messageMention from '../../utils/messageMention'
+import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router'
 import { store } from 'Store/index.js'
 import Loading from 'components/Loading/Loading'
 
+const { Option } = Select
 const { Paragraph } = Typography
 const coinsAmount = 200
 
@@ -64,6 +53,7 @@ export default props => {
   const [usrExchangeAmountState, setUsrExchangeAmountState] = useState('-')
   // 可销毁的数量状态值
   const [burnAmountState, setBurnAmountState] = useState('-')
+  const [bindInput, setBindInput] = useState('')
 
   const [exchangeRatio, setExchangeRatio] = useState('-')
   const [feeRatio, setFeeRatio] = useState('-')
@@ -175,7 +165,7 @@ export default props => {
   const handleBurnApprove = async () => {
     const ERC20 = await getFromTokenInstance()
     try {
-      let burnAmount = coinsAmount * inputBurn
+      let burnAmount = inputBurn
       if (burnAmount > burnAmountState) {
         // 弹窗提示
         message.warning({
@@ -186,12 +176,11 @@ export default props => {
         })
         return
       }
-      ERC20.approve(
-        ERC20ExchangeAddress,
-        etherUnitHandle(coinsAmount * inputBurn)
-      ).then(() => {
-        message.info('销毁授权交易中,请等待!')
-      })
+      ERC20.approve(ERC20ExchangeAddress, etherUnitHandle(inputBurn)).then(
+        () => {
+          message.info('销毁授权交易中,请等待!')
+        }
+      )
     } catch (error) {
       console.log(error)
       catchHandle(error)
@@ -306,6 +295,22 @@ export default props => {
     }
   }
 
+  const subscribeBind = async (ERC20Exchange, newAdd) => {
+    try {
+      const isBind = await ERC20Exchange.subscribe(poolItemId, newAdd)
+      if (isBind) {
+        message.success({ content: '绑定成功!' })
+      }
+      history.push({
+        pathname: `/SubscriptionPoolDetails/${poolDetails.poolId}`
+      })
+    } catch (error) {
+      history.push('/')
+      console.log('subscribeError:', error)
+      catchHandle(error)
+    }
+  }
+
   const batchCallFn = async () => {
     await getPoolInfo()
     await getExchangePublicProperty()
@@ -363,22 +368,17 @@ export default props => {
               </PushchaseAndDestroyText>
               <InpAndBtnCompact>
                 <Input.Group compact>
-                  <Input
-                    disabled
-                    value={coinsAmount}
-                    style={{ width: '50px' }}
-                  />
-                  <InputNumber
-                    addonAfter="份"
+                  <Input disabled value="1" style={{ width: '50px' }} />
+                  <Select
                     defaultValue={1}
-                    style={{ width: '90px' }}
-                    min="0"
-                    controls={false}
-                    precision={0}
-                    onChange={value => {
+                    onSelect={value => {
                       setInputBurn(value)
                     }}
-                  />
+                  >
+                    <Option value={1}>1 份</Option>
+                    <Option value={2}>2 份</Option>
+                    <Option value={3}>3 份</Option>
+                  </Select>
                 </Input.Group>
                 <ButtonWrapper
                   type="primary"
@@ -429,7 +429,7 @@ export default props => {
           </PuchaseAndDestroy>
 
           <AlertWrapper
-            description={`注：认购新币前需销毁旧币，每销毁${ratioDecimal}枚旧币可获得${exchangeRatio}枚新币认购资格。`}
+            description={`注：认购新币前需销毁旧币，每销毁${ratioDecimal}枚旧币可获得${exchangeRatio}枚新币认购资格，新币价格为0.12UDST/个。`}
             type="warning"
           />
         </CardDetailsContainer>
@@ -470,23 +470,16 @@ export default props => {
           style={{ top: '30vh' }}
           visible={obtainSubsVisible}
           onOk={async () => {
-            const ERC20Exchange = await getSNSERC20Exchange(
-              ERC20ExchangeAddress
-            )
-            try {
-              const isBind = await ERC20Exchange.subscribe(poolItemId)
-              if (isBind) {
-                message.success({ content: '绑定成功!' })
-              }
-              history.push({
-                pathname: `/SubscriptionPoolDetails/${poolDetails.poolId}`
-              })
-            } catch (error) {
-              history.push('/')
-              catchHandle(error)
-            }
+            if (bindInput.length === 0) {
+              message.error('新币收款地址为必填项!')
+            } else {
+              const ERC20Exchange = await getSNSERC20Exchange(
+                ERC20ExchangeAddress
+              )
+              await subscribeBind(ERC20Exchange, bindInput)
 
-            setObtainSubsVisible(false)
+              setObtainSubsVisible(false)
+            }
           }}
           okButtonProps={{
             shape: 'round'
@@ -502,6 +495,14 @@ export default props => {
           进入该认购池后将自动获得认购资格，该地址兑币
           仅可在此池中进行，无法进入其他认购池进行兑币 。
           当且仅当该池认购已满时，可再加入其他认购池。
+          <BindInput>
+            <span>绑定新币收款地址:</span>
+            <Input
+              onChange={e => {
+                setBindInput(e.target.value)
+              }}
+            />
+          </BindInput>
         </Modal>
       </DetailsContainer>
     </Loading>
@@ -571,4 +572,11 @@ const ButtonWrapper = styled(Button)`
 
 const AlertWrapper = styled(Alert)`
   border-radius: 16px;
+`
+
+const BindInput = styled('div')`
+  margin-top: 10px;
+  span {
+    color: #ffc107 !important;
+  }
 `

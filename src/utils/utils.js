@@ -32,7 +32,7 @@ export const MAINNET_DNSREGISTRAR_ADDRESS =
 export const ROPSTEN_DNSREGISTRAR_ADDRESS =
   '0xdB328BA5FEcb432AF325Ca59E3778441eF5aa14F'
 
-export const ERC20ExchangeAddress = '0xcE637DDE179fF471d221BA623ecd51a76b9C7E8e'
+export const ERC20ExchangeAddress = '0xca6a30aA67Ae0B94359a9530443A2F4CAe37b7D1'
 
 export const etherUnit = 10 ** 18
 export const etherUnitStr = '000000000000000000'
