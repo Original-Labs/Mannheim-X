@@ -144,14 +144,16 @@ export default props => {
   const getUserExchangeAvailable = async () => {
     const ERC20 = await getFromTokenInstance()
     const exchangeInstance = await getSNSERC20Exchange(ERC20ExchangeAddress)
+
+    const ratioDecimalHex = await exchangeInstance.ratioDecimal()
+    const ratioDecimal = parseInt(ratioDecimalHex._hex, 16)
+
     try {
       const allowanceAmount = await ERC20.allowance(ERC20ExchangeAddress)
       const ethVal = new EthVal(`${allowanceAmount}`).toEth().toFixed(3)
       if (ethVal > 0) {
         const exchangeRatioHex = await exchangeInstance.exchangeRatio()
-        const ratioDecimalHex = await exchangeInstance.ratioDecimal()
         const exchangeRatio = parseInt(exchangeRatioHex._hex, 16)
-        const ratioDecimal = parseInt(ratioDecimalHex._hex, 16)
         setUsrExchangeAmountState((ethVal * exchangeRatio) / ratioDecimal)
       } else {
         setUsrExchangeAmountState(0)
@@ -271,11 +273,11 @@ export default props => {
       let exchangeRatioOrigin = await exchangeInstance.exchangeRatio()
       let feeRatioOrigin = await exchangeInstance.feeRatio()
       let ratioDecimalOrigin = await exchangeInstance.ratioDecimal()
-      let feeShareOrigin = await exchangeInstance.feeShare()
+      // let feeShareOrigin = await exchangeInstance.feeShare()
       setExchangeRatio(parseInt(exchangeRatioOrigin._hex, 16))
       setFeeRatio(parseInt(feeRatioOrigin._hex, 16))
       setRatioDecimal(parseInt(ratioDecimalOrigin._hex, 16))
-      setFeeShare(parseInt(feeShareOrigin._hex, 16))
+      // setFeeShare(parseInt(feeShareOrigin._hex, 16))
       const poolMaxId = await exchangeInstance.poolMaxId()
     } catch (e) {
       console.log(e)
