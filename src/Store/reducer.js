@@ -1,4 +1,4 @@
-import poolAvatar from '../assets/poolAvatar.png'
+import poolAvatar from '../assets/logo.png'
 
 //默认数据
 const defaultState = {
