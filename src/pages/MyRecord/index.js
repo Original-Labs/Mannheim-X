@@ -20,6 +20,8 @@ import { getSNSERC20Exchange } from '../../apollo/mutations/sns'
 
 const { Meta } = Card
 
+let timer
+
 export default ({ match }) => {
   const mediumBP = useMediaMin('medium')
 
@@ -114,6 +116,12 @@ export default ({ match }) => {
             type: 'warn',
             content: `${t('serviceMsg.paramsIsNull')}`
           })
+        } else if (resp && resp.data && resp.data.status === '0') {
+          clearInterval(timer)
+          messageMention({
+            type: 'warn',
+            content: '认购记录为空'
+          })
         } else {
           messageMention({
             type: 'error',
@@ -164,10 +172,10 @@ export default ({ match }) => {
 
   useEffect(() => {
     getSubscribeRecords()
-    let timer
     timer = setInterval(() => {
       getSubscribeRecords()
     }, 3000)
+
     return () => {
       clearInterval(timer)
     }
