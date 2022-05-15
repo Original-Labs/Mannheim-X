@@ -170,7 +170,7 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
                 pathname: `/myChainAddress`
               }}
             >
-              <span>新链收款地址</span>
+              <span>mannheim收币地址</span>
             </NavLink>
           </li>
         ) : null}

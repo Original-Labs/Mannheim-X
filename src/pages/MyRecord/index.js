@@ -185,13 +185,13 @@ export default ({ match }) => {
     <div className="MyRecordContainer">
       <Card title="认购汇总" className="CardTotalContainer">
         <div>
-          认购总数: {subscribeSummary.totalSubscribeAmount} {newCoin}
+          申购总数: {subscribeSummary.totalSubscribeAmount} {newCoin}
         </div>
         <div>
-          销毁总数: {subscribeSummary.totalBurnAmount} {oldCoin}
+          激活花费: {subscribeSummary.totalBurnAmount} {oldCoin}
         </div>
         <div>
-          支付总金额: {subscribeSummary.totalPayAmount} {BUSDT}
+          支付金额: {subscribeSummary.totalPayAmount} {BUSDT}
         </div>
       </Card>
       {subscribeList.map(item => {

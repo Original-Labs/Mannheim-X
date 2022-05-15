@@ -27,6 +27,7 @@ import Loading from 'components/Loading/Loading'
 const { Option } = Select
 const { Paragraph } = Typography
 const coinsAmount = 200
+const heimRatio = 0.12
 
 export default props => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -354,6 +355,9 @@ export default props => {
             <Progress type="circle" percent={poolDetails.rank} width={40} />
           }
         >
+          <div>第一步：支付DMI获得白名单权限</div>
+          <div>支付DMI激活您的白名单资格授权激活</div>
+          <div>第二步：支付BUSD进行申购HEIM(每个钱包至多2份)</div>
           <div>
             已认购数量: {exchangeAmountState} | 剩余:{exchangeableAmountState}
           </div>
@@ -366,7 +370,7 @@ export default props => {
           <PuchaseAndDestroy>
             <InpAndBtnWrapper>
               <PushchaseAndDestroyText>
-                可销毁的数量:{burnAmountState}
+                可销毁的DMI数量:{burnAmountState}
               </PushchaseAndDestroyText>
               <InpAndBtnCompact>
                 <Input.Group compact>
@@ -379,7 +383,6 @@ export default props => {
                   >
                     <Option value={1}>1 份</Option>
                     <Option value={2}>2 份</Option>
-                    <Option value={3}>3 份</Option>
                   </Select>
                 </Input.Group>
                 <ButtonWrapper
@@ -396,7 +399,7 @@ export default props => {
 
             <InpAndBtnWrapper>
               <PushchaseAndDestroyText>
-                可认购的数量:{usrExchangeAmountState}
+                可认购的HEIM数量:{usrExchangeAmountState}
               </PushchaseAndDestroyText>
               <InpAndBtnCompact>
                 <Input.Group compact>
@@ -431,7 +434,21 @@ export default props => {
           </PuchaseAndDestroy>
 
           <AlertWrapper
-            description={`注：认购新币前需销毁旧币，每销毁${ratioDecimal}枚旧币可获得${exchangeRatio}枚新币认购资格，新币价格为0.12UDST/个。`}
+            description={
+              <>
+                <div>
+                  注：用户可以进行申请100USDT或200USDT
+                  两种不同份额的白名单额度，对应需要支付1枚和2枚DMI
+                </div>
+                <div>白名单可申购种类：</div>
+                <div>A：100 USDT——需要1枚DMI进行授权激活</div>
+                <div>B：200 USDT——需要2枚DMI进行授权激活</div>
+                <div>
+                  *抢购成功的社区用户将会获得 Mannheim
+                  亚太矿工联盟的一部分HEIM白名单挖矿分红作为额外奖励。
+                </div>
+              </>
+            }
             type="warning"
           />
         </CardDetailsContainer>
@@ -458,10 +475,10 @@ export default props => {
             认购数量:{coinsAmount} X {inputSubscribe}份 ={' '}
             {coinsAmount * inputSubscribe}
           </div>
-          <div>剩余可认购数量: {exchangeableAmountState}</div>
+          <div>认购池剩余可认购数量: {exchangeableAmountState}</div>
           <div>
-            需支付: 0.3 U X {coinsAmount * inputSubscribe} ={' '}
-            {coinsAmount * inputSubscribe * 0.3} U
+            需支付: {heimRatio} U X {coinsAmount * inputSubscribe} ={' '}
+            {coinsAmount * inputSubscribe * heimRatio} BUSD
           </div>
         </Modal>
 
@@ -494,11 +511,11 @@ export default props => {
             shape: 'round'
           }}
         >
-          进入该认购池后将自动获得认购资格，该地址兑币
-          仅可在此池中进行，无法进入其他认购池进行兑币 。
-          当且仅当该池认购已满时，可再加入其他认购池。
+          绑定mannheim地址,请打开
+          <a href="https://www.tokenspace.org">tokenspace.org</a>
+          钱包创建mannheim地址, 该地址将在申购后默认成为获得HEIM代币的收款地址
           <BindInput>
-            <span>绑定新币收款地址:</span>
+            <span>绑定mannheim链地址:</span>
             <Input
               onChange={e => {
                 setBindInput(e.target.value)

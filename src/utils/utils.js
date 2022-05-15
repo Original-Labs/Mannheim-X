@@ -39,7 +39,7 @@ export const etherUnitStr = '000000000000000000'
 
 export const payRatio = 30 / 100
 
-export const BUSDT = 'BUSDT'
+export const BUSDT = 'BUSD'
 export const oldCoin = 'Domino'
 export const newCoin = 'Heim'
 

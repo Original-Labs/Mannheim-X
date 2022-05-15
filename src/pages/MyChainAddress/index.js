@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Input, message } from 'antd'
+import { Button, Card, Input, message, Typography } from 'antd'
 import styled from '@emotion/styled'
 import './index.css'
 import { getSNSERC20Exchange } from 'apollo/mutations/sns'
 import { catchHandle, ERC20ExchangeAddress } from 'utils/utils'
+
+const { Paragraph } = Typography
 
 const MyChainAddress = () => {
   const [updateAddress, setUpdateAddress] = useState('')
@@ -37,26 +39,32 @@ const MyChainAddress = () => {
 
   return (
     <MyChainAddWrapper>
-      <Card title="新链收款地址信息" className="CardWrapper">
-        <div>新链收款地址: {myChainAddress}</div>
+      <Card title="绑定您的mannheim收币地址" className="CardWrapper">
+        <div>
+          mannheim收币地址:
+          <Paragraph copyable>{myChainAddress}</Paragraph>
+        </div>
         <div className="inputAndBtnWrapper">
-          <Input
-            value={updateAddress}
-            onChange={e => {
-              setUpdateAddress(e.target.value)
-            }}
-          />
-          <ButtonWrapper
-            onClick={async () => {
-              if (updateAddress.length === 0) {
-                message.error('新币收款地址为必填项!')
-              } else {
-                setBindAddressFn(updateAddress)
-              }
-            }}
-          >
-            修改地址
-          </ButtonWrapper>
+          <div>HEIM Address:</div>
+          <div>
+            <Input
+              value={updateAddress}
+              onChange={e => {
+                setUpdateAddress(e.target.value)
+              }}
+            />
+            <ButtonWrapper
+              onClick={async () => {
+                if (updateAddress.length === 0) {
+                  message.error('新币收款地址为必填项!')
+                } else {
+                  setBindAddressFn(updateAddress)
+                }
+              }}
+            >
+              修改地址
+            </ButtonWrapper>
+          </div>
         </div>
       </Card>
     </MyChainAddWrapper>

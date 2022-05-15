@@ -9,6 +9,10 @@
 
 .inputAndBtnWrapper {
   display: flex;
+  flex-flow: column;
+}
+.inputAndBtnWrapper > div {
+  display: flex;
   margin-top: 5px;
 }
 
