@@ -21,6 +21,7 @@
 
 .transRecord:hover div {
   border: none !important;
+  color: red;
 }
 
 .transRecord .ant-card-head-title {

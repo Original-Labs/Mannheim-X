@@ -32,7 +32,7 @@ export const MAINNET_DNSREGISTRAR_ADDRESS =
 export const ROPSTEN_DNSREGISTRAR_ADDRESS =
   '0xdB328BA5FEcb432AF325Ca59E3778441eF5aa14F'
 
-export const ERC20ExchangeAddress = '0xca6a30aA67Ae0B94359a9530443A2F4CAe37b7D1'
+export const ERC20ExchangeAddress = '0x348AA8a785647A76E9489d4D6c110eacddcC4D2f'
 
 export const etherUnit = 10 ** 18
 export const etherUnitStr = '000000000000000000'
@@ -95,7 +95,12 @@ export const catchHandle = e => {
         )
         break
       case -32603:
-        errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
+        console.log('data:', e.data)
+        if (e.data.code === 3) {
+          errorContent = '每个地址最多只能购买两份'
+        } else {
+          errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
+        }
         break
       default:
         errorContent = <UnknowErrMsgComponent />
