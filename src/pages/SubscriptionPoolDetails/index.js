@@ -392,7 +392,7 @@ export default props => {
                     handleBurnApprove()
                   }}
                 >
-                  销毁授权
+                  激活
                 </ButtonWrapper>
               </InpAndBtnCompact>
             </InpAndBtnWrapper>
