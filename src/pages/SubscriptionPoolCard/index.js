@@ -36,7 +36,7 @@ export default props => {
             <Title> {poolItem.title}</Title>
           </>
         }
-        extra={<CardNo className="cardNo">{poolItem.poolId}</CardNo>}
+        extra={<CardNo className="cardNo">{poolItem.poolWord}</CardNo>}
         hoverable
         onClick={async () => {
           if (!isReadOnly()) {
@@ -63,7 +63,7 @@ export default props => {
         <Meta
           avatar={<Progress type="circle" percent={poolItem.rank} width={50} />}
           // title={getUserPoolId() }
-          description="认购池简要描述内容,认购池简要描述内容,认购池简要描述内容,认购池简要描述内容,认购池简要描述内容"
+          description="Mannheim X认购开启"
           style={{ color: 'white' }}
         />
       </CardContainer>

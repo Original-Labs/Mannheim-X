@@ -5,14 +5,16 @@ const defaultState = {
   banner: '暂无广播',
   poolList: [
     {
+      poolWord: 'A',
       poolId: 1,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#A',
       description: '1个认购池的描述',
-      backColor: '#212121'
+      backColor: '#b3b7b8'
     },
     {
+      poolWord: 'B',
       poolId: 2,
       rank: 0,
       avatar: poolAvatar,
@@ -21,6 +23,7 @@ const defaultState = {
       backColor: '#61998c'
     },
     {
+      poolWord: 'C',
       poolId: 3,
       rank: 0,
       avatar: poolAvatar,
@@ -29,6 +32,7 @@ const defaultState = {
       backColor: '#e8c77a'
     },
     {
+      poolWord: 'D',
       poolId: 4,
       rank: 0,
       avatar: poolAvatar,
@@ -37,6 +41,7 @@ const defaultState = {
       backColor: '#7b7168'
     },
     {
+      poolWord: 'E',
       poolId: 5,
       rank: 0,
       avatar: poolAvatar,
@@ -45,6 +50,7 @@ const defaultState = {
       backColor: '#9beca9'
     },
     {
+      poolWord: 'F',
       poolId: 6,
       rank: 0,
       avatar: poolAvatar,
@@ -53,6 +59,7 @@ const defaultState = {
       backColor: '#6c8cbb'
     },
     {
+      poolWord: 'G',
       poolId: 7,
       rank: 0,
       avatar: poolAvatar,
@@ -61,14 +68,16 @@ const defaultState = {
       backColor: '#82dbd9'
     },
     {
+      poolWord: 'H',
       poolId: 8,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#H',
       description: '8个认购池的描述',
-      backColor: '#212121'
+      backColor: '#b3b7b8'
     },
     {
+      poolWord: 'I',
       poolId: 9,
       rank: 0,
       avatar: poolAvatar,
@@ -77,6 +86,7 @@ const defaultState = {
       backColor: '#61998c'
     },
     {
+      poolWord: 'J',
       poolId: 10,
       rank: 0,
       avatar: poolAvatar,
@@ -85,6 +95,7 @@ const defaultState = {
       backColor: '#e8c77a'
     },
     {
+      poolWord: 'K',
       poolId: 11,
       rank: 0,
       avatar: poolAvatar,
@@ -93,6 +104,7 @@ const defaultState = {
       backColor: '#7b7168'
     },
     {
+      poolWord: 'L',
       poolId: 12,
       rank: 0,
       avatar: poolAvatar,
@@ -101,6 +113,7 @@ const defaultState = {
       backColor: '#9beca9'
     },
     {
+      poolWord: 'M',
       poolId: 13,
       rank: 0,
       avatar: poolAvatar,
@@ -109,6 +122,7 @@ const defaultState = {
       backColor: '#6c8cbb'
     },
     {
+      poolWord: 'N',
       poolId: 14,
       rank: 0,
       avatar: poolAvatar,
@@ -117,14 +131,16 @@ const defaultState = {
       backColor: '#82dbd9'
     },
     {
+      poolWord: 'O',
       poolId: 15,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#O',
       description: '15个认购池的描述',
-      backColor: '#212121'
+      backColor: '#b3b7b8'
     },
     {
+      poolWord: 'P',
       poolId: 16,
       rank: 0,
       avatar: poolAvatar,
@@ -133,6 +149,7 @@ const defaultState = {
       backColor: '#61998c'
     },
     {
+      poolWord: 'Q',
       poolId: 17,
       rank: 0,
       avatar: poolAvatar,
@@ -141,6 +158,7 @@ const defaultState = {
       backColor: '#e8c77a'
     },
     {
+      poolWord: 'R',
       poolId: 18,
       rank: 0,
       avatar: poolAvatar,
@@ -149,6 +167,7 @@ const defaultState = {
       backColor: '#7b7168'
     },
     {
+      poolWord: 'S',
       poolId: 19,
       rank: 0,
       avatar: poolAvatar,
@@ -157,6 +176,7 @@ const defaultState = {
       backColor: '#9beca9'
     },
     {
+      poolWord: 'T',
       poolId: 20,
       rank: 0,
       avatar: poolAvatar,
@@ -165,6 +185,7 @@ const defaultState = {
       backColor: '#6c8cbb'
     },
     {
+      poolWord: 'U',
       poolId: 21,
       rank: 0,
       avatar: poolAvatar,
