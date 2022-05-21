@@ -127,7 +127,7 @@ html {
 
 .ant-card {
   width: 100% !important;
-  background-color: #212121 !important;
+  background-color: #212121;
   color: white !important;
   border: none !important;
   border-radius: 16px !important;
@@ -140,12 +140,12 @@ html {
 
 .ant-card .ant-card-body .ant-card-meta-detail > div {
   color: white !important;
-  font-weight: bold !important;
+  font-weight: 500 !important;
 }
 
 .ant-card:hover .ant-card-body .ant-card-meta-detail > div {
   color: black !important;
-  font-weight: bold !important;
+  font-weight: 500 !important;
 }
 
 .ant-card > div {

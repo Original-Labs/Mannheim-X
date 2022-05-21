@@ -354,18 +354,23 @@ export default props => {
           extra={
             <Progress type="circle" percent={poolDetails.rank} width={40} />
           }
+          style={{ backgroundColor: poolDetails.backColor }}
         >
-          <div>第一步：支付DMI获得白名单权限</div>
-          <div>支付DMI激活您的白名单资格授权激活</div>
-          <div>第二步：支付BUSD进行申购HEIM(每个钱包至多2份)</div>
-          <div>
-            已认购数量: {exchangeAmountState} | 剩余:{exchangeableAmountState}
-          </div>
-          <div>
-            <Paragraph copyable={{ text: window.location.href }}>
-              认购池专属链接
-            </Paragraph>
-          </div>
+          <CardDetailsInfo>
+            <CardDetailsStep>第一步：支付DMI获得白名单权限</CardDetailsStep>
+            <div>支付DMI激活您的白名单资格授权激活</div>
+            <CardDetailsStep>
+              第二步：支付BUSD进行申购HEIM(每个钱包至多2份)
+            </CardDetailsStep>
+            <div>
+              已认购数量: {exchangeAmountState} | 剩余:{exchangeableAmountState}
+            </div>
+            <div>
+              <Paragraph copyable={{ text: window.location.href }}>
+                认购池专属链接
+              </Paragraph>
+            </div>
+          </CardDetailsInfo>
 
           <PuchaseAndDestroy>
             <InpAndBtnWrapper>
@@ -598,4 +603,15 @@ const BindInput = styled('div')`
   span {
     color: #ffc107 !important;
   }
+`
+const CardDetailsInfo = styled('div')`
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  font-weight: 500;
+`
+
+const CardDetailsStep = styled('div')`
+  // font-size:16px;
+  font-weight: 700;
 `

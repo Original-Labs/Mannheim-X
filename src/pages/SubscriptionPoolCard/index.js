@@ -58,6 +58,7 @@ export default props => {
             message.warning({ content: '请连接钱包!' })
           }
         }}
+        style={{ backgroundColor: poolItem.backColor }}
       >
         <Meta
           avatar={<Progress type="circle" percent={poolItem.rank} width={50} />}
