@@ -10,7 +10,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#A',
-      description: '1个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#b3b7b8'
     },
     {
@@ -19,7 +19,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#B',
-      description: '2个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#61998c'
     },
     {
@@ -28,7 +28,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#C',
-      description: '3个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#e8c77a'
     },
     {
@@ -37,7 +37,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#D',
-      description: '4个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#7b7168'
     },
     {
@@ -46,7 +46,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#E',
-      description: '5个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#9beca9'
     },
     {
@@ -55,7 +55,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#F',
-      description: '6个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#6c8cbb'
     },
     {
@@ -64,7 +64,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#G',
-      description: '7个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#82dbd9'
     },
     {
@@ -73,7 +73,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#H',
-      description: '8个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#b3b7b8'
     },
     {
@@ -82,7 +82,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#I',
-      description: '9个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#61998c'
     },
     {
@@ -91,7 +91,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#J',
-      description: '10个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#e8c77a'
     },
     {
@@ -100,7 +100,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#K',
-      description: '11个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#7b7168'
     },
     {
@@ -109,7 +109,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#L',
-      description: '12个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#9beca9'
     },
     {
@@ -118,7 +118,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#M',
-      description: '13个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#6c8cbb'
     },
     {
@@ -127,7 +127,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#N',
-      description: '14个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#82dbd9'
     },
     {
@@ -136,7 +136,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#O',
-      description: '15个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#b3b7b8'
     },
     {
@@ -145,7 +145,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#P',
-      description: '16个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#61998c'
     },
     {
@@ -154,7 +154,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#Q',
-      description: '17个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#e8c77a'
     },
     {
@@ -163,7 +163,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#R',
-      description: '18个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#7b7168'
     },
     {
@@ -172,7 +172,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#S',
-      description: '19个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#9beca9'
     },
     {
@@ -181,7 +181,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#T',
-      description: '20个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#6c8cbb'
     },
     {
@@ -190,7 +190,7 @@ const defaultState = {
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#U',
-      description: '21个认购池的描述',
+      description: 'Mannheim X认购开启',
       backColor: '#82dbd9'
     }
   ],

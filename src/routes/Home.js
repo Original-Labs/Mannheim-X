@@ -15,7 +15,6 @@ import { isReadOnly } from 'contracts'
 const poolTotalAmount = 100000
 
 export default () => {
-  const [pageLoading, setPageLoading] = useState(true)
   const [poolListState, setPoolListState] = useState(store.getState().poolList)
   const [storeState, setStoreState] = useState(store.getState())
   const { searchList, poolList } = storeState
@@ -122,6 +121,8 @@ export default () => {
             (exchangeaAmount / (balance + exchangeaAmount)) *
             100
           ).toFixed(0)
+          item.balance = balance
+          item.exchangeaAmount = exchangeaAmount
           return item
         }
         return item
@@ -151,23 +152,20 @@ export default () => {
       // 获取广告条
       handleBanner()
       handleListData()
-      setPageLoading(false)
     }, 3000)
   }, [searchValue])
 
   return (
     <Hero>
       <HeaderContainer />
-      <Loading loading={pageLoading} size="large" defaultColor="#ffc107">
-        <ContentContainer>
-          <AlertBanner />
-          <CardContainer>
-            {handleSearch().map(item => {
-              return <SubscriptionPoolCard poolItem={item} />
-            })}
-          </CardContainer>
-        </ContentContainer>
-      </Loading>
+      <ContentContainer>
+        <AlertBanner />
+        <CardContainer>
+          {handleSearch().map(item => {
+            return <SubscriptionPoolCard poolItem={item} />
+          })}
+        </CardContainer>
+      </ContentContainer>
     </Hero>
   )
 }

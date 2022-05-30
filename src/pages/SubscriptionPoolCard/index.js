@@ -13,6 +13,8 @@ const { Meta } = Card
 export default props => {
   const { poolItem } = props
 
+  console.log('poolItem:', poolItem)
+
   const history = useHistory()
 
   // 获取用户绑定的兑换池ID
@@ -63,7 +65,16 @@ export default props => {
         <Meta
           avatar={<Progress type="circle" percent={poolItem.rank} width={50} />}
           // title={getUserPoolId() }
-          description="Mannheim X认购开启"
+          description={
+            poolItem.balance || poolItem.exchangeaAmount ? (
+              <div>
+                <div>认购数量 : {poolItem.exchangeaAmount}</div>
+                <div>剩余数量 : {poolItem.balance}</div>
+              </div>
+            ) : (
+              poolItem.description
+            )
+          }
           style={{ color: 'white' }}
         />
       </CardContainer>

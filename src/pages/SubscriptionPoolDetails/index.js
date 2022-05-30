@@ -173,7 +173,7 @@ export default props => {
         // 弹窗提示
         message.warning({
           key: 2,
-          content: '可销毁数量不足，请减少销毁值',
+          content: '可授权数量不足，请减少授权值',
           duration: 3,
           style: { marginTop: '20vh' }
         })
@@ -363,7 +363,8 @@ export default props => {
               第二步：支付BUSD进行申购HEIM(每个钱包至多2份)
             </CardDetailsStep>
             <div>
-              已认购数量: {exchangeAmountState} | 剩余:{exchangeableAmountState}
+              已认购数量: {exchangeAmountState} | 剩余:{exchangeableAmountState}{' '}
+              HEIM
             </div>
             <div>
               <Paragraph copyable={{ text: window.location.href }}>
@@ -375,7 +376,7 @@ export default props => {
           <PuchaseAndDestroy>
             <InpAndBtnWrapper>
               <PushchaseAndDestroyText>
-                可销毁的DMI数量:{burnAmountState}
+                可授权的DMI数量:{burnAmountState}
               </PushchaseAndDestroyText>
               <InpAndBtnCompact>
                 <Input.Group compact>
