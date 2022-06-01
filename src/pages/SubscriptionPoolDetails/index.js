@@ -26,7 +26,7 @@ import Loading from 'components/Loading/Loading'
 
 const { Option } = Select
 const { Paragraph } = Typography
-const coinsAmount = 200
+const coinsAmount = 100
 const heimRatio = 0.12
 
 export default props => {
@@ -101,6 +101,7 @@ export default props => {
   const getFromTokenInstance = async () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     const fromTokenAdd = await ERC20Exchange.fromTokenAddress()
+    console.log('fromTokenAdd = ', fromTokenAdd)
     const ERC20 = await getSNSERC20(fromTokenAdd)
     return ERC20
   }
@@ -207,7 +208,7 @@ export default props => {
       })
       return
     }
-    // 授权USDT支付，支付金额为 授权认购新币数量的 30%
+    // 授权BUSD支付，支付金额为 授权认购新币数量的 30%
     try {
       const feeRatioHex = await erc20Exchange.feeRatio()
       const ratioDecimalHex = await erc20Exchange.ratioDecimal()
@@ -290,7 +291,10 @@ export default props => {
     const ERC20 = await getFromTokenInstance()
     try {
       const allowanceAmount = await ERC20.balanceOf()
-      const ethVal = new EthVal(`${allowanceAmount}`).toEth().toFixed(3)
+      // debugger
+      console.log('allowAmount:', parseInt(allowanceAmount._hex, 16))
+      // console.log('allowanceAmount:',allowanceAmount)
+      const ethVal = new EthVal(`${allowanceAmount}`).scaleUp(6).toFixed(3)
       setBurnAmountState(ethVal)
     } catch (error) {
       console.log('allowanceError:', error)
@@ -358,7 +362,7 @@ export default props => {
         >
           <CardDetailsInfo>
             <CardDetailsStep>第一步：支付DMI获得白名单权限</CardDetailsStep>
-            <div>支付DMI激活您的白名单资格授权激活</div>
+            <div>支付DMI激活您的白名单资格</div>
             <CardDetailsStep>
               第二步：支付BUSD进行申购HEIM(每个钱包至多2份)
             </CardDetailsStep>
@@ -414,17 +418,26 @@ export default props => {
                     value={coinsAmount}
                     style={{ width: '50px' }}
                   />
-                  <InputNumber
-                    addonAfter="份"
-                    defaultValue={inputSubscribe}
-                    style={{ width: '90px' }}
-                    min="0"
-                    controls={false}
-                    precision={0}
-                    onChange={value => {
+                  {/*<InputNumber*/}
+                  {/*  addonAfter="份"*/}
+                  {/*  defaultValue={inputSubscribe}*/}
+                  {/*  style={{ width: '90px' }}*/}
+                  {/*  min="0"*/}
+                  {/*  controls={false}*/}
+                  {/*  precision={0}*/}
+                  {/*  onChange={value => {*/}
+                  {/*    setInputSubscribe(value)*/}
+                  {/*  }}*/}
+                  {/*/>*/}
+                  <Select
+                    defaultValue={1}
+                    onSelect={value => {
                       setInputSubscribe(value)
                     }}
-                  />
+                  >
+                    <Option value={1}>1 份</Option>
+                    <Option value={2}>2 份</Option>
+                  </Select>
                 </Input.Group>
                 <ButtonWrapper
                   type="primary"
@@ -443,12 +456,12 @@ export default props => {
             description={
               <>
                 <div>
-                  注：用户可以进行申请100USDT或200USDT
+                  注：用户可以进行申请100BUSD或200BUSD
                   两种不同份额的白名单额度，对应需要支付1枚和2枚DMI
                 </div>
                 <div>白名单可申购种类：</div>
-                <div>A：100 USDT——需要1枚DMI进行授权激活</div>
-                <div>B：200 USDT——需要2枚DMI进行授权激活</div>
+                <div>A：100 BUSD——需要1枚DMI进行授权激活</div>
+                <div>B：200 BUSD——需要2枚DMI进行授权激活</div>
                 <div>
                   *抢购成功的社区用户将会获得 Mannheim
                   亚太矿工联盟的一部分HEIM白名单挖矿分红作为额外奖励。
