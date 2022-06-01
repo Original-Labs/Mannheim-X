@@ -5,8 +5,9 @@ const defaultState = {
   banner: '暂无广播',
   poolList: [
     {
+      uri: '1',
       poolWord: 'A',
-      poolId: 1,
+      poolId: 22,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#A',
@@ -14,8 +15,9 @@ const defaultState = {
       backColor: '#b3b7b8'
     },
     {
+      uri: '2',
       poolWord: 'B',
-      poolId: 2,
+      poolId: 23,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#B',
@@ -23,8 +25,9 @@ const defaultState = {
       backColor: '#61998c'
     },
     {
+      uri: '3',
       poolWord: 'C',
-      poolId: 3,
+      poolId: 24,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#C',
@@ -32,8 +35,9 @@ const defaultState = {
       backColor: '#e8c77a'
     },
     {
+      uri: '4',
       poolWord: 'D',
-      poolId: 4,
+      poolId: 25,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#D',
@@ -41,8 +45,9 @@ const defaultState = {
       backColor: '#7b7168'
     },
     {
+      uri: '5',
       poolWord: 'E',
-      poolId: 5,
+      poolId: 26,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#E',
@@ -50,8 +55,9 @@ const defaultState = {
       backColor: '#9beca9'
     },
     {
+      uri: '6',
       poolWord: 'F',
-      poolId: 6,
+      poolId: 27,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#F',
@@ -59,8 +65,9 @@ const defaultState = {
       backColor: '#6c8cbb'
     },
     {
+      uri: '7',
       poolWord: 'G',
-      poolId: 7,
+      poolId: 28,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#G',
@@ -68,8 +75,9 @@ const defaultState = {
       backColor: '#82dbd9'
     },
     {
+      uri: '8',
       poolWord: 'H',
-      poolId: 8,
+      poolId: 29,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#H',
@@ -77,8 +85,9 @@ const defaultState = {
       backColor: '#b3b7b8'
     },
     {
+      uri: '9',
       poolWord: 'I',
-      poolId: 9,
+      poolId: 30,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#I',
@@ -86,8 +95,9 @@ const defaultState = {
       backColor: '#61998c'
     },
     {
+      uri: '10',
       poolWord: 'J',
-      poolId: 10,
+      poolId: 31,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#J',
@@ -95,8 +105,9 @@ const defaultState = {
       backColor: '#e8c77a'
     },
     {
+      uri: '11',
       poolWord: 'K',
-      poolId: 11,
+      poolId: 32,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#K',
@@ -104,8 +115,9 @@ const defaultState = {
       backColor: '#7b7168'
     },
     {
+      uri: '12',
       poolWord: 'L',
-      poolId: 12,
+      poolId: 33,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#L',
@@ -113,8 +125,9 @@ const defaultState = {
       backColor: '#9beca9'
     },
     {
+      uri: '13',
       poolWord: 'M',
-      poolId: 13,
+      poolId: 34,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#M',
@@ -122,8 +135,9 @@ const defaultState = {
       backColor: '#6c8cbb'
     },
     {
+      uri: '14',
       poolWord: 'N',
-      poolId: 14,
+      poolId: 35,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#N',
@@ -131,8 +145,9 @@ const defaultState = {
       backColor: '#82dbd9'
     },
     {
+      uri: '15',
       poolWord: 'O',
-      poolId: 15,
+      poolId: 36,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#O',
@@ -140,8 +155,9 @@ const defaultState = {
       backColor: '#b3b7b8'
     },
     {
+      uri: '16',
       poolWord: 'P',
-      poolId: 16,
+      poolId: 37,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#P',
@@ -149,8 +165,9 @@ const defaultState = {
       backColor: '#61998c'
     },
     {
+      uri: '17',
       poolWord: 'Q',
-      poolId: 17,
+      poolId: 38,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#Q',
@@ -158,8 +175,9 @@ const defaultState = {
       backColor: '#e8c77a'
     },
     {
+      uri: '18',
       poolWord: 'R',
-      poolId: 18,
+      poolId: 39,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#R',
@@ -167,8 +185,9 @@ const defaultState = {
       backColor: '#7b7168'
     },
     {
+      uri: '19',
       poolWord: 'S',
-      poolId: 19,
+      poolId: 40,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#S',
@@ -176,8 +195,9 @@ const defaultState = {
       backColor: '#9beca9'
     },
     {
+      uri: '20',
       poolWord: 'T',
-      poolId: 20,
+      poolId: 41,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#T',
@@ -185,8 +205,9 @@ const defaultState = {
       backColor: '#6c8cbb'
     },
     {
+      uri: '21',
       poolWord: 'U',
-      poolId: 21,
+      poolId: 42,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#U',

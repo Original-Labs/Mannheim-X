@@ -13,8 +13,6 @@ const { Meta } = Card
 export default props => {
   const { poolItem } = props
 
-  console.log('poolItem:', poolItem)
-
   const history = useHistory()
 
   // 获取用户绑定的兑换池ID
@@ -53,7 +51,7 @@ export default props => {
             }
             if (usrPoolId === 0 || usrPoolId === poolItem.poolId) {
               history.push({
-                pathname: `/SubscriptionPoolDetails/${poolItem.poolId}`
+                pathname: `/SubscriptionPoolDetails/${poolItem.uri}`
               })
             }
           } else {
