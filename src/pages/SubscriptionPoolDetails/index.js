@@ -33,7 +33,7 @@ export default props => {
   const [modalVisible, setModalVisible] = useState(false)
   const [obtainSubsVisible, setObtainSubsVisible] = useState(false)
   const [poolItemId, setPoolItemId] = useState(
-    Number(props.match.params.poolId)
+    Number(props.match.params.poolId) + 21
   )
   const [pageLoading, setPageLoading] = useState(true)
 
@@ -134,8 +134,8 @@ export default props => {
     try {
       const exchangeableAmount = await ERC20Exchange.poolBalance(poolItemId)
       const amountVal = new EthVal(`${exchangeableAmount._hex}`)
-        .toEth()
-        .toFixed(3)
+        .scaleUp(6)
+        .toFixed(4)
       setExchangeableAmountState(amountVal)
     } catch (error) {
       console.log('poolBalanceError:', error)
@@ -152,7 +152,7 @@ export default props => {
 
     try {
       const allowanceAmount = await ERC20.allowance(ERC20ExchangeAddress)
-      const ethVal = new EthVal(`${allowanceAmount}`).toEth().toFixed(3)
+      const ethVal = new EthVal(`${allowanceAmount}`).scaleUp(6).toFixed(4)
       if (ethVal > 0) {
         const exchangeRatioHex = await exchangeInstance.exchangeRatio()
         const exchangeRatio = parseInt(exchangeRatioHex._hex, 16)
@@ -329,7 +329,7 @@ export default props => {
 
   useEffect(() => {
     let timer
-    setPoolItemId(Number(props.match.params.poolId))
+    setPoolItemId(Number(props.match.params.poolId) + 21)
     setTimeout(() => {
       getPoolItemDetails()
       batchCallFn()
