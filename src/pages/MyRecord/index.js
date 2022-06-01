@@ -183,7 +183,7 @@ export default ({ match }) => {
 
   return (
     <div className="MyRecordContainer">
-      <Card title="认购汇总" className="CardTotalContainer">
+      <Card title="您的申购记录" className="CardTotalContainer">
         <div>
           申购总数: {subscribeSummary.totalSubscribeAmount} {newCoin}
         </div>
