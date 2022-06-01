@@ -164,7 +164,7 @@ export default ({ match }) => {
     let inputStr = item.substring(10)
     let number = parseInt(inputStr, 16)
     let numberStr = number.toString(10)
-    return numberStr / 10 ** 18
+    return numberStr / 10 ** 6
   }
   const getDateTime = item => {
     return new Date(item * 1000).toLocaleString()
