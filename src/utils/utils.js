@@ -36,6 +36,7 @@ export const ERC20ExchangeAddress = '0xCF997370076ad296F550a3a154A26Fa350465654'
 
 export const etherUnit = 10 ** 18
 export const etherUnitStr = '000000000000000000'
+export const DMIUnitStr = '000000'
 
 export const payRatio = 30 / 100
 
@@ -45,6 +46,9 @@ export const newCoin = 'Heim'
 
 export const etherUnitHandle = amount => {
   return amount.toString() + etherUnitStr
+}
+export const DMIUnitHandle = amount => {
+  return amount.toString() + DMIUnitStr
 }
 
 // oldCoin : newCoin = 1: 200

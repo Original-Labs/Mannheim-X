@@ -41,6 +41,8 @@ export default props => {
         onClick={async () => {
           if (!isReadOnly()) {
             const usrPoolId = await getUserPoolId()
+            console.log('poolItemId11:', poolItem.poolId)
+            console.log('usrPoolId11:', usrPoolId)
             if (usrPoolId !== 0 && poolItem.poolId !== usrPoolId) {
               message.warning({ content: '已绑定其他认购池,无法进入该池' })
             }

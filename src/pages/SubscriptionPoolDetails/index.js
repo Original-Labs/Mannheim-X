@@ -17,7 +17,12 @@ import './index.css'
 import styled from '@emotion/styled'
 import AlertBanner from 'components/AlertBanner'
 import { getSNSERC20Exchange, getSNSERC20 } from 'apollo/mutations/sns'
-import { catchHandle, ERC20ExchangeAddress, etherUnitHandle } from 'utils/utils'
+import {
+  catchHandle,
+  DMIUnitHandle,
+  ERC20ExchangeAddress,
+  etherUnitHandle
+} from 'utils/utils'
 import EthVal from 'ethval'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router'
@@ -77,8 +82,11 @@ export default props => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     try {
       const usrPoolId = await ERC20Exchange.getUserPool()
-      const usrPoolIdVal = parseInt(usrPoolId, 16)
+      const usrPoolIdVal = parseInt(usrPoolId._hex, 16)
+      console.log('poolItemId:', poolItemId)
       if (poolItemId) {
+        console.log('poolItemId:', poolItemId)
+        console.log('usrPoolIdVal:', usrPoolIdVal)
         if (usrPoolIdVal !== 0 && poolItemId !== usrPoolIdVal) {
           history.push('/')
           message.warning({ content: '已绑定其他认购池,无法进入该池' })
@@ -156,6 +164,8 @@ export default props => {
       if (ethVal > 0) {
         const exchangeRatioHex = await exchangeInstance.exchangeRatio()
         const exchangeRatio = parseInt(exchangeRatioHex._hex, 16)
+        const feeRatioHex = await exchangeInstance.feeRatio()
+        const feeRatio = parseInt(feeRatioHex._hex, 16)
         setUsrExchangeAmountState((ethVal * exchangeRatio) / ratioDecimal)
       } else {
         setUsrExchangeAmountState(0)
@@ -180,11 +190,9 @@ export default props => {
         })
         return
       }
-      ERC20.approve(ERC20ExchangeAddress, etherUnitHandle(inputBurn)).then(
-        () => {
-          message.info('销毁授权交易中,请等待!')
-        }
-      )
+      ERC20.approve(ERC20ExchangeAddress, DMIUnitHandle(inputBurn)).then(() => {
+        message.info('销毁授权交易中,请等待!')
+      })
     } catch (error) {
       console.log(error)
       catchHandle(error)
@@ -329,7 +337,9 @@ export default props => {
 
   useEffect(() => {
     let timer
-    setPoolItemId(Number(props.match.params.poolId) + 21)
+    let id = Number(props.match.params.poolId) + 21
+    console.log('id:', id)
+    setPoolItemId(id)
     setTimeout(() => {
       getPoolItemDetails()
       batchCallFn()

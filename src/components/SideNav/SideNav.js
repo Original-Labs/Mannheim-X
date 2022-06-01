@@ -123,7 +123,8 @@ function SideNav({ match, isMenuOpen, toggleMenu }) {
     const usrPoolId = await ERC20Exchange.getUserPool()
     const { poolList } = store.getState()
     poolList.map(item => {
-      if (item.poolId === parseInt(usrPoolId, 16)) {
+      debugger
+      if (item.poolId == parseInt(usrPoolId, 16)) {
         setPoolItem(item)
       }
     })
