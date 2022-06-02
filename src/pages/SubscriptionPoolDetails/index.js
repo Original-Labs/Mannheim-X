@@ -32,7 +32,7 @@ import Loading from 'components/Loading/Loading'
 const { Option } = Select
 const { Paragraph } = Typography
 const coinsAmount = 100
-const heimRatio = 0.12
+const heimRatio = 1
 
 export default props => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -83,10 +83,7 @@ export default props => {
     try {
       const usrPoolId = await ERC20Exchange.getUserPool()
       const usrPoolIdVal = parseInt(usrPoolId._hex, 16)
-      console.log('poolItemId:', poolItemId)
       if (poolItemId) {
-        console.log('poolItemId:', poolItemId)
-        console.log('usrPoolIdVal:', usrPoolIdVal)
         if (usrPoolIdVal !== 0 && poolItemId !== usrPoolIdVal) {
           history.push('/')
           message.warning({ content: '已绑定其他认购池,无法进入该池' })
@@ -109,7 +106,6 @@ export default props => {
   const getFromTokenInstance = async () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     const fromTokenAdd = await ERC20Exchange.fromTokenAddress()
-    console.log('fromTokenAdd = ', fromTokenAdd)
     const ERC20 = await getSNSERC20(fromTokenAdd)
     return ERC20
   }
@@ -166,7 +162,8 @@ export default props => {
         const exchangeRatio = parseInt(exchangeRatioHex._hex, 16)
         const feeRatioHex = await exchangeInstance.feeRatio()
         const feeRatio = parseInt(feeRatioHex._hex, 16)
-        setUsrExchangeAmountState((ethVal * exchangeRatio) / ratioDecimal)
+        // setUsrExchangeAmountState((ethVal * exchangeRatio) / ratioDecimal)
+        setUsrExchangeAmountState(ethVal * coinsAmount)
       } else {
         setUsrExchangeAmountState(0)
       }
@@ -206,6 +203,8 @@ export default props => {
 
     let subscribeAmount = coinsAmount * inputSubscribe
 
+    console.log('subscribeAmount:', subscribeAmount)
+
     if (!usrExchangeAmountState || subscribeAmount > usrExchangeAmountState) {
       // 弹窗提示
       message.warning({
@@ -222,8 +221,14 @@ export default props => {
       const ratioDecimalHex = await erc20Exchange.ratioDecimal()
       const feeRatio = parseInt(feeRatioHex._hex, 16)
       const ratioDecimal = parseInt(ratioDecimalHex._hex, 16)
+      console.log('ratio:')
       await feeTokenInstance.approve(
         ERC20ExchangeAddress,
+        // etherUnitHandle((subscribeAmount * feeRatio) / ratioDecimal)
+        etherUnitHandle(subscribeAmount)
+      )
+      console.log(
+        'etherUnitHandle((subscribeAmount * feeRatio) / ratioDecimal):',
         etherUnitHandle((subscribeAmount * feeRatio) / ratioDecimal)
       )
       setModalVisible(true)
@@ -260,8 +265,14 @@ export default props => {
   const handleExchange = async () => {
     const erc20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     try {
+      console.log(
+        'DMIUnitHandle(inputSubscribe)',
+        DMIUnitHandle(inputSubscribe)
+      )
+      const ratioNum = 833333333
       const exchangeTx = await erc20Exchange.exchange(
-        etherUnitHandle(coinsAmount * inputSubscribe)
+        // DMIUnitHandle(ratioNum * inputSubscribe )
+        ratioNum * inputSubscribe
       )
       if (exchangeTx && exchangeTx.hash) {
         message.loading({
@@ -299,9 +310,6 @@ export default props => {
     const ERC20 = await getFromTokenInstance()
     try {
       const allowanceAmount = await ERC20.balanceOf()
-      // debugger
-      console.log('allowAmount:', parseInt(allowanceAmount._hex, 16))
-      // console.log('allowanceAmount:',allowanceAmount)
       const ethVal = new EthVal(`${allowanceAmount}`).scaleUp(6).toFixed(3)
       setBurnAmountState(ethVal)
     } catch (error) {
@@ -419,7 +427,7 @@ export default props => {
 
             <InpAndBtnWrapper>
               <PushchaseAndDestroyText>
-                可认购的HEIM数量:{usrExchangeAmountState}
+                可申请的BUSD份额:{usrExchangeAmountState}
               </PushchaseAndDestroyText>
               <InpAndBtnCompact>
                 <Input.Group compact>

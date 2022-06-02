@@ -45,10 +45,12 @@ export const oldCoin = 'DMI'
 export const newCoin = 'Heim'
 
 export const etherUnitHandle = amount => {
+  console.log('amount:', amount)
   return amount.toString() + etherUnitStr
 }
 export const DMIUnitHandle = amount => {
-  return amount.toString() + DMIUnitStr
+  // return amount.toString() + DMIUnitStr
+  return amount * 10 ** 6
 }
 
 // oldCoin : newCoin = 1: 200
