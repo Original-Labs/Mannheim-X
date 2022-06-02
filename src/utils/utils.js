@@ -103,7 +103,10 @@ export const catchHandle = e => {
       case -32603:
         console.log('data:', e.data)
         if (e.data.code === 3) {
-          errorContent = '每个地址最多只能购买两份'
+          if (e.data.message) {
+            errorContent = e.data.message.split('-')[1].split(':')[1]
+          }
+          // errorContent = '每个地址最多只能购买两份'
         } else {
           errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
         }
