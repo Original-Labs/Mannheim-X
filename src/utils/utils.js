@@ -32,7 +32,9 @@ export const MAINNET_DNSREGISTRAR_ADDRESS =
 export const ROPSTEN_DNSREGISTRAR_ADDRESS =
   '0xdB328BA5FEcb432AF325Ca59E3778441eF5aa14F'
 
-export const ERC20ExchangeAddress = '0xCF997370076ad296F550a3a154A26Fa350465654'
+// 1. 改变 ERC20ExchangeAddress； 2. 两处补上 + 21； 3. reducer 更换
+export const ERC20ExchangeAddress = '0xCF997370076ad296F550a3a154A26Fa350465654' // mainnet
+// export const ERC20ExchangeAddress = '0xE3fA7C3A32eA3106DaAFb6Ddeb7655018Ee9f8D7' // testnet
 
 export const etherUnit = 10 ** 18
 export const etherUnitStr = '000000000000000000'
@@ -49,8 +51,8 @@ export const etherUnitHandle = amount => {
   return amount.toString() + etherUnitStr
 }
 export const DMIUnitHandle = amount => {
-  // return amount.toString() + DMIUnitStr
-  return amount * 10 ** 6
+  return amount.toString() + DMIUnitStr
+  // return amount * 10 ** 6
 }
 
 // oldCoin : newCoin = 1: 200
@@ -108,7 +110,7 @@ export const catchHandle = e => {
           }
           // errorContent = '每个地址最多只能购买两份'
         } else {
-          errorContent = <Trans i18nKey={`withdrawErrCode.001`} />
+          errorContent = e.data.message
         }
         break
       default:

@@ -39,6 +39,7 @@ export default props => {
   const [obtainSubsVisible, setObtainSubsVisible] = useState(false)
   const [poolItemId, setPoolItemId] = useState(
     Number(props.match.params.poolId) + 21
+    // Number(props.match.params.poolId)
   )
   const [pageLoading, setPageLoading] = useState(true)
 
@@ -158,10 +159,6 @@ export default props => {
       const allowanceAmount = await ERC20.allowance(ERC20ExchangeAddress)
       const ethVal = new EthVal(`${allowanceAmount}`).scaleUp(6).toFixed(4)
       if (ethVal > 0) {
-        const exchangeRatioHex = await exchangeInstance.exchangeRatio()
-        const exchangeRatio = parseInt(exchangeRatioHex._hex, 16)
-        const feeRatioHex = await exchangeInstance.feeRatio()
-        const feeRatio = parseInt(feeRatioHex._hex, 16)
         // setUsrExchangeAmountState((ethVal * exchangeRatio) / ratioDecimal)
         setUsrExchangeAmountState(ethVal * coinsAmount)
       } else {
@@ -227,10 +224,6 @@ export default props => {
         // etherUnitHandle((subscribeAmount * feeRatio) / ratioDecimal)
         etherUnitHandle(subscribeAmount)
       )
-      console.log(
-        'etherUnitHandle((subscribeAmount * feeRatio) / ratioDecimal):',
-        etherUnitHandle((subscribeAmount * feeRatio) / ratioDecimal)
-      )
       setModalVisible(true)
     } catch (e) {
       catchHandle(e)
@@ -269,10 +262,13 @@ export default props => {
         'DMIUnitHandle(inputSubscribe)',
         DMIUnitHandle(inputSubscribe)
       )
-      const ratioNum = 833333333
+      const ratioNum = 833
+      console.log(
+        'exChange amount = ',
+        typeof DMIUnitHandle(ratioNum * inputSubscribe)
+      )
       const exchangeTx = await erc20Exchange.exchange(
-        // DMIUnitHandle(ratioNum * inputSubscribe )
-        ratioNum * inputSubscribe
+        DMIUnitHandle(ratioNum * inputSubscribe)
       )
       if (exchangeTx && exchangeTx.hash) {
         message.loading({
@@ -336,7 +332,7 @@ export default props => {
 
   const batchCallFn = async () => {
     await getPoolInfo()
-    await getExchangePublicProperty()
+    // await getExchangePublicProperty()
     await getPoolExchangeAmount()
     await getPoolBalance()
     await getUserExchangeAvailable()
@@ -346,6 +342,7 @@ export default props => {
   useEffect(() => {
     let timer
     let id = Number(props.match.params.poolId) + 21
+    // let id = Number(props.match.params.poolId)
     console.log('id:', id)
     setPoolItemId(id)
     setTimeout(() => {
