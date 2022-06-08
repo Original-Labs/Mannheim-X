@@ -32,9 +32,15 @@ export const MAINNET_DNSREGISTRAR_ADDRESS =
 export const ROPSTEN_DNSREGISTRAR_ADDRESS =
   '0xdB328BA5FEcb432AF325Ca59E3778441eF5aa14F'
 
-// 1. 改变 ERC20ExchangeAddress； 2. 两处补上 + 21； 3. reducer 更换
-export const ERC20ExchangeAddress = '0xCF997370076ad296F550a3a154A26Fa350465654' // mainnet
-// export const ERC20ExchangeAddress = '0xE3fA7C3A32eA3106DaAFb6Ddeb7655018Ee9f8D7' // testnet
+/**
+ * 合约pools若被重新添加，则执行以下操作
+ * 1. 在两次执行 +21 操作
+ * 2. reducer 执行 +21 操作
+ * 3. 若为主网，则去掉对 chainID = 97 的支持
+ * @type {string}
+ */
+export const ERC20ExchangeAddress = '0x003a290211913DB0d33C385b61bB812e6F3B12c4' // mainnet
+// export const ERC20ExchangeAddress = '0xac2840C6917B6863B7E63d764dA4C23644cbdEe2' // testnet
 
 export const etherUnit = 10 ** 18
 export const etherUnitStr = '000000000000000000'

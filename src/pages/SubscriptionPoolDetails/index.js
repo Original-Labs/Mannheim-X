@@ -38,8 +38,8 @@ export default props => {
   const [modalVisible, setModalVisible] = useState(false)
   const [obtainSubsVisible, setObtainSubsVisible] = useState(false)
   const [poolItemId, setPoolItemId] = useState(
-    Number(props.match.params.poolId) + 21
-    // Number(props.match.params.poolId)
+    // Number(props.match.params.poolId) + 21
+    Number(props.match.params.poolId)
   )
   const [pageLoading, setPageLoading] = useState(true)
 
@@ -341,8 +341,8 @@ export default props => {
 
   useEffect(() => {
     let timer
-    let id = Number(props.match.params.poolId) + 21
-    // let id = Number(props.match.params.poolId)
+    // let id = Number(props.match.params.poolId) + 21
+    let id = Number(props.match.params.poolId)
     console.log('id:', id)
     setPoolItemId(id)
     setTimeout(() => {
