@@ -1,7 +1,6 @@
 import poolAvatar from '../assets/logo.png'
 
 // 默认数据
-
 // const defaultState = {
 //   banner: '暂无广播',
 //   poolList: [
@@ -227,7 +226,7 @@ const defaultState = {
     {
       uri: '1',
       poolWord: 'A',
-      poolId: 22 - 21 - 21,
+      poolId: 22 - 21,
       rank: 0,
       avatar: poolAvatar,
       title: '认购池#A',

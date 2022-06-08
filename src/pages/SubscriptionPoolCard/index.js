@@ -40,22 +40,21 @@ export default props => {
         hoverable
         onClick={async () => {
           if (!isReadOnly()) {
-            const usrPoolId = await getUserPoolId()
-            console.log('poolItemId11:', poolItem.poolId)
-            console.log('usrPoolId11:', usrPoolId)
-            if (usrPoolId !== 0 && poolItem.poolId !== usrPoolId) {
-              message.warning({ content: '已绑定其他认购池,无法进入该池' })
-            }
-            if (poolItem.rank === 100) {
-              message.warning({
-                content: '认购池已满'
-              })
-            }
-            if (usrPoolId === 0 || usrPoolId === poolItem.poolId) {
-              history.push({
-                pathname: `/SubscriptionPoolDetails/${poolItem.uri}`
-              })
-            }
+            getUserPoolId().then(usrPoolId => {
+              if (usrPoolId !== 0 && poolItem.poolId !== usrPoolId) {
+                message.warning({ content: '已绑定其他认购池,无法进入该池!' })
+              }
+              if (poolItem.rank === 100) {
+                message.warning({
+                  content: '认购池已满'
+                })
+              }
+              if (usrPoolId === 0 || usrPoolId === poolItem.poolId) {
+                history.push({
+                  pathname: `/SubscriptionPoolDetails/${poolItem.uri}`
+                })
+              }
+            })
           } else {
             message.warning({ content: '请连接钱包!' })
           }
