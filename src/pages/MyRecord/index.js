@@ -53,10 +53,15 @@ export default ({ match }) => {
     let ratioDecimal = parseInt(ratioDecimalOrigin._hex, 16)
     let exchangeRatio = parseInt(exchangeRatioOrigin._hex, 16)
 
+    const arr = []
     // 数据处理
     // 1 url处理
     for (let i = 0; i < data.length; i++) {
+      console.log('daata >>>', data[i])
       let subscribeAmount = getSubscribeAmount(data[i].input)
+      if (subscribeAmount > 1666) {
+        continue
+      }
       data[i].url =
         networkId == 97
           ? 'https://testnet.bscscan.com/tx/' + data[i].hash
@@ -65,10 +70,11 @@ export default ({ match }) => {
       data[i].subscribeAmount = subscribeAmount
       data[i].dateTime = getDateTime(data[i].timeStamp)
       data[i].payAmount = (subscribeAmount * feeRatio) / ratioDecimal
+      arr.push(data[i])
     }
     totalPayAmount = (totalSubscribeAmount * feeRatio) / ratioDecimal
     totalBurnAmount = (totalSubscribeAmount * ratioDecimal) / exchangeRatio
-    setSubscribeList(data)
+    setSubscribeList(arr)
     let totalData = {}
     totalData.totalSubscribeAmount = totalSubscribeAmount
     totalData.totalPayAmount = totalPayAmount
