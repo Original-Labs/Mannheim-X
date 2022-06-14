@@ -139,7 +139,7 @@ export default props => {
     try {
       const exchangeableAmount = await ERC20Exchange.poolBalance(poolItemId)
       const amountVal = new EthVal(`${exchangeableAmount._hex}`)
-        .scaleUp(6)
+        .toEth()
         .toFixed(4)
       setExchangeableAmountState(amountVal)
     } catch (error) {
@@ -149,21 +149,26 @@ export default props => {
 
   // 获取用户可以兑换的余额
   const getUserExchangeAvailable = async () => {
-    const ERC20 = await getFromTokenInstance()
+    // const ERC20 = await getFromTokenInstance()
     const exchangeInstance = await getSNSERC20Exchange(ERC20ExchangeAddress)
-
-    const ratioDecimalHex = await exchangeInstance.ratioDecimal()
-    const ratioDecimal = parseInt(ratioDecimalHex._hex, 16)
-
     try {
-      const allowanceAmount = await ERC20.allowance(ERC20ExchangeAddress)
-      const ethVal = new EthVal(`${allowanceAmount}`).scaleUp(6).toFixed(4)
-      if (ethVal > 0) {
-        // setUsrExchangeAmountState((ethVal * exchangeRatio) / ratioDecimal)
-        setUsrExchangeAmountState(ethVal * coinsAmount)
-      } else {
-        setUsrExchangeAmountState(0)
-      }
+      // const allowanceAmount = await ERC20.allowance(ERC20ExchangeAddress)
+      // const ethVal = new EthVal(`${allowanceAmount}`).scaleUp(6).toFixed(4)
+      // if (ethVal > 0) {
+      //   setUsrExchangeAmountState(ethVal * coinsAmount)
+      // } else {
+      //   setUsrExchangeAmountState(0)
+      // }
+
+      const value = await exchangeInstance.getUserExchangeAmount()
+
+      const ethVal = new EthVal(`${value}`).toEth().toFixed(0) / 833
+
+      console.log('value:', ethVal)
+      setUsrExchangeAmountState(200 - ethVal * 100)
+
+      // const ratioDecimalHex = await exchangeInstance.ratioDecimal()
+      // const ratioDecimal = parseInt(ratioDecimalHex._hex, 16)
     } catch (error) {
       console.log('userExchangeAvailableError:', error)
     }
@@ -218,7 +223,6 @@ export default props => {
       const ratioDecimalHex = await erc20Exchange.ratioDecimal()
       const feeRatio = parseInt(feeRatioHex._hex, 16)
       const ratioDecimal = parseInt(ratioDecimalHex._hex, 16)
-      console.log('ratio:')
       await feeTokenInstance.approve(
         ERC20ExchangeAddress,
         // etherUnitHandle((subscribeAmount * feeRatio) / ratioDecimal)
@@ -268,7 +272,7 @@ export default props => {
         typeof DMIUnitHandle(ratioNum * inputSubscribe)
       )
       const exchangeTx = await erc20Exchange.exchange(
-        DMIUnitHandle(ratioNum * inputSubscribe)
+        etherUnitHandle(ratioNum * inputSubscribe)
       )
       if (exchangeTx && exchangeTx.hash) {
         message.loading({
@@ -284,22 +288,22 @@ export default props => {
     }
   }
 
-  const getExchangePublicProperty = async () => {
-    const exchangeInstance = await getSNSERC20Exchange(ERC20ExchangeAddress)
-    try {
-      let exchangeRatioOrigin = await exchangeInstance.exchangeRatio()
-      let feeRatioOrigin = await exchangeInstance.feeRatio()
-      let ratioDecimalOrigin = await exchangeInstance.ratioDecimal()
-      // let feeShareOrigin = await exchangeInstance.feeShare()
-      setExchangeRatio(parseInt(exchangeRatioOrigin._hex, 16))
-      setFeeRatio(parseInt(feeRatioOrigin._hex, 16))
-      setRatioDecimal(parseInt(ratioDecimalOrigin._hex, 16))
-      // setFeeShare(parseInt(feeShareOrigin._hex, 16))
-      const poolMaxId = await exchangeInstance.poolMaxId()
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  // const getExchangePublicProperty = async () => {
+  //   const exchangeInstance = await getSNSERC20Exchange(ERC20ExchangeAddress)
+  //   try {
+  //     let exchangeRatioOrigin = await exchangeInstance.exchangeRatio()
+  //     let feeRatioOrigin = await exchangeInstance.feeRatio()
+  //     let ratioDecimalOrigin = await exchangeInstance.ratioDecimal()
+  //     // let feeShareOrigin = await exchangeInstance.feeShare()
+  //     setExchangeRatio(parseInt(exchangeRatioOrigin._hex, 16))
+  //     setFeeRatio(parseInt(feeRatioOrigin._hex, 16))
+  //     setRatioDecimal(parseInt(ratioDecimalOrigin._hex, 16))
+  //     // setFeeShare(parseInt(feeShareOrigin._hex, 16))
+  //     const poolMaxId = await exchangeInstance.poolMaxId()
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
 
   // 用户可销毁的金额
   const getBurnAmount = async () => {
@@ -376,8 +380,8 @@ export default props => {
           style={{ backgroundColor: poolDetails.backColor }}
         >
           <CardDetailsInfo>
-            <CardDetailsStep>第一步：支付DMI获得白名单权限</CardDetailsStep>
-            <div>支付DMI激活您的白名单资格</div>
+            {/* <CardDetailsStep>第一步：支付DMI获得白名单权限</CardDetailsStep>
+            <div>支付DMI激活您的白名单资格</div> */}
             <CardDetailsStep>
               第二步：支付BUSD进行申购HEIM(每个钱包至多2份)
             </CardDetailsStep>
@@ -393,7 +397,7 @@ export default props => {
           </CardDetailsInfo>
 
           <PuchaseAndDestroy>
-            <InpAndBtnWrapper>
+            {/* <InpAndBtnWrapper>
               <PushchaseAndDestroyText>
                 可授权的DMI数量:{burnAmountState}
               </PushchaseAndDestroyText>
@@ -420,7 +424,7 @@ export default props => {
                   激活
                 </ButtonWrapper>
               </InpAndBtnCompact>
-            </InpAndBtnWrapper>
+            </InpAndBtnWrapper> */}
 
             <InpAndBtnWrapper>
               <PushchaseAndDestroyText>
@@ -471,12 +475,12 @@ export default props => {
             description={
               <>
                 <div>
-                  注：用户可以进行申请100BUSD或200BUSD
-                  两种不同份额的白名单额度，对应需要支付1枚和2枚DMI
+                  注：用户可以进行申请100BUSD或200BUSD 两种不同份额的白名单额度
+                  {/* ，对应需要支付1枚和2枚DMI */}
                 </div>
                 <div>白名单可申购种类：</div>
-                <div>A：100 BUSD——需要1枚DMI进行授权激活</div>
-                <div>B：200 BUSD——需要2枚DMI进行授权激活</div>
+                <div>A：100 BUSD——可获得约833枚HEIM</div>
+                <div>B：200 BUSD——可获得约1666枚HEIM</div>
                 <div>
                   *抢购成功的社区用户将会获得 Mannheim
                   亚太矿工联盟的一部分HEIM白名单挖矿分红作为额外奖励。

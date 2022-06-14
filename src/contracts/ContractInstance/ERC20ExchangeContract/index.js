@@ -151,4 +151,10 @@ export class ERC20Exchange {
     const usrAccount = await getAccount()
     return await this.ERC20Trans.getBindAddress(usrAccount)
   }
+
+  // 获取用户交易的金额
+  async getUserExchangeAmount() {
+    const usrAccount = await getAccount()
+    return await this.ERC20Trans.getUserExchangeAmount(usrAccount)
+  }
 }
