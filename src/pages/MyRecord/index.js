@@ -50,7 +50,6 @@ export default ({ match }) => {
     let ratioDecimalOrigin = await exchangeInstance.ratioDecimal()
     let feeRatio = parseInt(feeRatioOrigin._hex, 16)
     // 因DMI与BUSD存在精度差，feeRatio 需除于10^12，消除精度差
-    feeRatio = feeRatio / 10 ** 12
     let ratioDecimal = parseInt(ratioDecimalOrigin._hex, 16)
     let exchangeRatio = parseInt(exchangeRatioOrigin._hex, 16)
 
@@ -166,7 +165,7 @@ export default ({ match }) => {
     let inputStr = item.substring(10)
     let number = parseInt(inputStr, 16)
     let numberStr = number.toString(10)
-    return numberStr / 10 ** 6
+    return numberStr / 10 ** 18
   }
   const getDateTime = item => {
     return new Date(item * 1000).toLocaleString()

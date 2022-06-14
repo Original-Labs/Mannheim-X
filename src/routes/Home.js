@@ -60,7 +60,7 @@ export default () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     try {
       const poolAmount = await ERC20Exchange.poolBalance(poolId)
-      const ethVal = new EthVal(`${poolAmount}`).scaleUp(6).toFixed(4)
+      const ethVal = new EthVal(`${poolAmount}`).toEth().toFixed(4)
       return ethVal
     } catch (error) {
       console.log('poolBalanceError:', error)
@@ -73,7 +73,7 @@ export default () => {
     const ERC20Exchange = await getSNSERC20Exchange(ERC20ExchangeAddress)
     try {
       const exchangedAmount = await ERC20Exchange.poolExchangeAmount(poolId)
-      return new EthVal(`${exchangedAmount._hex}`).scaleUp(6).toFixed(0)
+      return new EthVal(`${exchangedAmount._hex}`).toEth().toFixed(0)
     } catch (error) {
       console.log('poolExchangeAmountError:', error)
       return '-'
