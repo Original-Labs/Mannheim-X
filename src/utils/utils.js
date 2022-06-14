@@ -113,6 +113,9 @@ export const catchHandle = e => {
         if (e.data.code === 3) {
           if (e.data.message) {
             errorContent = e.data.message.split('-')[1].split(':')[1]
+            if (errorContent.length == 0) {
+              errorContent = e.data.message.split(':')[1]
+            }
           }
           // errorContent = '每个地址最多只能购买两份'
         } else {
