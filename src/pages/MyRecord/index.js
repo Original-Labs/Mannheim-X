@@ -189,9 +189,9 @@ export default ({ match }) => {
         <div>
           申购总数: {subscribeSummary.totalSubscribeAmount} {newCoin}
         </div>
-        <div>
+        {/* <div>
           激活花费: {subscribeSummary.totalBurnAmount} {oldCoin}
-        </div>
+        </div> */}
         <div>
           支付金额: {subscribeSummary.totalPayAmount} {BUSDT}
         </div>

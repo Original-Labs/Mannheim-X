@@ -156,14 +156,14 @@ export default props => {
     const ratioDecimal = parseInt(ratioDecimalHex._hex, 16)
 
     try {
-      const allowanceAmount = await ERC20.allowance(ERC20ExchangeAddress)
-      const ethVal = new EthVal(`${allowanceAmount}`).scaleUp(6).toFixed(4)
-      if (ethVal > 0) {
-        // setUsrExchangeAmountState((ethVal * exchangeRatio) / ratioDecimal)
-        setUsrExchangeAmountState(ethVal * coinsAmount)
-      } else {
-        setUsrExchangeAmountState(0)
-      }
+      // const allowanceAmount = await ERC20.allowance(ERC20ExchangeAddress)
+      // const ethVal = new EthVal(`${allowanceAmount}`).scaleUp(6).toFixed(4)
+      // if (ethVal > 0) {
+      //   setUsrExchangeAmountState(ethVal * coinsAmount)
+      // } else {
+      //   setUsrExchangeAmountState(0)
+      // }
+      setUsrExchangeAmountState(200)
     } catch (error) {
       console.log('userExchangeAvailableError:', error)
     }
@@ -376,8 +376,8 @@ export default props => {
           style={{ backgroundColor: poolDetails.backColor }}
         >
           <CardDetailsInfo>
-            <CardDetailsStep>第一步：支付DMI获得白名单权限</CardDetailsStep>
-            <div>支付DMI激活您的白名单资格</div>
+            {/* <CardDetailsStep>第一步：支付DMI获得白名单权限</CardDetailsStep>
+            <div>支付DMI激活您的白名单资格</div> */}
             <CardDetailsStep>
               第二步：支付BUSD进行申购HEIM(每个钱包至多2份)
             </CardDetailsStep>
@@ -393,7 +393,7 @@ export default props => {
           </CardDetailsInfo>
 
           <PuchaseAndDestroy>
-            <InpAndBtnWrapper>
+            {/* <InpAndBtnWrapper>
               <PushchaseAndDestroyText>
                 可授权的DMI数量:{burnAmountState}
               </PushchaseAndDestroyText>
@@ -420,7 +420,7 @@ export default props => {
                   激活
                 </ButtonWrapper>
               </InpAndBtnCompact>
-            </InpAndBtnWrapper>
+            </InpAndBtnWrapper> */}
 
             <InpAndBtnWrapper>
               <PushchaseAndDestroyText>
@@ -471,12 +471,12 @@ export default props => {
             description={
               <>
                 <div>
-                  注：用户可以进行申请100BUSD或200BUSD
-                  两种不同份额的白名单额度，对应需要支付1枚和2枚DMI
+                  注：用户可以进行申请100BUSD或200BUSD 两种不同份额的白名单额度
+                  {/* ，对应需要支付1枚和2枚DMI */}
                 </div>
                 <div>白名单可申购种类：</div>
-                <div>A：100 BUSD——需要1枚DMI进行授权激活</div>
-                <div>B：200 BUSD——需要2枚DMI进行授权激活</div>
+                <div>A：100 BUSD——可获得约833枚HEIM</div>
+                <div>B：200 BUSD——可获得约1666枚HEIM</div>
                 <div>
                   *抢购成功的社区用户将会获得 Mannheim
                   亚太矿工联盟的一部分HEIM白名单挖矿分红作为额外奖励。
